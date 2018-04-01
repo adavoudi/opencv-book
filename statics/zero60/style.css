@@ -402,4 +402,5 @@ footer {
 
 .katex {
     direction: ltr;
+    white-space: normal !important;
 }
