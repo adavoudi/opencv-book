@@ -4,6 +4,7 @@ chapter: 02
 chaptername: فصل دوم - حوزهٔ مکان
 part: 17
 title: کانتورهای تصویر
+_index: contours
 ---
 
 ## کد

@@ -4,6 +4,7 @@ chapter: 02
 chaptername: فصل دوم - حوزهٔ مکان
 part: 20
 title: قاب‌های چرخیدهٔ مستطیلی و بیضوی برای کانتورها
+_index: contours-rotated-frames
 ---
 
 ## کد

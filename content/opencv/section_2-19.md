@@ -4,6 +4,7 @@ chapter: 02
 chaptername: فصل دوم - حوزهٔ مکان
 part: 19
 title: قاب‌های مستطیلی و دایره‌ای برای کانتورها
+_index: contours-frames
 ---
 
 ## کد
