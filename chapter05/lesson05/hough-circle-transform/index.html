@@ -2,7 +2,7 @@
 <html lang="Farsi">
 <head>
 
-<title>پردازش تصویر در OpenCV | تبدیل دایره هُو</title>
+<title>پردازش تصویر در OpenCV | تبدیل دایره هاف</title>
 
 <meta charset="utf-8">
 <meta name="description" content="">
@@ -242,12 +242,12 @@
         
         
             <li>
-              <a href="/opencv-book/chapter05/lesson04/hough-line-transform/">- تبدیل خط هُو</a>
+              <a href="/opencv-book/chapter05/lesson04/hough-line-transform/">- تبدیل خط هاف</a>
             </li>
         
         
             <li>
-              <a href="/opencv-book/chapter05/lesson05/hough-circle-transform/">- تبدیل دایره هُو</a>
+              <a href="/opencv-book/chapter05/lesson05/hough-circle-transform/">- تبدیل دایره هاف</a>
             </li>
         
         </ul>
@@ -265,11 +265,11 @@
           <h1 class="list">فصل پنجم - شناسایی الگو</h1>
       
 
-    <h3 class="list">تبدیل دایره هُو</h3>
+    <h3 class="list">تبدیل دایره هاف</h3>
 
     <div class="content-body content">
     <a name="more"></a>
-<p>تبدیل دایرهٔ هُو بسیار شبیه به تبدیل خط هُو که در بخش قبل توضیح داده شد عمل می‌کند. در مورد کشف خط، یک خط با دو پارامتر $\left( r,\ \theta \right)$ تعریف می‌شود ولی برای تعریف دایره به سه پارامتر نیاز داریم:</p>
+<p>تبدیل دایرهٔ هاف بسیار شبیه به تبدیل خط هاف که در بخش قبل توضیح داده شد عمل می‌کند. در مورد کشف خط، یک خط با دو پارامتر $\left( r,\ \theta \right)$ تعریف می‌شود ولی برای تعریف دایره به سه پارامتر نیاز داریم:</p>
 
 <p>$$C:\ (x_{\text{center}},\ y_{\text{center}},\ r)$$</p>
 
@@ -289,7 +289,7 @@
 </tbody>
 </table>
 
-<p>به منظور رعایت بهینگی، اُ سی وی این تبدیل با استفاده از روش گرادیان هُو پیاده سازی کرده است که متفاوت با روش مورد استفاده در تبدیل استاندارد هُو است.</p>
+<p>به منظور رعایت بهینگی، اُ سی وی این تبدیل با استفاده از روش گرادیان هاف پیاده سازی کرده است که متفاوت با روش مورد استفاده در تبدیل استاندارد هاف است.</p>
 
 <h2>کد</h2>
 
@@ -346,7 +346,7 @@ int main(int argc, char** argv)
 
 <p>در خط 23 به منظور کاهش نویز و جلوگیری از کشف دایره‌های اشتباه، یک فیلتر گوسی اعمال می‌کنیم.</p>
 
-<p>در خط 28 با استفاده از تابع HoughCircles تبدیل دایره هُو را اعمال می‌کنیم. این تابع دارای 9 آرگومان به شرح زیر است:</p>
+<p>در خط 28 با استفاده از تابع HoughCircles تبدیل دایره هاف را اعمال می‌کنیم. این تابع دارای 9 آرگومان به شرح زیر است:</p>
 
 <ol>
 <li><strong>src_gray:</strong> تصویر ورودی که باید سیاه و سفید باشد.</li>
@@ -386,7 +386,7 @@ int main(int argc, char** argv)
     <nav class="pagination" role="navigation" aria-label="pagination">
     <a href="/opencv-book/chapter05/lesson04/hough-line-transform/" class="pagination-previous button is-primary is-outlined">
     →
-    تبدیل خط هُو
+    تبدیل خط هاف
   </a>
     </nav>
 </div>
