@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="Farsi">
+<head>
+
+<title>پردازش تصویر در OpenCV | فرسایش و گشایش</title>
+
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="">
+<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:site_name" content="پردازش تصویر در OpenCV">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+
+  <link rel="short icon" href="/static/img/mira.png">
+  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+ 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
+
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+
+</head>
+<body>
+
+  <header class="hero is-info columns">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+              <a href="/opencv-book">
+                پردازش تصویر در OpenCV
+              </a>
+            </h1>
+            <h2 class="subtitle"></h2>
+        </div>
+    </div>
+    <span class="sidebar_toggle">
+        <em class="open-icon"></em>
+    </span>
+</header>
+
+  <section class="main-content columns is-fullheight">
+    <aside id="sidebar" class="column is-one-quarter-desktop is-one-third-tablet section ">
+  <div class="sidebar__inner">
+    <ul class="menu-list">
+        
+        <li>
+        
+        
+          <span class="season">فصل اول - معرفی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson01/معرفی-اُ-سی-وی/">- معرفی اُ سی وی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson02/بارگذاری-نمایش-و-ذخیره-تصویر/">- بارگذاری، نمایش و ذخیره تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson03/کلاس-mat/">- کلاس MAT</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson04/ذخیره-سازی-و-بازیابی-اطلاعات/">- ذخیره سازی و بازیابی اطلاعات</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل دوم - حوزهٔ مکان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson01/شکل‌های-هندسی-ساده/">- شکل‌های هندسی ساده</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson02/ترکیب-خطی-دو-تصویر/">- ترکیب خطی دو تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson03/فیلتر-خطی/">- فیلتر خطی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson04/تبدیل-اَفاین/">- تبدیل اَفاین</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson05/نگاشت/">- نگاشت</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson06/تغییر-کنتراست-و-روشنایی-تصویر/">- تغییر کنتراست و روشنایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson07/هموار-سازی-تصویر/">- هموار سازی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson08/اضافه-کردن-قاب-به-تصویر/">- اضافه کردن قاب به تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson09/مولد-عدد-تصادفی-و-ترسیم-متن/">- مولد عدد تصادفی و ترسیم متن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson10/بزرگ‌نمایی-و-کوچک‌نمایی-تصویر/">- بزرگ‌نمایی و کوچک‌نمایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson11/آستانه‌گذاری/">- آستانه‌گذاری</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson12/بافت‌نگار-تصویر/">- بافت‌نگار تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson13/برابرسازی-بافت‌نگار/">- برابرسازی بافت‌نگار</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson14/عملگر-سابل/">- عملگر سابل</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson15/عملگر-لاپلاس/">- عملگر لاپلاس</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson16/عملگر-کَنی/">- عملگر کَنی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson17/کانتورهای-تصویر/">- کانتورهای تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson18/پوش-محدب/">- پوش محدب</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson19/قاب‌های-مستطیلی-و-دایره‌ای-برای-کانتورها/">- قاب‌های مستطیلی و دایره‌ای برای کانتورها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson20/قاب‌های-چرخیدهٔ-مستطیلی-و-بیضوی-برای-کانتورها/">- قاب‌های چرخیدهٔ مستطیلی و بیضوی برای کانتورها</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل سوم - حوزهٔ زمان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter03/lesson01/تبدیل-فوریهٔ-گسسته/">- تبدیل فوریهٔ گسسته</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل چهارم - مورفولوژی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson01/فرسایش-و-گشایش/">- فرسایش و گشایش</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson02/تبدیل‌های-مورفولوژی-پیچیده/">- تبدیل‌های مورفولوژی پیچیده</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل پنجم - شناسایی الگو</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson01/مقایسه-بافت‌نگارها/">- مقایسه بافت‌نگارها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson02/بَک-پروجکشن/">- بَک پروجکشن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson03/تطبیق-الگو/">- تطبیق الگو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson04/تبدیل-خط-هُو/">- تبدیل خط هُو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson05/تبدیل-دایره-هُو/">- تبدیل دایره هُو</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+    </ul>
+  </div>
+</aside>
+
+    <div class="container column">
+        <div class="section" id="content">
+
+  
+      
+          <h1 class="list">فصل چهارم - مورفولوژی</h1>
+      
+
+    <h3 class="list">فرسایش و گشایش</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>به طور کلی به دسته‌ای از عملیات که تصاویر را بر پایهٔ اشکال هندسی پردازش می‌کنند، عملیات مورفولوژی می گویند. عملیات مورفولوژی به تصویر ورودی یک عنصر سازنده<a href="#fn:a" id="fnref:a" class="footnote">1</a> اعمال می‌کنند و یک تصویر خروجی تولید می‌کنند. در فرایند مورفولوژی میزان شباهت اشکال موجود در تصویر داده شده را با عنصر سازنده که خود یک شکل هندسی است، بررسی می‌شود.</p>
+
+<p>ابتدایی‌ترین عملیات مورفولوژی، عملیات فرسایش<a href="#fn:b" id="fnref:b" class="footnote">2</a> و گشایش<a href="#fn:c" id="fnref:c" class="footnote">3</a> هستند که کاربردهای بسیاری دارند، از جمله:</p>
+
+<ul>
+<li><p>از بین بردن نویز</p></li>
+<li><p>جدا کردن عناصر خاص و متصل کردن قسمت‌های جدا از هم موجود در یک تصویر</p></li>
+<li><p>پیدا کردن قسمت‌های بسیار تیره (حفره‌ها<a href="#fn:d" id="fnref:d" class="footnote">4</a>) و بسیار روشن تصویر</p></li>
+</ul>
+
+<p>در ادامه با در نظر گرفتن تصویر زیر، عملیات فرسایش و گشایش را بررسی می‌کنیم.</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image112.png" alt="تصویر ورودی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>گشایش:</strong></p>
+
+<p>این عمل از کانولوشن تصویر A با کرنل B که می‌تواند هر اندازه و شکلی داشته باشد (که معمولاً دایره یا مربع است)، تشکیل شده است. کرنل B یک لنگر دارد که معمولاً در مرکز کرنل است.</p>
+
+<p>همین‌طور که کرنل B روی تصویر حرکت می‌کند، پیکسل بیشینه‌ای که در پنجرهٔ B است را پیدا کرده و مقدار آن را به جای مقدار پیکسلی که لنگر روی آن قرار دارد می‌گذارد. پس این عمل باعث رشد نواحی روشن در تصویر می‌شود (نام گشایش از اینجا می‌آید). به عنوان مثال اگر عملگر گشایش را به تصویر ورودی بالا اعمال کنیم، نتیجه به صورت زیر خواهد بود:</p>
+
+<p><img src="/opencv-book/media/image113.png" alt="نتیجه اعمال گشایش روی تصویر ورودی" id="" /></p>
+
+<p>نتیجه اعمال گشایش روی تصویر ورودی</p>
+
+<hr />
+
+<p>پس زمینهٔ تصویر (قسمت روشن) نسبت به ناحیهٔ تیره مربوط به حرف j، گشایش می‌یابد.</p>
+
+<p><strong>فرسایش:</strong></p>
+
+<p>همین‌طور که کرنل B روی تصویر حرکت می‌کند، پیکسل کمینه‌ای که در پنجرهٔ B است را پیدا کرده و مقدار آن را به جای مقدار پیکسلی که لنگر روی آن قرار دارد می‌گذارد.</p>
+
+<p>عملگر فرسایش را روی تصویر ورودی اعمال می‌کنیم. شکل زیر نتیجهٔ این کار را نشان می‌دهد. در این تصویر می‌بینید که ناحیه‌های روشن تصویر (یعنی پس زمینه) نازک‌تر شده‌اند (یعنی فرسایش یافته‌اند)، در حالی که ناحیه‌های تیره بزرگتر شده‌اند.</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image114.png" alt="نتیجه اعمال فرسایش روی تصویر ورودی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">نتیجه اعمال فرسایش روی تصویر ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+using namespace cv;
+
+/// Global variables
+Mat src, erosion_dst, dilation_dst;
+
+int erosion_elem = 0;
+int erosion_size = 0;
+int dilation_elem = 0;
+int dilation_size = 0;
+int const max_elem = 2;
+int const max_kernel_size = 21;
+
+/** Function Headers */
+void Erosion( int, void* );
+void Dilation( int, void* );
+
+/** @function main */
+int main( int argc, char** argv )
+{
+  /// Load an image
+  src = imread( argv[1] );
+
+  if( !src.data )
+  { return -1; }
+
+  /// Create windows
+  namedWindow( "Erosion Demo", CV_WINDOW_AUTOSIZE );
+  namedWindow( "Dilation Demo", CV_WINDOW_AUTOSIZE );
+  cvMoveWindow( "Dilation Demo", src.cols, 0 );
+
+  /// Create Erosion Trackbar
+  createTrackbar( "Element:\n 0: Rect \n 1: Cross \n 2: Ellipse", "Erosion Demo",
+                  &amp;erosion_elem, max_elem,
+                  Erosion );
+
+  createTrackbar( "Kernel size:\n 2n +1", "Erosion Demo",
+                  &amp;erosion_size, max_kernel_size,
+                  Erosion );
+
+  /// Create Dilation Trackbar
+  createTrackbar( "Element:\n 0: Rect \n 1: Cross \n 2: Ellipse", "Dilation Demo",
+                  &amp;dilation_elem, max_elem,
+                  Dilation );
+
+  createTrackbar( "Kernel size:\n 2n +1", "Dilation Demo",
+                  &amp;dilation_size, max_kernel_size,
+                  Dilation );
+
+  /// Default start
+  Erosion( 0, 0 );
+  Dilation( 0, 0 );
+
+  waitKey(0);
+  return 0;
+}
+
+/**  @function Erosion  */
+void Erosion( int, void* )
+{
+  int erosion_type;
+  if( erosion_elem == 0 ){ erosion_type = MORPH_RECT; }
+  else if( erosion_elem == 1 ){ erosion_type = MORPH_CROSS; }
+  else if( erosion_elem == 2) { erosion_type = MORPH_ELLIPSE; }
+
+  Mat element = getStructuringElement( erosion_type,
+                                       Size( 2*erosion_size + 1, 2*erosion_size+1 ),
+                                       Point( erosion_size, erosion_size ) );
+
+  /// Apply the erosion operation
+  erode( src, erosion_dst, element );
+  imshow( "Erosion Demo", erosion_dst );
+}
+
+/** @function Dilation */
+void Dilation( int, void* )
+{
+  int dilation_type;
+  if( dilation_elem == 0 ){ dilation_type = MORPH_RECT; }
+  else if( dilation_elem == 1 ){ dilation_type = MORPH_CROSS; }
+  else if( dilation_elem == 2) { dilation_type = MORPH_ELLIPSE; }
+
+  Mat element = getStructuringElement( dilation_type,
+                                       Size( 2*dilation_size + 1, 2*dilation_size+1 ),
+                                       Point( dilation_size, dilation_size ) );
+  /// Apply the dilation operation
+  dilate( src, dilation_dst, element );
+  imshow( "Dilation Demo", dilation_dst );
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p><strong>تابع Erosion (خط 63):</strong></p>
+
+<p>تابعی که عمل گشایش را انجام می‌دهد، تابع erode است (خط 75). این تابع سه آرگومان دریافت می‌کند:</p>
+
+<ul>
+<li><p>src: تصویر ورودی</p></li>
+<li><p>erosion_dst: تصویر خروجی</p></li>
+<li><p>element: کرنلی که برای عمل گشایش از آن استفاده خواهد شد. اگر آن را تعیین نکنیم به صورت پیشفرض یک ماتریس 3 در 3 استفاده می‌شود. در غیر این صورت برای مشخص کردن شکل آن از تابع getStructuringElement استفاده می‌شود. می‌توان یکی از سه شکل زیر را به عنوان کرنل انتخاب کرد:</p></li>
+<li><p>مستطیل: MORPH_RECT</p></li>
+<li><p>صلیب: MORPH_CROSS</p></li>
+<li><p>بیضی: MORPH_ELLIPSE</p></li>
+</ul>
+
+<p>سپس فقط باید اندازه و مختصات لنگر را انتخاب کرد. اگر مختصات لنگر مشخص نشود، به صورت پیش‌فرض نقطهٔ مرکزی کرنل به عنوان محل لنگر در نظر گرفته می‌شود.</p>
+
+<p><strong>تابع Dilation (خط 80):</strong></p>
+
+<p>کد این تابع بسیار مشابه با کد تابع Erosion است. اینجا هم باید نوع کرنل، مختصات لنگر و اندازهٔ کرنل را مشخص کرد.</p>
+
+<h2>خروجی</h2>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image115.png" alt="تصویر ورودی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image116.png" alt="نمایی از برنامه – سمت راست عمل گشایش و سمت چپ عمل فرسایش" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">نمایی از برنامه – سمت راست عمل گشایش و سمت چپ عمل فرسایش</td>
+</tr>
+</tbody>
+</table>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:a"><p>Structuring element<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:b"><p>Erode<a href="#fnref:b" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:c"><p>Dilate<a href="#fnref:c" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:d"><p>holes<a href="#fnref:d" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+</ol>
+</div>
+
+    </div>
+  
+
+
+</div>
+
+<div class="section">
+    <nav class="pagination" role="navigation" aria-label="pagination">
+    <a href="/opencv-book/chapter03/lesson01/تبدیل-فوریهٔ-گسسته/" class="pagination-previous button is-primary is-outlined">
+    →
+    تبدیل فوریهٔ گسسته
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter04/lesson02/تبدیل‌های-مورفولوژی-پیچیده/" class="pagination-next button is-primary is-outlined">
+    تبدیل‌های مورفولوژی پیچیده
+    ←
+  </a>
+    </nav>
+</div>
+    </div>
+
+  </section>
+
+  <footer class="columns hero section is-dark has-text-centered">
+        <div class="container ">
+            <div class="columns">
+
+                <div class="column">
+                    <div class="footer-header">
+                       به این جاها سر بزنید
+                    </div>
+                    <ul class="related-links has-text-centered">
+                        <li>
+                            <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <div class="footer-header">
+                    پردازش تصویر در OpenCV
+                    </div>
+                    <div class="socials">
+                      <a href="/opencv-book">
+                        <img class="cover" src="/opencv-book/media/cover-small.jpg">
+                      </a>
+                    </div>
+                </div>
+
+
+                </div>
+            </div>
+            <div class="has-text-centered credit">
+              <div>
+                ارائه شده بر بستر
+                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                و قالب از
+                <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
+                «لاراول، از صفر تا شصت»
+              </a>                
+              </div>
+            </div>
+        </div>
+    </footer>
+
+
+    
+<script type="text/javascript" src="/opencv-book/static/js/jquery.min.js"></script>
+<script src="/opencv-book/static/js/highlight.pack.js"></script>
+<script src="/opencv-book/static/js/highlightjs-line-numbers.min.js"></script>
+<script src="/opencv-book/static/js/app.js"></script>
+
+<script>
+    renderMathInElement(document.body,{ delimiters:
+      [
+       {left: "$$", right: "$$", display: true},
+       {left: "$", right: "$", display: false}
+      ]
+    });
+</script>
+
+<script>
+    // Trim extra blank line of the codes
+    var y = document.querySelectorAll("pre code");
+    for(var i = 0; i < y.length; i++) {
+      y[i].innerHTML = y[i].innerHTML.trimRight();
+    }
+</script>
+
+</body>
+</html>

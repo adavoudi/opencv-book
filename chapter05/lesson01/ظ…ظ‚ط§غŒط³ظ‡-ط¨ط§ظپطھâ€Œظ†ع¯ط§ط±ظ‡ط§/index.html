@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="Farsi">
+<head>
+
+<title>پردازش تصویر در OpenCV | مقایسه بافت‌نگارها</title>
+
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="">
+<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:site_name" content="پردازش تصویر در OpenCV">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+
+  <link rel="short icon" href="/static/img/mira.png">
+  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+ 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
+
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+
+</head>
+<body>
+
+  <header class="hero is-info columns">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+              <a href="/opencv-book">
+                پردازش تصویر در OpenCV
+              </a>
+            </h1>
+            <h2 class="subtitle"></h2>
+        </div>
+    </div>
+    <span class="sidebar_toggle">
+        <em class="open-icon"></em>
+    </span>
+</header>
+
+  <section class="main-content columns is-fullheight">
+    <aside id="sidebar" class="column is-one-quarter-desktop is-one-third-tablet section ">
+  <div class="sidebar__inner">
+    <ul class="menu-list">
+        
+        <li>
+        
+        
+          <span class="season">فصل اول - معرفی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson01/معرفی-اُ-سی-وی/">- معرفی اُ سی وی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson02/بارگذاری-نمایش-و-ذخیره-تصویر/">- بارگذاری، نمایش و ذخیره تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson03/کلاس-mat/">- کلاس MAT</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson04/ذخیره-سازی-و-بازیابی-اطلاعات/">- ذخیره سازی و بازیابی اطلاعات</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل دوم - حوزهٔ مکان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson01/شکل‌های-هندسی-ساده/">- شکل‌های هندسی ساده</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson02/ترکیب-خطی-دو-تصویر/">- ترکیب خطی دو تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson03/فیلتر-خطی/">- فیلتر خطی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson04/تبدیل-اَفاین/">- تبدیل اَفاین</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson05/نگاشت/">- نگاشت</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson06/تغییر-کنتراست-و-روشنایی-تصویر/">- تغییر کنتراست و روشنایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson07/هموار-سازی-تصویر/">- هموار سازی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson08/اضافه-کردن-قاب-به-تصویر/">- اضافه کردن قاب به تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson09/مولد-عدد-تصادفی-و-ترسیم-متن/">- مولد عدد تصادفی و ترسیم متن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson10/بزرگ‌نمایی-و-کوچک‌نمایی-تصویر/">- بزرگ‌نمایی و کوچک‌نمایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson11/آستانه‌گذاری/">- آستانه‌گذاری</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson12/بافت‌نگار-تصویر/">- بافت‌نگار تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson13/برابرسازی-بافت‌نگار/">- برابرسازی بافت‌نگار</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson14/عملگر-سابل/">- عملگر سابل</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson15/عملگر-لاپلاس/">- عملگر لاپلاس</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson16/عملگر-کَنی/">- عملگر کَنی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson17/کانتورهای-تصویر/">- کانتورهای تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson18/پوش-محدب/">- پوش محدب</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson19/قاب‌های-مستطیلی-و-دایره‌ای-برای-کانتورها/">- قاب‌های مستطیلی و دایره‌ای برای کانتورها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson20/قاب‌های-چرخیدهٔ-مستطیلی-و-بیضوی-برای-کانتورها/">- قاب‌های چرخیدهٔ مستطیلی و بیضوی برای کانتورها</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل سوم - حوزهٔ زمان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter03/lesson01/تبدیل-فوریهٔ-گسسته/">- تبدیل فوریهٔ گسسته</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل چهارم - مورفولوژی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson01/فرسایش-و-گشایش/">- فرسایش و گشایش</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson02/تبدیل‌های-مورفولوژی-پیچیده/">- تبدیل‌های مورفولوژی پیچیده</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل پنجم - شناسایی الگو</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson01/مقایسه-بافت‌نگارها/">- مقایسه بافت‌نگارها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson02/بَک-پروجکشن/">- بَک پروجکشن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson03/تطبیق-الگو/">- تطبیق الگو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson04/تبدیل-خط-هُو/">- تبدیل خط هُو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson05/تبدیل-دایره-هُو/">- تبدیل دایره هُو</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+    </ul>
+  </div>
+</aside>
+
+    <div class="container column">
+        <div class="section" id="content">
+
+  
+      
+          <h1 class="list">فصل پنجم - شناسایی الگو</h1>
+      
+
+    <h3 class="list">مقایسه بافت‌نگارها</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>برای مقایسهٔ دو بافت‌نگار H1 و H2 باید ابتدا معیاری برای بیان میزان شباهت دو بافت‌نگار انتخاب کرد. در اُ سی وی برای مقایسهٔ بافت‌نگارها از تابع comapreHist استفاده می‌شود. این تابع سه معیار شباهت در اختیار ما قرار می‌دهد:</p>
+
+<ol>
+<li><p><strong>همبستگی</strong><a href="#fn:a" id="fnref:a" class="footnote">1</a> <strong>(CV_COMP_CORREL):</strong></p>
+
+<p>$$d\left( H_{1},H_{2} \right) = \frac{\sum_{I}^{}{\left( H_{1}\left( I \right) - H_{1}^{'} \right)\left( H_{2}\left( I \right) - H_{2}^{'} \right)}}{\sqrt{\sum_{I}^{}{\left( H_{1}\left( I \right) - H_{1}^{'} \right)^{2}\ \sum_{I}^{}\left( H_{2}\left( I \right) - H_{2}^{'} \right)^{2}}}}$$</p>
+
+<p>که</p>
+
+<p>$$H_{k}^{'} = \frac{1}{N}\sum_{J}^{}{H_{k}(J)}$$</p>
+
+<p>و N هم تعداد سطل‌های بافت‌نگار است.</p></li>
+<li><p><strong>کای-اسکوئر</strong><a href="#fn:b" id="fnref:b" class="footnote">2</a> <strong>(CV_COMP_CHISQR):</strong></p>
+
+<p>$$d\left( H_{1},H_{2} \right) = \sum_{I}^{}\frac{\left( H_{1}\left( I \right) - H_{2}\left( I \right) \right)^{2}}{H_{1}\left( I \right)}$$</p></li>
+<li><p><strong>اشتراک</strong><a href="#fn:c" id="fnref:c" class="footnote">3</a> <strong>(CV_COMP_INTERSECT):</strong></p>
+
+<p>$$d\left( H_{1},H_{2} \right) = \sum_{I}^{}{\min\left( H_{1}\left( I \right),\ H_{2}\left( I \right) \right)}$$</p></li>
+<li><p><strong>فاصلهٔ باتاچاریا</strong><a href="#fn:d" id="fnref:d" class="footnote">4</a> <strong>(CV_COMP_BHATTACHARYYA):</strong></p>
+
+<p>$$d\left( H_{1},H_{2} \right) = \sqrt{1 - \frac{1}{\sqrt{H_{1}^{'}\ H_{2}^{'}\ N^{2}}}\ \sum_{I}^{}\sqrt{H_{1}\left( I \right)\text{.\ }H_{2}\left( I \right)}}$$</p></li>
+</ol>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include &lt;iostream&gt;
+#include &lt;stdio.h&gt;
+
+using namespace std;
+using namespace cv;
+
+/**
+ * @function main
+ */
+int main( int argc, char** argv )
+{
+    Mat src_base, hsv_base;
+    Mat src_test1, hsv_test1;
+    Mat src_test2, hsv_test2;
+    Mat hsv_half_down;
+
+    /// Load three images with different environment settings
+    if( argc &lt; 4 )
+    {
+        printf("** Error. Usage: ./compareHist_Demo &lt;image_settings0&gt; &lt;image_setting1&gt; &lt;image_settings2&gt;\n");
+        return -1;
+    }
+
+    src_base = imread( argv[1], 1 );
+    src_test1 = imread( argv[2], 1 );
+    src_test2 = imread( argv[3], 1 );
+
+    /// Convert to HSV
+    cvtColor( src_base, hsv_base, COLOR_BGR2HSV );
+    cvtColor( src_test1, hsv_test1, COLOR_BGR2HSV );
+    cvtColor( src_test2, hsv_test2, COLOR_BGR2HSV );
+
+    hsv_half_down = hsv_base( Range( hsv_base.rows/2, hsv_base.rows - 1 ), Range( 0, hsv_base.cols - 1 ) );
+
+    /// Using 50 bins for hue and 60 for saturation
+    int h_bins = 50; int s_bins = 60;
+    int histSize[] = { h_bins, s_bins };
+
+    // hue varies from 0 to 179, saturation from 0 to 255
+    float h_ranges[] = { 0, 180 };
+    float s_ranges[] = { 0, 256 };
+
+    const float* ranges[] = { h_ranges, s_ranges };
+
+    // Use the o-th and 1-st channels
+    int channels[] = { 0, 1 };
+
+
+    /// Histograms
+    MatND hist_base;
+    MatND hist_half_down;
+    MatND hist_test1;
+    MatND hist_test2;
+
+    /// Calculate the histograms for the HSV images
+    calcHist( &amp;hsv_base, 1, channels, Mat(), hist_base, 2, histSize, ranges, true, false );
+    normalize( hist_base, hist_base, 0, 1, NORM_MINMAX, -1, Mat() );
+
+    calcHist( &amp;hsv_half_down, 1, channels, Mat(), hist_half_down, 2, histSize, ranges, true, false );
+    normalize( hist_half_down, hist_half_down, 0, 1, NORM_MINMAX, -1, Mat() );
+
+    calcHist( &amp;hsv_test1, 1, channels, Mat(), hist_test1, 2, histSize, ranges, true, false );
+    normalize( hist_test1, hist_test1, 0, 1, NORM_MINMAX, -1, Mat() );
+
+    calcHist( &amp;hsv_test2, 1, channels, Mat(), hist_test2, 2, histSize, ranges, true, false );
+    normalize( hist_test2, hist_test2, 0, 1, NORM_MINMAX, -1, Mat() );
+
+    /// Apply the histogram comparison methods
+    for( int i = 0; i &lt; 4; i++ )
+    {
+        int compare_method = i;
+        double base_base = compareHist( hist_base, hist_base, compare_method );
+        double base_half = compareHist( hist_base, hist_half_down, compare_method );
+        double base_test1 = compareHist( hist_base, hist_test1, compare_method );
+        double base_test2 = compareHist( hist_base, hist_test2, compare_method );
+
+        printf( " Method [%d] Perfect, Base-Half, Base-Test(1), Base-Test(2) : %f, %f, %f, %f \n",
+               i, base_base, base_half , base_test1, base_test2 );
+    }
+
+    printf( "Done \n" );
+
+    return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در خطوط 31 تا 33، تصاویر پایه را به فرمت HSV تبدیل می‌کنیم.</p>
+
+<p>در خط 35 یک ماتریس که به نصف پایینی تصویر پایه اشاره می‌کند تعریف می‌کنیم (در فرمت HSV).</p>
+
+<p>در خطوط 37 تا 48، آرگومان‌های مورد نیاز برای حساب کردن بافت‌نگارها را مقدار دهی می‌کنیم.</p>
+
+<p>در خطوط 58 تا 68، بافت‌نگار تصاویر HSV را حساب و نرمال می‌کنیم.</p>
+
+<p>در خطوط 71 تا 81، به ترتیب چهار بار تابع مقایسه را بین بافت‌نگار تصویر پایه و بافت‌نگار تصاویر دیگر اعمال می‌کنیم.</p>
+
+<h2>خروجی</h2>
+
+<p>سه تصویر زیر را به عنوان ورودی به کار می‌بریم:</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image124.png" alt="تصاویر ورودی به برنامه-تصویر سمت چپ، تصویر پایه است" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصاویر ورودی به برنامه - تصویر سمت چپ، تصویر پایه است</td>
+</tr>
+</tbody>
+</table>
+
+<p>تصویر سمت چپ را به عنوان تصویر پایه و دو تصویر دیگر را به عنوان تصاویر آزمایشی در نظر می‌گیریم. همچنین توجه کنید که تصویر پایه هم نسبت به خودش و هم نسبت به نصفهٔ پایینی‌اش، مقایسه می‌شود.</p>
+
+<p>وقتی بافت‌نگار تصویر پایه را با خودش مقایسه می‌کنیم انتظار جواب کامل داریم. همچنین هنگامی که این بافت‌نگار را با بافت‌نگار نصفه پایین اش مقایسه می‌کنیم، از آنجا که هر دو تصویر از یک منبع هستند، جواب باید بیانگر میزان زیادی از شباهت باشد. به خاطر اینکه شرایط نور در دو تصویر آزمایشی با تصویر پایه متفاوت است، نتیجه مقایسهٔ بافت‌نگار آن‌ها با بافت‌نگار تصویر پایه نباید خیلی خوب باشد.</p>
+
+<p>خروجی برنامه به صورت زیر است:</p>
+
+<table>
+<col align="center" />
+<col align="center" />
+<col align="center" />
+<col align="center" />
+<col />
+<thead>
+<tr>
+	<th>BASE-TEST2</th>
+	<th>BASE-TEST1</th>
+	<th>BASE-HALF</th>
+	<th>BASE-BASE</th>
+	<th>Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">0.12044</td>
+	<td align="center">0.18207</td>
+	<td align="center">0.93076</td>
+	<td align="center">1.000000</td>
+	<td>CORRELATION</td>
+</tr>
+<tr>
+	<td align="center">49.2734</td>
+	<td align="center">21.1845</td>
+	<td align="center">4.94046</td>
+	<td align="center">0.000000</td>
+	<td>CHI-SQUARE</td>
+</tr>
+<tr>
+	<td align="center">5.77508</td>
+	<td align="center">3.88902</td>
+	<td align="center">14.9598</td>
+	<td align="center">24.39154</td>
+	<td>INTERSECTION</td>
+</tr>
+<tr>
+	<td align="center">0.80186</td>
+	<td align="center">0.64657</td>
+	<td align="center">0.22260</td>
+	<td align="center">0.000000</td>
+	<td>BHATTACHARYYA</td>
+</tr>
+</tbody>
+</table>
+
+<p>در روش‌های همبستگی و اشتراکی هر چه نتیجه بزرگتر باشد، شباهت بیشتر است. همانطور که انتظار داشتیم نتیجهٔ مقایسهٔ پایه با خودش، بزرگ‌ترین مقدار را دارد. همچنین نتیجهٔ مقایسه بافت‌نگار پایه با بافت‌نگار تصویر نصفه، دومین بزرگترین مقدار است. در دو روش دیگر، هر چه نتیجه کوچکتر باشد شباهت بیشتر است.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:a"><p>Correlation<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:b"><p>Chi-Square<a href="#fnref:b" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:c"><p>Intersection<a href="#fnref:c" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:d"><p>Bhattacharyya<a href="#fnref:d" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+</ol>
+</div>
+
+    </div>
+  
+
+
+</div>
+
+<div class="section">
+    <nav class="pagination" role="navigation" aria-label="pagination">
+    <a href="/opencv-book/chapter04/lesson02/تبدیل‌های-مورفولوژی-پیچیده/" class="pagination-previous button is-primary is-outlined">
+    →
+    تبدیل‌های مورفولوژی پیچیده
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter05/lesson02/بَک-پروجکشن/" class="pagination-next button is-primary is-outlined">
+    بَک پروجکشن
+    ←
+  </a>
+    </nav>
+</div>
+    </div>
+
+  </section>
+
+  <footer class="columns hero section is-dark has-text-centered">
+        <div class="container ">
+            <div class="columns">
+
+                <div class="column">
+                    <div class="footer-header">
+                       به این جاها سر بزنید
+                    </div>
+                    <ul class="related-links has-text-centered">
+                        <li>
+                            <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <div class="footer-header">
+                    پردازش تصویر در OpenCV
+                    </div>
+                    <div class="socials">
+                      <a href="/opencv-book">
+                        <img class="cover" src="/opencv-book/media/cover-small.jpg">
+                      </a>
+                    </div>
+                </div>
+
+
+                </div>
+            </div>
+            <div class="has-text-centered credit">
+              <div>
+                ارائه شده بر بستر
+                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                و قالب از
+                <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
+                «لاراول، از صفر تا شصت»
+              </a>                
+              </div>
+            </div>
+        </div>
+    </footer>
+
+
+    
+<script type="text/javascript" src="/opencv-book/static/js/jquery.min.js"></script>
+<script src="/opencv-book/static/js/highlight.pack.js"></script>
+<script src="/opencv-book/static/js/highlightjs-line-numbers.min.js"></script>
+<script src="/opencv-book/static/js/app.js"></script>
+
+<script>
+    renderMathInElement(document.body,{ delimiters:
+      [
+       {left: "$$", right: "$$", display: true},
+       {left: "$", right: "$", display: false}
+      ]
+    });
+</script>
+
+<script>
+    // Trim extra blank line of the codes
+    var y = document.querySelectorAll("pre code");
+    for(var i = 0; i < y.length; i++) {
+      y[i].innerHTML = y[i].innerHTML.trimRight();
+    }
+</script>
+
+</body>
+</html>

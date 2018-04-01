@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="Farsi">
+<head>
+
+<title>پردازش تصویر در OpenCV | تطبیق الگو</title>
+
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="">
+<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:site_name" content="پردازش تصویر در OpenCV">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+
+  <link rel="short icon" href="/static/img/mira.png">
+  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+ 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
+
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+
+</head>
+<body>
+
+  <header class="hero is-info columns">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+              <a href="/opencv-book">
+                پردازش تصویر در OpenCV
+              </a>
+            </h1>
+            <h2 class="subtitle"></h2>
+        </div>
+    </div>
+    <span class="sidebar_toggle">
+        <em class="open-icon"></em>
+    </span>
+</header>
+
+  <section class="main-content columns is-fullheight">
+    <aside id="sidebar" class="column is-one-quarter-desktop is-one-third-tablet section ">
+  <div class="sidebar__inner">
+    <ul class="menu-list">
+        
+        <li>
+        
+        
+          <span class="season">فصل اول - معرفی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson01/معرفی-اُ-سی-وی/">- معرفی اُ سی وی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson02/بارگذاری-نمایش-و-ذخیره-تصویر/">- بارگذاری، نمایش و ذخیره تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson03/کلاس-mat/">- کلاس MAT</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson04/ذخیره-سازی-و-بازیابی-اطلاعات/">- ذخیره سازی و بازیابی اطلاعات</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل دوم - حوزهٔ مکان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson01/شکل‌های-هندسی-ساده/">- شکل‌های هندسی ساده</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson02/ترکیب-خطی-دو-تصویر/">- ترکیب خطی دو تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson03/فیلتر-خطی/">- فیلتر خطی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson04/تبدیل-اَفاین/">- تبدیل اَفاین</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson05/نگاشت/">- نگاشت</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson06/تغییر-کنتراست-و-روشنایی-تصویر/">- تغییر کنتراست و روشنایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson07/هموار-سازی-تصویر/">- هموار سازی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson08/اضافه-کردن-قاب-به-تصویر/">- اضافه کردن قاب به تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson09/مولد-عدد-تصادفی-و-ترسیم-متن/">- مولد عدد تصادفی و ترسیم متن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson10/بزرگ‌نمایی-و-کوچک‌نمایی-تصویر/">- بزرگ‌نمایی و کوچک‌نمایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson11/آستانه‌گذاری/">- آستانه‌گذاری</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson12/بافت‌نگار-تصویر/">- بافت‌نگار تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson13/برابرسازی-بافت‌نگار/">- برابرسازی بافت‌نگار</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson14/عملگر-سابل/">- عملگر سابل</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson15/عملگر-لاپلاس/">- عملگر لاپلاس</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson16/عملگر-کَنی/">- عملگر کَنی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson17/کانتورهای-تصویر/">- کانتورهای تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson18/پوش-محدب/">- پوش محدب</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson19/قاب‌های-مستطیلی-و-دایره‌ای-برای-کانتورها/">- قاب‌های مستطیلی و دایره‌ای برای کانتورها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson20/قاب‌های-چرخیدهٔ-مستطیلی-و-بیضوی-برای-کانتورها/">- قاب‌های چرخیدهٔ مستطیلی و بیضوی برای کانتورها</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل سوم - حوزهٔ زمان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter03/lesson01/تبدیل-فوریهٔ-گسسته/">- تبدیل فوریهٔ گسسته</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل چهارم - مورفولوژی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson01/فرسایش-و-گشایش/">- فرسایش و گشایش</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson02/تبدیل‌های-مورفولوژی-پیچیده/">- تبدیل‌های مورفولوژی پیچیده</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل پنجم - شناسایی الگو</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson01/مقایسه-بافت‌نگارها/">- مقایسه بافت‌نگارها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson02/بَک-پروجکشن/">- بَک پروجکشن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson03/تطبیق-الگو/">- تطبیق الگو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson04/تبدیل-خط-هُو/">- تبدیل خط هُو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson05/تبدیل-دایره-هُو/">- تبدیل دایره هُو</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+    </ul>
+  </div>
+</aside>
+
+    <div class="container column">
+        <div class="section" id="content">
+
+  
+      
+          <h1 class="list">فصل پنجم - شناسایی الگو</h1>
+      
+
+    <h3 class="list">تطبیق الگو</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>تطبیق الگو تکنیکی برای پیدا کردن ناحیه‌هایی از یک تصویر است که مطابق (مشابه) با یک تصویر الگو (تکه تصویر) هستند.</p>
+
+<p>برای انجام این عمل به دو عنصر اولیه نیاز است:</p>
+
+<ol>
+<li><p>تصویر منبع (I): تصویری که می‌خواهیم یک تطبیق در آن پیدا کنیم.</p></li>
+<li><p>تصویر الگو (T): تکه تصویری که با تصویر منبع مقایسه می‌شود.</p></li>
+</ol>
+
+<p>هدف پیدا کردن بزرگترین ناحیهٔ تطبیق است.</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image129.png" alt="دو عنصر مورد نیاز برای انجام یک تطبیق الگو" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">دو عنصر مورد نیاز برای انجام یک تطبیق الگو</td>
+</tr>
+</tbody>
+</table>
+
+<p>برای پیدا کردن ناحیهٔ تطبیق باید تصویر الگو را روی تصویر منبع حرکت دهیم و هر قسمت از تصویر منبع را با تصویر الگو مقایسه کنیم.</p>
+
+<table>
+<col />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image130.png" alt="روند پیدا کردن یک تطبیق در تصویر منبع" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>روند پیدا کردن یک تطبیق در تصویر منبع</td>
+</tr>
+</tbody>
+</table>
+
+<p>منظور از حرکت دادن این است که تکه تصویر را هر بار یک پیکسل حرکت دهیم (از چپ به راست و از بالا به پایین). به هر حال، در هر توقف یک مقدار حساب می‌شود که مشخص می‌کند تطبیق در آن محل چقدر خوب یا بد بوده است (به زبان دیگر بیان می‌کند تکه تصویر چقدر شبیه به آن ناحیه است).</p>
+
+<p>به ازای هر محل T روی I، مقدار حساب شده را در ماتریس R (ماتریس نتیجه) ذخیره می‌کنیم. هر محل (x,y) در R حاوی مقدار حساب شده برای آن محل است.</p>
+
+<table>
+<col />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image131.png" alt="مثالی از ماتریس R" id="r" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>مثالی از ماتریس R</td>
+</tr>
+</tbody>
+</table>
+
+<p>تصویر بالا ماتریس R است که با حرکت دادن الگو روی تصویر ورودی با معیار TM_CCORR_NORMED به دست آمده است. هر چه یک محل روشن‌تر باشد به این معنی است که شباهتش بیشتر است. همانطور که می‌بینید محلی که با دایرهٔ قرمز مشخص شده، احتمالاً همان محلی است که بیشترین مقدار را دارد؛ پس آن محل (یعنی مستطیلی که گوشه بالا و سمت چپ آن روی این نقطه قرار دارد و طول و عرضش هم اندازه با طول و عرض الگو است) را به عنوان ناحیه تطبیق در نظر می‌گیریم.</p>
+
+<p>در عمل برای پیدا کردن محل عنصر بیشنه (یا کمینه، بسته به نوع معیار استفاده شده،) در ماتریس R، از تابع minMaxLoc استفاده می‌کنیم.</p>
+
+<p>اُ سی وی عملیات تطبیق الگو را در تابع matchTemplate پیاده سازی کرده است. روش‌های موجود به صورت زیر هستند:</p>
+
+<ol>
+<li><p><strong>CV_TM_SQDIFF</strong></p>
+
+<p>$$R\left( x,\ y \right) = \sum_{x^{'},y^{'}}^{}\left( T\left( x^{'},\ y^{'} \right) - I\left( x + x^{'},\ y + y^{'} \right) \right)^{2}$$</p></li>
+<li><p><strong>CV_TM_SQDIFF_NORMED</strong></p>
+
+<p>$$R\left( x,\ y \right) = \frac{\sum_{x^{'},\ y^{'}}^{}\left( T\left( x^{'},\ y^{'} \right) - I\left( x + x^{'},\ y + y^{'} \right) \right)^{2}}{\sqrt{\sum_{x^{'},\ y^{'}}^{}{{T\left( x^{'},\ y^{'} \right)}^{2}\ }.\sum_{x^{'},\ y^{'}}^{}{I\left( x + x^{'},\ y + y^{'} \right)}^{2}}}$$</p></li>
+<li><p><strong>CV_TM_CCORR</strong></p>
+
+<p>$$R\left( x,\ y \right) = \sum_{x^{'},y^{'}}^{}\left( T\left( x^{'},\ y^{'} \right).I\left( x + x^{'},\ y + y^{'} \right) \right)$$</p></li>
+<li><p><strong>CV_TM_CCORR_NORMED</strong></p>
+
+<p>$$R\left( x,\ y \right) = \frac{\sum_{x^{'},\ y^{'}}^{}{T\left( x^{'},\ y^{'} \right).I^{'}\left( x + x^{'},\ y + y^{'} \right)}}{\sqrt{\sum_{x^{'},\ y^{'}}^{}{{T\left( x^{'},\ y^{'} \right)}^{2}\ }.\sum_{x^{'},\ y^{'}}^{}{I\left( x + x^{'},\ y + y^{'} \right)}^{2}}}$$</p></li>
+<li><p><strong>CV_TM_CCOEFF</strong></p>
+
+<p>$$R\left( x,\ y \right) = \sum_{x^{'},y^{'}}^{}\left( T^{'}\left( x^{'},\ y^{'} \right)\text{\ .\ \ I}\left( x + x^{'},\ y + y^{'} \right) \right)$$</p>
+
+<p>که</p>
+
+<p>$$T^{'}\left( x^{'},\ y^{'} \right) = T\left( x^{'},\ y^{'} \right) - \frac{1}{w. h}.\sum_{x^{''},y^{''}}^{}{T\left( x^{''},\ y^{''} \right)}$$</p>
+
+<p>$$I^{'}\left( x + x^{'},\ y + y^{'} \right) = I\left( x + x^{'},\ y + y^{'} \right) - \frac{1}{w.h}.\sum_{x^{''},y^{''}}^{}{I\left( x + x^{''},\ y + y^{''} \right)}$$</p></li>
+<li><p><strong>CV_TM_CCOEFF_NORMED</strong></p>
+
+<p>$$R\left( x,\ y \right) = \frac{\sum_{x^{'},\ y^{'}}^{}\left( T^{'}\left( x^{'},\ y^{'} \right).I^{'}\left( x + x^{'},\ y + y^{'} \right) \right)}{\sqrt{\sum_{x^{'},\ y^{'}}^{}{{T^{'}\left( x^{'},\ y^{'} \right)}^{2}\ }.\sum_{x^{'},\ y^{'}}^{}{I^{'}\left( x + x^{'},\ y + y^{'} \right)}^{2}}}$$</p></li>
+</ol>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include &lt;iostream&gt;
+#include &lt;stdio.h&gt;
+
+using namespace std;
+using namespace cv;
+
+/// Global Variables
+Mat img; Mat templ; Mat result;
+char* image_window = "Source Image";
+char* result_window = "Result window";
+
+int match_method;
+int max_Trackbar = 5;
+
+/// Function Headers
+void MatchingMethod( int, void* );
+
+/** @function main */
+int main( int argc, char** argv )
+{
+    /// Load image and template
+    img = imread( argv[1], 1 );
+    templ = imread( argv[2], 1 );
+
+    /// Create windows
+    namedWindow( image_window, CV_WINDOW_AUTOSIZE );
+    namedWindow( result_window, CV_WINDOW_AUTOSIZE );
+
+    /// Create Trackbar
+    char* trackbar_label = "Method: \n 0: SQDIFF \n 1: SQDIFF NORMED \n 2: TM CCORR \n \
+                            3: TM CCORR NORMED \n 4: TM COEFF \n 5: TM COEFF NORMED";
+    createTrackbar( trackbar_label, image_window, &amp;match_method, max_Trackbar, MatchingMethod );
+
+    MatchingMethod( 0, 0 );
+
+    waitKey(0);
+    return 0;
+}
+
+/**
+ * @function MatchingMethod
+ * @brief Trackbar callback
+ */
+void MatchingMethod( int, void* )
+{
+    /// Source image to display
+    Mat img_display;
+    img.copyTo( img_display );
+
+    /// Create the result matrix
+    int result_cols =  img.cols - templ.cols + 1;
+    int result_rows = img.rows - templ.rows + 1;
+
+    result.create( result_cols, result_rows, CV_32FC1 );
+
+    /// Do the Matching and Normalize
+    matchTemplate( img, templ, result, match_method );
+    normalize( result, result, 0, 1, NORM_MINMAX, -1, Mat() );
+
+    /// Localizing the best match with minMaxLoc
+    double minVal; double maxVal; Point minLoc; Point maxLoc;
+    Point matchLoc;
+
+    minMaxLoc( result, &amp;minVal, &amp;maxVal, &amp;minLoc, &amp;maxLoc, Mat() );
+
+    /// For SQDIFF and SQDIFF_NORMED, the best matches are lower values.
+    /// For all the other methods, the higher the better
+    if( match_method  == CV_TM_SQDIFF || match_method == CV_TM_SQDIFF_NORMED )
+    { matchLoc = minLoc; }
+    else
+    { matchLoc = maxLoc; }
+
+    /// Show me what you got
+    rectangle( img_display, matchLoc, Point( matchLoc.x + templ.cols , matchLoc.y + templ.rows ), 
+              Scalar::all(0), 2, 8, 0 );
+    rectangle( result, matchLoc, Point( matchLoc.x + templ.cols , matchLoc.y + templ.rows ), 
+              Scalar::all(0), 2, 8, 0 );
+
+    imshow( image_window, img_display );
+    imshow( result_window, result );
+
+    return;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در خط 59 با استفاده از تابع matchTemplate عملیات تطبیق الگو را اجرا می‌کنیم. آرگومان‌های این تابع تصویر ورودی (I)، الگو (T)، ماتریس نتیجه (R) و نوع تطبیق (که از ترک‌بار به دست می‌آید) هستند.</p>
+
+<p>در خط 60 نتیجه را نرمال می‌کنیم.</p>
+
+<p>در خط 66، با استفاده از تابع minMaxLoc محل مقادیر بیشنیه و کمینهٔ ماتریس R را پیدا می‌کنیم. این تابع 6 آرگومان دارد که به شرح زیر هستند:</p>
+
+<ol>
+<li><strong>result:</strong> آرایهٔ ورودی (آرایه‌ای که مورد جستجو قرار می‌گیرد).</li>
+<li><strong><code>&amp;minVal</code> و <code>&amp;maxVal</code>:</strong> متغیرهایی برای ذخیرهٔ مقادیر کمینه و بیشنهٔ موجود در result.</li>
+<li><strong><code>&amp;minLoc</code> و <code>&amp;maxLoc</code>:</strong> محل مقادیر بیشینه و کمینه در این نقاط قرار می‌گیرند.</li>
+<li><strong><code>Mat()</code>:</strong> ماسک آرایه ورودی.</li>
+</ol>
+
+<p>در دو روش تطبیق CV_SQDIFF و CV_SQDIFF_NORMED، بهترین تطبیق‌ها دارای کمترین مقادیر هستند در حالی که در دیگر روش‌ها بهترین تطبیق‌ها دارای بیشترین مقادیر هستند. پس برای سادگی، در خطوط 70 تا 73 بسته به روش مورد استفاده، متغیر matchLoc را مقدار دهی می‌کنیم.</p>
+
+<h2>خروجی</h2>
+
+<table>
+<col />
+<col />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image132.png" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image133.png" alt="تصویر الگو" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>تصویر ورودی</td>
+	<td>تصویر الگو</td>
+</tr>
+</tbody>
+</table>
+
+<p>ماتریس‌های نتیجه زیر تولید می‌شوند (ردیف اول روش‌های SQDIFF، CCORR و CCOEFF و ردیف دوم هم همین روش‌ها، ولی نسخهٔ نرمال شدهٔ آنها هستند). در ستون اول، تاریک‌ترین محل، بهترین تطبیق است و در دو ستون دیگر روشن‌ترین محل، بهترین تطبیق است.</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image134.png" alt="ماتریس‌های نتیجه تولید شده توسط فرایند تطبیق الگو" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">ماتریس‌های نتیجه تولید شده توسط فرایند تطبیق الگو</td>
+</tr>
+</tbody>
+</table>
+
+<p>نتیجه نهایی در شکل زیر نشان داده شده است. دقت کنید که CCORR و CCDEFF جواب نادرستی را به عنوان پاسخ داده‌اند؛ البته نسخه نرمال شده آنها درست عمل کرده است. این ممکن است به خاطر این واقعیت باشد که ما فقط اولین بزرگترین تطبیق را در نظر می‌گیریم و به تطبیق‌های بزرگ دیگر کاری نداریم.</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image135.png" alt="نتیجه نهایی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">نتیجه نهایی</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+  
+
+
+</div>
+
+<div class="section">
+    <nav class="pagination" role="navigation" aria-label="pagination">
+    <a href="/opencv-book/chapter05/lesson02/بَک-پروجکشن/" class="pagination-previous button is-primary is-outlined">
+    →
+    بَک پروجکشن
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter05/lesson04/تبدیل-خط-هُو/" class="pagination-next button is-primary is-outlined">
+    تبدیل خط هُو
+    ←
+  </a>
+    </nav>
+</div>
+    </div>
+
+  </section>
+
+  <footer class="columns hero section is-dark has-text-centered">
+        <div class="container ">
+            <div class="columns">
+
+                <div class="column">
+                    <div class="footer-header">
+                       به این جاها سر بزنید
+                    </div>
+                    <ul class="related-links has-text-centered">
+                        <li>
+                            <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <div class="footer-header">
+                    پردازش تصویر در OpenCV
+                    </div>
+                    <div class="socials">
+                      <a href="/opencv-book">
+                        <img class="cover" src="/opencv-book/media/cover-small.jpg">
+                      </a>
+                    </div>
+                </div>
+
+
+                </div>
+            </div>
+            <div class="has-text-centered credit">
+              <div>
+                ارائه شده بر بستر
+                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                و قالب از
+                <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
+                «لاراول، از صفر تا شصت»
+              </a>                
+              </div>
+            </div>
+        </div>
+    </footer>
+
+
+    
+<script type="text/javascript" src="/opencv-book/static/js/jquery.min.js"></script>
+<script src="/opencv-book/static/js/highlight.pack.js"></script>
+<script src="/opencv-book/static/js/highlightjs-line-numbers.min.js"></script>
+<script src="/opencv-book/static/js/app.js"></script>
+
+<script>
+    renderMathInElement(document.body,{ delimiters:
+      [
+       {left: "$$", right: "$$", display: true},
+       {left: "$", right: "$", display: false}
+      ]
+    });
+</script>
+
+<script>
+    // Trim extra blank line of the codes
+    var y = document.querySelectorAll("pre code");
+    for(var i = 0; i < y.length; i++) {
+      y[i].innerHTML = y[i].innerHTML.trimRight();
+    }
+</script>
+
+</body>
+</html>

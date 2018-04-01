@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="Farsi">
+<head>
+
+<title>پردازش تصویر در OpenCV | اضافه کردن قاب به تصویر</title>
+
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="">
+<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:site_name" content="پردازش تصویر در OpenCV">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+
+  <link rel="short icon" href="/static/img/mira.png">
+  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+ 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
+
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+
+</head>
+<body>
+
+  <header class="hero is-info columns">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+              <a href="/opencv-book">
+                پردازش تصویر در OpenCV
+              </a>
+            </h1>
+            <h2 class="subtitle"></h2>
+        </div>
+    </div>
+    <span class="sidebar_toggle">
+        <em class="open-icon"></em>
+    </span>
+</header>
+
+  <section class="main-content columns is-fullheight">
+    <aside id="sidebar" class="column is-one-quarter-desktop is-one-third-tablet section ">
+  <div class="sidebar__inner">
+    <ul class="menu-list">
+        
+        <li>
+        
+        
+          <span class="season">فصل اول - معرفی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson01/معرفی-اُ-سی-وی/">- معرفی اُ سی وی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson02/بارگذاری-نمایش-و-ذخیره-تصویر/">- بارگذاری، نمایش و ذخیره تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson03/کلاس-mat/">- کلاس MAT</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson04/ذخیره-سازی-و-بازیابی-اطلاعات/">- ذخیره سازی و بازیابی اطلاعات</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل دوم - حوزهٔ مکان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson01/شکل‌های-هندسی-ساده/">- شکل‌های هندسی ساده</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson02/ترکیب-خطی-دو-تصویر/">- ترکیب خطی دو تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson03/فیلتر-خطی/">- فیلتر خطی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson04/تبدیل-اَفاین/">- تبدیل اَفاین</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson05/نگاشت/">- نگاشت</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson06/تغییر-کنتراست-و-روشنایی-تصویر/">- تغییر کنتراست و روشنایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson07/هموار-سازی-تصویر/">- هموار سازی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson08/اضافه-کردن-قاب-به-تصویر/">- اضافه کردن قاب به تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson09/مولد-عدد-تصادفی-و-ترسیم-متن/">- مولد عدد تصادفی و ترسیم متن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson10/بزرگ‌نمایی-و-کوچک‌نمایی-تصویر/">- بزرگ‌نمایی و کوچک‌نمایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson11/آستانه‌گذاری/">- آستانه‌گذاری</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson12/بافت‌نگار-تصویر/">- بافت‌نگار تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson13/برابرسازی-بافت‌نگار/">- برابرسازی بافت‌نگار</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson14/عملگر-سابل/">- عملگر سابل</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson15/عملگر-لاپلاس/">- عملگر لاپلاس</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson16/عملگر-کَنی/">- عملگر کَنی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson17/کانتورهای-تصویر/">- کانتورهای تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson18/پوش-محدب/">- پوش محدب</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson19/قاب‌های-مستطیلی-و-دایره‌ای-برای-کانتورها/">- قاب‌های مستطیلی و دایره‌ای برای کانتورها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson20/قاب‌های-چرخیدهٔ-مستطیلی-و-بیضوی-برای-کانتورها/">- قاب‌های چرخیدهٔ مستطیلی و بیضوی برای کانتورها</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل سوم - حوزهٔ زمان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter03/lesson01/تبدیل-فوریهٔ-گسسته/">- تبدیل فوریهٔ گسسته</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل چهارم - مورفولوژی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson01/فرسایش-و-گشایش/">- فرسایش و گشایش</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson02/تبدیل‌های-مورفولوژی-پیچیده/">- تبدیل‌های مورفولوژی پیچیده</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل پنجم - شناسایی الگو</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson01/مقایسه-بافت‌نگارها/">- مقایسه بافت‌نگارها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson02/بَک-پروجکشن/">- بَک پروجکشن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson03/تطبیق-الگو/">- تطبیق الگو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson04/تبدیل-خط-هُو/">- تبدیل خط هُو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson05/تبدیل-دایره-هُو/">- تبدیل دایره هُو</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+    </ul>
+  </div>
+</aside>
+
+    <div class="container column">
+        <div class="section" id="content">
+
+  
+      
+          <h1 class="list">فصل دوم - حوزهٔ مکان</h1>
+      
+
+    <h3 class="list">اضافه کردن قاب به تصویر</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>در بخش قبل با کانولوشن و نحوهٔ اعمال آن روی یک تصویر آشنا شدیم. مسئله بر سر پیکسل‌های کناری تصویر بود. چگونه می‌توان این پیکسل‌ها را کانوال کرد در حالی که لنگر کرنل روی آنها قرار دارد و قسمتی از کرنل خارج از تصویر افتاده است؟!</p>
+
+<p>بیشتر توابع اُ سی وی برای حل این مشکل تصویر را در یک ماتریس بزرگتر کپی می‌کنند و سپس به طور خودکار اطراف تصویر را پر می‌کنند. به این طریق می‌توان بدون هیچ مشکلی کانولوشن را روی تمام پیکسل‌های مورد نیاز اعمال کرد و سپس در انتها پیکسل‌های اضافه را پاک کرد.</p>
+
+<p>در این بخش دو روش اضافه کردن قاب به تصویر بیان خواهد شد:</p>
+
+<ol>
+<li><strong>BORDER_CONSTANT:</strong> قاب اطراف تصویر را با یک مقدار ثابت پُر می‌کند (مثلاً با عدد 0).</li>
+<li><strong>BORDER_REPLICATE:</strong> سطرها و ستون‌های آخر تصویر اصلی را در قسمت قاب کپی می‌کند.</li>
+</ol>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+using namespace cv;
+
+/// Global Variables
+Mat src, dst;
+int top, bottom, left, right;
+int borderType;
+Scalar value;
+char* window_name = "copyMakeBorder Demo";
+RNG rng(12345);
+
+/** @function main  */
+int main( int argc, char** argv )
+{
+
+  int c;
+
+  /// Load an image
+  src = imread( argv[1] );
+
+  if( !src.data )
+  { return -1;
+    printf(" No data entered, please enter the path to an image file \n");
+  }
+
+  /// Brief how-to for this program
+  printf( "\n \t copyMakeBorder Demo: \n" );
+  printf( "\t -------------------- \n" );
+  printf( " ** Press 'c' to set the border to a random constant value \n");
+  printf( " ** Press 'r' to set the border to be replicated \n");
+  printf( " ** Press 'ESC' to exit the program \n");
+
+  /// Create window
+  namedWindow( window_name, CV_WINDOW_AUTOSIZE );
+
+  /// Initialize arguments for the filter
+  top = (int) (0.05*src.rows); bottom = (int) (0.05*src.rows);
+  left = (int) (0.05*src.cols); right = (int) (0.05*src.cols);
+  dst = src;
+
+  imshow( window_name, dst );
+
+  while( true )
+    {
+      c = waitKey(500);
+
+      if( (char)c == 27 )
+        { break; }
+      else if( (char)c == 'c' )
+        { borderType = BORDER_CONSTANT; }
+      else if( (char)c == 'r' )
+        { borderType = BORDER_REPLICATE; }
+
+      value = Scalar( rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255) );
+      copyMakeBorder( src, dst, top, bottom, left, right, borderType, value );
+
+      imshow( window_name, dst );
+    }
+
+  return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در خطوط 41 و 42 متغیرهایی که اندازهٔ قاب را مشخص می‌کنند (بالا، پایین، چپ و راست) تعریف شده است. در اینجا مقدارشان پنج درصدِ اندازهٔ تصویر src قرار داده شده‌اند.</p>
+
+<p>در خط 47 برنامه وارد یک حلقهٔ while می‌شود. با فشردن کلید "c" یا "r"، متغیر borderType به ترتیب یکی از مقادیر BORDER_CONSTANT یا BORDER_REPLICATE را می‌گیرد.</p>
+
+<p>در هر تکرار (هر 500 میلی ثانیه)، متغیر value در خط 58 به روز می‌شود. این مقدار یک عدد تصادفی است که توسط rng و در بازهٔ 0 تا 255 تولید می‌شود.</p>
+
+<p>در انتها در خط 59 برای اضافه کردن قاب، تابع copyMakeBorder صدا زده می‌شود. آرگومان‌های این تابع به شرح زیر هستند:</p>
+
+<ul>
+<li>src: تصویر منبع</li>
+<li>dst: تصویر مقصد</li>
+<li>top, bottom, left, right: طول قاب‌های هر طرف تصویر در مقیاس پیکسل هستند.</li>
+<li>borderType: نوع قاب را تعیین می‌کند. می‌تواند ثابت یا تکرار شونده باشد.</li>
+<li>value: اگر مقدار borderType، BORDER_CONSTANT باشد، value همان مقدار ثابتی است که در قاب قرار می‌گیرد.</li>
+</ul>
+
+<h2>خروجی</h2>
+
+<p>برنامه را به صورت زیر اجرا می‌کنیم:</p>
+
+<pre><code class="language-powershell">CopyMakeBorder.exe "PICTURES /2.jpg"
+</code></pre>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image42.jpeg" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image43.jpeg" alt="قاب ثابت (بعد از فشردن کلید c)" id="c" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+	<td align="center">قاب ثابت (بعد از فشردن کلید c)</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image44.jpeg" alt="قاب تکرار شونده (بعد از فشردن کلید r)" id="r" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">قاب تکرار شونده (بعد از فشردن کلید r)</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+  
+
+
+</div>
+
+<div class="section">
+    <nav class="pagination" role="navigation" aria-label="pagination">
+    <a href="/opencv-book/chapter02/lesson07/هموار-سازی-تصویر/" class="pagination-previous button is-primary is-outlined">
+    →
+    هموار سازی تصویر
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter02/lesson09/مولد-عدد-تصادفی-و-ترسیم-متن/" class="pagination-next button is-primary is-outlined">
+    مولد عدد تصادفی و ترسیم متن
+    ←
+  </a>
+    </nav>
+</div>
+    </div>
+
+  </section>
+
+  <footer class="columns hero section is-dark has-text-centered">
+        <div class="container ">
+            <div class="columns">
+
+                <div class="column">
+                    <div class="footer-header">
+                       به این جاها سر بزنید
+                    </div>
+                    <ul class="related-links has-text-centered">
+                        <li>
+                            <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <div class="footer-header">
+                    پردازش تصویر در OpenCV
+                    </div>
+                    <div class="socials">
+                      <a href="/opencv-book">
+                        <img class="cover" src="/opencv-book/media/cover-small.jpg">
+                      </a>
+                    </div>
+                </div>
+
+
+                </div>
+            </div>
+            <div class="has-text-centered credit">
+              <div>
+                ارائه شده بر بستر
+                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                و قالب از
+                <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
+                «لاراول، از صفر تا شصت»
+              </a>                
+              </div>
+            </div>
+        </div>
+    </footer>
+
+
+    
+<script type="text/javascript" src="/opencv-book/static/js/jquery.min.js"></script>
+<script src="/opencv-book/static/js/highlight.pack.js"></script>
+<script src="/opencv-book/static/js/highlightjs-line-numbers.min.js"></script>
+<script src="/opencv-book/static/js/app.js"></script>
+
+<script>
+    renderMathInElement(document.body,{ delimiters:
+      [
+       {left: "$$", right: "$$", display: true},
+       {left: "$", right: "$", display: false}
+      ]
+    });
+</script>
+
+<script>
+    // Trim extra blank line of the codes
+    var y = document.querySelectorAll("pre code");
+    for(var i = 0; i < y.length; i++) {
+      y[i].innerHTML = y[i].innerHTML.trimRight();
+    }
+</script>
+
+</body>
+</html>

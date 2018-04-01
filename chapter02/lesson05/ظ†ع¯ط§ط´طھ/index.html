@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="Farsi">
+<head>
+
+<title>پردازش تصویر در OpenCV | نگاشت</title>
+
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="">
+<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:site_name" content="پردازش تصویر در OpenCV">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+
+  <link rel="short icon" href="/static/img/mira.png">
+  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+ 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
+
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+
+</head>
+<body>
+
+  <header class="hero is-info columns">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+              <a href="/opencv-book">
+                پردازش تصویر در OpenCV
+              </a>
+            </h1>
+            <h2 class="subtitle"></h2>
+        </div>
+    </div>
+    <span class="sidebar_toggle">
+        <em class="open-icon"></em>
+    </span>
+</header>
+
+  <section class="main-content columns is-fullheight">
+    <aside id="sidebar" class="column is-one-quarter-desktop is-one-third-tablet section ">
+  <div class="sidebar__inner">
+    <ul class="menu-list">
+        
+        <li>
+        
+        
+          <span class="season">فصل اول - معرفی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson01/معرفی-اُ-سی-وی/">- معرفی اُ سی وی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson02/بارگذاری-نمایش-و-ذخیره-تصویر/">- بارگذاری، نمایش و ذخیره تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson03/کلاس-mat/">- کلاس MAT</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson04/ذخیره-سازی-و-بازیابی-اطلاعات/">- ذخیره سازی و بازیابی اطلاعات</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل دوم - حوزهٔ مکان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson01/شکل‌های-هندسی-ساده/">- شکل‌های هندسی ساده</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson02/ترکیب-خطی-دو-تصویر/">- ترکیب خطی دو تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson03/فیلتر-خطی/">- فیلتر خطی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson04/تبدیل-اَفاین/">- تبدیل اَفاین</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson05/نگاشت/">- نگاشت</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson06/تغییر-کنتراست-و-روشنایی-تصویر/">- تغییر کنتراست و روشنایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson07/هموار-سازی-تصویر/">- هموار سازی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson08/اضافه-کردن-قاب-به-تصویر/">- اضافه کردن قاب به تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson09/مولد-عدد-تصادفی-و-ترسیم-متن/">- مولد عدد تصادفی و ترسیم متن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson10/بزرگ‌نمایی-و-کوچک‌نمایی-تصویر/">- بزرگ‌نمایی و کوچک‌نمایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson11/آستانه‌گذاری/">- آستانه‌گذاری</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson12/بافت‌نگار-تصویر/">- بافت‌نگار تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson13/برابرسازی-بافت‌نگار/">- برابرسازی بافت‌نگار</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson14/عملگر-سابل/">- عملگر سابل</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson15/عملگر-لاپلاس/">- عملگر لاپلاس</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson16/عملگر-کَنی/">- عملگر کَنی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson17/کانتورهای-تصویر/">- کانتورهای تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson18/پوش-محدب/">- پوش محدب</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson19/قاب‌های-مستطیلی-و-دایره‌ای-برای-کانتورها/">- قاب‌های مستطیلی و دایره‌ای برای کانتورها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson20/قاب‌های-چرخیدهٔ-مستطیلی-و-بیضوی-برای-کانتورها/">- قاب‌های چرخیدهٔ مستطیلی و بیضوی برای کانتورها</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل سوم - حوزهٔ زمان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter03/lesson01/تبدیل-فوریهٔ-گسسته/">- تبدیل فوریهٔ گسسته</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل چهارم - مورفولوژی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson01/فرسایش-و-گشایش/">- فرسایش و گشایش</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson02/تبدیل‌های-مورفولوژی-پیچیده/">- تبدیل‌های مورفولوژی پیچیده</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل پنجم - شناسایی الگو</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson01/مقایسه-بافت‌نگارها/">- مقایسه بافت‌نگارها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson02/بَک-پروجکشن/">- بَک پروجکشن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson03/تطبیق-الگو/">- تطبیق الگو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson04/تبدیل-خط-هُو/">- تبدیل خط هُو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson05/تبدیل-دایره-هُو/">- تبدیل دایره هُو</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+    </ul>
+  </div>
+</aside>
+
+    <div class="container column">
+        <div class="section" id="content">
+
+  
+      
+          <h1 class="list">فصل دوم - حوزهٔ مکان</h1>
+      
+
+    <h3 class="list">نگاشت</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>در این بخش به چگونگی استفاده از تابع remap برای پیاده سازی نگاشت‌های ساده می‌پردازیم.</p>
+
+<p>به فرایند تغییر مکان پیکسل‌های یک تصویر و بردن آنها به مکان‌های دیگر در یک تصویر جدید، نگاشت می گویند. می‌توان عملیات نگاشت هر پیکسل $(x,\ y)$ را به صورت زیر نشان داد:</p>
+
+<p>$$g\left( x,\ y \right) = f\left( h\left( x,\ y \right) \right)$$</p>
+
+<p>که $g$ تصویر نگاشت یافته، $f$ تصویر منبع و $h$ هم تابع نگاشت است.</p>
+
+<p>به عنوان مثال فرض کنید عکسی به نام I داریم و می‌خواهیم یک نگاشت به صورت زیر روی آن اعمال کنیم:</p>
+
+<p>$$h\left( x,\ y \right) = \left( I.cols - x,\ y \right)$$</p>
+
+<p>به راحتی می‌توان دید که نتیجهٔ این نگاشت چرخیدن عکس در جهت x است. مثلاً عکس زیر را در نظر بگیرید:</p>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image28.png" alt="تصویر نگاشت شده" id="" /></th>
+	<th><img src="/opencv-book/media/image29.png" alt="تصویر اصلی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر نگاشت شده</td>
+	<td align="center">تصویر اصلی</td>
+</tr>
+</tbody>
+</table>
+
+<p>به تغییر موقعیت دایره قرمز نسبت به X توجه کنید (با توجه به اینکه x جهت افقی است).</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include &lt;iostream&gt;
+#include &lt;stdio.h&gt;
+
+using namespace cv;
+
+/// Global variables
+Mat src, dst;
+Mat map_x, map_y;
+char* remap_window = "Remap demo";
+int ind = 0;
+
+/// Function Headers
+void update_map( void );
+
+/**
+* @function main
+*/
+int main( int argc, char** argv )
+{
+    /// Load the image
+    src = imread( argv[1], 1 );
+
+    /// Create dst, map_x and map_y with the same size as src:
+    dst.create( src.size(), src.type() );
+    map_x.create( src.size(), CV_32FC1 );
+    map_y.create( src.size(), CV_32FC1 );
+
+    /// Create window
+    namedWindow( remap_window, CV_WINDOW_AUTOSIZE );
+
+    /// Loop
+    while( true )
+    {
+        /// Each 1 sec. Press ESC to exit the program
+        int c = waitKey( 1000 );
+
+        if( (char)c == 27 )
+        { break; }
+
+        /// Update map_x &amp; map_y. Then apply remap
+        update_map();
+        remap( src, dst, map_x, map_y, CV_INTER_LINEAR, BORDER_CONSTANT, Scalar(0,0, 0) );
+
+        /// Display results
+        imshow( remap_window, dst );
+    }
+    return 0;
+}
+
+/**
+* @function update_map
+* @brief Fill the map_x and map_y matrices with 4 types of mappings
+*/
+void update_map( void )
+{
+    ind = ind%4;
+
+    for( int j = 0; j &lt; src.rows; j++ )
+    { for( int i = 0; i &lt; src.cols; i++ )
+        {
+            switch( ind )
+            {
+            case 0:
+                if( i &gt; src.cols*0.25 &amp;&amp; i &lt; src.cols*0.75 &amp;&amp; j &gt; src.rows*0.25 &amp;&amp; j &lt; src.rows*0.75 )
+                {
+                    map_x.at&lt;float&gt;(j,i) = 2*( i - src.cols*0.25 ) + 0.5 ;
+                    map_y.at&lt;float&gt;(j,i) = 2*( j - src.rows*0.25 ) + 0.5 ;
+                }
+                else
+                { map_x.at&lt;float&gt;(j,i) = 0 ;
+                    map_y.at&lt;float&gt;(j,i) = 0 ;
+                }
+                break;
+            case 1:
+                map_x.at&lt;float&gt;(j,i) = i ;
+                map_y.at&lt;float&gt;(j,i) = src.rows - j ;
+                break;
+            case 2:
+                map_x.at&lt;float&gt;(j,i) = src.cols - i ;
+                map_y.at&lt;float&gt;(j,i) = j ;
+                break;
+            case 3:
+                map_x.at&lt;float&gt;(j,i) = src.cols - i ;
+                map_y.at&lt;float&gt;(j,i) = src.rows - j ;
+                break;
+            } // end of switch
+        }
+    }
+    ind++;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در خط 44 برای انجام نگاشت، تابع remap را صدا می‌زنیم. این تابع پنج آرگومان به شرح زیر دارد:</p>
+
+<ol>
+<li>src: تصویر ورودی</li>
+<li>dst: تصویر خروجی که همان اندازهٔ src است.</li>
+<li>map_x: تابع نگاشت در جهت x است. معادل قسمت اول تابع $h\left( i,\ j \right)$ است.</li>
+<li>map_y: مشابه بالایی، فقط در جهت y است. توجه کنید که map_x و map_y هر دو هم اندازهٔ src هستند.</li>
+<li>CV_INTER_LINEAR: نوع دورن یابی ای که برای پیکسل‌های غیر صحیح به کار می‌رود. پیش فرض آن همین مقدار است.</li>
+<li>BORDER_CONSTANT: نوع قابی که به اطراف تصویر اضافه می‌شود.</li>
+</ol>
+
+<p>در این برنامه چهار نوع نگاشت به تصویر ورودی اعمال می‌شود. تابع $h\left( i,\ j \right)$ هر کدام از این نگاشت‌ها به صورت زیر است:</p>
+
+<p>i.  <strong>کاهش اندازهٔ تصویر به نصف و نشان دادن آن در مرکز:</strong></p>
+
+<p>$$h\left( i,\ j \right) = \left( 2*i - \frac{\text{src.cols}}{2} + 0.5,\ 2*j - \frac{\text{src.rows}}{2} + 0.5 \right)$$</p>
+
+<p>​   برای همهٔ زوج‌های $\left( i,\ j \right)$ به صورتی که:</p>
+
+<p>$$\frac{\text{src.cols}}{4} &lt; i &lt; \frac{3*src.cols}{4}\text{\ and}\frac{\text{src.rows}}{4} &lt; j &lt; \frac{3*src.rows}{4}$$</p>
+
+<p>ii. <strong>بالا به پایین کردن تصویر:</strong> $h\left( i,\ j \right) = \left( i,\ src.rows - j \right)$</p>
+
+<p>iii. <strong>چپ به راست کردن تصویر:</strong> $h\left( i,\ j \right) = \left( \ src.cols - i,\ j \right)$</p>
+
+<p>iv. <strong>ترکیب ii و iii:</strong> $h\left( i,\ j \right) = \left( \ src.cols - i,\ \ src.rows - j \right)$</p>
+
+<p>تمام موارد بالا در خطوط 65 تا 88 پیاده سازی شده‌اند. در اینجا map_x نشان دهندهٔ مختص اول $h\left( i,\ j \right)$ و map_y مختص دوم آن است.</p>
+
+<h2>خروجی</h2>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image30.jpg" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image31.jpeg" alt="بالا به پایین کردن تصویر ورودی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+	<td align="center">بالا به پایین کردن تصویر ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image32.jpeg" alt="چپ به راست کردن تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image33.jpg" alt="بالا به پایین و چپ به راست کردن تصویر ورودی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">چپ به راست کردن تصویر ورودی</td>
+	<td align="center">بالا به پایین و چپ به راست کردن تصویر ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image34.jpg" alt="کاهش اندازهٔ تصویر به نصف و نشان دادن آن در مرکز" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">کاهش اندازهٔ تصویر به نصف و نشان دادن آن در مرکز</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+  
+
+
+</div>
+
+<div class="section">
+    <nav class="pagination" role="navigation" aria-label="pagination">
+    <a href="/opencv-book/chapter02/lesson04/تبدیل-اَفاین/" class="pagination-previous button is-primary is-outlined">
+    →
+    تبدیل اَفاین
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter02/lesson06/تغییر-کنتراست-و-روشنایی-تصویر/" class="pagination-next button is-primary is-outlined">
+    تغییر کنتراست و روشنایی تصویر
+    ←
+  </a>
+    </nav>
+</div>
+    </div>
+
+  </section>
+
+  <footer class="columns hero section is-dark has-text-centered">
+        <div class="container ">
+            <div class="columns">
+
+                <div class="column">
+                    <div class="footer-header">
+                       به این جاها سر بزنید
+                    </div>
+                    <ul class="related-links has-text-centered">
+                        <li>
+                            <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <div class="footer-header">
+                    پردازش تصویر در OpenCV
+                    </div>
+                    <div class="socials">
+                      <a href="/opencv-book">
+                        <img class="cover" src="/opencv-book/media/cover-small.jpg">
+                      </a>
+                    </div>
+                </div>
+
+
+                </div>
+            </div>
+            <div class="has-text-centered credit">
+              <div>
+                ارائه شده بر بستر
+                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                و قالب از
+                <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
+                «لاراول، از صفر تا شصت»
+              </a>                
+              </div>
+            </div>
+        </div>
+    </footer>
+
+
+    
+<script type="text/javascript" src="/opencv-book/static/js/jquery.min.js"></script>
+<script src="/opencv-book/static/js/highlight.pack.js"></script>
+<script src="/opencv-book/static/js/highlightjs-line-numbers.min.js"></script>
+<script src="/opencv-book/static/js/app.js"></script>
+
+<script>
+    renderMathInElement(document.body,{ delimiters:
+      [
+       {left: "$$", right: "$$", display: true},
+       {left: "$", right: "$", display: false}
+      ]
+    });
+</script>
+
+<script>
+    // Trim extra blank line of the codes
+    var y = document.querySelectorAll("pre code");
+    for(var i = 0; i < y.length; i++) {
+      y[i].innerHTML = y[i].innerHTML.trimRight();
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="Farsi">
+<head>
+
+<title>پردازش تصویر در OpenCV | ذخیره سازی و بازیابی اطلاعات</title>
+
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="">
+<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:site_name" content="پردازش تصویر در OpenCV">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+
+  <link rel="short icon" href="/static/img/mira.png">
+  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+ 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
+
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+
+</head>
+<body>
+
+  <header class="hero is-info columns">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+              <a href="/opencv-book">
+                پردازش تصویر در OpenCV
+              </a>
+            </h1>
+            <h2 class="subtitle"></h2>
+        </div>
+    </div>
+    <span class="sidebar_toggle">
+        <em class="open-icon"></em>
+    </span>
+</header>
+
+  <section class="main-content columns is-fullheight">
+    <aside id="sidebar" class="column is-one-quarter-desktop is-one-third-tablet section ">
+  <div class="sidebar__inner">
+    <ul class="menu-list">
+        
+        <li>
+        
+        
+          <span class="season">فصل اول - معرفی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson01/معرفی-اُ-سی-وی/">- معرفی اُ سی وی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson02/بارگذاری-نمایش-و-ذخیره-تصویر/">- بارگذاری، نمایش و ذخیره تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson03/کلاس-mat/">- کلاس MAT</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson04/ذخیره-سازی-و-بازیابی-اطلاعات/">- ذخیره سازی و بازیابی اطلاعات</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل دوم - حوزهٔ مکان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson01/شکل‌های-هندسی-ساده/">- شکل‌های هندسی ساده</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson02/ترکیب-خطی-دو-تصویر/">- ترکیب خطی دو تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson03/فیلتر-خطی/">- فیلتر خطی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson04/تبدیل-اَفاین/">- تبدیل اَفاین</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson05/نگاشت/">- نگاشت</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson06/تغییر-کنتراست-و-روشنایی-تصویر/">- تغییر کنتراست و روشنایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson07/هموار-سازی-تصویر/">- هموار سازی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson08/اضافه-کردن-قاب-به-تصویر/">- اضافه کردن قاب به تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson09/مولد-عدد-تصادفی-و-ترسیم-متن/">- مولد عدد تصادفی و ترسیم متن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson10/بزرگ‌نمایی-و-کوچک‌نمایی-تصویر/">- بزرگ‌نمایی و کوچک‌نمایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson11/آستانه‌گذاری/">- آستانه‌گذاری</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson12/بافت‌نگار-تصویر/">- بافت‌نگار تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson13/برابرسازی-بافت‌نگار/">- برابرسازی بافت‌نگار</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson14/عملگر-سابل/">- عملگر سابل</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson15/عملگر-لاپلاس/">- عملگر لاپلاس</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson16/عملگر-کَنی/">- عملگر کَنی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson17/کانتورهای-تصویر/">- کانتورهای تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson18/پوش-محدب/">- پوش محدب</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson19/قاب‌های-مستطیلی-و-دایره‌ای-برای-کانتورها/">- قاب‌های مستطیلی و دایره‌ای برای کانتورها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson20/قاب‌های-چرخیدهٔ-مستطیلی-و-بیضوی-برای-کانتورها/">- قاب‌های چرخیدهٔ مستطیلی و بیضوی برای کانتورها</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل سوم - حوزهٔ زمان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter03/lesson01/تبدیل-فوریهٔ-گسسته/">- تبدیل فوریهٔ گسسته</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل چهارم - مورفولوژی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson01/فرسایش-و-گشایش/">- فرسایش و گشایش</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson02/تبدیل‌های-مورفولوژی-پیچیده/">- تبدیل‌های مورفولوژی پیچیده</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل پنجم - شناسایی الگو</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson01/مقایسه-بافت‌نگارها/">- مقایسه بافت‌نگارها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson02/بَک-پروجکشن/">- بَک پروجکشن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson03/تطبیق-الگو/">- تطبیق الگو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson04/تبدیل-خط-هُو/">- تبدیل خط هُو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson05/تبدیل-دایره-هُو/">- تبدیل دایره هُو</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+    </ul>
+  </div>
+</aside>
+
+    <div class="container column">
+        <div class="section" id="content">
+
+  
+      
+          <h1 class="list">فصل اول - معرفی</h1>
+      
+
+    <h3 class="list">ذخیره سازی و بازیابی اطلاعات</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>در این بخش می‌خواهیم شما را با شیوه استاندارد ذخیره سازی و بازیابی داده ساختارهای موجود در اُ سی وی آشنا کنیم. البته با این روش می‌توان داده ساختارهایی که به نوعی از داده ساختارهای اُ سی وی درست شده‌اند را نیز ذخیره/بازیابی کرد.</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include &lt;opencv2/core/core.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace cv;
+using namespace std;
+
+static void help(char** av)
+{
+    cout &lt;&lt; endl
+        &lt;&lt; av[0] &lt;&lt; " shows the usage of the OpenCV serialization functionality." &lt;&lt; endl &lt;&lt; "usage: " &lt;&lt; endl
+        &lt;&lt;  av[0] &lt;&lt; " outputfile.yml.gz" &lt;&lt; endl
+        &lt;&lt; "The output file may be either XML (xml) or YAML (yml/yaml). You can even compress it by "
+        &lt;&lt; "specifying this in its extension like xml.gz yaml.gz etc... " &lt;&lt; endl
+        &lt;&lt; "With FileStorage you can serialize objects in OpenCV by using the &lt;&lt; and &gt;&gt; operators" &lt;&lt; endl
+        &lt;&lt; "For example: - create a class and have it serialized"                         &lt;&lt; endl
+        &lt;&lt; "             - use it to read and write matrices."                            &lt;&lt; endl;
+}
+
+class MyData
+{
+public:
+    MyData() : A(0), X(0), id()
+    {}
+    explicit MyData(int) : A(97), X(CV_PI), id("mydata1234") // explicit to avoid implicit conversion
+    {}
+    void write(FileStorage&amp; fs) const                        //Write serialization for this class
+    {
+        fs &lt;&lt; "{" &lt;&lt; "A" &lt;&lt; A &lt;&lt; "X" &lt;&lt; X &lt;&lt; "id" &lt;&lt; id &lt;&lt; "}";
+    }
+    void read(const FileNode&amp; node)                          //Read serialization for this class
+    {
+        A = (int)node["A"];
+        X = (double)node["X"];
+        id = (string)node["id"];
+    }
+public:   // Data Members
+    int A;
+    double X;
+    string id;
+};
+
+//These write and read functions must be defined for the serialization in FileStorage to work
+static void write(FileStorage&amp; fs, const std::string&amp;, const MyData&amp; x)
+{
+    x.write(fs);
+}
+static void read(const FileNode&amp; node, MyData&amp; x, const MyData&amp; default_value = MyData()){
+    if(node.empty())
+        x = default_value;
+    else
+        x.read(node);
+}
+
+// This function will print our custom class to the console
+static ostream&amp; operator&lt;&lt;(ostream&amp; out, const MyData&amp; m)
+{
+    out &lt;&lt; "{ id = " &lt;&lt; m.id &lt;&lt; ", ";
+    out &lt;&lt; "X = " &lt;&lt; m.X &lt;&lt; ", ";
+    out &lt;&lt; "A = " &lt;&lt; m.A &lt;&lt; "}";
+    return out;
+}
+
+int main(int ac, char** av)
+{
+    if (ac != 2)
+    {
+        help(av);
+        return 1;
+    }
+
+    string filename = av[1];
+    { //write
+        Mat R = Mat_&lt;uchar&gt;::eye(3, 3),
+            T = Mat_&lt;double&gt;::zeros(3, 1);
+        MyData m(1);
+
+        FileStorage fs(filename, FileStorage::WRITE);
+
+        fs &lt;&lt; "iterationNr" &lt;&lt; 100;
+        fs &lt;&lt; "strings" &lt;&lt; "["; // text - string sequence
+        fs &lt;&lt; "image1.jpg" &lt;&lt; "Awesomeness" &lt;&lt; "baboon.jpg";
+        fs &lt;&lt; "]"; // close sequence
+
+        fs &lt;&lt; "Mapping"; // text - mapping
+        fs &lt;&lt; "{" &lt;&lt; "One" &lt;&lt; 1;
+        fs &lt;&lt;        "Two" &lt;&lt; 2 &lt;&lt; "}";
+
+        fs &lt;&lt; "R" &lt;&lt; R; // cv::Mat
+        fs &lt;&lt; "T" &lt;&lt; T;
+
+        fs &lt;&lt; "MyData" &lt;&lt; m; // your own data structures
+
+        fs.release(); // explicit close
+        cout &lt;&lt; "Write Done." &lt;&lt; endl;
+    }
+
+    {//read
+        cout &lt;&lt; endl &lt;&lt; "Reading: " &lt;&lt; endl;
+        FileStorage fs;
+        fs.open(filename, FileStorage::READ);
+
+        int itNr;
+        //fs["iterationNr"] &gt;&gt; itNr;
+        itNr = (int) fs["iterationNr"];
+        cout &lt;&lt; itNr;
+        if (!fs.isOpened())
+        {
+            cerr &lt;&lt; "Failed to open " &lt;&lt; filename &lt;&lt; endl;
+            help(av);
+            return 1;
+        }
+
+        FileNode n = fs["strings"]; // Read string sequence - Get node
+        if (n.type() != FileNode::SEQ)
+        {
+            cerr &lt;&lt; "strings is not a sequence! FAIL" &lt;&lt; endl;
+            return 1;
+        }
+
+        FileNodeIterator it = n.begin(), it_end = n.end(); // Go through the node
+        for (; it != it_end; ++it)
+            cout &lt;&lt; (string)*it &lt;&lt; endl;
+
+
+        n = fs["Mapping"]; // Read mappings from a sequence
+        cout &lt;&lt; "Two  " &lt;&lt; (int)(n["Two"]) &lt;&lt; "; ";
+        cout &lt;&lt; "One  " &lt;&lt; (int)(n["One"]) &lt;&lt; endl &lt;&lt; endl;
+
+
+        MyData m;
+        Mat R, T;
+
+        fs["R"] &gt;&gt; R; // Read cv::Mat
+        fs["T"] &gt;&gt; T;
+        fs["MyData"] &gt;&gt; m; // Read your own structure_
+
+        cout &lt;&lt; endl
+            &lt;&lt; "R = " &lt;&lt; R &lt;&lt; endl;
+        cout &lt;&lt; "T = " &lt;&lt; T &lt;&lt; endl &lt;&lt; endl;
+        cout &lt;&lt; "MyData = " &lt;&lt; endl &lt;&lt; m &lt;&lt; endl &lt;&lt; endl;
+
+        //Show default behavior for non existing nodes
+        cout &lt;&lt; "Attempt to read NonExisting (should initialize the data structure with its default).";
+        fs["NonExisting"] &gt;&gt; m;
+        cout &lt;&lt; endl &lt;&lt; "NonExisting = " &lt;&lt; endl &lt;&lt; m &lt;&lt; endl;
+    }
+
+    cout &lt;&lt; endl
+        &lt;&lt; "Tip: Open up " &lt;&lt; filename &lt;&lt; " with a text editor to see the serialized data." &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در این بخش فقط در مورد فایل‌های XML و YAML صحبت می‌کنیم. فایل ورودی/خروجی شما ممکن است فقط یکی از این دو فرمت را داشته باشد.</p>
+
+<p>به طور کلی دو نوع داده ساختار قابل سریال سازی<a href="#fn:32" id="fnref:32" class="footnote">1</a> وجود دارد:</p>
+
+<ul>
+<li>نگاشت‌ها<a href="#fn:33" id="fnref:33" class="footnote">2</a> (مثل map در STL)</li>
+<li>دنبالهٔ عناصر<a href="#fn:34" id="fnref:34" class="footnote">3</a> (مثل vector در STL).</li>
+</ul>
+
+<p>تفاوت این دو در این است که در نگاشت‌ها هر عنصر یک کلید یکتا دارد و می‌توان در صورت وجود مستقیماً به آن دسترسی پیدا کرد، ولی در دنباله برای پیدا کردن یک عنصر باید کل دنباله را جستجو کرد.</p>
+
+<p>در ادامه با نحوه ذخیره سازی و بازیابی هر دو نوع داده ساختار بالا را بررسی می‌کنیم.</p>
+
+<ol>
+<li><p><strong>باز/بسته کردن فایل:</strong> قبل از اینکه در یک فایل بنویسید، لازم است آن را باز کرده و سپس در انتها آن را به بنید. در اُ سی وی برای کار با فایل‌های XML و YAML از کلاس FileStorage استفاده می‌شود. برای باز کردن یک فایل با استفاده از این کلاس می‌توان از سازنده آن یا تابع open آن استفاده کرد:</p>
+
+<pre><code class="language-c++">string filname = "I.xml";
+FileStorage fs(filename, FileStorage::READ);
+// OR ...
+FileStorage fs;
+fs.open(filename, FileStorage::READ);
+</code></pre>
+
+<p>آرگومان دوم یک ثابت است که مشخص کنندهٔ عملیاتی است که می‌خواهید روی آن فایل انجام دهید: WRITE (نوشتن)، READ(خواندن) یا APPEND (اضافه کردن). همچنین پسوندی که در اسم فایل مشخص شده است، تعیین کنندهٔ نوع فایل خروجی است. جالب اینکه با اضافه کردن .gz به انتهای اسم فایل، آن فایل فشرده خواهد شد.</p>
+
+<p>وقتی یک شیء FileStorage از بین برود، فایل مربوط به آن به صورت خودکار بسته می‌شود. البته می‌توان این کار را به صورت دستی با تابع release انجام داد:</p>
+
+<pre><code class="language-c++">fs.release();
+</code></pre></li>
+<li><p><strong>ورودی/خروجی عددی و متنی:</strong> کلاس FileStotage مشابه کتابخانهٔ STL برای خروجی از عملگر \&lt;\&lt; استفاده می‌کند. برای چاپ هر ساختار داده‌ای لازم است که ابتدا نام آن مشخص شود. این کار به سادگی با چاپ کردن اسم آن انجام می‌شود. برای داده‌های اولیه می‌توان به روش زیر، هم اسم و هم مقدار آن را چاپ کرد:</p>
+
+<pre><code class="language-c++">fs &lt;&lt; "iterationNr" &lt;&lt; 100;
+</code></pre>
+
+<p>برای خواندن مقدار iterationNr باید با استفاده از عملگر [] نام گره‌ای که قصد خواندن آن را داریم (که در اینجا iterationNr است)، مشخص کنیم. سپس می‌توان به یکی از دو روش زیر به مقدار آن دسترسی پیدا کرد:</p>
+
+<pre><code class="language-c++">int itNr;
+fs["iterationNr"] &gt;&gt; itNr;
+// OR ...
+itNr = (int) fs["iterationNr"];
+</code></pre></li>
+<li><p><strong>ورودی/خروجی ساختار داده‌های اُ سی وی:</strong> این کار دقیقاً مشابه نوشتن نوع‌های اولیه است:</p>
+
+<pre><code class="language-c++">Mat R = Mat_&lt;uchar&gt;::eye(3, 3),
+T = Mat_&lt;double&gt;::zeros(3, 1);
+
+
+fs &lt;&lt; "R" &lt;&lt; R; // Write cv::Mat
+fs &lt;&lt; "T" &lt;&lt; T;
+
+
+fs["R"] &gt;&gt; R; // Read cv::Mat
+fs["T"] &gt;&gt; T;
+</code></pre></li>
+<li><p><strong>ورودی/خروجی آرایه‌های ساده و انجمنی:</strong> همان‌طور که قبلاً گفته شد، می‌توان نگاشت‌ها و دنباله‌ها (آرایه‌ها و بردارها) را با استفاده از کلاس FileStorage چاپ کرد. روند چاپ اینگونه داده ساختارها به این صورت است که ابتدا نام متغیر را می‌آوریم و سپس مشخص می‌کنیم که خروجی یک دنباله یا یک نگاشت است.</p>
+
+<p>برای دنباله‌ها، قبل از آیتم اول کاراکتر [ و بعد از آیتم آخر نیز کاراکتر ] را قرار می‌دهیم:</p>
+
+<pre><code class="language-c++">fs &lt;&lt; "strings" &lt;&lt; "[";                // text - string sequence
+fs &lt;&lt; "image1.jpg" &lt;&lt; "Awesomeness" &lt;&lt; "baboon.jpg";
+fs &lt;&lt; "]"; // close sequence
+</code></pre>
+
+<p>در مورد نگاشت‌ها هم همین کار را می‌کنیم، با این تفاوت که از کاراکترهای { و } استفاده می‌کنیم:</p>
+
+<pre><code class="language-c++">fs &lt;&lt; "Mapping"; // text - mapping
+fs &lt;&lt; "{" &lt;&lt; "One" &lt;&lt; 1;
+fs &lt;&lt;        "Two" &lt;&lt; 2 &lt;&lt; "}";
+</code></pre>
+
+<p>برای خواندن هم از ساختار داده‌های FileNode و FileNodeIterator استفاده می‌کنیم. عملگر [] مربوط به کلاس FileStotage یک شیء FileNode را بر می‌گرداند. اگر نود بازگشتی یک دنباله بود، از FileNodeIterator برای خواندن آیتم‌ها استفاده می‌کنیم:</p>
+
+<pre><code class="language-c++">FileNode n = fs["strings"]; // Read string sequence - Get node
+if (n.type() != FileNode::SEQ)
+{
+    cerr &lt;&lt; "strings is not a sequence! FAIL" &lt;&lt; endl;
+    return 1;
+}
+
+
+FileNodeIterator it = n.begin(), it_end = n.end(); // Go through the node
+for (; it != it_end; ++it)
+    cout &lt;&lt; (string)*it &lt;&lt; endl;
+</code></pre>
+
+<p>در مورد نگاشت‌ها می‌توانیم از همان عملگر [] برای دسترسی به آیتم‌ها استفاده کنیم:</p>
+
+<pre><code class="language-c++">n = fs["Mapping"]; // Read mappings from a sequence
+cout &lt;&lt; "Two  " &lt;&lt; (int)(n["Two"]) &lt;&lt; "; ";
+cout &lt;&lt; "One  " &lt;&lt; (int)(n["One"]) &lt;&lt; endl &lt;&lt; endl;
+</code></pre></li>
+<li><p><strong>ورودی/خروجی ساختمان داده‌های ساختگی:</strong> فرض کنید یک ساختار داده به شکل زیر داریم:</p>
+
+<pre><code class="language-c++">class MyData
+{
+public:
+    MyData() : A(0), X(0), id() {}
+public:   // Data Members
+    int A;
+    double X;
+    string id;
+};
+</code></pre>
+
+<p>می‌توان این کلاس را به وسیلهٔ رابط ورودی/خروجی YAML/XML سریال کرد (درست مثل ساختار داده‌های اُ سی وی). برای این کار باید یک تابع read و یک تابع write، داخل و بیرون کلاس مورد نظر اضافه شود. به عنوان مثال قسمت داخلی کلاس بالا را به شکل زیر تعریف می‌کنیم:</p>
+
+<pre><code class="language-c++">//Write serialization for this class
+void write(FileStorage&amp; fs) const
+{
+    fs &lt;&lt; "{" &lt;&lt; "A" &lt;&lt; A &lt;&lt; "X" &lt;&lt; X &lt;&lt; "id" &lt;&lt; id &lt;&lt; "}";
+}
+//Read serialization for this class
+void read(const FileNode&amp; node)
+{
+    A = (int)node["A"];
+    X = (double)node["X"];
+    id = (string)node["id"];
+}
+</code></pre>
+
+<p>سپس قسمت خارجی را به صورت زیر تعریف می‌کنیم:</p>
+
+<pre><code class="language-c++">//These write and read functions must be defined for the serialization in FileStorage to work
+static void write(FileStorage&amp; fs, const std::string&amp;, const MyData&amp; x)
+{
+    x.write(fs);
+}
+static void read(const FileNode&amp; node, MyData&amp; x, const MyData&amp; default_value = MyData()){
+    if(node.empty())
+        x = default_value;
+    else
+        x.read(node);
+}
+</code></pre>
+
+<p>در قسمت read مشخص کرده‌ایم که اگر نود درخواستی وجود نداشته باشد از یک نود پیش فرض استفاده شود (یک شئ خام از کلاس MyData). البته بهتر است که در برنامه‌های واقعی یک خطا پرتاب کنیم.</p>
+
+<p>بعد از اضافه کردن این چهار تابع از عملگر >> برای خواندن و از عملگر &lt;&lt; برای نوشتن استفاده می‌کنیم:</p>
+
+<pre><code class="language-c++">MyData m(1);
+
+
+fs &lt;&lt; "MyData" &lt;&lt; m; // Write your own data structures
+fs["MyData"] &gt;&gt; m; // Read your own structure_
+</code></pre></li>
+</ol>
+
+<h2>خروجی</h2>
+
+<p>برنامه را به صورت زیر اجرا می‌کنیم:</p>
+
+<pre><code class="language-powershell">FileRW.exe "1.xml"
+</code></pre>
+
+<p>محتوای فایل <code>1.xml</code> به صورت زیر است:</p>
+
+<pre><code class="language-xml">&lt;?xml version="1.0"?&gt;
+&lt;opencv_storage&gt;
+&lt;iterationNr&gt;100&lt;/iterationNr&gt;
+&lt;strings&gt;
+  image1.jpg Awesomeness baboon.jpg&lt;/strings&gt;
+&lt;Mapping&gt;
+  &lt;One&gt;1&lt;/One&gt;
+  &lt;Two&gt;2&lt;/Two&gt;&lt;/Mapping&gt;
+&lt;R type_id="opencv-matrix"&gt;
+  &lt;rows&gt;3&lt;/rows&gt;
+  &lt;cols&gt;3&lt;/cols&gt;
+  &lt;dt&gt;u&lt;/dt&gt;
+  &lt;data&gt;
+    1 0 0 0 1 0 0 0 1&lt;/data&gt;&lt;/R&gt;
+&lt;T type_id="opencv-matrix"&gt;
+  &lt;rows&gt;3&lt;/rows&gt;
+  &lt;cols&gt;1&lt;/cols&gt;
+  &lt;dt&gt;d&lt;/dt&gt;
+  &lt;data&gt;
+    0. 0. 0.&lt;/data&gt;&lt;/T&gt;
+&lt;MyData&gt;
+  &lt;A&gt;97&lt;/A&gt;
+  &lt;X&gt;3.1415926535897931e+000&lt;/X&gt;
+  &lt;id&gt;mydata1234&lt;/id&gt;&lt;/MyData&gt;
+&lt;/opencv_storage&gt;
+</code></pre>
+
+<p>برنامه را به صورت زیر اجرا می‌کنیم:</p>
+
+<pre><code class="language-powershell">FileRW.exe "2.yml"
+</code></pre>
+
+<p>محتوای فایل <code>2.yml</code> به صورت زیر است:</p>
+
+<pre><code class="language-yaml">%YAML:1.0
+iterationNr: 100
+strings:
+   - "image1.jpg"
+   - Awesomeness
+   - "baboon.jpg"
+Mapping:
+   One: 1
+   Two: 2
+R: !!opencv-matrix
+   rows: 3
+   cols: 3
+   dt: u
+   data: [ 1, 0, 0, 0, 1, 0, 0, 0, 1 ]
+T: !!opencv-matrix
+   rows: 3
+   cols: 1
+   dt: d
+   data: [ 0., 0., 0. ]
+MyData:
+   A: 97
+   X: 3.1415926535897931e+000
+   id: mydata1234
+</code></pre>
+
+<p>.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:32"><p>Serializing<a href="#fnref:32" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:33"><p>Mappings<a href="#fnref:33" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:34"><p>Element sequence<a href="#fnref:34" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+</ol>
+</div>
+
+    </div>
+  
+
+
+</div>
+
+<div class="section">
+    <nav class="pagination" role="navigation" aria-label="pagination">
+    <a href="/opencv-book/chapter01/lesson03/کلاس-mat/" class="pagination-previous button is-primary is-outlined">
+    →
+    کلاس MAT
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter02/lesson01/شکل‌های-هندسی-ساده/" class="pagination-next button is-primary is-outlined">
+    شکل‌های هندسی ساده
+    ←
+  </a>
+    </nav>
+</div>
+    </div>
+
+  </section>
+
+  <footer class="columns hero section is-dark has-text-centered">
+        <div class="container ">
+            <div class="columns">
+
+                <div class="column">
+                    <div class="footer-header">
+                       به این جاها سر بزنید
+                    </div>
+                    <ul class="related-links has-text-centered">
+                        <li>
+                            <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <div class="footer-header">
+                    پردازش تصویر در OpenCV
+                    </div>
+                    <div class="socials">
+                      <a href="/opencv-book">
+                        <img class="cover" src="/opencv-book/media/cover-small.jpg">
+                      </a>
+                    </div>
+                </div>
+
+
+                </div>
+            </div>
+            <div class="has-text-centered credit">
+              <div>
+                ارائه شده بر بستر
+                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                و قالب از
+                <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
+                «لاراول، از صفر تا شصت»
+              </a>                
+              </div>
+            </div>
+        </div>
+    </footer>
+
+
+    
+<script type="text/javascript" src="/opencv-book/static/js/jquery.min.js"></script>
+<script src="/opencv-book/static/js/highlight.pack.js"></script>
+<script src="/opencv-book/static/js/highlightjs-line-numbers.min.js"></script>
+<script src="/opencv-book/static/js/app.js"></script>
+
+<script>
+    renderMathInElement(document.body,{ delimiters:
+      [
+       {left: "$$", right: "$$", display: true},
+       {left: "$", right: "$", display: false}
+      ]
+    });
+</script>
+
+<script>
+    // Trim extra blank line of the codes
+    var y = document.querySelectorAll("pre code");
+    for(var i = 0; i < y.length; i++) {
+      y[i].innerHTML = y[i].innerHTML.trimRight();
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="Farsi">
+<head>
+
+<title>پردازش تصویر در OpenCV | تبدیل اَفاین</title>
+
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="">
+<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:site_name" content="پردازش تصویر در OpenCV">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+
+  <link rel="short icon" href="/static/img/mira.png">
+  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+ 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
+
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+
+</head>
+<body>
+
+  <header class="hero is-info columns">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+              <a href="/opencv-book">
+                پردازش تصویر در OpenCV
+              </a>
+            </h1>
+            <h2 class="subtitle"></h2>
+        </div>
+    </div>
+    <span class="sidebar_toggle">
+        <em class="open-icon"></em>
+    </span>
+</header>
+
+  <section class="main-content columns is-fullheight">
+    <aside id="sidebar" class="column is-one-quarter-desktop is-one-third-tablet section ">
+  <div class="sidebar__inner">
+    <ul class="menu-list">
+        
+        <li>
+        
+        
+          <span class="season">فصل اول - معرفی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson01/معرفی-اُ-سی-وی/">- معرفی اُ سی وی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson02/بارگذاری-نمایش-و-ذخیره-تصویر/">- بارگذاری، نمایش و ذخیره تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson03/کلاس-mat/">- کلاس MAT</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson04/ذخیره-سازی-و-بازیابی-اطلاعات/">- ذخیره سازی و بازیابی اطلاعات</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل دوم - حوزهٔ مکان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson01/شکل‌های-هندسی-ساده/">- شکل‌های هندسی ساده</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson02/ترکیب-خطی-دو-تصویر/">- ترکیب خطی دو تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson03/فیلتر-خطی/">- فیلتر خطی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson04/تبدیل-اَفاین/">- تبدیل اَفاین</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson05/نگاشت/">- نگاشت</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson06/تغییر-کنتراست-و-روشنایی-تصویر/">- تغییر کنتراست و روشنایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson07/هموار-سازی-تصویر/">- هموار سازی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson08/اضافه-کردن-قاب-به-تصویر/">- اضافه کردن قاب به تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson09/مولد-عدد-تصادفی-و-ترسیم-متن/">- مولد عدد تصادفی و ترسیم متن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson10/بزرگ‌نمایی-و-کوچک‌نمایی-تصویر/">- بزرگ‌نمایی و کوچک‌نمایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson11/آستانه‌گذاری/">- آستانه‌گذاری</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson12/بافت‌نگار-تصویر/">- بافت‌نگار تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson13/برابرسازی-بافت‌نگار/">- برابرسازی بافت‌نگار</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson14/عملگر-سابل/">- عملگر سابل</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson15/عملگر-لاپلاس/">- عملگر لاپلاس</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson16/عملگر-کَنی/">- عملگر کَنی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson17/کانتورهای-تصویر/">- کانتورهای تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson18/پوش-محدب/">- پوش محدب</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson19/قاب‌های-مستطیلی-و-دایره‌ای-برای-کانتورها/">- قاب‌های مستطیلی و دایره‌ای برای کانتورها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson20/قاب‌های-چرخیدهٔ-مستطیلی-و-بیضوی-برای-کانتورها/">- قاب‌های چرخیدهٔ مستطیلی و بیضوی برای کانتورها</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل سوم - حوزهٔ زمان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter03/lesson01/تبدیل-فوریهٔ-گسسته/">- تبدیل فوریهٔ گسسته</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل چهارم - مورفولوژی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson01/فرسایش-و-گشایش/">- فرسایش و گشایش</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson02/تبدیل‌های-مورفولوژی-پیچیده/">- تبدیل‌های مورفولوژی پیچیده</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل پنجم - شناسایی الگو</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson01/مقایسه-بافت‌نگارها/">- مقایسه بافت‌نگارها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson02/بَک-پروجکشن/">- بَک پروجکشن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson03/تطبیق-الگو/">- تطبیق الگو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson04/تبدیل-خط-هُو/">- تبدیل خط هُو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson05/تبدیل-دایره-هُو/">- تبدیل دایره هُو</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+    </ul>
+  </div>
+</aside>
+
+    <div class="container column">
+        <div class="section" id="content">
+
+  
+      
+          <h1 class="list">فصل دوم - حوزهٔ مکان</h1>
+      
+
+    <h3 class="list">تبدیل اَفاین</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>به هر تبدیلی که بتوان آن را به فرم یک ضرب ماتریسی و به دنبال آن یک جمع برداری بیان کرد، تبدیل اَفاین می گویند. بنابراین می‌توانیم اعمال زیر را به عنوان تبدیل اَفاین در نظر بگیریم:</p>
+
+<ol>
+<li>چرخش (تبدیل خطی)</li>
+<li>انتقال (جمع برداری)</li>
+<li>عملیات‌ مقیاسی (تبدیل خطی)</li>
+</ol>
+
+<p>یک تبدیل اَفاین نشان دهندهٔ یک رابطه بین دو عکس است و معمول‌ترین راه برای نشان دادن یک تبدیل اَفاین، استفاده از یک ماتریس 2 در 3 است:</p>
+
+<p>$$
+A=\begin{pmatrix}
+a_{00} &amp; a_{01}\\
+a_{10} &amp; a_{11}
+\end{pmatrix}
+,
+B=\begin{bmatrix}
+b_{00}\\
+b_{10}
+\end{bmatrix}
+$$</p>
+
+<p>$$
+M = \begin{bmatrix}
+A &amp; B \\
+\end{bmatrix} = \begin{bmatrix}
+\begin{matrix}
+a_{00} &amp; a_{01} &amp; b_{00} \\
+\end{matrix} \\
+\begin{matrix}
+a_{10} &amp; a_{11} &amp; b_{10} \\
+\end{matrix} \\
+\end{bmatrix}_{2 \times 3}
+$$</p>
+
+<p>با توجه به اینکه می‌خواهیم یک بردار دو بعدی به صورت  $X = \begin{bmatrix} x \\ y \end{bmatrix}$ را با استفاده از A و B تبدیل کنیم، می‌توانیم این کار را به صورت معادل زیر هم انجام دهیم:</p>
+
+<p>$$
+T = A\ .\ \begin{bmatrix}
+x \\
+y
+\end{bmatrix} + B\ or\ T = M\ .\ {\lbrack x,\ y,\ 1\rbrack}^{t}
+$$</p>
+
+<p>$$
+T = \begin{bmatrix}
+a_{00}x + a_{01}y + b_{00} \\
+a_{10}x + a_{11}y + b_{10}
+\end{bmatrix}
+$$</p>
+
+<p>گفتیم که هر تبدیل اَفاین یک رابطه بین دو عکس است. اطلاعات مربوط به این رابطه می‌تواند به دو طریق وجود داشته باشد:</p>
+
+<ol>
+<li>X و T را در اختیار داریم و می دانیم که این دو با هم رابطه دارند. بنابراین هدف ما پیدا کردن M است.</li>
+<li>M و X را در اختیار داریم و برای به دست آوردن T از معادله $T = M . X$ استفاده می‌کنیم. ممکن است M را به طور صریح در اختیارمان قرار دهند (یعنی همان ماتریس 2 در 3 را داده باشند)، یا اینکه آن را به صورت یک رابطهٔ هندسی بین نقاط داشته باشیم.</li>
+</ol>
+
+<p>از آنجایی که M دو تصویر را به هم ربط می‌دهد، می‌توان آن را به صورت ساده‌ترین حالت یعنی حالتی که سه نقطه از هر کدام از دو تصویر را به هم ربط می‌دهد، در نظر گرفت. به شکل زیر نگاه کنید:</p>
+
+<p><img src="/opencv-book/media/image24.png" alt="mage2" id="mage2" /></p>
+
+<p>نقاط 1، 2 و 3 در تصویر 1 (که یک مثلث تشکیل داده‌اند)، به تصویر 2 نگاشت شده‌اند و هنوز هم به شکل یک مثلث هستند ولی شکل آن مثلث تغییر کرده است. اگر ما تبدیل اَفاین این سه نقطه را پیدا کنیم، می‌توانیم آن را به همهٔ پیکسل‌های یک تصویر اعمال کنیم.</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include &lt;iostream&gt;
+#include &lt;stdio.h&gt;
+
+using namespace cv;
+using namespace std;
+
+/// Global variables
+char* source_window = "Source image";
+char* warp_window = "Warp";
+char* warp_rotate_window = "Warp + Rotate";
+
+/** @function main */
+int main( int argc, char** argv )
+{
+    Point2f srcTri[3];
+    Point2f dstTri[3];
+
+    Mat rot_mat( 2, 3, CV_32FC1 );
+    Mat warp_mat( 2, 3, CV_32FC1 );
+    Mat src, warp_dst, warp_rotate_dst;
+
+    /// Load the image
+    src = imread( argv[1], 1 );
+
+    /// Set the dst image the same type and size as src
+    warp_dst = Mat::zeros( src.rows, src.cols, src.type() );
+
+    /// Set your 3 points to calculate the  Affine Transform
+    srcTri[0] = Point2f( 0,0 );
+    srcTri[1] = Point2f( src.cols - 1, 0 );
+    srcTri[2] = Point2f( 0, src.rows - 1 );
+
+    dstTri[0] = Point2f( src.cols*0.0, src.rows*0.33 );
+    dstTri[1] = Point2f( src.cols*0.85, src.rows*0.25 );
+    dstTri[2] = Point2f( src.cols*0.15, src.rows*0.7 );
+
+    /// Get the Affine Transform
+    warp_mat = getAffineTransform( srcTri, dstTri );
+
+    /// Apply the Affine Transform just found to the src image
+    warpAffine( src, warp_dst, warp_mat, warp_dst.size() );
+
+    /** Rotating the image after Warp */
+
+    /// Compute a rotation matrix with respect to the center of the image
+    Point center = Point( warp_dst.cols/2, warp_dst.rows/2 );
+    double angle = -50.0;
+    double scale = 0.6;
+
+    /// Get the rotation matrix with the specifications above
+    rot_mat = getRotationMatrix2D( center, angle, scale );
+
+    /// Rotate the warped image
+    warpAffine( warp_dst, warp_rotate_dst, rot_mat, warp_dst.size() );
+
+    /// Show what you got
+    namedWindow( source_window, CV_WINDOW_AUTOSIZE );
+    imshow( source_window, src );
+
+    namedWindow( warp_window, CV_WINDOW_AUTOSIZE );
+    imshow( warp_window, warp_dst );
+
+    namedWindow( warp_rotate_window, CV_WINDOW_AUTOSIZE );
+    imshow( warp_rotate_window, warp_rotate_dst );
+
+    /// Wait until user exits the program
+    waitKey(0);
+
+    return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>همانطور که قبلاً توضیح داده شد، برای به دست آوردن یک تبدیل اَفاین به رابطهٔ بین دو مجموعه سه نقطه‌ای نیاز داریم. در خطوط 30 تا 37 این دو مجموعه تعریف شده‌اند. موقعیت این نقاط تقریباً شبیه همانی است که در قسمت قبل دیدید.</p>
+
+<p>اکنون با داشتن این نقاط در خط 40 برای به دست آوردن تبدیل اَفاین از تابع getAffineTransform استفاده می‌کنیم. خروجی این تابع به صورت یک ماتریس 2 در 3 است.</p>
+
+<p>در خط 43 با استفاده از تابع warpAffine تبدیل اَفاین را به تصویر src اعمال می‌کنیم. این تابع چهار آرگومان دارد:</p>
+
+<ol>
+<li>src: تصویر ورودی</li>
+<li>warp_dst: تصویر خروجی</li>
+<li>warp_mat: تبدیل اَفاین</li>
+<li>warp_dst.size(): اندازهٔ تصویر خروجی است.</li>
+</ol>
+
+<p>در خطوط 48 تا 56 می‌خواهیم تصویر تبدیل شده warp_dst را بچرخانیم. برای چرخاندن یک تصویر به مختصات مرکزی که تصویر باید نسبت به آن بچرخد و میزان زاویه‌ای که تصویر باید بچرخد نیاز داریم. این پارامترها در خطوط 48 تا 50 تعریف شده‌اند.</p>
+
+<p>در خط 53 برای تولید ماتریس چرخشی از تابع getRotationMatrix2D استفاده می‌کنیم. این تابع یک ماتریس 2 در 3 بر می‌گرداند.</p>
+
+<p>سپس در خط 56، ماتریس چرخشی را به تصویر warp_mat اعمال می‌کنیم.</p>
+
+<h2>خروجی</h2>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image25.jpeg" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image26.jpeg" alt="تصویر تبدیل شده" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+	<td align="center">تصویر تبدیل شده</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image27.jpeg" alt="تصویر چرخیده شده از روی تصویر تبدیل شده" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر چرخیده شده از روی تصویر تبدیل شده</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+  
+
+
+</div>
+
+<div class="section">
+    <nav class="pagination" role="navigation" aria-label="pagination">
+    <a href="/opencv-book/chapter02/lesson03/فیلتر-خطی/" class="pagination-previous button is-primary is-outlined">
+    →
+    فیلتر خطی
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter02/lesson05/نگاشت/" class="pagination-next button is-primary is-outlined">
+    نگاشت
+    ←
+  </a>
+    </nav>
+</div>
+    </div>
+
+  </section>
+
+  <footer class="columns hero section is-dark has-text-centered">
+        <div class="container ">
+            <div class="columns">
+
+                <div class="column">
+                    <div class="footer-header">
+                       به این جاها سر بزنید
+                    </div>
+                    <ul class="related-links has-text-centered">
+                        <li>
+                            <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <div class="footer-header">
+                    پردازش تصویر در OpenCV
+                    </div>
+                    <div class="socials">
+                      <a href="/opencv-book">
+                        <img class="cover" src="/opencv-book/media/cover-small.jpg">
+                      </a>
+                    </div>
+                </div>
+
+
+                </div>
+            </div>
+            <div class="has-text-centered credit">
+              <div>
+                ارائه شده بر بستر
+                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                و قالب از
+                <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
+                «لاراول، از صفر تا شصت»
+              </a>                
+              </div>
+            </div>
+        </div>
+    </footer>
+
+
+    
+<script type="text/javascript" src="/opencv-book/static/js/jquery.min.js"></script>
+<script src="/opencv-book/static/js/highlight.pack.js"></script>
+<script src="/opencv-book/static/js/highlightjs-line-numbers.min.js"></script>
+<script src="/opencv-book/static/js/app.js"></script>
+
+<script>
+    renderMathInElement(document.body,{ delimiters:
+      [
+       {left: "$$", right: "$$", display: true},
+       {left: "$", right: "$", display: false}
+      ]
+    });
+</script>
+
+<script>
+    // Trim extra blank line of the codes
+    var y = document.querySelectorAll("pre code");
+    for(var i = 0; i < y.length; i++) {
+      y[i].innerHTML = y[i].innerHTML.trimRight();
+    }
+</script>
+
+</body>
+</html>
