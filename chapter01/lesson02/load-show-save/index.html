@@ -2,7 +2,7 @@
 <html lang="Farsi">
 <head>
 
-<title>پردازش تصویر در OpenCV</title>
+<title>پردازش تصویر در OpenCV | بارگذاری، نمایش و ذخیره تصویر</title>
 
 <meta charset="utf-8">
 <meta name="description" content="">
@@ -260,27 +260,104 @@
     <div class="container column">
         <div class="section" id="content">
 
-  <h1 class="cover">پردازش تصویر در OpenCV</h1>
-  <h2 class="cover"></h2>
-    
-   <div style="text-align:center">
-     <br>
-     نویسندگان:
-     <br>
-     علیرضا داودی
-     <br>
-     رضا غریبی
-     <br>
-     <br>
-  </div>
-    
-  <img class="cover" src="/opencv-book/media/cover.jpg">
+  
+      
+          <h1 class="list">فصل اول - معرفی</h1>
+      
 
-  <div style="text-align:center">
-    <a href="/opencv-book/chapter01/lesson01/%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D8%A7%D9%8F-%D8%B3%DB%8C-%D9%88%DB%8C/">
-      از اینجا شروع به خواندن کنید
-    </a>
-  </div>
+    <h3 class="list">بارگذاری، نمایش و ذخیره تصویر</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>در این بخش می‌خواهیم شما را با سه عمل بنیادی آشنا کنیم. تقریباً در تمام کاربردهای پردازش تصویری به سه عمل بارگذاری، نمایش و ذخیره تصویر نیاز داریم. در ادامه با نحوه انجام این کارها در اُ سی وی آشنا می‌شویم.</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include &lt;opencv2/core/core.hpp&gt;
+#include &lt;opencv2/highgui/highgui.hpp&gt;
+#include &lt;opencv2/imgproc/imgproc.hpp&gt;
+
+int main( int argc, char** argv )
+{
+    char* imageName = argv[1];
+
+    cv::Mat image;
+    image = cv::imread( imageName, CV_LOAD_IMAGE_COLOR );
+
+    if(!image.data )
+    {
+        printf( " No image data \n " );
+        return -1;
+    }
+
+    cv::Mat gray_image;
+    cv::cvtColor( image, gray_image,  CV_BGR2GRAY);
+
+    cv::imwrite( argv[2], gray_image );
+
+    cv::namedWindow( imageName, CV_WINDOW_AUTOSIZE );
+    cv::namedWindow( "Gray image", CV_WINDOW_AUTOSIZE );
+
+    cv::imshow( imageName, image );
+    cv::imshow( "Gray image", gray_image );
+
+    cv::waitKey(0);
+
+    return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در خطوط 1 تا 3 فایل‌های سرایند مورد نیاز را وارد برنامه می‌کنیم. فایل سرایند core.hpp مربوط به ماژول Core در اُ سی وی است که توابع و متغیرهای عمومی در آن قرار دارند. کلاس Mat در این ماژول تعریف شده است.</p>
+
+<p>فایل سرایند highgui.hpp هم مربوط به ماژولی با همین نام در اُ سی وی است. در این فایل توابع و کلاس‌های مربوط به رابط گرافیکی اُ سی وی قرار دارد. توابع imread، imshow، imwrite و waitKey در این ماژول تعریف شده‌اند.</p>
+
+<p>فایل سرایند imgproc.hpp مربوط به ماژول imgProc است. در این ماژول توابع و الگوریتم‌های پردازش تصویر قرار گرفته‌اند. تابع cvtColor و پرچم‌های آن در این مازول تعریف شده‌اند.</p>
+
+<p>در خط 7 آدرس تصویر ورودی را از آرگومان ورودی برنامه می‌گیریم و در متغیر imageName قرار می‌دهیم.</p>
+
+<p>در خط 9 یک شیء از کلاس Mat درست می‌کنیم. قرار است تصویر ورودی در این شیء قرار گیرد.</p>
+
+<p>در خط 10 با استفاده از تابع imread تصویر ورودی را می‌خوانیم. این تابع دو آرگومان دارد. آرگومان اول آدرس تصویر است و آرگومان دوم نحوه بارگذاری تصویر است. در اینجا مشخص کرده‌ایم که تصویر به صورت رنگی بارگذاری شود. اگر می‌خواستیم تصویر به صورت سیاه و سفید بارگذاری شود، باید از پرچم CV_LOAD_IMAGE_GRAYSCALE استفاده می‌کردیم.</p>
+
+<p>در خط 12 چک می‌کنیم که آیا تصویر درست بارگذاری شده است یا نه. اگر درست بارگذاری نشده باشد یک پیغام خطا نشان می‌دهیم و از برنامه خارج می‌شویم.</p>
+
+<p>در خط 19 با استفاده از تابع cvtColor فضای رنگی تصویر ورودی را از رنگی به سیاه و سفید می‌بریم. آرگومان اول این تابع تصویر ورودی و آرگومان دوم تصویر خروجی است. آرگومان سوم مشخص می‌کند که از چه فضای رنگی به چه فضای رنگی می‌خواهیم تبدیل کنیم.</p>
+
+<p>در خط 21 با استفاده از تابع imwrite تصویر سیاه و سفید را ذخیره می‌کنیم. آرگومان اول این تابع آدرس تصویر خروجی است و آرگومان دوم هم تصویری است که می‌خواهیم ذخیره کنیم. دقت کنید که پسوند نام تصویر خروجی تعیین می‌کند که تصویر خروجی از چه نوعی باشد. مثلاً اگر نام تصویر خروجی bla.jpg باشد، تصویر خروجی به فرمت jpg نوشته می‌شود.</p>
+
+<p>در خطوط 23 و 24 دو پنجره برای نمایش تصویر ورودی و تصویر خروجی درست می‌کنیم. آرگومان اول این توابع نام پنجره و آرگومان دوم تنظیمات پنجره است.</p>
+
+<p>در خطوط 26 و 27 با استفاده از تابع imshow تصویر ورودی و تصویر خروجی را در پنجره‌هایی که درست کردیم، نمایش می‌دهیم. آرگومان اول این توابع نام پنجره و آرگومان دوم تصویری است که می‌خواهیم نمایش دهیم.</p>
+
+<p>در خط 29 با استفاده از تابع waitKey کاری می‌کنیم که برنامه ما تا زمانی که کاربر کلیدی فشار نداده است همچنان در حال اجرا باشد.</p>
+
+<h2>خروجی</h2>
+
+<p>برنامه را به صورت زیر اجرا می‌کنیم:</p>
+
+<pre><code class="language-powershell">SimpleProgram.exe "D:/input.jpg" "D:/output.jpg"
+</code></pre>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image3.jpg" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image4.jpg" alt="تصویر خروجی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+	<td align="center">تصویر خروجی</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
   
 
 
@@ -288,7 +365,18 @@
 
 <div class="section">
     <nav class="pagination" role="navigation" aria-label="pagination">
-    
+    <a href="/opencv-book/chapter01/lesson01/ocv-intro/" class="pagination-previous button is-primary is-outlined">
+    →
+    معرفی اُ سی وی
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter01/lesson03/mat-class/" class="pagination-next button is-primary is-outlined">
+    کلاس MAT
+    ←
+  </a>
     </nav>
 </div>
     </div>

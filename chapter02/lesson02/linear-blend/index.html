@@ -2,7 +2,7 @@
 <html lang="Farsi">
 <head>
 
-<title>پردازش تصویر در OpenCV</title>
+<title>پردازش تصویر در OpenCV | ترکیب خطی دو تصویر</title>
 
 <meta charset="utf-8">
 <meta name="description" content="">
@@ -260,27 +260,119 @@
     <div class="container column">
         <div class="section" id="content">
 
-  <h1 class="cover">پردازش تصویر در OpenCV</h1>
-  <h2 class="cover"></h2>
-    
-   <div style="text-align:center">
-     <br>
-     نویسندگان:
-     <br>
-     علیرضا داودی
-     <br>
-     رضا غریبی
-     <br>
-     <br>
-  </div>
-    
-  <img class="cover" src="/opencv-book/media/cover.jpg">
+  
+      
+          <h1 class="list">فصل دوم - حوزهٔ مکان</h1>
+      
 
-  <div style="text-align:center">
-    <a href="/opencv-book/chapter01/lesson01/%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D8%A7%D9%8F-%D8%B3%DB%8C-%D9%88%DB%8C/">
-      از اینجا شروع به خواندن کنید
-    </a>
-  </div>
+    <h3 class="list">ترکیب خطی دو تصویر</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>دو تصویر را می‌توان با استفاده از یک ترکیب خطی از مقادیر پیکسل‌های آنان، جمع کرد. فرم کلی یک ترکیب خطی به صورت زیر است:</p>
+
+<p>$$g\left( x \right) = \alpha f_{0}\left( x \right) + \beta f_{1}\left( x \right) + \gamma\ : \alpha, \ \beta, \ \gamma \in R$$</p>
+
+<p>قبلاً با عملگرهای ریاضی مُجازی که می‌توانستیم روی کلاس Mat استفاده کنیم آشنا شدیم. می دانیم که می‌توان به راحتی دو عکس (با ابعاد یکسان) را با هم جمع کرد و عکس دیگری با همان ابعاد به وجود آورد. اما در این بخش می‌خواهیم شما را با تابع addWeighted آشنا کنیم. این تابع دقیقاً مشابه معادله بالا عمل می‌کند؛ یعنی با دریافت دو ماتریس مبدأ و سه عدد $\alpha$، $\beta$ و $\gamma$ یک ترکیب خطی از دو ماتریس ورودی درست می‌کند و به عنوان خروجی بر می‌گرداند.</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include &lt;opencv2/core/core.hpp&gt;
+#include &lt;opencv2/highgui/highgui.hpp&gt;
+#include &lt;iostream&gt;
+
+int main( int argc, char** argv )
+{
+    double alpha = 0.5; double beta; double input;
+    cv::Mat src1, src2, dst;
+
+    /// Ask the user enter alpha
+    std::cout &lt;&lt; " Simple Linear Blender "&lt;&lt;std::endl;
+    std::cout &lt;&lt; "-----------------------"&lt;&lt;std::endl;
+    std::cout &lt;&lt; "* Enter alpha [0-1]: ";
+    std::cin &gt;&gt; input;
+
+    // We use the alpha provided by the user iff it is between 0 and 1
+    if( alpha &gt;= 0 &amp;&amp; alpha &lt;= 1 )
+        alpha = input;
+
+    // Read image ( same size, same type )
+    src1 = cv::imread("PICTURES/1.jpg");
+    src2 = cv::imread("PICTURES/2.jpg");
+    if( !src1.data )
+    {
+        std::cout &lt;&lt; "Error loading src1" &lt;&lt; std::endl;
+        return -1;
+    }
+    if( !src2.data )
+    {
+        std::cout &lt;&lt; "Error loading src2" &lt;&lt; std::endl;
+        return -1;
+    }
+
+    // Create Windows
+    beta = ( 1.0 - alpha );
+    cv::addWeighted( src1, alpha, src2, beta, 0.0, dst);
+
+    cv::imshow( "Linear Blend", dst );
+    cv::waitKey(0);
+
+    return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در این برنامه ابتدا از کاربر می‌خواهیم که یک مقدار بین 0 و 1 برای $\alpha$ انتخاب کند. اگر کاربر عدد درستی را وارد کرده باشد، متغیر alpha را برابر با آن عدد قرار می‌دهیم (خط 18)؛ در غیر این صورت از همان مقدار پیشفرض که 0.5 است، استفاده می‌شود.</p>
+
+<p>در ادامه دو تصویر را از حافظه می‌خوانیم و در src1 و src2 قرار می‌دهیم. همچنین مطمئن می‌شویم که این دو تصویر به درستی بارگذاری شده‌اند.</p>
+
+<p>در خط 35 مقدار beta را برابر <code>1 – alpha</code> قرار می‌دهیم. این یعنی می‌خواهیم تصویر نهایی به نسبت alpha از تصویر src1 و به نسبت <code>1 – alpha</code> از تصویر src2 تشکیل شده باشد.</p>
+
+<p>برای اعمال ترکیب خطی در خط 36 تابع addWeighted را صدا می‌زنیم. توجه کنید که در اینجا مقدار $\gamma$ را صفر قرار داده‌ایم.</p>
+
+<h2>خروجی</h2>
+
+<p>برنامه را به صورت زیر اجرا می‌کنیم:</p>
+
+<pre><code class="language-powershell">LinearBlend.exe
+&gt; 0.3
+</code></pre>
+
+<p>خروجی به صورت زیر است:</p>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image15.jpeg" alt="تصویر ورودی اول" id="" /></th>
+	<th><img src="/opencv-book/media/image16.jpeg" alt="تصویر ورودی دوم" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی اول</td>
+	<td align="center">تصویر ورودی دوم</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image17.jpeg" alt="تصویر خروجی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر خروجی</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
   
 
 
@@ -288,7 +380,18 @@
 
 <div class="section">
     <nav class="pagination" role="navigation" aria-label="pagination">
-    
+    <a href="/opencv-book/chapter02/lesson01/simple-shapes/" class="pagination-previous button is-primary is-outlined">
+    →
+    شکل‌های هندسی ساده
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter02/lesson03/linear-filter/" class="pagination-next button is-primary is-outlined">
+    فیلتر خطی
+    ←
+  </a>
     </nav>
 </div>
     </div>

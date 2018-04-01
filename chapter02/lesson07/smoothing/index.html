@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="Farsi">
+<head>
+
+<title>پردازش تصویر در OpenCV | هموار سازی تصویر</title>
+
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="">
+<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:site_name" content="پردازش تصویر در OpenCV">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+
+  <link rel="short icon" href="/static/img/mira.png">
+  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+ 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
+
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+
+</head>
+<body>
+
+  <header class="hero is-info columns">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+              <a href="/opencv-book">
+                پردازش تصویر در OpenCV
+              </a>
+            </h1>
+            <h2 class="subtitle"></h2>
+        </div>
+    </div>
+    <span class="sidebar_toggle">
+        <em class="open-icon"></em>
+    </span>
+</header>
+
+  <section class="main-content columns is-fullheight">
+    <aside id="sidebar" class="column is-one-quarter-desktop is-one-third-tablet section ">
+  <div class="sidebar__inner">
+    <ul class="menu-list">
+        
+        <li>
+        
+        
+          <span class="season">فصل اول - معرفی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson01/ocv-intro/">- معرفی اُ سی وی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson02/load-show-save/">- بارگذاری، نمایش و ذخیره تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson03/mat-class/">- کلاس MAT</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson04/store-retrieve/">- ذخیره سازی و بازیابی اطلاعات</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل دوم - حوزهٔ مکان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson01/simple-shapes/">- شکل‌های هندسی ساده</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson02/linear-blend/">- ترکیب خطی دو تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson03/linear-filter/">- فیلتر خطی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson04/affine-transformation/">- تبدیل اَفاین</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson05/map/">- نگاشت</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson06/contrast-brightness/">- تغییر کنتراست و روشنایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson07/smoothing/">- هموار سازی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson08/border/">- اضافه کردن قاب به تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson09/drawing/">- مولد عدد تصادفی و ترسیم متن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson10/zooming/">- بزرگ‌نمایی و کوچک‌نمایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson11/threshold/">- آستانه‌گذاری</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson12/image-histogram/">- بافت‌نگار تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson13/equalize-histogram/">- برابرسازی بافت‌نگار</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson14/sobel-operator/">- عملگر سابل</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson15/laplace-operator/">- عملگر لاپلاس</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson16/canny-operator/">- عملگر کَنی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson17/contours/">- کانتورهای تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson18/convex-hull/">- پوش محدب</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson19/contours-frames/">- قاب‌های مستطیلی و دایره‌ای برای کانتورها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson20/contours-rotated-frames/">- قاب‌های چرخیدهٔ مستطیلی و بیضوی برای کانتورها</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل سوم - حوزهٔ زمان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter03/lesson01/discrete-fourier/">- تبدیل فوریهٔ گسسته</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل چهارم - مورفولوژی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson01/erode-dilate/">- فرسایش و گشایش</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson02/morphology-transformations/">- تبدیل‌های مورفولوژی پیچیده</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل پنجم - شناسایی الگو</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson01/compare-histograms/">- مقایسه بافت‌نگارها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson02/back-projection/">- بَک پروجکشن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson03/pattern-matching/">- تطبیق الگو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson04/hough-line-transform/">- تبدیل خط هُو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson05/hough-circle-transform/">- تبدیل دایره هُو</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+    </ul>
+  </div>
+</aside>
+
+    <div class="container column">
+        <div class="section" id="content">
+
+  
+      
+          <h1 class="list">فصل دوم - حوزهٔ مکان</h1>
+      
+
+    <h3 class="list">هموار سازی تصویر</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>هموار سازی یا مات کردن، یک عمل سادهٔ پردازش تصویری است که بسیار مورد استفاده قرار می‌گیرد. دلایل زیادی برای هموار کردن یک تصویر وجود دارد. در این بخش از هموار کردن برای کاهش نویز استفاده می‌کنیم (با کاربردهای دیگرِ آن در بخش‌های دیگر آشنا خواهید شد).</p>
+
+<p>به منظور هموار کردن تصویر باید از فیلترها استفاده کرد که عموماً از فیلترهای خطی استفاده می‌شود؛ در این فیلترها مقدار یک پیکسل خروجی (یعنی $g\left( i,j \right)$) به جمع وزن دار پیکسل‌های ورودی بستگی دارد (یعنی $f\left( i + k,j + l \right)$).</p>
+
+<p>$$g\left( i,j \right) = \ \sum_{k,l}^{}{f\left( i + k,j + l \right)h(k,l)}$$</p>
+
+<p>به $h(k,l)$ کرنل می گویند. کرنل همان ضرایب فیلتر است.</p>
+
+<p>معادله بالا به ما نشان می‌دهد که فیلتر، یک پنجرهٔ لغزنده از ضرایب است که روی تصویر حرکت می‌کند. از آنجا که فیلترهای متنوع زیادی وجود دارند، اینجا فقط آنهایی که بیشتر مورد استفاده قرار می‌گیرند را توضیح می‌دهیم:</p>
+
+<p><strong>فیلتر جعبه‌ای نرمال شده</strong><a href="#fn:a" id="fnref:a" class="footnote">1</a><strong>:</strong></p>
+
+<ul>
+<li><p>ساده‌ترین فیلتر موجود است که هر پیکسل خروجی، میانگین همسایه‌های آن
+است.</p></li>
+<li><p>کرنل این فیلتر به صورت زیر است:</p>
+
+<p>$$
+K = \frac{1}{K_{width}.K_{height}}\begin{bmatrix}
+1 &amp; \cdots &amp; 1 \\
+\vdots &amp; \ddots &amp; \vdots \\
+1 &amp; \cdots &amp; 1
+\end{bmatrix}
+$$</p></li>
+</ul>
+
+<p><strong>فیلتر گوسی</strong><a href="#fn:b" id="fnref:b" class="footnote">2</a><strong>:</strong></p>
+
+<ul>
+<li><p>احتمالاً کاربردی‌ترین فیلتر (اما نه سریع‌ترین) است. فیلتر کردن به روش گوسی از کانوال هر نقطهٔ موجود در آرایه ورودی با یک کرنل گوسی و سپس جمع همهٔ آنها برای به دست آوردن خروجی، انجام می‌شود.</p></li>
+<li><p>نمودار کرنل گوسی یک بعدی به صورت زیر است:</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image36.png" alt="تابع توزیع گوسی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تابع توزیع گوسی</td>
+</tr>
+</tbody>
+</table>
+
+<p>اگر فرض کنیم عکس یک بُعدی باشد، با توجه به شکل بالا پیکسلی که در مرکز قرار گرفته بزرگترین وزن را خواهد داشت. با افزایش فاصله از پیکسل مرکزی وزن‌ها نیز کمتر می‌شوند.</p></li>
+</ul>
+
+<p><strong>نکته:</strong> به یاد داشته باشید که گوسی دو بعدی به شکل زیر است:</p>
+
+<p>$$G_{0}\left( x,y \right) = Ae^{\frac{- {(x - \mu_{x})}^{2}}{2\sigma_{x}^{2}}+\frac{- {(y - \mu_{y})}^{2}}{2\sigma_{y}^{2}}}$$</p>
+
+<p>که $\mu$ نشان دهندهٔ میانگین و $\sigma$ نشان دهندهٔ انحراف معیار (به ازای متغییر های $x$ و $y$) است.</p>
+
+<p><strong>فیلتر میانه</strong><a href="#fn:c" id="fnref:c" class="footnote">3</a><strong>:</strong></p>
+
+<p>فیلتر میانه گیر روی پیکسل‌های عکس عبور می‌کند و هر پیکسل را با میانهٔ پیکسل‌های همسایه‌اش جایگزین می‌کند.</p>
+
+<p><strong>فیلتر دوگانه</strong><a href="#fn:d" id="fnref:d" class="footnote">4</a><strong>:</strong></p>
+
+<p>تا اینجا فیلترهایی معرفی کردیم که هدف اصلیشان هموار کردن تصویر ورودی بود. برخی اوقات فیلترها نه فقط نویزها را از بین می‌برند بلکه لبه‌ها را نیز از بین می‌برند. برای جلوگیری از مورد دوم (حداقل در برخی مواقع) می‌توان از فیلتر دوگانه استفاده کرد.</p>
+
+<p>فیلتر دوگانه به روشی مشابه با فیلتر گوسی به هر کدام از پیکسل‌های همسایه، وزنی اختصاص می‌دهد. هر وزن از دو قسمت تشکیل شده است؛ قسمت اول همان وزنی است که در فیلتر گوسی وجود دارد. قسمت دوم هم اختلاف بین روشنایی پیکسل فعلی با همسایه‌هایش است. چون هدف این کتاب آموزش اُ سی وی است از ذکر جزئیات این فیلتر خودداری می‌کنیم.</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/features2d/features2d.hpp"
+
+using namespace std;
+using namespace cv;
+
+/// Global Variables
+int DELAY_CAPTION = 1500;
+int DELAY_BLUR = 100;
+int MAX_KERNEL_LENGTH = 31;
+
+Mat src; Mat dst;
+char window_name[] = "Smoothing Demo";
+
+/// Function headers
+int display_caption( const char* caption );
+int display_dst( int delay );
+
+
+/**
+ * function main
+ */
+int main( void )
+{
+  namedWindow( window_name, WINDOW_AUTOSIZE );
+
+  /// Load the source image
+  src = imread( "D:/TRANSLATION/OpenCV Book for PGU/PICTURES/USED IN CODES/1.jpg", 1 );
+
+  if( display_caption( "Original Image" ) != 0 ) { return 0; }
+
+  dst = src.clone();
+  if( display_dst( DELAY_CAPTION ) != 0 ) { return 0; }
+
+
+  /// Applying Homogeneous blur
+  if( display_caption( "Homogeneous Blur" ) != 0 ) { return 0; }
+
+  for ( int i = 1; i &lt; MAX_KERNEL_LENGTH; i = i + 2 )
+      { blur( src, dst, Size( i, i ), Point(-1,-1) );
+        if( display_dst( DELAY_BLUR ) != 0 ) { return 0; } }
+
+
+  /// Applying Gaussian blur
+  if( display_caption( "Gaussian Blur" ) != 0 ) { return 0; }
+
+  for ( int i = 1; i &lt; MAX_KERNEL_LENGTH; i = i + 2 )
+      { GaussianBlur( src, dst, Size( i, i ), 0, 0 );
+        if( display_dst( DELAY_BLUR ) != 0 ) { return 0; } }
+
+
+  /// Applying Median blur
+  if( display_caption( "Median Blur" ) != 0 ) { return 0; }
+
+  for ( int i = 1; i &lt; MAX_KERNEL_LENGTH; i = i + 2 )
+      { medianBlur ( src, dst, i );
+        if( display_dst( DELAY_BLUR ) != 0 ) { return 0; } }
+
+
+  /// Applying Bilateral Filter
+  if( display_caption( "Bilateral Blur" ) != 0 ) { return 0; }
+
+  for ( int i = 1; i &lt; MAX_KERNEL_LENGTH; i = i + 2 )
+      { bilateralFilter ( src, dst, i, i*2, i/2 );
+        if( display_dst( DELAY_BLUR ) != 0 ) { return 0; } }
+
+  /// Wait until user press a key
+  display_caption( "End: Press a key!" );
+
+  waitKey(0);
+
+  return 0;
+}
+
+/**
+ * @function display_caption
+ */
+int display_caption( const char* caption )
+{
+  dst = Mat::zeros( src.size(), src.type() );
+  putText( dst, caption,
+           Point( src.cols/4, src.rows/2),
+           FONT_HERSHEY_COMPLEX, 1, Scalar(255, 255, 255) );
+
+  imshow( window_name, dst );
+  int c = waitKey( DELAY_CAPTION );
+  if( c &gt;= 0 ) { return -1; }
+  return 0;
+}
+
+/**
+ * @function display_dst
+ */
+int display_dst( int delay )
+{
+  imshow( window_name, dst );
+  int c = waitKey ( delay );
+  if( c &gt;= 0 ) { return -1; }
+  return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در فصل قبل با خیلی از دستورهایی که در کد بالا استفاده شده‌اند، آشنا شدید؛ به همین دلیل فقط به توابع هموار سازی می‌پردازیم.</p>
+
+<p><strong>فیلتر جعبه‌ای نرمال شده (خط 44):</strong></p>
+
+<p>تابع blur چهار آرگومان دارد:</p>
+
+<ul>
+<li>src: عکس منبع</li>
+<li>dst: عکس مقصد</li>
+<li><code>Size( w,h )</code>: اندازهٔ کرنل مورد استفاده را مشخص می‌کند (عرض w و ارتفاع h).</li>
+<li><code>Point( -1, -1 )</code>: موقعیت نقطه لنگر<a href="#fn:e" id="fnref:e" class="footnote">5</a> نسبت به همسایه‌ها را مشخص می‌کند. اگر یک مقدارِ منفی باشد، مرکز کرنل به عنوان نقطهٔ مرجع در نظر گرفته می‌شود.</li>
+</ul>
+
+<p><strong>فیلتر گوسی (خط 52):</strong></p>
+
+<p>تابع GassuainBlur پنج آرگومان دارد:</p>
+
+<ul>
+<li>src: عکس منبع</li>
+<li>dst: عکس مقصد</li>
+<li><code>Size( w, h)</code>: اندازهٔ کرنل مورد استفاده را مشخص می‌کند (یعنی همسایه‌های درگیر را مشخص می‌کند). w و h باید مثبت و فرد باشند، در غیر این صورت از $\sigma_{x}$ و $\sigma_{y}$ برای محاسبهٔ این اندازه‌ها استفاده می‌شود.</li>
+<li>$\sigma_{x}$: انحراف معیار<a href="#fn:f" id="fnref:f" class="footnote">6</a> نسبت به x است. با قرار دادن مقدار صفر مشخص می‌کنیم که $\sigma_{x}$ باید از روی اندازهٔ کرنل محاسبه شود.</li>
+<li>$\sigma_{y}$: انحراف معیار نسبت به y است. با قرار دادن مقدار صفر مشخص می‌کنیم که $\sigma_{y}$ باید از روی اندازهٔ کرنل محاسبه شود.</li>
+</ul>
+
+<p><strong>فیلتر میانه (خط 60):</strong></p>
+
+<p>تابع medianFilter سه آرگومان دارد:</p>
+
+<ul>
+<li>src: عکس منبع</li>
+<li>dst: عکس مقصد؛ باید همنوع src باشد.</li>
+<li>i: اندازهٔ کرنل است (چون از کرنل مربعی استفاده می‌شود فقط یک پارامتر کافی است). باید فرد باشد.</li>
+</ul>
+
+<p><strong>فیلتر دوگانه (خط 68):</strong></p>
+
+<p>تابع bilateralFilter پنج آرگومان دارد:</p>
+
+<ul>
+<li>src: تصویر منبع</li>
+<li>dst: تصویر مقصد</li>
+<li>d: قطر همسایگی هر پیکسل</li>
+<li>$\sigma_{\text{color}}$: انحراف معیار در فضای رنگی.</li>
+<li>$\sigma_{\text{space}}$: انحراف معیار در فضای مختصات (در مقیاس پیکسل).</li>
+</ul>
+
+<h2>خروجی</h2>
+
+<p>برنامه پس از اجرا تصویری را باز می‌کند و چهار فیلتر توضیح داده شده را به ترتیب روی آن اعمال می‌کند.</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image37.jpg" alt="تصویر ورودی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image38.jpg" alt="فیلتر جعبه‌ای نرمال شده با اندازه کرنل 25" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">فیلتر جعبه‌ای نرمال شده با اندازه کرنل 25</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image39.jpg" alt="فیلتر گوسی با اندازه کرنل 25" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">فیلتر گوسی با اندازه کرنل 25</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image40.jpg" alt="فیلتر میانه با اندازه کرنل 25" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">فیلتر میانه با اندازه کرنل 25</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image41.jpg" alt="فیلتر دوگانه با اندازه کرنل 25" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">فیلتر دوگانه با اندازه کرنل 25</td>
+</tr>
+</tbody>
+</table>
+
+<p>به راحتی می‌توان دید که کیفیت تصویر ایجاد شده با فیلتر دوگانه از سایر تصاویر بیشتر است.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:a"><p>Normalized Box Filter<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:b"><p>Gaussian Filter<a href="#fnref:b" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:c"><p>Median Filter<a href="#fnref:c" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:d"><p>Bilateral Filter<a href="#fnref:d" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:e"><p>Anchor Point<a href="#fnref:e" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:f"><p>Standard derivation<a href="#fnref:f" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+</ol>
+</div>
+
+    </div>
+  
+
+
+</div>
+
+<div class="section">
+    <nav class="pagination" role="navigation" aria-label="pagination">
+    <a href="/opencv-book/chapter02/lesson06/contrast-brightness/" class="pagination-previous button is-primary is-outlined">
+    →
+    تغییر کنتراست و روشنایی تصویر
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter02/lesson08/border/" class="pagination-next button is-primary is-outlined">
+    اضافه کردن قاب به تصویر
+    ←
+  </a>
+    </nav>
+</div>
+    </div>
+
+  </section>
+
+  <footer class="columns hero section is-dark has-text-centered">
+        <div class="container ">
+            <div class="columns">
+
+                <div class="column">
+                    <div class="footer-header">
+                       به این جاها سر بزنید
+                    </div>
+                    <ul class="related-links has-text-centered">
+                        <li>
+                            <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <div class="footer-header">
+                    پردازش تصویر در OpenCV
+                    </div>
+                    <div class="socials">
+                      <a href="/opencv-book">
+                        <img class="cover" src="/opencv-book/media/cover-small.jpg">
+                      </a>
+                    </div>
+                </div>
+
+
+                </div>
+            </div>
+            <div class="has-text-centered credit">
+              <div>
+                ارائه شده بر بستر
+                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                و قالب از
+                <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
+                «لاراول، از صفر تا شصت»
+              </a>                
+              </div>
+            </div>
+        </div>
+    </footer>
+
+
+    
+<script type="text/javascript" src="/opencv-book/static/js/jquery.min.js"></script>
+<script src="/opencv-book/static/js/highlight.pack.js"></script>
+<script src="/opencv-book/static/js/highlightjs-line-numbers.min.js"></script>
+<script src="/opencv-book/static/js/app.js"></script>
+
+<script>
+    renderMathInElement(document.body,{ delimiters:
+      [
+       {left: "$$", right: "$$", display: true},
+       {left: "$", right: "$", display: false}
+      ]
+    });
+</script>
+
+<script>
+    // Trim extra blank line of the codes
+    var y = document.querySelectorAll("pre code");
+    for(var i = 0; i < y.length; i++) {
+      y[i].innerHTML = y[i].innerHTML.trimRight();
+    }
+</script>
+
+</body>
+</html>

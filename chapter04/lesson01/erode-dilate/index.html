@@ -2,7 +2,7 @@
 <html lang="Farsi">
 <head>
 
-<title>پردازش تصویر در OpenCV</title>
+<title>پردازش تصویر در OpenCV | فرسایش و گشایش</title>
 
 <meta charset="utf-8">
 <meta name="description" content="">
@@ -260,27 +260,239 @@
     <div class="container column">
         <div class="section" id="content">
 
-  <h1 class="cover">پردازش تصویر در OpenCV</h1>
-  <h2 class="cover"></h2>
-    
-   <div style="text-align:center">
-     <br>
-     نویسندگان:
-     <br>
-     علیرضا داودی
-     <br>
-     رضا غریبی
-     <br>
-     <br>
-  </div>
-    
-  <img class="cover" src="/opencv-book/media/cover.jpg">
+  
+      
+          <h1 class="list">فصل چهارم - مورفولوژی</h1>
+      
 
-  <div style="text-align:center">
-    <a href="/opencv-book/chapter01/lesson01/%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D8%A7%D9%8F-%D8%B3%DB%8C-%D9%88%DB%8C/">
-      از اینجا شروع به خواندن کنید
-    </a>
-  </div>
+    <h3 class="list">فرسایش و گشایش</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>به طور کلی به دسته‌ای از عملیات که تصاویر را بر پایهٔ اشکال هندسی پردازش می‌کنند، عملیات مورفولوژی می گویند. عملیات مورفولوژی به تصویر ورودی یک عنصر سازنده<a href="#fn:a" id="fnref:a" class="footnote">1</a> اعمال می‌کنند و یک تصویر خروجی تولید می‌کنند. در فرایند مورفولوژی میزان شباهت اشکال موجود در تصویر داده شده را با عنصر سازنده که خود یک شکل هندسی است، بررسی می‌شود.</p>
+
+<p>ابتدایی‌ترین عملیات مورفولوژی، عملیات فرسایش<a href="#fn:b" id="fnref:b" class="footnote">2</a> و گشایش<a href="#fn:c" id="fnref:c" class="footnote">3</a> هستند که کاربردهای بسیاری دارند، از جمله:</p>
+
+<ul>
+<li><p>از بین بردن نویز</p></li>
+<li><p>جدا کردن عناصر خاص و متصل کردن قسمت‌های جدا از هم موجود در یک تصویر</p></li>
+<li><p>پیدا کردن قسمت‌های بسیار تیره (حفره‌ها<a href="#fn:d" id="fnref:d" class="footnote">4</a>) و بسیار روشن تصویر</p></li>
+</ul>
+
+<p>در ادامه با در نظر گرفتن تصویر زیر، عملیات فرسایش و گشایش را بررسی می‌کنیم.</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image112.png" alt="تصویر ورودی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>گشایش:</strong></p>
+
+<p>این عمل از کانولوشن تصویر A با کرنل B که می‌تواند هر اندازه و شکلی داشته باشد (که معمولاً دایره یا مربع است)، تشکیل شده است. کرنل B یک لنگر دارد که معمولاً در مرکز کرنل است.</p>
+
+<p>همین‌طور که کرنل B روی تصویر حرکت می‌کند، پیکسل بیشینه‌ای که در پنجرهٔ B است را پیدا کرده و مقدار آن را به جای مقدار پیکسلی که لنگر روی آن قرار دارد می‌گذارد. پس این عمل باعث رشد نواحی روشن در تصویر می‌شود (نام گشایش از اینجا می‌آید). به عنوان مثال اگر عملگر گشایش را به تصویر ورودی بالا اعمال کنیم، نتیجه به صورت زیر خواهد بود:</p>
+
+<p><img src="/opencv-book/media/image113.png" alt="نتیجه اعمال گشایش روی تصویر ورودی" id="" /></p>
+
+<p>نتیجه اعمال گشایش روی تصویر ورودی</p>
+
+<hr />
+
+<p>پس زمینهٔ تصویر (قسمت روشن) نسبت به ناحیهٔ تیره مربوط به حرف j، گشایش می‌یابد.</p>
+
+<p><strong>فرسایش:</strong></p>
+
+<p>همین‌طور که کرنل B روی تصویر حرکت می‌کند، پیکسل کمینه‌ای که در پنجرهٔ B است را پیدا کرده و مقدار آن را به جای مقدار پیکسلی که لنگر روی آن قرار دارد می‌گذارد.</p>
+
+<p>عملگر فرسایش را روی تصویر ورودی اعمال می‌کنیم. شکل زیر نتیجهٔ این کار را نشان می‌دهد. در این تصویر می‌بینید که ناحیه‌های روشن تصویر (یعنی پس زمینه) نازک‌تر شده‌اند (یعنی فرسایش یافته‌اند)، در حالی که ناحیه‌های تیره بزرگتر شده‌اند.</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image114.png" alt="نتیجه اعمال فرسایش روی تصویر ورودی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">نتیجه اعمال فرسایش روی تصویر ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+using namespace cv;
+
+/// Global variables
+Mat src, erosion_dst, dilation_dst;
+
+int erosion_elem = 0;
+int erosion_size = 0;
+int dilation_elem = 0;
+int dilation_size = 0;
+int const max_elem = 2;
+int const max_kernel_size = 21;
+
+/** Function Headers */
+void Erosion( int, void* );
+void Dilation( int, void* );
+
+/** @function main */
+int main( int argc, char** argv )
+{
+  /// Load an image
+  src = imread( argv[1] );
+
+  if( !src.data )
+  { return -1; }
+
+  /// Create windows
+  namedWindow( "Erosion Demo", CV_WINDOW_AUTOSIZE );
+  namedWindow( "Dilation Demo", CV_WINDOW_AUTOSIZE );
+  cvMoveWindow( "Dilation Demo", src.cols, 0 );
+
+  /// Create Erosion Trackbar
+  createTrackbar( "Element:\n 0: Rect \n 1: Cross \n 2: Ellipse", "Erosion Demo",
+                  &amp;erosion_elem, max_elem,
+                  Erosion );
+
+  createTrackbar( "Kernel size:\n 2n +1", "Erosion Demo",
+                  &amp;erosion_size, max_kernel_size,
+                  Erosion );
+
+  /// Create Dilation Trackbar
+  createTrackbar( "Element:\n 0: Rect \n 1: Cross \n 2: Ellipse", "Dilation Demo",
+                  &amp;dilation_elem, max_elem,
+                  Dilation );
+
+  createTrackbar( "Kernel size:\n 2n +1", "Dilation Demo",
+                  &amp;dilation_size, max_kernel_size,
+                  Dilation );
+
+  /// Default start
+  Erosion( 0, 0 );
+  Dilation( 0, 0 );
+
+  waitKey(0);
+  return 0;
+}
+
+/**  @function Erosion  */
+void Erosion( int, void* )
+{
+  int erosion_type;
+  if( erosion_elem == 0 ){ erosion_type = MORPH_RECT; }
+  else if( erosion_elem == 1 ){ erosion_type = MORPH_CROSS; }
+  else if( erosion_elem == 2) { erosion_type = MORPH_ELLIPSE; }
+
+  Mat element = getStructuringElement( erosion_type,
+                                       Size( 2*erosion_size + 1, 2*erosion_size+1 ),
+                                       Point( erosion_size, erosion_size ) );
+
+  /// Apply the erosion operation
+  erode( src, erosion_dst, element );
+  imshow( "Erosion Demo", erosion_dst );
+}
+
+/** @function Dilation */
+void Dilation( int, void* )
+{
+  int dilation_type;
+  if( dilation_elem == 0 ){ dilation_type = MORPH_RECT; }
+  else if( dilation_elem == 1 ){ dilation_type = MORPH_CROSS; }
+  else if( dilation_elem == 2) { dilation_type = MORPH_ELLIPSE; }
+
+  Mat element = getStructuringElement( dilation_type,
+                                       Size( 2*dilation_size + 1, 2*dilation_size+1 ),
+                                       Point( dilation_size, dilation_size ) );
+  /// Apply the dilation operation
+  dilate( src, dilation_dst, element );
+  imshow( "Dilation Demo", dilation_dst );
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p><strong>تابع Erosion (خط 63):</strong></p>
+
+<p>تابعی که عمل گشایش را انجام می‌دهد، تابع erode است (خط 75). این تابع سه آرگومان دریافت می‌کند:</p>
+
+<ul>
+<li><p>src: تصویر ورودی</p></li>
+<li><p>erosion_dst: تصویر خروجی</p></li>
+<li><p>element: کرنلی که برای عمل گشایش از آن استفاده خواهد شد. اگر آن را تعیین نکنیم به صورت پیشفرض یک ماتریس 3 در 3 استفاده می‌شود. در غیر این صورت برای مشخص کردن شکل آن از تابع getStructuringElement استفاده می‌شود. می‌توان یکی از سه شکل زیر را به عنوان کرنل انتخاب کرد:</p></li>
+<li><p>مستطیل: MORPH_RECT</p></li>
+<li><p>صلیب: MORPH_CROSS</p></li>
+<li><p>بیضی: MORPH_ELLIPSE</p></li>
+</ul>
+
+<p>سپس فقط باید اندازه و مختصات لنگر را انتخاب کرد. اگر مختصات لنگر مشخص نشود، به صورت پیش‌فرض نقطهٔ مرکزی کرنل به عنوان محل لنگر در نظر گرفته می‌شود.</p>
+
+<p><strong>تابع Dilation (خط 80):</strong></p>
+
+<p>کد این تابع بسیار مشابه با کد تابع Erosion است. اینجا هم باید نوع کرنل، مختصات لنگر و اندازهٔ کرنل را مشخص کرد.</p>
+
+<h2>خروجی</h2>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image115.png" alt="تصویر ورودی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image116.png" alt="نمایی از برنامه – سمت راست عمل گشایش و سمت چپ عمل فرسایش" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">نمایی از برنامه – سمت راست عمل گشایش و سمت چپ عمل فرسایش</td>
+</tr>
+</tbody>
+</table>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:a"><p>Structuring element<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:b"><p>Erode<a href="#fnref:b" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:c"><p>Dilate<a href="#fnref:c" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:d"><p>holes<a href="#fnref:d" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+</ol>
+</div>
+
+    </div>
   
 
 
@@ -288,7 +500,18 @@
 
 <div class="section">
     <nav class="pagination" role="navigation" aria-label="pagination">
-    
+    <a href="/opencv-book/chapter03/lesson01/discrete-fourier/" class="pagination-previous button is-primary is-outlined">
+    →
+    تبدیل فوریهٔ گسسته
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter04/lesson02/morphology-transformations/" class="pagination-next button is-primary is-outlined">
+    تبدیل‌های مورفولوژی پیچیده
+    ←
+  </a>
     </nav>
 </div>
     </div>

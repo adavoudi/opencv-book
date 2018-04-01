@@ -2,7 +2,7 @@
 <html lang="Farsi">
 <head>
 
-<title>پردازش تصویر در OpenCV</title>
+<title>پردازش تصویر در OpenCV | کانتورهای تصویر</title>
 
 <meta charset="utf-8">
 <meta name="description" content="">
@@ -260,27 +260,152 @@
     <div class="container column">
         <div class="section" id="content">
 
-  <h1 class="cover">پردازش تصویر در OpenCV</h1>
-  <h2 class="cover"></h2>
-    
-   <div style="text-align:center">
-     <br>
-     نویسندگان:
-     <br>
-     علیرضا داودی
-     <br>
-     رضا غریبی
-     <br>
-     <br>
-  </div>
-    
-  <img class="cover" src="/opencv-book/media/cover.jpg">
+  
+      
+          <h1 class="list">فصل دوم - حوزهٔ مکان</h1>
+      
 
-  <div style="text-align:center">
-    <a href="/opencv-book/chapter01/lesson01/%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D8%A7%D9%8F-%D8%B3%DB%8C-%D9%88%DB%8C/">
-      از اینجا شروع به خواندن کنید
-    </a>
-  </div>
+    <h3 class="list">کانتورهای تصویر</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include &lt;iostream&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+using namespace cv;
+using namespace std;
+
+Mat src; Mat src_gray;
+int thresh = 100;
+int max_thresh = 255;
+RNG rng(12345);
+
+/// Function header
+void thresh_callback(int, void* );
+
+/** @function main */
+int main( int argc, char** argv )
+{
+    /// Load source image and convert it to gray
+    src = imread( argv[1], 1 );
+
+    /// Convert image to gray and blur it
+    cvtColor( src, src_gray, CV_BGR2GRAY );
+    blur( src_gray, src_gray, Size(3,3) );
+
+    /// Create Window
+    char* source_window = "Source";
+    namedWindow( source_window, CV_WINDOW_AUTOSIZE );
+    imshow( source_window, src );
+
+    createTrackbar( " Canny thresh:", "Source", &amp;thresh, max_thresh, thresh_callback );
+    thresh_callback( 0, 0 );
+
+    waitKey(0);
+    return(0);
+}
+
+/** @function thresh_callback */
+void thresh_callback(int, void* )
+{
+    Mat canny_output;
+    vector&lt;vector&lt;Point&gt; &gt; contours;
+    vector&lt;Vec4i&gt; hierarchy;
+
+    /// Detect edges using canny
+    Canny( src_gray, canny_output, thresh, thresh*2, 3 );
+    /// Find contours
+    findContours( canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+
+    /// Draw contours
+    Mat drawing = Mat::zeros( canny_output.size(), CV_8UC3 );
+    for( int i = 0; i&lt; contours.size(); i++ )
+    {
+        Scalar color = Scalar( rng.uniform(0, 255), rng.uniform(0,255), rng.uniform(0,255) );
+        drawContours( drawing, contours, i, color, 2, 8, hierarchy, 0, Point() );
+    }
+
+    /// Show in a window
+    namedWindow( "Contours", CV_WINDOW_AUTOSIZE );
+    imshow( "Contours", drawing );
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>به منظور کاهش نویز، در خط 26 تصویر سیاه و سفید را با فیلتر 3 در 3 هموار می‌کنیم.</p>
+
+<p>در 41 تابع thresh_callback تعریف شده است. در این تابع ابتدا یک ماتریس برای نگه داری خروجی لبه‌یاب کَنی درست می‌کنیم. همچنین یک بردار دو بعدی از نوع Point برای نگه داری کانتورهای به دست آمده و یک بردار تک بعدی از نوع Vec4i برای نگه داری خروجی اختیاری تابع findContours، یعنی hierarchy، تعریف می‌کنیم.</p>
+
+<p><strong>نکته: Vec4i یک بردار 1 در 4 است که همهٔ عناصر آن از نوع int هستند.</strong></p>
+
+<p>در خط 48 با استفاده از تابع Canny لبه‌های تصویر سیاه و سفید را پیدا می‌کنیم. از آستانه‌ای استفاده می‌کنیم که کاربر وارد کرده است (یعنی متغیر thresh).</p>
+
+<p>سپس در خط 50 با فراخوانی تابع findContours، کانتورهای تصویر خروجی از تابع Canny (یعنی canny_output) را پیدا می‌کنیم. این تابع 6 آرگومان به شرح زیر دارد:</p>
+
+<ol>
+<li><strong>canny_output:</strong> تصویر ورودی است. این تصویر باید از نوع CV_8UC1 باشد. در اینجا از خروجی تابع Canny به عنوان ورودی این تابع استفاده می‌کنیم. از آنجا که خروجی تابع Canny یک عکس تک بعدی 8 بیتی است پس مشکلی وجود ندارد.</li>
+<li><strong>contours:</strong> کانتورهای کشف شده هستند. هر کانتور به شکل برداری از نقاط در این متغیر ذخیره می‌شود.</li>
+<li><strong>hierarchy:</strong> بردار خروجی اختیاری که اطلاعاتی در مورد توپولوژی تصویر به ما می‌دهد.</li>
+<li><p><strong>CV_RET_TREE:</strong> شیوهٔ بازیابی کانتورها است. می‌تواند به جای این مقدار، هر کدام از مقادیر زیر باشد:</p>
+
+<ul>
+<li><p>CV_RETR_EXTERNAL</p></li>
+<li><p>CV_RETR_LIST</p></li>
+<li><p>CV_RETR_CCOMP</p></li>
+<li><p>CV_RET_TREE</p></li>
+</ul></li>
+<li><p><strong>CV_CHAIN_APPROX_SIMPLE:</strong> شیوهٔ تقریب کانتورها است. می‌تواند به جای این مقدار، هر کدام از مقادیر زیر باشد:</p>
+
+<ol>
+<li><p>CV_CHAIN_APPROX_NONE</p></li>
+<li><p>CV_CHAIN_APPROX_SIMPLE</p></li>
+<li><p>CV_CHAIN_APPROX_TC89_L1 و CV_CHAIN_APPROX_TC89_KCOS</p></li>
+</ol></li>
+<li><strong><code>Point(0,0)</code>:</strong> یک آفست اختیاری که هر کدام از کانتورها با آن جمع می‌شوند. در اینجا نقطهٔ (0,0) را به عنوان آفست در نظر گرفته‌ایم. آفست زمانی مفید است که کانتورها از روی یک ROI به دست آمده باشند و قرار باشد بعداً کانتورها را روی عکس اصلی نشان دهیم.</li>
+</ol>
+
+<p>بعد از پیدا کردن کانتورها، هم می‌توانیم آنها را به صورت یکجا (و با یک رنگ) بکشیم و هم اینکه هر کدام از کانتورها را با یک رنگ خاص نمایش دهیم. به هر حال در هر دو حالت از تابع drawContours استفاده می‌کنیم. در حالت اول با یک بار فراخوانی تابع drawContours و در حالت دوم، تابع drawContours را در یک حلقه می‌گذاریم و به تعداد کانتورهای کشف شده حلقه را تکرار می‌کنیم و هر دفعه یکی از کانتورها را می‌کشیم. در اینجا به روش دوم عمل می‌کنیم. تابع drawContours در خط 57 دارای 9 آرگومان به شرح زیر است:</p>
+
+<ol>
+<li><strong>drawing:</strong> تصویر ورودی است.</li>
+<li><strong>contours:</strong> بردار کانتورها است. هر کانتور به صورت برداری از نقاط در contours قرار می‌گیرند.</li>
+<li><strong>i:</strong> شمارهٔ کانتوری که باید کشیده شود. اگر یک عدد منفی در اینجا قرار دهیم، همهٔ کانتورها کشیده می‌شوند.</li>
+<li><strong>color:</strong> رنگ کانتور است.</li>
+<li><strong>2:</strong> نازکی کانتور است.</li>
+<li><strong>8:</strong> نوع خطی که بین نقاط کانتور کشیده می‌شود.</li>
+<li><strong>hierarchy:</strong> اطلاعات اختیاری در مورد سلسله مراتب عکس است. فقط زمانی نیاز است که بخواهیم بعضی از کانتورها را بکشیم (مثلاً در اینجا که هر دفعه فقط یکی از کانتورها را می‌کشیم، این متغیر نیاز است).</li>
+<li><strong>0:</strong> حداکثر سطح برای کانتورهای کشیده شده است. اگر صفر باشد فقط کانتور مشخص شده کشیده می‌شود. اگر یک باشد کانتور مشخص شده و تمام کانتورهای تو در توی آن را می‌کشد.</li>
+<li><strong><code>Point()</code>:</strong> آفست اختیاری‌ای است که مختصات کانتورها ابتدا با آن جمع و سپس روی عکس کشیده می‌شوند.</li>
+</ol>
+
+<h2>خروجی</h2>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image90.png" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image91.png" alt="تصویر خروجی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+	<td align="center">تصویر خروجی</td>
+</tr>
+</tbody>
+</table>
+
+<p>دقت کنید که رنگ کانتورها به صورت تصادفی انتخاب شده‌اند و هیچ ربطی به رنگ‌های تصویر ورودی ندارند.</p>
+
+    </div>
   
 
 
@@ -288,7 +413,18 @@
 
 <div class="section">
     <nav class="pagination" role="navigation" aria-label="pagination">
-    
+    <a href="/opencv-book/chapter02/lesson16/canny-operator/" class="pagination-previous button is-primary is-outlined">
+    →
+    عملگر کَنی
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter02/lesson18/convex-hull/" class="pagination-next button is-primary is-outlined">
+    پوش محدب
+    ←
+  </a>
     </nav>
 </div>
     </div>

@@ -2,7 +2,7 @@
 <html lang="Farsi">
 <head>
 
-<title>پردازش تصویر در OpenCV</title>
+<title>پردازش تصویر در OpenCV | تبدیل دایره هُو</title>
 
 <meta charset="utf-8">
 <meta name="description" content="">
@@ -260,27 +260,123 @@
     <div class="container column">
         <div class="section" id="content">
 
-  <h1 class="cover">پردازش تصویر در OpenCV</h1>
-  <h2 class="cover"></h2>
-    
-   <div style="text-align:center">
-     <br>
-     نویسندگان:
-     <br>
-     علیرضا داودی
-     <br>
-     رضا غریبی
-     <br>
-     <br>
-  </div>
-    
-  <img class="cover" src="/opencv-book/media/cover.jpg">
+  
+      
+          <h1 class="list">فصل پنجم - شناسایی الگو</h1>
+      
 
-  <div style="text-align:center">
-    <a href="/opencv-book/chapter01/lesson01/%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D8%A7%D9%8F-%D8%B3%DB%8C-%D9%88%DB%8C/">
-      از اینجا شروع به خواندن کنید
-    </a>
-  </div>
+    <h3 class="list">تبدیل دایره هُو</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>تبدیل دایرهٔ هُو بسیار شبیه به تبدیل خط هُو که در بخش قبل توضیح داده شد عمل می‌کند. در مورد کشف خط، یک خط با دو پارامتر $\left( r,\ \theta \right)$ تعریف می‌شود ولی برای تعریف دایره به سه پارامتر نیاز داریم:</p>
+
+<p>$$C:\ (x_{\text{center}},\ y_{\text{center}},\ r)$$</p>
+
+<p>که $(x_{\text{center}},\ y_{\text{center}})$ مرکز دایره (نقطهٔ سبز رنگ در شکل زیر) و r هم شعاع آن را مشخص می‌کند. با این سه پارامتر می‌توانیم هر دایره‌ای با هر مختصات و شعاعی تعریف کنیم. دایره قرمز در شکل زیر مثالی از کشف دایره است:</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image141.png" alt="مثالی از کشف دایره" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">مثالی از کشف دایره</td>
+</tr>
+</tbody>
+</table>
+
+<p>به منظور رعایت بهینگی، اُ سی وی این تبدیل با استفاده از روش گرادیان هُو پیاده سازی کرده است که متفاوت با روش مورد استفاده در تبدیل استاندارد هُو است.</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include &lt;iostream&gt;
+#include &lt;stdio.h&gt;
+
+using namespace cv;
+
+/** @function main */
+int main(int argc, char** argv)
+{
+    Mat src, src_gray;
+
+    /// Read the image
+    src = imread( argv[1], 1 );
+
+    if( !src.data )
+    { return -1; }
+
+    /// Convert it to gray
+    cvtColor( src, src_gray, CV_BGR2GRAY );
+
+    /// Reduce the noise so we avoid false circle detection
+    GaussianBlur( src_gray, src_gray, Size(9, 9), 2, 2 );
+
+    vector&lt;Vec3f&gt; circles;
+
+    /// Apply the Hough Transform to find the circles
+    HoughCircles( src_gray, circles, CV_HOUGH_GRADIENT, 1, src_gray.rows/8, 200, 100, 0, 0 );
+
+    /// Draw the circles detected
+    for( size_t i = 0; i &lt; circles.size(); i++ )
+    {
+        Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
+        int radius = cvRound(circles[i][2]);
+        // circle center
+        circle( src, center, 3, Scalar(0,255,0), -1, 8, 0 );
+        // circle outline
+        circle( src, center, radius, Scalar(0,0,255), 3, 8, 0 );
+    }
+
+    /// Show your results
+    namedWindow( "Hough Circle Transform Demo", CV_WINDOW_AUTOSIZE );
+    imshow( "Hough Circle Transform Demo", src );
+
+    waitKey(0);
+    return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در خط 23 به منظور کاهش نویز و جلوگیری از کشف دایره‌های اشتباه، یک فیلتر گوسی اعمال می‌کنیم.</p>
+
+<p>در خط 28 با استفاده از تابع HoughCircles تبدیل دایره هُو را اعمال می‌کنیم. این تابع دارای 9 آرگومان به شرح زیر است:</p>
+
+<ol>
+<li><strong>src_gray:</strong> تصویر ورودی که باید سیاه و سفید باشد.</li>
+<li><strong>circles:</strong> یک بردار که مجموعه‌ای از سه مقدار $x_{c},y_{c},\ r$ را برای هر دایره کشف شده نگه می دارد.</li>
+<li><strong>CV_HOUGH_GRADIENT:</strong> روش کشف را مشخص می‌کند. در حال حاضر فقط همین روش در اُ سی وی وجود دارد.</li>
+<li><strong>1:</strong> نسبت معکوس وضوح است.</li>
+<li><strong>src_gray.rows/8:</strong> حدقل فاصلهٔ بین دایره‌های کشف شده است.</li>
+<li><strong>200:</strong> آستانهٔ بالایی برای لبه‌یاب کَنی که در این تابع استفاده می‌شود.</li>
+<li><strong>100:</strong> آستانه‌ای برای کشف مرکز دایره است.</li>
+<li><strong>0:</strong> حداقل شعاع مجاز برای دایره‌های کشف شده است. اگر معلوم نیست، مقدارش را صفر بگذارید.</li>
+<li><strong>0:</strong> حداکثر شعاع مجاز برای دایره‌های کشف شده است. اگر معلوم نیست، مقدارش را صفر بگذارید.</li>
+</ol>
+
+<h2>خروجی</h2>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image142.png" alt="خروجی برنامه" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">خروجی برنامه</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
   
 
 
@@ -288,7 +384,10 @@
 
 <div class="section">
     <nav class="pagination" role="navigation" aria-label="pagination">
-    
+    <a href="/opencv-book/chapter05/lesson04/hough-line-transform/" class="pagination-previous button is-primary is-outlined">
+    →
+    تبدیل خط هُو
+  </a>
     </nav>
 </div>
     </div>

@@ -2,7 +2,7 @@
 <html lang="Farsi">
 <head>
 
-<title>پردازش تصویر در OpenCV</title>
+<title>پردازش تصویر در OpenCV | شکل‌های هندسی ساده</title>
 
 <meta charset="utf-8">
 <meta name="description" content="">
@@ -260,27 +260,248 @@
     <div class="container column">
         <div class="section" id="content">
 
-  <h1 class="cover">پردازش تصویر در OpenCV</h1>
-  <h2 class="cover"></h2>
-    
-   <div style="text-align:center">
-     <br>
-     نویسندگان:
-     <br>
-     علیرضا داودی
-     <br>
-     رضا غریبی
-     <br>
-     <br>
-  </div>
-    
-  <img class="cover" src="/opencv-book/media/cover.jpg">
+  
+      
+          <h1 class="list">فصل دوم - حوزهٔ مکان</h1>
+      
 
-  <div style="text-align:center">
-    <a href="/opencv-book/chapter01/lesson01/%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D8%A7%D9%8F-%D8%B3%DB%8C-%D9%88%DB%8C/">
-      از اینجا شروع به خواندن کنید
-    </a>
-  </div>
+    <h3 class="list">شکل‌های هندسی ساده</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>در این بخش می‌خواهیم طریقه ترسیم شکل‌های هندسی ساده را آموزش دهیم. این شکل‌ها عبارتند از خط، دایره، بیضی، مستطیل، چند ضلعی.</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include &lt;opencv2/core/core.hpp&gt;
+#include &lt;opencv2/highgui/highgui.hpp&gt;
+#include &lt;iostream&gt;
+#define w 400
+
+using namespace cv;
+
+/// Function headers
+void MyEllipse( Mat img, double angle );
+void MyFilledCircle( Mat img, Point center );
+void MyPolygon( Mat img );
+void MyLine( Mat img, Point start, Point end );
+
+/**
+ * @function main
+ * @brief Main function
+ */
+int main( void ){
+
+    /// Windows names
+    char atom_window[] = "Drawing 1: Atom";
+    char rook_window[] = "Drawing 2: Rook";
+
+    /// Create black empty images
+    Mat atom_image = Mat::zeros( w, w, CV_8UC3 );
+    Mat rook_image = Mat::zeros( w, w, CV_8UC3 );
+
+    /// 1. Draw a simple atom:
+    /// -----------------------
+
+    /// 1.a. Creating ellipses
+    MyEllipse( atom_image, 90 );
+    MyEllipse( atom_image, 0 );
+    MyEllipse( atom_image, 45 );
+    MyEllipse( atom_image, -45 );
+
+    /// 1.b. Creating circles
+    MyFilledCircle( atom_image, Point( w/2, w/2) );
+
+    /// 2. Draw a rook
+    /// ------------------
+
+    /// 2.a. Create a convex polygon
+    MyPolygon( rook_image );
+
+    /// 2.b. Creating rectangles
+    rectangle(rook_image, Point( 0, 7*w/8 ), Point( w, w), Scalar( 0, 255, 255 ), -1, 8);
+
+    /// 2.c. Create a few lines
+    MyLine( rook_image, Point( 0, 15*w/16 ), Point( w, 15*w/16 ) );
+    MyLine( rook_image, Point( w/4, 7*w/8 ), Point( w/4, w ) );
+    MyLine( rook_image, Point( w/2, 7*w/8 ), Point( w/2, w ) );
+    MyLine( rook_image, Point( 3*w/4, 7*w/8 ), Point( 3*w/4, w ) );
+
+    /// 3. Display your stuff!
+    imshow( atom_window, atom_image );
+    moveWindow( atom_window, 0, 200 );
+    imshow( rook_window, rook_image );
+    moveWindow( rook_window, w, 200 );
+
+    waitKey( 0 );
+    return(0);
+}
+
+/// Function Declaration
+
+/**
+ * @function MyEllipse
+ * @brief Draw a fixed-size ellipse with different angles
+ */
+void MyEllipse( Mat img, double angle )
+{
+    int thickness = 2;
+    int lineType = 8;
+
+    ellipse( img, Point( w/2, w/2 ), Size( w/4, w/16 ), angle, 0, 360, Scalar( 255, 0, 0 ), thickness, lineType );
+}
+
+/**
+ * @function MyFilledCircle
+ * @brief Draw a fixed-size filled circle
+ */
+void MyFilledCircle( Mat img, Point center )
+{
+    int thickness = -1;
+    int lineType = 8;
+
+    circle(img, center, w/32, Scalar( 0, 0, 255 ), thickness, lineType);
+}
+
+/**
+ * @function MyPolygon
+ * @function Draw a simple concave polygon (rook)
+ */
+void MyPolygon( Mat img )
+{
+    int lineType = 8;
+
+    /** Create some points */
+    Point rook_points[1][20];
+    rook_points[0][0]  = Point(    w/4,   7*w/8 );
+    rook_points[0][1]  = Point(  3*w/4,   7*w/8 );
+    rook_points[0][2]  = Point(  3*w/4,  13*w/16 );
+    rook_points[0][3]  = Point( 11*w/16, 13*w/16 );
+    rook_points[0][4]  = Point( 19*w/32,  3*w/8 );
+    rook_points[0][5]  = Point(  3*w/4,   3*w/8 );
+    rook_points[0][6]  = Point(  3*w/4,     w/8 );
+    rook_points[0][7]  = Point( 26*w/40,    w/8 );
+    rook_points[0][8]  = Point( 26*w/40,    w/4 );
+    rook_points[0][9]  = Point( 22*w/40,    w/4 );
+    rook_points[0][10] = Point( 22*w/40,    w/8 );
+    rook_points[0][11] = Point( 18*w/40,    w/8 );
+    rook_points[0][12] = Point( 18*w/40,    w/4 );
+    rook_points[0][13] = Point( 14*w/40,    w/4 );
+    rook_points[0][14] = Point( 14*w/40,    w/8 );
+    rook_points[0][15] = Point(    w/4,     w/8 );
+    rook_points[0][16] = Point(    w/4,   3*w/8 );
+    rook_points[0][17] = Point( 13*w/32,  3*w/8 );
+    rook_points[0][18] = Point(  5*w/16, 13*w/16 );
+    rook_points[0][19] = Point(    w/4,  13*w/16 );
+
+    const Point* ppt[1] = { rook_points[0] };
+    int npt[] = { 20 };
+
+    fillPoly(img, ppt, npt, 1, Scalar( 255, 255, 255 ), lineType);
+}
+
+/**
+ * @function MyLine
+ * @brief Draw a simple line
+ */
+void MyLine( Mat img, Point start, Point end )
+{
+    int thickness = 2;
+    int lineType = 8;
+    line(img, start, end, Scalar( 0, 0, 0 ), thickness, lineType);
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>از آنجایی که می‌خواهیم دو شکل رسم کنیم (یک اتم و یک قلعه)، باید دو ماتریس به عنوان صفحهٔ ترسیم و دو پنجره برای نمایش آنها درست کنیم (خطوط 25 و 26).</p>
+
+<p>برای کشیدن هر شکل یک تابع جداگانه درست کرده‌ایم. به عنوان مثال برای کشیدن اتم از توابع MyEllipse و MyFilledCircle استفاده کرده‌ایم (خطوط 28 تا 39).</p>
+
+<p>برای کشیدن قلعه از توابع MyLine، rectangle و یک MyPolygon استفاده کرده‌ایم (خطوط 40 تا 53).</p>
+
+<p>بهتر است ببینیم درون این توابع چه می‌گذرد:</p>
+
+<ul>
+<li><p>تابع MyLine (خطوط 132 تا 137)</p>
+
+<p>همان طور که می‌بینید این تابع فقط به روش زیر چندین بار از تابع line (که در ماژول Core موجود است) استفاده می‌کند:</p>
+
+<ul>
+<li>یک خط از نقطهٔ start به نقطهٔ end می‌کشد.</li>
+<li>خط بالا را در تصویر img رسم می‌کند.</li>
+<li>رنگ خط با یک اسکالر به فرم <code>Scalar(0,0,0)</code>، که نشان دهندهٔ رنگ سیاه RGB است، به تابع line فرستاده شده.</li>
+<li>میزان نازکی خط با متغیر thickness مشخص شده است.</li>
+<li>این خط از نوع متصل است و این مورد با متغیر lineType که مقدار 2 دارد مشخص شده است.</li>
+</ul></li>
+<li><p>تابع MyEllipse (خطوط 71 تا 77)</p>
+
+<p>این تابع به شکل زیر یک بیضی می‌کشد:</p>
+
+<ul>
+<li>بیضی در عکس img ترسیم می‌شود.</li>
+<li>مرکز بیضی نقطهٔ (w/2,w/2) است و در یک مستطیل به اندازهٔ (w/4,w/16) محدود شده.</li>
+<li>بیضی به اندازه angle درجه چرخانده می‌شود.</li>
+<li>بیضی به صورت یک قطاع از زاویهٔ 0 تا 360 است.</li>
+<li>رنگ بیضی با <code>Scalar(255,0,0)</code> که در RGB یعنی آبی، مشخص شده است.</li>
+<li>نازکی و نوع خط بیضی با متغیرهای thickness و lineType مشخص شده‌اند.</li>
+</ul></li>
+<li><p>تابع MyFilledCircle (خطوط 83 تا 89)</p>
+
+<p>آرگومان‌های تابع circle به شرح زیر است:</p>
+
+<ul>
+<li>img عکسی است که دایره در آن کشیده می‌شود.</li>
+<li>مرکز دایره با نقطهٔ center مشخص شده است.</li>
+<li>شعاع دایره W/32 است.</li>
+<li>رنگ دایره با <code>Scalar(0,0,255)</code> که در RGB به معنی قرمز است، مشخص شده است.</li>
+<li>به خاطر اینکه مقدار thickness عدد 1- قرار داده شده، دایره توپُر کشیده می‌شود.</li>
+</ul></li>
+<li><p>تابع MyPolygon (خطوط 95 تا 126)</p>
+
+<p>برای کشیدن یک چند ضلعی توپر، از تابع fillPoly که در ماژول Core موجود است استفاده می‌کنیم. قابل ذکر است که:</p>
+
+<ul>
+<li>چندضلعی روی عکس img کشیده می‌شود.</li>
+<li>رأس‌های چند ضلعی همان مجموعه نقاطی هستند که در ppt قرار داده شده‌اند.</li>
+<li>تعداد رأس‌هایی که باید رسم شوند در متغیر npt قرار داده شده است.</li>
+<li>تعداد چند ضلعی‌هایی که باید رسم شوند، 1 عدد است.</li>
+<li>رنگ چند ضلعی با <code>Scalar(255,255,255)</code> که در RGB به معنای سفید است، مشخص شده است.</li>
+</ul></li>
+<li><p>تابع rectangle (خط 47)</p>
+
+<p>در آخر تابع rectangle را معرفی می‌کنیم. در این تابع:</p>
+
+<ul>
+<li>مستطیل روی عکس rook_image کشیده می‌شود.</li>
+<li>دو رأس مخالف مستطیل با <code>Point(0,7\*w/8.0)</code> و <code>Point(w,w)</code> مشخص شده‌اند.</li>
+<li>رنگ مستطیل با <code>Scalar(0,255,255)</code> که نشان دهندهٔ رنگ زرد در سیستم RGB است، مشخص شده است.</li>
+<li>به خاطر اینکه مقدار thickness عدد 1- قرار داده شده است، مستطیل توپُر خواهد بود.</li>
+</ul></li>
+</ul>
+
+<h2>خروجی</h2>
+
+<p>خروجی برنامه به شکل زیر است:</p>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image11.jpg" alt="mage1" id="mage1" /></th>
+	<th><img src="/opencv-book/media/image12.jpg" alt="mage1" id="mage1" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center"> </td>
+	<td align="center"> </td>
+</tr>
+</tbody>
+</table>
+
+    </div>
   
 
 
@@ -288,7 +509,18 @@
 
 <div class="section">
     <nav class="pagination" role="navigation" aria-label="pagination">
-    
+    <a href="/opencv-book/chapter01/lesson04/store-retrieve/" class="pagination-previous button is-primary is-outlined">
+    →
+    ذخیره سازی و بازیابی اطلاعات
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter02/lesson02/linear-blend/" class="pagination-next button is-primary is-outlined">
+    ترکیب خطی دو تصویر
+    ←
+  </a>
     </nav>
 </div>
     </div>

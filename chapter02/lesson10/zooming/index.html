@@ -2,7 +2,7 @@
 <html lang="Farsi">
 <head>
 
-<title>پردازش تصویر در OpenCV</title>
+<title>پردازش تصویر در OpenCV | بزرگ‌نمایی و کوچک‌نمایی تصویر</title>
 
 <meta charset="utf-8">
 <meta name="description" content="">
@@ -260,27 +260,216 @@
     <div class="container column">
         <div class="section" id="content">
 
-  <h1 class="cover">پردازش تصویر در OpenCV</h1>
-  <h2 class="cover"></h2>
-    
-   <div style="text-align:center">
-     <br>
-     نویسندگان:
-     <br>
-     علیرضا داودی
-     <br>
-     رضا غریبی
-     <br>
-     <br>
-  </div>
-    
-  <img class="cover" src="/opencv-book/media/cover.jpg">
+  
+      
+          <h1 class="list">فصل دوم - حوزهٔ مکان</h1>
+      
 
-  <div style="text-align:center">
-    <a href="/opencv-book/chapter01/lesson01/%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D8%A7%D9%8F-%D8%B3%DB%8C-%D9%88%DB%8C/">
-      از اینجا شروع به خواندن کنید
-    </a>
-  </div>
+    <h3 class="list">بزرگ‌نمایی و کوچک‌نمایی تصویر</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>معمولاً نیاز است که اندازهٔ یک عکس را تغییر داد. در اُ سی وی به منظور تغیر اندازهٔ عکس‌ها تابع تبدیل هندسی resize وجود دارد ولی در این بخش به بیان مفهوم هرم تصویر می‌پردازیم که کاربردهای زیادی در برنامه‌های بینایی دارد.</p>
+
+<p>هرم تصویر مجموعه‌ای از تصاویر است که همگی از یک تصویر اصلی سرچشمه گرفته‌اند و به ترتیب کوچک می‌شوند تا به یک اندازهٔ مشخص برسند.</p>
+
+<p>دو نوع هرم تصویر داریم:</p>
+
+<ul>
+<li><strong>هرم گوسی</strong><a href="#fn:a" id="fnref:a" class="footnote">1</a>: در این روش برای ساخت هرم از میانگین‌گیری گوسی استفاده می‌شود.</li>
+<li><strong>هرم لاپلاسی</strong><a href="#fn:b" id="fnref:b" class="footnote">2</a><strong>:</strong> مشابه هرم گوسی است با این تفاوت که از یک تبدیل لاپلاس برای ساخت هرم استفاده می‌کند.</li>
+</ul>
+
+<p>هرم موجود در اُ سی وی از نوع گوسی است.</p>
+
+<p><strong>هرم گوسی:</strong></p>
+
+<p>هرم را به صورت یک مجموعه از لایه‌ها در نظر بگیرید که هر چه لایه در سطح بالاتری قرار گرفته باشد، کوچک‌تر خواهد بود.</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image50.png" alt="هرم تصویر (سطح زیرین تصویر اصلی است)" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">هرم تصویر (سطح زیرین تصویر اصلی است)</td>
+</tr>
+</tbody>
+</table>
+
+<p>لایه‌ها از پایین به بالا شماره گذاری شده‌اند. پس لایهٔ i+1 که با$G_{i + 1}$ نشان داده می‌شود، از لایهٔ i که با $G_{i}$ نشان داده می‌شود کوچکتر است.</p>
+
+<p>در هرم گوسی برای تولید لایهٔ i+1 از روی لایه i، به شیوهٔ زیر عمل می‌کنیم:</p>
+
+<ul>
+<li><p>$G_{i}$ را با یک کرنل گوسی زیر کانوالو می‌کنیم:</p>
+
+<p><img src="/opencv-book/media/image51.png" alt="mage5" id="mage5" /></p></li>
+<li><p>همهٔ سطرها و ستون‌های زوج را پاک می‌کنیم.</p></li>
+</ul>
+
+<p>عکس به دست آمده دقیقاً یک چهارم عکس پیشین خواهد بود. با تکرار فرایند بالا روی عکس اصلی (یعنی $G_0$)، می‌توان تمام هرم را درست کرد.</p>
+
+<p>رویهٔ بالا به منظور کوچک نمایی تصویر بود. برای بزرگ‌نمایی تصویر باید مراحل زیر را انجام دهیم:</p>
+
+<ul>
+<li><p>ابتدا ابعاد لایه i را دو برابر کرده و سطرها و ستون‌های زوج آن را با صفر پر می‌کنیم.</p></li>
+<li><p>تصویر به دست آمده در مرحله قبل را در کرنل بالا (البته با درایه‌های آن که در 4 ضرب شده‌اند) کانوالو می‌کنیم. با این کار مقدار پیکسل‌های جدید معرفی شده در مرحلهٔ قبل که با صفر پر شده بودند، تخمین زده می‌شوند.</p></li>
+</ul>
+
+<p>دو رویهٔ بالا (یعنی کوچک نمایی و بزرگ‌نمایی)، در توابع pyrDown و pyrUp پیاده سازی شده‌اند.</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include &lt;math.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+using namespace cv;
+
+/// Global variables
+Mat src, dst, tmp;
+char* window_name = "Pyramids Demo";
+
+/**
+ * @function main
+ */
+int main( int argc, char** argv )
+{
+  /// General instructions
+  printf( "\n Zoom In-Out demo  \n " );
+  printf( "------------------ \n" );
+  printf( " * [u] -&gt; Zoom in  \n" );
+  printf( " * [d] -&gt; Zoom out \n" );
+  printf( " * [ESC] -&gt; Close program \n \n" );
+
+  /// Test image - Make sure it s divisible by 2^{n}
+  src = imread( argv[1] );
+  if( !src.data )
+    { printf(" No data! -- Exiting the program \n");
+      return -1; }
+
+  tmp = src;
+  dst = tmp;
+
+  /// Create window
+  namedWindow( window_name, CV_WINDOW_AUTOSIZE );
+  imshow( window_name, dst );
+
+  /// Loop
+  while( true )
+  {
+    int c;
+    c = waitKey(10);
+
+    if( (char)c == 27 )
+      { break; }
+    if( (char)c == 'u' )
+      { pyrUp( tmp, dst, Size( tmp.cols*2, tmp.rows*2 ) );
+        printf( "** Zoom In: Image x 2 \n" );
+      }
+    else if( (char)c == 'd' )
+     { pyrDown( tmp, dst, Size( tmp.cols/2, tmp.rows/2 ) );
+       printf( "** Zoom Out: Image / 2 \n" );
+     }
+
+    imshow( window_name, dst );
+    tmp = dst;
+  }
+  return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در خط 44 مشخص شده که اگر کاربر کلید ESC را فشار دهد از برنامه خارج شود.</p>
+
+<p>در خط 46 مشخص شده که اگر کاربر کلید u را فشار دهد عمل بزرگ‌نمایی توسط تابع pyrUp انجام شود. این تابع سه آرگومان دارد:</p>
+
+<ul>
+<li><p>tmp: تصویر ورودی است. در ابتدا برابر با تصویر src است.</p></li>
+<li><p>dst: تصویر خروجی است (همان که برروی صفحه نمایش داده خواهد شد و در حقیقت دو برابر تصویر ورودی است).</p></li>
+<li><p><code>Size(tmp.cols\*2, tmp.rows\*2)</code>: اندازهٔ تصویر خروجی است. از آنجایی که قصد بزرگ‌نمایی داریم، تابع pyrUp انتظار دارد که این اندازه دو برابر اندازهٔ تصویر ورودی باشد.</p></li>
+</ul>
+
+<p>در خط 50 مشخص شده که اگر کاربر کلید d را فشار دهد عمل کوچک نمایی توسط تابع pyrDown انجام شود. این تابع سه آرگومان دارد:</p>
+
+<ul>
+<li><p>tmp: تصویر ورودی است. در ابتدا برابر با تصویر src است.</p></li>
+<li><p>dst: تصویر خروجی است (همان که برروی صفحه نمایش داده خواهد شد و در حقیقت نصف تصویر ورودی است).</p></li>
+<li><p><code>Size(tmp.cols/2 , tmp.rows/2)</code>: اندازهٔ تصویر خروجی است. از آنجایی که قصد کوچک نمایی داریم، تابع pyrDown انتظار دارد که این اندازه نصف اندازهٔ تصویر ورودی باشد.</p></li>
+</ul>
+
+<p>توجه داشته باشید که ابعاد تصویر ورودی به توابع pyrDown و pyrUp باید حتماً ضریبی از دو باشد، در غیر این صورت خطایی مبتنی بر رعایت نکردن این محدودیت دریافت خواهید کرد.</p>
+
+<h2>خروجی</h2>
+
+<p>برنامه را به صورت زیر اجرا می‌کنیم:</p>
+
+<pre><code class="language-powershell">PyrUpDown.exe "PICTURES /1.jpg"
+</code></pre>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image52.jpg" alt="تصویر ورودی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image53.jpg" alt="نتیجه دو بار کوچک‌نمایی تصویر اصلی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">نتیجهٔ دو بار کوچک‌نمایی تصویر اصلی</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image54.jpg" alt="نتیجه دو بار بزرگ‌نمایی تصویر کوچک شده" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">نتیجه دو بار بزرگ‌نمایی تصویر کوچک شده</td>
+</tr>
+</tbody>
+</table>
+
+<p>همانطور که می‌بینید تصویر آخر دارای وضوح کمتری نسبت به تصویر ورودی است.</p>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:a"><p>Gaussian pyramid<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:b"><p>Laplacian pyramid<a href="#fnref:b" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+</ol>
+</div>
+
+    </div>
   
 
 
@@ -288,7 +477,18 @@
 
 <div class="section">
     <nav class="pagination" role="navigation" aria-label="pagination">
-    
+    <a href="/opencv-book/chapter02/lesson09/drawing/" class="pagination-previous button is-primary is-outlined">
+    →
+    مولد عدد تصادفی و ترسیم متن
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter02/lesson11/threshold/" class="pagination-next button is-primary is-outlined">
+    آستانه‌گذاری
+    ←
+  </a>
     </nav>
 </div>
     </div>

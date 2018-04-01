@@ -2,7 +2,7 @@
 <html lang="Farsi">
 <head>
 
-<title>پردازش تصویر در OpenCV</title>
+<title>پردازش تصویر در OpenCV | تغییر کنتراست و روشنایی تصویر</title>
 
 <meta charset="utf-8">
 <meta name="description" content="">
@@ -260,27 +260,131 @@
     <div class="container column">
         <div class="section" id="content">
 
-  <h1 class="cover">پردازش تصویر در OpenCV</h1>
-  <h2 class="cover"></h2>
-    
-   <div style="text-align:center">
-     <br>
-     نویسندگان:
-     <br>
-     علیرضا داودی
-     <br>
-     رضا غریبی
-     <br>
-     <br>
-  </div>
-    
-  <img class="cover" src="/opencv-book/media/cover.jpg">
+  
+      
+          <h1 class="list">فصل دوم - حوزهٔ مکان</h1>
+      
 
-  <div style="text-align:center">
-    <a href="/opencv-book/chapter01/lesson01/%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D8%A7%D9%8F-%D8%B3%DB%8C-%D9%88%DB%8C/">
-      از اینجا شروع به خواندن کنید
-    </a>
-  </div>
+    <h3 class="list">تغییر کنتراست و روشنایی تصویر</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>به طور کلی کنتراست یکی از مشخصات تصویر است که به صورت نسبت روشنایی درخشان‌ترین رنگ (سفید) به روشنایی تاریک‌ترین رنگ (سیاه) موجود در آن تصویر تعریف می‌شود. در تصاویر هر چه نسبت کنتراست بالاتر باشد مطلوب‌تر است. این مقدار نسبت بیشترین میزان روشنایی رنگ سفید به کمترین میزان روشنایی رنگ سیاه کامل را نشان می‌دهد.</p>
+
+<p>از آنجا که کنتراست و شدت روشنایی هر دو از مشخصه‌های پیکسلی هستند، می‌خواهیم در این بخش به بهانه تغییر کنتراست و روشنایی تصاویر، شما را با تبدیل‌های پیکسلی آشنا کنیم.</p>
+
+<p>به طور کلی اگر $f\left( i,j \right)$ مقدار تصویر ورودی در پیکسل $\left( i,j \right)$ باشد، آنگاه می‌توان با استفاده از معادله زیر و تعیین مقادیر مناسب برای $\alpha$ و $\beta$، کنتراست و روشنایی تصویر $f$ را تغییر داد:</p>
+
+<p>$$g\left( i,j \right) = \alpha\ .\ f\left( i,j \right) + \ \beta$$</p>
+
+<p>در اینجا $g\left( i,j \right)$ مقدار جدید تصویر در پیکسل $\left( i,j \right)$ است. با استفاده از $\alpha$ می‌توان میزان کنتراست را تغییر داد و با استفاده از $\beta$ هم می‌توان میزان روشنایی را تغییر داد. توجه کنید که اگر می‌خواهید فقط میزان روشنایی را تغییر دهید، باید $\alpha$ را یک بگذارید و عدد $\beta$ را فقط تغییر دهید. اگر هم می‌خواهید فقط میزان کنتراست را تغییر دهید کافی است عدد $\beta$ را صفر بگذارید و عدد $\alpha$ را هر آنچه می‌خواهید قرار دهید.</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include &lt;opencv2/core/core.hpp&gt;
+#include &lt;opencv2/highgui/highgui.hpp&gt;
+#include &lt;iostream&gt;
+
+int main( int argc, char** argv )
+{
+    double alpha; /**&lt; Simple contrast control */
+    int beta; /**&lt; Simple brightness control */
+
+    /// Read image given by user
+    cv::Mat image = cv::imread( argv[1] );
+    cv::Mat new_image = cv::Mat::zeros( image.size(), image.type() );
+
+    /// Initialize values
+    std::cout &lt;&lt; " Basic Linear Transforms " &lt;&lt; std::endl;
+    std::cout &lt;&lt; "-------------------------" &lt;&lt; std::endl;
+    std::cout &lt;&lt; "* Enter the alpha value [1.0-3.0]: ";
+    std::cin &gt;&gt; alpha;
+    std::cout &lt;&lt; "* Enter the beta value [0-100]: ";
+    std::cin &gt;&gt; beta;
+
+    /// Do the operation new_image(i,j) = alpha*image(i,j) + beta
+    for( int y = 0; y &lt; image.rows; y++ )
+    { for( int x = 0; x &lt; image.cols; x++ )
+        { for( int c = 0; c &lt; 3; c++ )
+            {
+                new_image.at&lt;cv::Vec3b&gt;(y,x)[c] =
+                        cv::saturate_cast&lt;uchar&gt;( alpha*( image.at&lt;cv::Vec3b&gt;(y,x)[c] ) + beta );
+            }
+        }
+    }
+
+    /// Show stuff
+    cv::imshow("Original Image", image);
+    cv::imshow("New Image", new_image);
+    cv::imwrite("D:/TRANSLATION/OpenCV Book for PGU/PICTURES/USED IN CODES/out2.jpg", new_image);
+
+    /// Wait until user press some key
+    cv::waitKey();
+
+    return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در خط 12، به دلیل اینکه می‌خواهیم تغییراتی در تصویر ورودی ایجاد کنیم، یک شیء جدید Mat درست می‌کنیم. همچنین می‌خواهیم این Mat جدید ویژگی‌های زیر را هم داشته باشد:</p>
+
+<ul>
+<li>مقدار اولیهٔ صفر در همهٔ پیکسل‌ها</li>
+<li>اندازه و نوع مطابق با عکس اصلی</li>
+</ul>
+
+<p>تابع Mat::zeros یک شیء Mat با اندازه و نوع داده شده بر می‌گرداند که همهٔ پیکسل‌های آن صفر است.</p>
+
+<p>حالا برای تغییر کنتراست و روشنایی، باید به همهٔ پیکسل‌های تصویر ورودی دسترسی پیدا کنیم. به دلیل اینکه با RGB کار می‌کنیم، به ازای هر پیکسل 3 مقدار داریم (R، G و B)؛ پس باید به هر کدام از آنها جداگانه دسترسی پیدا کنیم. خطوط 23 تا 31 همین کار را انجام می‌دهند.</p>
+
+<p>به نکات زیر توجه کنید:</p>
+
+<ul>
+<li>برای دسترسی به هر کدام از پیکسل‌ها از قاعدهٔ روبرو استفاده می‌کنیم: <code>image.at&lt;Vec3b&gt;(y,x)[c]</code> که y شماره سطر، x شماره ستون و c هم R، G یا B یعنی (0، 1 یا 2) است.</li>
+<li>به خاطر اینکه عمل $\alpha.f(i,j)+\beta$ ممکن است مقادیری بزرگتر از حد مجاز یا غیر صحیح (اگر آلفا اعشاری باشد) تولید کند، از تابع saturate_cast استفاده می‌کنیم تا مطمئن شویم که مقدار معتبری در پیکسل خروجی قرار می‌گیرد.</li>
+</ul>
+
+<p>در آخر خروجی را در یک پنجره نشان می‌دهیم.</p>
+
+<p><strong>نکته: به جای استفاده از حلقهٔ for برای اعمال فرمول بالا، می‌توانستیم از تابع زیر استفاده کنیم:</strong></p>
+
+<pre><code class="language-c++">image.convertTo(new_image, -1, alpha, beta);
+</code></pre>
+
+<p><strong>این تابع مقدار new_image را از معادلهٔ $new_{image} = \alpha * image + \beta$ به دست می‌آورد. به هر حال هدف ما در این بخش این بود که شما را با نحوهٔ دسترسی مستقیم به پیکسل‌ها و انجام تبدیلات پیکسلی آشنا کنیم. هر دو روش خروجی یکسانی دارند.</strong></p>
+
+<h2>خروجی</h2>
+
+<p>برنامه را به صورت زیر اجرا می‌کنیم:</p>
+
+<pre><code class="language-powershell">BasicLinearTransform.exe "PICTURES /2.jpg"
+&gt; Basic Linear Transforms
+&gt; -------------------------
+&gt; * Enter the alpha value [1.0-3.0]: 1.5
+&gt; * Enter the beta value [0-100]: 12
+</code></pre>
+
+<p>خروجی به صورت زیر است:</p>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image30.jpg" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image35.jpeg" alt="تصویر خروجی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+	<td align="center">تصویر خروجی</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
   
 
 
@@ -288,7 +392,18 @@
 
 <div class="section">
     <nav class="pagination" role="navigation" aria-label="pagination">
-    
+    <a href="/opencv-book/chapter02/lesson05/map/" class="pagination-previous button is-primary is-outlined">
+    →
+    نگاشت
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter02/lesson07/smoothing/" class="pagination-next button is-primary is-outlined">
+    هموار سازی تصویر
+    ←
+  </a>
     </nav>
 </div>
     </div>

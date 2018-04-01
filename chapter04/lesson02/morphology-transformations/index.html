@@ -2,7 +2,7 @@
 <html lang="Farsi">
 <head>
 
-<title>پردازش تصویر در OpenCV</title>
+<title>پردازش تصویر در OpenCV | تبدیل‌های مورفولوژی پیچیده</title>
 
 <meta charset="utf-8">
 <meta name="description" content="">
@@ -260,27 +260,264 @@
     <div class="container column">
         <div class="section" id="content">
 
-  <h1 class="cover">پردازش تصویر در OpenCV</h1>
-  <h2 class="cover"></h2>
-    
-   <div style="text-align:center">
-     <br>
-     نویسندگان:
-     <br>
-     علیرضا داودی
-     <br>
-     رضا غریبی
-     <br>
-     <br>
-  </div>
-    
-  <img class="cover" src="/opencv-book/media/cover.jpg">
+  
+      
+          <h1 class="list">فصل چهارم - مورفولوژی</h1>
+      
 
-  <div style="text-align:center">
-    <a href="/opencv-book/chapter01/lesson01/%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D8%A7%D9%8F-%D8%B3%DB%8C-%D9%88%DB%8C/">
-      از اینجا شروع به خواندن کنید
-    </a>
-  </div>
+    <h3 class="list">تبدیل‌های مورفولوژی پیچیده</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>در این بخش به بررسی نحوه اعمال عملیات‌های مورفولوژی پیچیده مثل باز کردن<a href="#fn:a" id="fnref:a" class="footnote">1</a>، بستن<a href="#fn:b" id="fnref:b" class="footnote">2</a>، گرادیان به روش مورفولوژی، تاپ هَت<a href="#fn:c" id="fnref:c" class="footnote">3</a>و بلک هَت<a href="#fn:d" id="fnref:d" class="footnote">4</a> می‌پردازیم. تمام این اعمال بر پایه عملیات فرسایش و گشایش به وجود آمده‌اند. در ادامه توضیح مختصری در مورد هر کدام از این اعمال می‌دهیم.</p>
+
+<p><strong>باز کردن:</strong></p>
+
+<p>از طریقِ گشایش گرفتن از فرسایش یافتهٔ یک تصویر به دست می‌آید:</p>
+
+<p>$$dst = open\left( src,\ element \right) = dilate\left(erode\left( src,\ element \right) \right)$$</p>
+
+<p>این عمل برای از بین بردن اشیای کوچک مناسب است (بافرض اینکه اشیا به رنگ روشن و روی زمینهٔ تیره قرار داشته باشند). به شکل زیر نگاه کنید. تصویر سمت چپ تصویر ورودی و تصویر سمت راست نتیجهٔ عملیات باز کردن است. همانطور که می‌بینید ناحیه‌های کوچک بین حرف ناپدید شده‌اند.</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image117.png" alt="نتیجه اعمال باز کردن روی تصویر سمت چپ" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">نتیجه اعمال باز کردن روی تصویر سمت چپ</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>بستن:</strong></p>
+
+<p>از طریق فرسایش گرفتن از گشایش یافتهٔ یک تصویر به دست می‌آید:</p>
+
+<p>$$dst = close\left( src,\ element \right) = erode\left( dilate\left( src,\ element \right) \right)$$</p>
+
+<p>این عمل برای از بین بردن حفره‌های کوچک مناسب است (نواحی تیره).</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image118.png" alt="نتیجه اعمال بستن روی تصویر سمت چپ" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">نتیجه اعمال بستن روی تصویر سمت چپ</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>گرادیان به روش مورفولوژی:</strong></p>
+
+<p>از اختلاف بین گشایش و فرسایش یک تصویر به دست می‌آید:</p>
+
+<p>$$dst = morph_{\text{grad}}\left( src,element \right) = dilate\left( src,\ element \right) - erode(src,\ element)$$</p>
+
+<p>این عمل برای پیدا کردن محیط یک شیء مناسب است.</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image119.png" alt="نتیجه اعمال گرادیان به روش مورفولوژی روی تصویر سمت چپ" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">نتیجه اعمال گرادیان به روش مورفولوژی روی تصویر سمت چپ</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>تاپ هَت:</strong></p>
+
+<p>از اختلاف بین یک تصویر با باز شدهٔ آن به دست می‌آید:</p>
+
+<p>$$dst = tophat\left( src,\ element \right) = src - open(src,\ element)$$</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image120.png" alt="نتیجه اعمال تاپ هَت روی تصویر سمت چپ" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">نتیجه اعمال تاپ هَت روی تصویر سمت چپ</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>بلک هَت:</strong></p>
+
+<p>از اختلاف بین بسته شدهٔ یک تصویر با خودش به دست می‌آید:</p>
+
+<p>$$dst = blackhat\left( src,\ element \right) = close\left( src,\ element \right) - src$$</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image121.png" alt="نتیجه اعمال بلک هَت روی تصویر سمت چپ" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">نتیجه اعمال بلک هَت روی تصویر سمت چپ</td>
+</tr>
+</tbody>
+</table>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+using namespace cv;
+
+/// Global variables
+Mat src, dst;
+
+int morph_elem = 0;
+int morph_size = 0;
+int morph_operator = 0;
+int const max_operator = 4;
+int const max_elem = 2;
+int const max_kernel_size = 21;
+
+char* window_name = "Morphology Transformations Demo";
+
+/** Function Headers */
+void Morphology_Operations( int, void* );
+
+/** @function main */
+int main( int argc, char** argv )
+{
+  /// Load an image
+  src = imread( argv[1] );
+
+  if( !src.data )
+  { return -1; }
+
+ /// Create window
+ namedWindow( window_name, CV_WINDOW_AUTOSIZE );
+
+ /// Create Trackbar to select Morphology operation
+ createTrackbar("Operator:\n 0: Opening - 1: Closing \n 2: Gradient - 3: Top Hat \n 4: Black Hat",
+                window_name, &amp;morph_operator, max_operator, Morphology_Operations );
+
+ /// Create Trackbar to select kernel type
+ createTrackbar( "Element:\n 0: Rect - 1: Cross - 2: Ellipse", window_name,
+                 &amp;morph_elem, max_elem,
+                 Morphology_Operations );
+
+ /// Create Trackbar to choose kernel size
+ createTrackbar( "Kernel size:\n 2n +1", window_name,
+                 &amp;morph_size, max_kernel_size,
+                 Morphology_Operations );
+
+ /// Default start
+ Morphology_Operations( 0, 0 );
+
+ waitKey(0);
+ return 0;
+ }
+
+ /**
+  * @function Morphology_Operations
+  */
+void Morphology_Operations( int, void* )
+{
+  // Since MORPH_X : 2,3,4,5 and 6
+  int operation = morph_operator + 2;
+
+  Mat element = getStructuringElement( morph_elem, Size( 2*morph_size + 1, 2*morph_size+1 ),
+                                      Point( morph_size, morph_size ) );
+
+  /// Apply the specified morphology operation
+  morphologyEx( src, dst, operation, element );
+  imshow( window_name, dst );
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در خط 68 از تابع MorphologyEx برای انجام عملیات مورفولوژی روی تصویر ورودی استفاده می‌شود. این تابع چهار آرگومان دارد:</p>
+
+<ul>
+<li><p>src: تصویر ورودی</p></li>
+<li><p>dst: تصویر خروجی</p></li>
+<li><p>operation: نوع تبدیل مورفولوژی‌ای که باید اعمال شود. از پنج مقدار زیر می‌توان استفاده کرد:</p>
+
+<ul>
+<li><p>بازکردن: MORPH_OPEN: 2</p></li>
+<li><p>بستن: MORPH_CLOSE: 3</p></li>
+<li><p>گرادیان: MORPH_GRADIENT: 4</p></li>
+<li><p>تاپ هَت: MORPH_TOPHAT: 5</p></li>
+<li><p>بلک هَت: MORPH_BLACKHAT: 6</p></li>
+</ul>
+
+<p>به خاطر اینکه مقدارها بین دو و شش است، در خط 62 دو واحد به مقدار گرفته شده از ترک‌بار اضافه می‌کنیم.</p></li>
+<li><p>element: کرنل مورد استفاده است. از تابع getStructuringElement برای ساخت آن استفاده شده است.</p></li>
+</ul>
+
+<h2>خروجی</h2>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image122.png" alt="تصویر ورودی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image123.png" alt="نمایی از برنامه – سمت راست عمل بلک هَت و سمت چپ عمل باز کردن" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">نمایی از برنامه – سمت راست عمل بلک هَت و سمت چپ عمل باز کردن</td>
+</tr>
+</tbody>
+</table>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:a"><p>Opening<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:b"><p>Closing<a href="#fnref:b" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:c"><p>Top Hat<a href="#fnref:c" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:d"><p>Black Hat<a href="#fnref:d" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+</ol>
+</div>
+
+    </div>
   
 
 
@@ -288,7 +525,18 @@
 
 <div class="section">
     <nav class="pagination" role="navigation" aria-label="pagination">
-    
+    <a href="/opencv-book/chapter04/lesson01/erode-dilate/" class="pagination-previous button is-primary is-outlined">
+    →
+    فرسایش و گشایش
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter05/lesson01/compare-histograms/" class="pagination-next button is-primary is-outlined">
+    مقایسه بافت‌نگارها
+    ←
+  </a>
     </nav>
 </div>
     </div>

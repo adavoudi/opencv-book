@@ -2,7 +2,7 @@
 <html lang="Farsi">
 <head>
 
-<title>پردازش تصویر در OpenCV</title>
+<title>پردازش تصویر در OpenCV | عملگر لاپلاس</title>
 
 <meta charset="utf-8">
 <meta name="description" content="">
@@ -260,27 +260,146 @@
     <div class="container column">
         <div class="section" id="content">
 
-  <h1 class="cover">پردازش تصویر در OpenCV</h1>
-  <h2 class="cover"></h2>
-    
-   <div style="text-align:center">
-     <br>
-     نویسندگان:
-     <br>
-     علیرضا داودی
-     <br>
-     رضا غریبی
-     <br>
-     <br>
-  </div>
-    
-  <img class="cover" src="/opencv-book/media/cover.jpg">
+  
+      
+          <h1 class="list">فصل دوم - حوزهٔ مکان</h1>
+      
 
-  <div style="text-align:center">
-    <a href="/opencv-book/chapter01/lesson01/%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D8%A7%D9%8F-%D8%B3%DB%8C-%D9%88%DB%8C/">
-      از اینجا شروع به خواندن کنید
-    </a>
-  </div>
+    <h3 class="list">عملگر لاپلاس</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>در بخش قبل با نحوهٔ استفاده از عملگر سابل آشنا شدید. این عملگر بر مبنای تغییرات روشنایی پیکسل‌های عکس بود. با گرفتن مشتق اول از تابع روشنایی دیدیم که می‌توان لبه را به عنوان یک بیشینه در نظر گرفت. مثلاً مشتق اول یک تابع می‌تواند به شکل زیر باشد:</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image83.png" alt="یک تابع و مشتق آن" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">یک تابع و مشتق آن</td>
+</tr>
+</tbody>
+</table>
+
+<p>و وقتی مشتق دوم گرفته شود به شکل زیر خواهد بود:</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image84.png" alt="مشتق دوم تابع بالا" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">مشتق دوم تابع بالا</td>
+</tr>
+</tbody>
+</table>
+
+<p>همانطور که می‌بینید، محل مورد نظر در مشتق دوم برابر صفر است! بنابراین می‌توان از این قضیه برای پیدا کردن لبه‌های یک تصویر استفاده کرد. توجه کنید که نقطه‌های صفر فقط در لبه‌ها رخ نمی‌دهند (می‌توانند در نقطه‌های بی معنی نیز رخ دهند)؛ البته می‌توان این مشکل را تا حدودی با فیلتر کردن نقاط برطرف کرد. در ادامه با عملگر لاپلاس آشنا می‌شویم.</p>
+
+<p><strong>عملگر لاپلاس:</strong></p>
+
+<p>از توضیحات بالا بر می‌آید که می‌توان از مشتق دوم برای پیدا کردن لبه‌ها استفاده کرد و از آنجایی که تصاویر دوبُعدی هستند، باید از هر دو بُعد مشتق بگیریم. اینجاست که عملگر لاپلاس به کار می‌آید و به‌صورت زیر تعریف می‌شود:</p>
+
+<p>$$Laplace\left( f \right) = \ \frac{\partial^{2}f}{\partial x^{2}} + \frac{\partial^{2}f}{\partial y^{2}}$$</p>
+
+<p>در اُ سی وی تابعی به نام Laplacian وجود دارد که معادلهٔ بالا را پیاده سازی کرده است. در واقع از آنجایی که لاپلاس از گرادیان‌های تصویر استفاده می‌کند، این تابع به صورت داخلی از عملگر سابل برای محاسباتش استفاده می‌کند.</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+using namespace cv;
+
+/** @function main */
+int main( int argc, char** argv )
+{
+    Mat src, src_gray, dst;
+    int kernel_size = 3;
+    int scale = 1;
+    int delta = 0;
+    int ddepth = CV_16S;
+    char* window_name = "Laplace Demo";
+
+    int c;
+
+    /// Load an image
+    src = imread( argv[1] );
+
+    if( !src.data )
+    { return -1; }
+
+    /// Remove noise by blurring with a Gaussian filter
+    GaussianBlur( src, src, Size(3,3), 0, 0, BORDER_DEFAULT );
+
+    /// Convert the image to grayscale
+    cvtColor( src, src_gray, CV_RGB2GRAY );
+
+    /// Create window
+    namedWindow( window_name, CV_WINDOW_AUTOSIZE );
+
+    /// Apply Laplace function
+    Mat abs_dst;
+
+    Laplacian( src_gray, dst, ddepth, kernel_size, scale, delta, BORDER_DEFAULT );
+    convertScaleAbs( dst, abs_dst );
+
+    /// Show what you got
+    imshow( window_name, abs_dst );
+
+    waitKey(0);
+
+    return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در خط 27 به منظور کاهش نویز از فیلتر هموار ساز گوسی استفاده می‌کنیم.</p>
+
+<p>در خط 38 عملگر لاپلاس را با استفاده از تابع Laplacian به تصویر ورودی اعمال می‌کنیم. این تابع 7 آرگومان به شرح زیر دارد:</p>
+
+<ol>
+<li><strong>src_gray:</strong> تصویر ورودی (که در این مورد سیاه و سفید است. می‌تواند رنگی نیز باشد).</li>
+<li><strong>dst:</strong> تصویر خروجی</li>
+<li><strong>ddepth:</strong> عمق تصویر خروجی است. از آنجا که در اینجا تصویر ورودی از نوع CV_8U است، برای جلوگیری از سرریز، عمق تصویر خروجی را CV_16S می‌گذاریم.</li>
+<li><strong>kernel_size:</strong> اندازهٔ کرنل عملگر سابل که داخل تابع Laplacian استفاده می‌شود. در اینجا از اندازهٔ 3 استفاده می‌کنیم.</li>
+<li><strong>scale، delta و BORDER_DEFAULT:</strong> این‌ها را به صورت پیش‌فرض رها می‌کنیم.</li>
+</ol>
+
+<p>در خط 39 خروجی تابع Laplacian را به نوع CV_8U تبدیل می‌کنیم.</p>
+
+<h2>خروجی</h2>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image85.png" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image86.png" alt="تصویر خروجی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+	<td align="center">تصویر خروجی</td>
+</tr>
+</tbody>
+</table>
+
+<p>درخت‌ها و نیمرخ گاو خوب در آمده‌اند؛ البته ناحیه‌هایی که دارای روشنایی یکسان هستند، مثل اطراف سر گاو، خیلی خوب نشده‌اند. همانطور که می‌بینید به دلیل کنتراست زیاد ناحیه سقف خانه پشت گاو، لبه‌ها خیلی واضح مشخص شده‌اند.</p>
+
+    </div>
   
 
 
@@ -288,7 +407,18 @@
 
 <div class="section">
     <nav class="pagination" role="navigation" aria-label="pagination">
-    
+    <a href="/opencv-book/chapter02/lesson14/sobel-operator/" class="pagination-previous button is-primary is-outlined">
+    →
+    عملگر سابل
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter02/lesson16/canny-operator/" class="pagination-next button is-primary is-outlined">
+    عملگر کَنی
+    ←
+  </a>
     </nav>
 </div>
     </div>

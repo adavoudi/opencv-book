@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="Farsi">
+<head>
+
+<title>پردازش تصویر در OpenCV | تبدیل خط هُو</title>
+
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="">
+<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:site_name" content="پردازش تصویر در OpenCV">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+
+  <link rel="short icon" href="/static/img/mira.png">
+  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+ 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
+
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+
+</head>
+<body>
+
+  <header class="hero is-info columns">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+              <a href="/opencv-book">
+                پردازش تصویر در OpenCV
+              </a>
+            </h1>
+            <h2 class="subtitle"></h2>
+        </div>
+    </div>
+    <span class="sidebar_toggle">
+        <em class="open-icon"></em>
+    </span>
+</header>
+
+  <section class="main-content columns is-fullheight">
+    <aside id="sidebar" class="column is-one-quarter-desktop is-one-third-tablet section ">
+  <div class="sidebar__inner">
+    <ul class="menu-list">
+        
+        <li>
+        
+        
+          <span class="season">فصل اول - معرفی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson01/ocv-intro/">- معرفی اُ سی وی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson02/load-show-save/">- بارگذاری، نمایش و ذخیره تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson03/mat-class/">- کلاس MAT</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson04/store-retrieve/">- ذخیره سازی و بازیابی اطلاعات</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل دوم - حوزهٔ مکان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson01/simple-shapes/">- شکل‌های هندسی ساده</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson02/linear-blend/">- ترکیب خطی دو تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson03/linear-filter/">- فیلتر خطی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson04/affine-transformation/">- تبدیل اَفاین</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson05/map/">- نگاشت</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson06/contrast-brightness/">- تغییر کنتراست و روشنایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson07/smoothing/">- هموار سازی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson08/border/">- اضافه کردن قاب به تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson09/drawing/">- مولد عدد تصادفی و ترسیم متن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson10/zooming/">- بزرگ‌نمایی و کوچک‌نمایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson11/threshold/">- آستانه‌گذاری</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson12/image-histogram/">- بافت‌نگار تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson13/equalize-histogram/">- برابرسازی بافت‌نگار</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson14/sobel-operator/">- عملگر سابل</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson15/laplace-operator/">- عملگر لاپلاس</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson16/canny-operator/">- عملگر کَنی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson17/contours/">- کانتورهای تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson18/convex-hull/">- پوش محدب</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson19/contours-frames/">- قاب‌های مستطیلی و دایره‌ای برای کانتورها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson20/contours-rotated-frames/">- قاب‌های چرخیدهٔ مستطیلی و بیضوی برای کانتورها</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل سوم - حوزهٔ زمان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter03/lesson01/discrete-fourier/">- تبدیل فوریهٔ گسسته</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل چهارم - مورفولوژی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson01/erode-dilate/">- فرسایش و گشایش</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson02/morphology-transformations/">- تبدیل‌های مورفولوژی پیچیده</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل پنجم - شناسایی الگو</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson01/compare-histograms/">- مقایسه بافت‌نگارها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson02/back-projection/">- بَک پروجکشن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson03/pattern-matching/">- تطبیق الگو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson04/hough-line-transform/">- تبدیل خط هُو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson05/hough-circle-transform/">- تبدیل دایره هُو</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+    </ul>
+  </div>
+</aside>
+
+    <div class="container column">
+        <div class="section" id="content">
+
+  
+      
+          <h1 class="list">فصل پنجم - شناسایی الگو</h1>
+      
+
+    <h3 class="list">تبدیل خط هُو</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>از تبدیل خط هُو<a href="#fn:a" id="fnref:a" class="footnote">1</a> برای کشف خطوط استفاده می‌شود. برای اعمال این تبدیل نیاز است که ابتدا تصویر مورد نظر لبه‌یابی شود.</p>
+
+<p>همانطور که می دانید، می‌توان خط را به وسیلهٔ دو پارامتر مشخص کرد. برای مثال:</p>
+
+<p>a.  در مختصات کارتزین پارمتر ها به صورت (m,b) هستند.</p>
+
+<p>b.  در مختصات قطبی پارامترها به صورت (r,ɵ) هستند.</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image136.png" alt="یک خط و نحوه نمایش آن در مختصات کارتزین و قطبی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">یک خط و نحوه نمایش آن در مختصات کارتزین و قطبی</td>
+</tr>
+</tbody>
+</table>
+
+<p>در تبدیل هُو از فرم قطبی استفاده می‌شود، بنابراین معادلهٔ خط را می‌توان به شکل زیر نوشت:</p>
+
+<p>$$y = \left( - \frac{\cos\theta}{\sin\theta} \right)x + \left( \frac{r}{\sin\theta} \right)$$</p>
+
+<p>که در آن $r = x\cos\theta + y\sin\theta$ است.</p>
+
+<p>به طورکلی، به ازای هر نقطه به صورت $\left( x_{0},y_{0} \right)$ می‌توانیم خانوادهٔ خطوطی که از آن نقطه می‌گذرند را به صورت زیر تعریف
+کنیم:</p>
+
+<p>$$r = x_{0}\cos\theta + y_{0}\sin\theta$$</p>
+
+<p>هر جفت $\left( r_{\theta},\ \theta \right)$، نشان دهندهٔ یک خط است که از نقطهٔ$\left( x_{0},\ y_{0} \right)$ می گذرد.</p>
+
+<p>اگر خانوادهٔ تمام خطوطی که از نقطهٔ $\left( x_{0},y_{0} \right)$ می‌گذرند را در صحفهٔ $\theta - r$ رسم کنیم، یک شکل سینوسی به وجود می‌آید. مثلاً به ازای $x_{0} = 8$ و $y_{0} = 6$ شکل زیر به وجود می‌آید:</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image137.png" alt="mage13" id="mage13" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">جفت $\left( \mathbf{r}_{\mathbf{\theta}}\mathbf{,\ \theta} \right)$ تمام خطوطی که از نقطه $\left( \mathbf{8,\ 6} \right)$ می گذرند</td>
+</tr>
+</tbody>
+</table>
+
+<p>می‌توان مشابه کار بالا را برای تمام نقاط موجود در یک تصویر انجام داد. اگر منحنی دو نقطهٔ مختلف در صفحهٔ $\theta - r$ هم دیگر را قطع کنند، به این معنی است که آن دو نقطه روی یک خط قرار دارند. مثلاً اگر به دنبال نقطهٔ مثال قبل، منحنی‌های نقاط $\left( 4,\ 9 \right)$ و $\left( 12,\ 3 \right)$ را بکشیم، نمودار حاصل به شکل زیر در می‌آید:</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image138.png" alt="mage13" id="mage13" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">رسم منحنی خطوطی که از سه نقطه $\left( \mathbf{8,\ 6} \right)$، $\left( \mathbf{4,9} \right)$ و $\left( \mathbf{12,\ 3} \right)$ می گذرند</td>
+</tr>
+</tbody>
+</table>
+
+<p>در این نمودار، سه منحنی یکدیگر را در نقطهٔ $\left( 0.925,\ 9.6 \right)$ قطع کرده‌اند. این همان پارامترهای $\left( \theta,\ r \right)$ خطی است که نقاط $\left( 8,\ 6 \right)$، $\left( 4,9 \right)$ و $\left( 12,\ 3 \right)$ روی آن قرار گرفته‌اند.</p>
+
+<p>به صورت کلی می‌توان یک خط را با به دست آوردن نقاط برخورد بین منحنی‌ها کشف کرد. هر چه تعداد بیشتری منحنی در یک برخورد وجود داشته باشد، به این معنی است که خطی که نشان دهندهٔ آن برخورد است، تعداد بیشتری نقطه دارد. به صورت کلی می‌توان با تعیین یک آستانه، حداقل تعداد مجاز برخوردهای مورد نیاز برای خط حساب کردن تعدادی نقطه را مشخص کرد. این همان کاری است که تبدیل هُو انجام می‌دهد. این تبدیل تعداد برخوردهای منحنی همه نقاط تصویر را به دست می‌آورد و اگر تعداد برخوردها بیشتر از آستانه بود، آن را به عنوان خط با پارامترهای $\left( \theta,r_{\theta} \right)$، در نظر می‌گیرد.</p>
+
+<p>در اُ سی وی دو نوع تبدیل خط هُو پیاده سازی شده است:</p>
+
+<p><strong>تبدیل خط استاندارد هُو:</strong></p>
+
+<p>بسیار شبیه همان چیزی است که توضیح دادیم. به عنوان خروجی، برداری از جفت‌های $\left( \theta,r_{\theta} \right)$ را می‌دهد. این تبدیل در تابع HoughLines پیاده سازی شده است.</p>
+
+<p><strong>تبدیل خط احتمالی هُو</strong>:</p>
+
+<p>این تبدیل بسیار بهینه‌تر از تبدیل خط استاندارد پیاده سازی شده است. به عنوان خروجی، نقاط انتهایی خطوط کشف شده را بر می‌گرداند $(x_{0},y_{0},x_{1},y_{1})$. این تبدیل در تابع HoughLinesP پیاده سازی شده است.</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+
+#include &lt;iostream&gt;
+
+using namespace cv;
+using namespace std;
+
+void help()
+{
+    cout &lt;&lt; "\nThis program demonstrates line finding with the Hough transform.\n"
+            "Usage:\n"
+            "./houghlines &lt;image_name&gt;, Default is pic1.jpg\n" &lt;&lt; endl;
+}
+
+int main(int argc, char** argv)
+{
+
+    Mat src = imread(argv[1], 0);
+    if(src.empty())
+    {
+        help();
+        cout &lt;&lt; "can not open " &lt;&lt; argv[1] &lt;&lt; endl;
+        return -1;
+    }
+
+    Mat dst, cdst;
+    Canny(src, dst, 50, 200, 3);
+    cvtColor(dst, cdst, CV_GRAY2BGR);
+
+#if 0
+    vector&lt;Vec2f&gt; lines;
+    HoughLines(dst, lines, 1, CV_PI/180, 100, 0, 0 );
+
+    for( size_t i = 0; i &lt; lines.size(); i++ )
+    {
+        float rho = lines[i][0], theta = lines[i][1];
+        Point pt1, pt2;
+        double a = cos(theta), b = sin(theta);
+        double x0 = a*rho, y0 = b*rho;
+        pt1.x = cvRound(x0 + 1000*(-b));
+        pt1.y = cvRound(y0 + 1000*(a));
+        pt2.x = cvRound(x0 - 1000*(-b));
+        pt2.y = cvRound(y0 - 1000*(a));
+        line( cdst, pt1, pt2, Scalar(0,0,255), 3, CV_AA);
+    }
+#else
+    vector&lt;Vec4i&gt; lines;
+    HoughLinesP(dst, lines, 1, CV_PI/180, 50, 50, 10 );
+    for( size_t i = 0; i &lt; lines.size(); i++ )
+    {
+        Vec4i l = lines[i];
+        line( cdst, Point(l[0], l[1]), Point(l[2], l[3]), Scalar(0,0,255), 3, CV_AA);
+    }
+#endif
+    imshow("source", src);
+    imshow("detected lines", cdst);
+
+    waitKey();
+
+    return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در خط 28 با استفاده از لبه‌یاب کَنی، لبه‌های عکس را پیدا می‌کنیم.</p>
+
+<p>حالا می‌توانیم تبدیل خط هُو را اعمال کنیم. هر دو تابع اُ سی وی که برای این کار هستند را توضیح می‌دهیم:</p>
+
+<p><strong>تبدیل خط استاندارد هُو:</strong></p>
+
+<p>ابتدا در خط 33 تبدیل خط استاندارد را با استفاده از تابع HoughLines حساب می‌کنیم. این تابع 7 آرگومان دارد که به شرح زیر هستند:</p>
+
+<ol>
+<li><p><strong>dst:</strong> تصویر ورودی (که در حقیقت همان خروجی لبه‌یاب) است. این تصویر باید نوع سیاه و سفید باشد (اگر چه در حقیقت یک عکس باینری است).</p></li>
+<li><p><strong>lines:</strong> برداری که پارامترهای $(r,\ \theta)$ خطوط کشف شده در آن قرار می‌گیرند.</p></li>
+<li><p><strong>rho:</strong> وضوح پارامتر r بر حسب تعداد پیکسل‌ها است. در این جا از 1 پیکسل استفاده می‌کنیم.</p></li>
+<li><p><strong>theta:</strong> وضوح پارامتر $\theta$ بر حسب رادیان است. در اینجا از 1 درجه استفاده می‌کنیم (که یعنی CV_PI/180).</p></li>
+<li><p><strong>threshold:</strong> حداقل تعداد برخوردها برای در نظر گرفتن به عنوان خط است.</p></li>
+<li><p><strong>srn و stn:</strong> به صورت پیش‌فرض صفر هستند.</p></li>
+</ol>
+
+<p>سپس در خطوط 35 تا 46 نتیجه را با کشیدن تمام خط‌های کشف شده، نشان می‌دهیم.</p>
+
+<p><strong>تبدیل خط احتمالی هُو:</strong></p>
+
+<p>ابتدا در خط 49 تبدیل خط احتمالی را با استفاده از تابع HoughLinesP حساب می‌کنیم. این تابع 7 آرگومان دارد که به شرح زیر هستند:</p>
+
+<ol>
+<li><p><strong>dst:</strong> تصویر ورودی (که در حقیقت همان خروجی لبه‌یاب) است. این تصویر باید از نوع سیاه و سفید باشد (اگر چه در حقیقت یک عکس باینری است).</p></li>
+<li><p><strong>lines:</strong> برداری که پارامترهای $(x_{\text{start}},\ y_{\text{start}},\ x_{\text{end}},\ y_{\text{end}})$ خطوط کشف شده در آن قرار می گیرند.</p></li>
+<li><p><strong>rho:</strong> وضوح پارامتر r بر حسب تعداد پیکسل‌ها است. در این جا از 1 پیکسل استفاده می‌کنیم.</p></li>
+<li><p><strong>theta:</strong> وضوح پارامتر $\theta$ بر حسب رادیان است. در اینجا از 1 درجه استفاده می‌کنیم (که یعنی CV_PI/180).</p></li>
+<li><p><strong>threshold:</strong> حداقل تعداد برخوردها برای در نظر گرفتن به عنوان خط است.</p></li>
+<li><p><strong>minLineLenght:</strong> حداقل تعداد نقطه‌هایی که می‌توانند یک خط را تشکیل دهند. خطوطی که کمتر از این تعداد نقطه دارند رد می‌شوند.</p></li>
+<li><p><strong>maxLineGap:</strong> حداکثر فضای خالی بین دو نقطه که روی یک خط قرار دارند.</p></li>
+</ol>
+
+<p>سپس در خطوط 50 تا 54 نتیجه را با کشیدن تمام خط‌های کشف شده، نشان می‌دهیم.</p>
+
+<h2>خروجی</h2>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image139.png" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image140.png" alt="نتیجه اعمال تبدیل خط احتمالی هُو با آستانه 20" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+	<td align="center">نتیجه اعمال تبدیل خط احتمالی هُو با آستانه 20</td>
+</tr>
+</tbody>
+</table>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:a"><p>Hough<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+</ol>
+</div>
+
+    </div>
+  
+
+
+</div>
+
+<div class="section">
+    <nav class="pagination" role="navigation" aria-label="pagination">
+    <a href="/opencv-book/chapter05/lesson03/pattern-matching/" class="pagination-previous button is-primary is-outlined">
+    →
+    تطبیق الگو
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter05/lesson05/hough-circle-transform/" class="pagination-next button is-primary is-outlined">
+    تبدیل دایره هُو
+    ←
+  </a>
+    </nav>
+</div>
+    </div>
+
+  </section>
+
+  <footer class="columns hero section is-dark has-text-centered">
+        <div class="container ">
+            <div class="columns">
+
+                <div class="column">
+                    <div class="footer-header">
+                       به این جاها سر بزنید
+                    </div>
+                    <ul class="related-links has-text-centered">
+                        <li>
+                            <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <div class="footer-header">
+                    پردازش تصویر در OpenCV
+                    </div>
+                    <div class="socials">
+                      <a href="/opencv-book">
+                        <img class="cover" src="/opencv-book/media/cover-small.jpg">
+                      </a>
+                    </div>
+                </div>
+
+
+                </div>
+            </div>
+            <div class="has-text-centered credit">
+              <div>
+                ارائه شده بر بستر
+                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                و قالب از
+                <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
+                «لاراول، از صفر تا شصت»
+              </a>                
+              </div>
+            </div>
+        </div>
+    </footer>
+
+
+    
+<script type="text/javascript" src="/opencv-book/static/js/jquery.min.js"></script>
+<script src="/opencv-book/static/js/highlight.pack.js"></script>
+<script src="/opencv-book/static/js/highlightjs-line-numbers.min.js"></script>
+<script src="/opencv-book/static/js/app.js"></script>
+
+<script>
+    renderMathInElement(document.body,{ delimiters:
+      [
+       {left: "$$", right: "$$", display: true},
+       {left: "$", right: "$", display: false}
+      ]
+    });
+</script>
+
+<script>
+    // Trim extra blank line of the codes
+    var y = document.querySelectorAll("pre code");
+    for(var i = 0; i < y.length; i++) {
+      y[i].innerHTML = y[i].innerHTML.trimRight();
+    }
+</script>
+
+</body>
+</html>

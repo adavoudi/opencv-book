@@ -2,7 +2,7 @@
 <html lang="Farsi">
 <head>
 
-<title>پردازش تصویر در OpenCV</title>
+<title>پردازش تصویر در OpenCV | عملگر کَنی</title>
 
 <meta charset="utf-8">
 <meta name="description" content="">
@@ -260,27 +260,195 @@
     <div class="container column">
         <div class="section" id="content">
 
-  <h1 class="cover">پردازش تصویر در OpenCV</h1>
-  <h2 class="cover"></h2>
-    
-   <div style="text-align:center">
-     <br>
-     نویسندگان:
-     <br>
-     علیرضا داودی
-     <br>
-     رضا غریبی
-     <br>
-     <br>
-  </div>
-    
-  <img class="cover" src="/opencv-book/media/cover.jpg">
+  
+      
+          <h1 class="list">فصل دوم - حوزهٔ مکان</h1>
+      
 
-  <div style="text-align:center">
-    <a href="/opencv-book/chapter01/lesson01/%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D8%A7%D9%8F-%D8%B3%DB%8C-%D9%88%DB%8C/">
-      از اینجا شروع به خواندن کنید
-    </a>
-  </div>
+    <h3 class="list">عملگر کَنی</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>لبه‌یاب کَنی در سال 1986 توسط جان اِف. کَنی<a href="#fn:a" id="fnref:a" class="footnote">1</a> توسعه یافت. همچنین خیلی‌ها آن را با نام <strong>یابندهٔ بهینه</strong><a href="#fn:b" id="fnref:b" class="footnote">2</a> می‌شناسند. الگوریتم کَنی سه هدف اساسی زیر را دنبال می‌کند:</p>
+
+<ol>
+<li><p><strong>نرخ خطای پایین:</strong> یعنی اینکه فقط لبه‌های واقعی را کشف کند (نه نقاطی که لبه نیستند).</p></li>
+<li><p><strong>مکان‌یابی خوب:</strong> فاصلهٔ میان پیکسل‌های کشف شدهٔ لبه و پیکسل‌های واقعی لبه باید کمینه باشد.</p></li>
+<li><p><strong>پاسخ کمینه:</strong> به ازای هر لبه فقط یک پاسخ وجود داشته باشد.</p></li>
+</ol>
+
+<p>رویه حساب لبه‌ها در لبه‌یاب کَنی به صورت زیر است:</p>
+
+<ol>
+<li><p>نویزها را فیلتر می‌کند. بدین منظور از فیلتر گوسی استفاده می‌شود. به عنوان مثال می‌توان از کرنل زیر استفاده کرد:</p>
+
+<p><img src="/opencv-book/media/image87.png" alt="mage8" id="mage8" /></p></li>
+<li><p>گرادیان تابع روشنایی تصویر را به دست می‌آورد. بدین منظور از روشی مشابه با عملگر سابل استفاده می‌شود:</p>
+
+<p>i. دو کرنل زیر را در تصویر کانوال می‌کند (یکی برای جهت x و یکی برای جهت y):</p>
+
+<p>$$
+G_{x} = \begin{bmatrix}
+    - 1 &amp; 0 &amp; + 1 \\
+    - 2 &amp; 0 &amp; + 2 \\
+    - 1 &amp; 0 &amp; + 1
+\end{bmatrix}
+$$</p>
+
+<p>$$
+G_{y} = \begin{bmatrix}
+    - 1 &amp; - 2 &amp; - 1 \\
+    0 &amp; 0 &amp; 0 \\
+    + 1 &amp; + 2 &amp; + 1
+\end{bmatrix}
+$$</p>
+
+<p>ii. از روش زیر، دامنه و جهت آن را پیدا می‌کند:</p>
+
+<p>$$G = \sqrt{G_{x}^{2} + G_{y}^{2}}$$</p>
+
+<p>$$\theta = \arctan\left( \frac{G_{y}}{G_{x}} \right)$$</p>
+
+<p>جهت‌ها در یکی از چهار گروه 0، 45، 90 یا 135 قرار می‌گیرند.</p></li>
+<li><p>فیلتری جهت حذف نقاط غیر بیشینه اعمال می‌کند. با این کار پیکسل‌هایی که جزئی از لبه نیستند، حذف می‌شوند. بنابراین فقط لبه‌های نازک باقی می‌مانند.</p></li>
+<li><p>در قدم آخر کَنی از یک روش آستانه گذاری با دو آستانه بالا و پایین استفاده می‌کند:</p>
+
+<p>I.  اگر مقدار پیکسلی از آستانهٔ بالایی بیشتر باشد، به عنوان لبه پذیرفته می‌شود.</p>
+
+<p>II. اگر مقدار پیکسلی از آستانهٔ پایینی کمتر باشد، رد می‌شود.</p>
+
+<p>III. اگر مقدار پیکسلی بین آستانهٔ بالایی و آستانهٔ پایینی بود، فقط در صورتی به عنوان لبه پذیرفته می‌شود که همسایهٔ پیکسلی باشد که مقدارش بالاتر از آستانهٔ بالایی است.</p>
+
+<p>پیشنهاد می‌شود که نسبت آستانهٔ بالایی: پایینی یکی از دو مقدار 1:2 یا 1:3 باشد.</p></li>
+</ol>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+using namespace cv;
+
+/// Global variables
+
+Mat src, src_gray;
+Mat dst, detected_edges;
+
+int edgeThresh = 1;
+int lowThreshold;
+int const max_lowThreshold = 100;
+int ratio = 3;
+int kernel_size = 3;
+char* window_name = "Edge Map";
+
+/**
+ * @function CannyThreshold
+ * @brief Trackbar callback - Canny thresholds input with a ratio 1:3
+ */
+void CannyThreshold(int, void*)
+{
+    /// Reduce noise with a kernel 3x3
+    blur( src_gray, detected_edges, Size(3,3) );
+
+    /// Canny detector
+    Canny( detected_edges, detected_edges, lowThreshold, lowThreshold*ratio, kernel_size );
+
+    /// Using Canny's output as a mask, we display our result
+    dst = Scalar::all(0);
+
+    src.copyTo( dst, detected_edges);
+    imshow( window_name, dst );
+}
+
+
+/** @function main */
+int main( int argc, char** argv )
+{
+    /// Load an image
+    src = imread( argv[1] );
+
+    if( !src.data )
+    { return -1; }
+
+    /// Create a matrix of the same type and size as src (for dst)
+    dst.create( src.size(), src.type() );
+
+    /// Convert the image to grayscale
+    cvtColor( src, src_gray, CV_BGR2GRAY );
+
+    /// Create a window
+    namedWindow( window_name, CV_WINDOW_AUTOSIZE );
+
+    /// Create a Trackbar for user to enter threshold
+    createTrackbar( "Min Threshold:", window_name, &amp;lowThreshold, max_lowThreshold, CannyThreshold );
+
+    /// Show the image
+    CannyThreshold(0, 0);
+
+    /// Wait until user exit program by pressing a key
+    waitKey(0);
+
+    return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>به نکات زیر توجه کنید:</p>
+
+<ol>
+<li><p>در خط 16 نسبت آستانهٔ پایین: بالا را 3:1 انتخاب کرده‌ایم.</p></li>
+<li><p>در خط 17 اندازهٔ کرنل را 3 می‌گذاریم (این کرنل برای عملیات سابلی است که در تابع Canny استفاده می‌شود).</p></li>
+<li><p>در خط 15 بیشنه مقدار مجاز برای آستانهٔ پایینی را 100 می‌گذاریم.</p></li>
+</ol>
+
+<p>در تابع CannyThreshold در خط 27، برای کاهش نویز تصویر ورودی را هموار می‌کنیم.</p>
+
+<p>سپس در خط 30 تابع Canny را صدا می‌زنیم. این تابع 5 آرگومان به شرح زیر دارد:</p>
+
+<ol>
+<li><p><strong>detected_edges:</strong> تصویر ورودی است. این تصویر باید سیاه و سفید باشد.</p></li>
+<li><p><strong>detected_edges:</strong> تصویر خروجی است. می‌توان همان تصویر ورودی را به عنوان خروجی در نظر گرفت.</p></li>
+<li><p><strong>lowThreshold:</strong> مقداری که کاربر به وسیلهٔ ترک‌بار مشخص کرده است.</p></li>
+<li><p><strong>highThreshold:</strong> مقدار این متغیر سه برابر آستانهٔ پایینی است (یعنی سه برابر lowThreshold).</p></li>
+<li><p><strong>kernel_size:</strong> مقدارش را 3 می‌گذاریم (این اندازهٔ کرنل Sobel ای است که در تابع Canny استفاده می‌شود).</p></li>
+</ol>
+
+<p>در نهایت در خط 35 از تابع copyTo برای نگاشت نواحی‌ای که به عنوان لبه کشف شده‌اند به یک پس زمینهٔ سیاه استفاده می‌کنیم. لازم به ذکر است که این تابع فقط مقادیری از عکس منبع را کپی می‌کند که صفر نباشند. از آنجایی که خروجی Canny به صورت کانتور های لبه روی یک زمینهٔ سیاه است، تمام نواحی dst به‌جز نواحی‌ای که لبه‌های کشف شده قرار داشته باشند، سیاه خواهند بود.</p>
+
+<h2>خروجی</h2>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image88.png" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image89.png" alt="تصویر خروجی با آستانه پایینی 100" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+	<td align="center">تصویر خروجی با آستانه پایینی 100</td>
+</tr>
+</tbody>
+</table>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:a"><p>John F. Canny<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:b"><p>Optimal detector<a href="#fnref:b" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+</ol>
+</div>
+
+    </div>
   
 
 
@@ -288,7 +456,18 @@
 
 <div class="section">
     <nav class="pagination" role="navigation" aria-label="pagination">
-    
+    <a href="/opencv-book/chapter02/lesson15/laplace-operator/" class="pagination-previous button is-primary is-outlined">
+    →
+    عملگر لاپلاس
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter02/lesson17/contours/" class="pagination-next button is-primary is-outlined">
+    کانتورهای تصویر
+    ←
+  </a>
     </nav>
 </div>
     </div>

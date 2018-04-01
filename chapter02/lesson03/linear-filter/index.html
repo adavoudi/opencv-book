@@ -2,7 +2,7 @@
 <html lang="Farsi">
 <head>
 
-<title>پردازش تصویر در OpenCV</title>
+<title>پردازش تصویر در OpenCV | فیلتر خطی</title>
 
 <meta charset="utf-8">
 <meta name="description" content="">
@@ -260,27 +260,164 @@
     <div class="container column">
         <div class="section" id="content">
 
-  <h1 class="cover">پردازش تصویر در OpenCV</h1>
-  <h2 class="cover"></h2>
-    
-   <div style="text-align:center">
-     <br>
-     نویسندگان:
-     <br>
-     علیرضا داودی
-     <br>
-     رضا غریبی
-     <br>
-     <br>
-  </div>
-    
-  <img class="cover" src="/opencv-book/media/cover.jpg">
+  
+      
+          <h1 class="list">فصل دوم - حوزهٔ مکان</h1>
+      
 
-  <div style="text-align:center">
-    <a href="/opencv-book/chapter01/lesson01/%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D8%A7%D9%8F-%D8%B3%DB%8C-%D9%88%DB%8C/">
-      از اینجا شروع به خواندن کنید
-    </a>
-  </div>
+    <h3 class="list">فیلتر خطی</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>در این بخش نحوه اعمال فیلتر خطی روی تصاویر را بررسی می‌کنیم. برای اعمال فیلتر خطی باید یک کرنل داشته باشیم؛ سپس آن کرنل را در تصویر کانوالو می‌کنیم.</p>
+
+<p>به طور کلی، به عملی که بین یک کرنل و همهٔ قسمت‌های یک تصویر انجام می‌شود کانولوشن می گویند. همچنین کرنل آرایه‌ای از ضرایب ثابت است و یک لنگر دارد که معمولاً در مرکز آرایه قرار دارد. لنگر همان درایه‌ای از کرنل است که روی پیکسل مورد بررسی قرار می‌گیرد.</p>
+
+<p><img src="/opencv-book/media/image18.png" alt="mage1" id="mage1" /></p>
+
+<p>یک کرنل نمونه که لنگر در مرکز آن قرار دارد.</p>
+
+<p>برای هر پیکسل (x,y) در تصویر I، اگر K ماتریس کرنل با ابعاد $M*N$ و $(a,b)$ <em>مختصات لنگر در کرنل باشد، آنگاه</em> $H\left( x,y \right)$<em>، یعنی مقدار پیکسل</em> $\left( x,y \right)$ در تصویر فیلتر شده، به صورت زیر حساب می شود:</p>
+
+<p>$$H\left( x,y \right) = \ \sum_{i = 0}^{M - 1}{\sum_{j = 0}^{N - 1}{I\left( x + i - a,y + j - b \right)K(i,j)}}$$</p>
+
+<p>برای اعمال فیلتر خطی لازم نیست خودمان فرمول بالا را پیاده سازی کنیم چون تابع filter2D در اُ سی وی دقیقاً همین کار را انجام می‌دهد.</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
+
+using namespace cv;
+
+/** @function main */
+int main ( int argc, char** argv )
+{
+  /// Declare variables
+  Mat src, dst;
+
+  Mat kernel;
+  Point anchor;
+  double delta;
+  int ddepth;
+  int kernel_size;
+  char* window_name = "filter2D Demo";
+
+  int c;
+
+  /// Load an image
+  src = imread( argv[1] );
+
+  if( !src.data )
+  { return -1; }
+
+  /// Create window
+  namedWindow( window_name, CV_WINDOW_AUTOSIZE );
+
+  /// Initialize arguments for the filter
+  anchor = Point( -1, -1 );
+  delta = 0;
+  ddepth = -1;
+
+  /// Loop - Will filter the image with different kernel sizes each 0.5 seconds
+  int ind = 0;
+  while( true )
+    {
+      c = waitKey(500);
+      /// Press 'ESC' to exit the program
+      if( (char)c == 27 )
+        { break; }
+
+      /// Update kernel size for a normalized box filter
+      kernel_size = 3 + 2*( ind%5 );
+      kernel = Mat::ones( kernel_size, kernel_size, CV_32F )/ (float)(kernel_size*kernel_size);
+
+      /// Apply filter
+      filter2D(src, dst, ddepth , kernel, anchor, delta, BORDER_DEFAULT );
+      imshow( window_name, dst );
+      ind++;
+    }
+
+  return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>خطوط 39 تا 51 در یک حلقه بینهایت قرار دارند. در این حلقه اندازهٔ کرنل آپدیت و فیلتر خطی به عکس اعمال می‌شود. جزئیات اعمالی که در این حلقه صورت می‌گیرد به صورت زیر است:</p>
+
+<p>ابتدا در خطوط 45 و 46 کرنل تعریف می‌شود. خط 45 برای آپدیت کردن مقدار kernel_size است؛ این مقدار عددی بین 3 و 11 است. در خط 46 برای ساخت کرنل ابتدا یک ماتریس مربعی با ابعاد kernel_size * kernel_size ساخته می‌شود و سپس آن ماتریس را بر تعداد درایه‌هایش (یعنی kernel_size * kernel_size) تقسیم می‌کند.</p>
+
+<p>بعد از درست کردن کرنل، در خط 49 برای اعمال کرنل ساخته شده به تصویر از تابع filter2D استفاده می‌شود. این تابع 7 آرگومان به شرح زیر دارد:</p>
+
+<ul>
+<li><p>src: تصویر ورودی</p></li>
+<li><p>dst: تصویر خروجی (تصویر فیلتر شده)</p></li>
+<li><p>ddepth: عمق تصویر خروجی است. یک مقدار منفی (مثل 1-) بیان می‌کند که عمق dst باید مشابه عمق src باشد.</p></li>
+<li><p>kernel: کرنل مورد استفاده است.</p></li>
+<li><p>anchor: موقعیت لنگر کرنل است. با قرار دادن <code>Point(-1,-1)</code> مقدار پیش فرض (یعنی مختصات مرکز کرنل) استفاده می‌شود.</p></li>
+<li><p>delta: مقداری که نتیجه کانولوشن هر پیکسل اضافه می‌شود. به صورت پیش‌فرض صفر است.</p></li>
+<li><p>BORDER_DEFAULT: نحوه کانوال کردن پیکسل‌های کناری تصویر را مشخص می‌کند.</p></li>
+</ul>
+
+<h2>خروجی</h2>
+
+<p>برنامه را به صورت زیر اجرا می‌کنیم:</p>
+
+<pre><code class="language-txt">2DFilter.exe "PICTURES /2.jpg"
+</code></pre>
+
+<p>هر 500 میلی ثانیه اندازهٔ کرنل تغییر می‌کند. نمونه‌ای از اجرای برنامه را در زیر می‌بینید:</p>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image19.jpeg" alt="اندازهٔ کرنل ۳" id="" /></th>
+	<th><img src="/opencv-book/media/image20.jpeg" alt="اندازهٔ کرنل ۵" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">اندازهٔ کرنل ۳</td>
+	<td align="center">اندازهٔ کرنل ۵</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image21.jpeg" alt="اندازهٔ کرنل ۷" id="" /></th>
+	<th><img src="/opencv-book/media/image22.jpeg" alt="اندازهٔ کرنل ۹" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">اندازهٔ کرنل ۷</td>
+	<td align="center">اندازهٔ کرنل ۹</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image23.jpeg" alt="اندازهٔ کرنل ۱۱" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">اندازهٔ کرنل ۱۱</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
   
 
 
@@ -288,7 +425,18 @@
 
 <div class="section">
     <nav class="pagination" role="navigation" aria-label="pagination">
-    
+    <a href="/opencv-book/chapter02/lesson02/linear-blend/" class="pagination-previous button is-primary is-outlined">
+    →
+    ترکیب خطی دو تصویر
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter02/lesson04/affine-transformation/" class="pagination-next button is-primary is-outlined">
+    تبدیل اَفاین
+    ←
+  </a>
     </nav>
 </div>
     </div>

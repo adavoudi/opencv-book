@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="Farsi">
+<head>
+
+<title>پردازش تصویر در OpenCV | بافت‌نگار تصویر</title>
+
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="">
+<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:site_name" content="پردازش تصویر در OpenCV">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="">
+<meta name="twitter:description" content="">
+
+  <link rel="short icon" href="/static/img/mira.png">
+  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+ 
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
+
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+
+</head>
+<body>
+
+  <header class="hero is-info columns">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+              <a href="/opencv-book">
+                پردازش تصویر در OpenCV
+              </a>
+            </h1>
+            <h2 class="subtitle"></h2>
+        </div>
+    </div>
+    <span class="sidebar_toggle">
+        <em class="open-icon"></em>
+    </span>
+</header>
+
+  <section class="main-content columns is-fullheight">
+    <aside id="sidebar" class="column is-one-quarter-desktop is-one-third-tablet section ">
+  <div class="sidebar__inner">
+    <ul class="menu-list">
+        
+        <li>
+        
+        
+          <span class="season">فصل اول - معرفی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson01/ocv-intro/">- معرفی اُ سی وی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson02/load-show-save/">- بارگذاری، نمایش و ذخیره تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson03/mat-class/">- کلاس MAT</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter01/lesson04/store-retrieve/">- ذخیره سازی و بازیابی اطلاعات</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل دوم - حوزهٔ مکان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson01/simple-shapes/">- شکل‌های هندسی ساده</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson02/linear-blend/">- ترکیب خطی دو تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson03/linear-filter/">- فیلتر خطی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson04/affine-transformation/">- تبدیل اَفاین</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson05/map/">- نگاشت</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson06/contrast-brightness/">- تغییر کنتراست و روشنایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson07/smoothing/">- هموار سازی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson08/border/">- اضافه کردن قاب به تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson09/drawing/">- مولد عدد تصادفی و ترسیم متن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson10/zooming/">- بزرگ‌نمایی و کوچک‌نمایی تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson11/threshold/">- آستانه‌گذاری</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson12/image-histogram/">- بافت‌نگار تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson13/equalize-histogram/">- برابرسازی بافت‌نگار</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson14/sobel-operator/">- عملگر سابل</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson15/laplace-operator/">- عملگر لاپلاس</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson16/canny-operator/">- عملگر کَنی</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson17/contours/">- کانتورهای تصویر</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson18/convex-hull/">- پوش محدب</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson19/contours-frames/">- قاب‌های مستطیلی و دایره‌ای برای کانتورها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter02/lesson20/contours-rotated-frames/">- قاب‌های چرخیدهٔ مستطیلی و بیضوی برای کانتورها</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل سوم - حوزهٔ زمان</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter03/lesson01/discrete-fourier/">- تبدیل فوریهٔ گسسته</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل چهارم - مورفولوژی</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson01/erode-dilate/">- فرسایش و گشایش</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter04/lesson02/morphology-transformations/">- تبدیل‌های مورفولوژی پیچیده</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+        <li>
+        
+        
+          <span class="season">فصل پنجم - شناسایی الگو</span>
+          <ul>
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson01/compare-histograms/">- مقایسه بافت‌نگارها</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson02/back-projection/">- بَک پروجکشن</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson03/pattern-matching/">- تطبیق الگو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson04/hough-line-transform/">- تبدیل خط هُو</a>
+            </li>
+        
+        
+            <li>
+              <a href="/opencv-book/chapter05/lesson05/hough-circle-transform/">- تبدیل دایره هُو</a>
+            </li>
+        
+        </ul>
+        </li>
+        
+    </ul>
+  </div>
+</aside>
+
+    <div class="container column">
+        <div class="section" id="content">
+
+  
+      
+          <h1 class="list">فصل دوم - حوزهٔ مکان</h1>
+      
+
+    <h3 class="list">بافت‌نگار تصویر</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>در علم آمار <strong>هیستوگرام</strong> یا <strong>بافت‌نگار</strong> یک نمودار ستونی و پله‌ای برای نشان دادن داده‌ها است. نمودار بافت‌نگار همانند نمودار ستونی است و تنها اختلافی که بین این دو وجود دارد، نمایش ستون‌هاست.</p>
+
+<p>در پردازش تصویر به نموداری که توسط آن تعداد پیکسل‌های هر سطح روشنایی در تصویر ورودی مشخص می‌شود بافت‌نگار تصویر می گویند. به عنوان مثال به شکل زیر توجه کنید:</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image67.png" alt="تصویری از مقادیر موجود در درایه‌های یک ماتریس" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویری از مقادیر موجود در درایه‌های یک ماتریس</td>
+</tr>
+</tbody>
+</table>
+
+<p>از آنجایی که دامنه مقادیر این داده‌ها معلوم است (بین 0 تا 255 است)، می‌توان آن دامنه را به زیر قسمت‌هایی که سطل<a href="#fn:a" id="fnref:a" class="footnote">1</a> نام دارند، تقسیم کرد:</p>
+
+<p>$$\left\lbrack 0,\ 255 \right\rbrack = \left\lbrack 0,\ 15 \right\rbrack \cup \left\lbrack 16,\ 31 \right\rbrack \cup \ldots\  \cup \left\lbrack 240,\ 255 \right\rbrack$$</p>
+
+<p>$$domain = bin_{1} \cup bin_{2} \cup \ldots \cup bin_{n} = 15$$</p>
+
+<p>بدین ترتیب می‌توان تعداد پیکسل‌هایی که در سطل $bin_{i}$ قرار می‌گیرند را به دست آورد. با اجرای این روش روی ماتریس بالا، نمودار زیر را به دست می‌آید:</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image68.png" alt="محور افقی نشان دهنده سطل‌ها و محور عمودی نشان دهنده تعداد پیکسل‌های موجود در آن سطل است" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">محور افقی نشان دهنده سطل‌ها و محور عمودی نشان دهنده تعداد پیکسل‌های موجود در آن سطل است.</td>
+</tr>
+</tbody>
+</table>
+
+<p>این فقط یک مثال از طرز کار بافت‌نگار و همچنین دلیل مفید بودن آن بود. کاربرد بافت‌نگار فقط مختص شمارش روشنایی پیکسل‌های تصویر نیست، بلکه می‌توان از آن برای اندازه گیری ویژگی‌های دیگر تصویر هم استفاده کرد (مثل گرادیان، جهت‌ها و...).</p>
+
+<p>یک بافت‌نگار از قسمت‌های زیر تشکیل شده است:</p>
+
+<ol>
+<li>ابعاد<a href="#fn:b" id="fnref:b" class="footnote">2</a>: تعداد پارامترهایی که قرار است برای آنها داده جمع کنیم. در مثال ما این مقدار یک است؛ چون فقط مقادیر روشنایی هر پیکسل را شمارش می‌کنیم (در یک تصویر سیاه و سفید).</li>
+<li>تعداد سطل‌ها: تعداد زیر قسمت‌های موجود در هر بُعد است. در مثال ما این مقدار برابر با 16 عدد است.</li>
+<li>بازه دامنه<a href="#fn:c" id="fnref:c" class="footnote">3</a>: حدود مقادیر مورد اندازه گیری است. در مثال ما به صورت $[0, 255]$ است.</li>
+</ol>
+
+<p>در صورتی که دو ویژگی اندازه گیری شود، بافت‌نگار به دست آمده به صورت سه بعدی در می‌آید (محور x و محور y نشان دهندهٔ $bin_{x}$ و $bin_{y}$ و محور z نشان دهندهٔ عدد شمارش شده برای هر ترکیب $(bin_{x},bin_{y})$ است). برای ابعاد بیشتر به همین صورت محور های بیشتری داریم.</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include &lt;iostream&gt;
+#include &lt;stdio.h&gt;
+
+using namespace std;
+using namespace cv;
+
+/**
+ * @function main
+ */
+int main( int argc, char** argv )
+{
+    Mat src, dst;
+
+    /// Load image
+    src = imread( argv[1], 1 );
+
+    if( !src.data )
+    { return -1; }
+
+    /// Separate the image in 3 places ( B, G and R )
+    vector&lt;Mat&gt; bgr_planes;
+    split( src, bgr_planes );
+
+    /// Establish the number of bins
+    int histSize = 256;
+
+    /// Set the ranges ( for B,G,R) )
+    float range[] = { 0, 256 } ;
+    const float* histRange = { range };
+
+    bool uniform = true; bool accumulate = false;
+
+    Mat b_hist, g_hist, r_hist;
+
+    /// Compute the histograms:
+    calcHist( &amp;bgr_planes[0], 1, 0, Mat(), b_hist, 1, &amp;histSize, &amp;histRange, uniform, accumulate );
+    calcHist( &amp;bgr_planes[1], 1, 0, Mat(), g_hist, 1, &amp;histSize, &amp;histRange, uniform, accumulate );
+    calcHist( &amp;bgr_planes[2], 1, 0, Mat(), r_hist, 1, &amp;histSize, &amp;histRange, uniform, accumulate );
+
+    // Draw the histograms for B, G and R
+    int hist_w = 512; int hist_h = 400;
+    int bin_w = cvRound( (double) hist_w/histSize );
+
+    Mat histImage( hist_h, hist_w, CV_8UC3, Scalar( 0,0,0) );
+
+    /// Normalize the result to [ 0, histImage.rows ]
+    normalize(b_hist, b_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat() );
+    normalize(g_hist, g_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat() );
+    normalize(r_hist, r_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat() );
+
+    /// Draw for each channel
+    for( int i = 1; i &lt; histSize; i++ )
+    {
+        line( histImage, Point( bin_w*(i-1), hist_h - cvRound(b_hist.at&lt;float&gt;(i-1)) ) ,
+              Point( bin_w*(i), hist_h - cvRound(b_hist.at&lt;float&gt;(i)) ),
+              Scalar( 255, 0, 0), 2, 8, 0  );
+        line( histImage, Point( bin_w*(i-1), hist_h - cvRound(g_hist.at&lt;float&gt;(i-1)) ) ,
+              Point( bin_w*(i), hist_h - cvRound(g_hist.at&lt;float&gt;(i)) ),
+              Scalar( 0, 255, 0), 2, 8, 0  );
+        line( histImage, Point( bin_w*(i-1), hist_h - cvRound(r_hist.at&lt;float&gt;(i-1)) ) ,
+              Point( bin_w*(i), hist_h - cvRound(r_hist.at&lt;float&gt;(i)) ),
+              Scalar( 0, 0, 255), 2, 8, 0  );
+    }
+
+    /// Display
+    namedWindow("calcHist Demo", CV_WINDOW_AUTOSIZE );
+    imshow("calcHist Demo", histImage );
+
+    waitKey(0);
+
+    return 0;
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در خط 24 با استفاده از تابع split تصویر ورودی را به صفحات R، G و B تقسیم می‌کنیم. ورودی اول این تابع تصویری است که می‌خواهیم آن را تقسیم کنیم و ورودی دوم آن برداری است که صفحات (ماتریس‌های) خروجی در آن قرار می‌گیرند.</p>
+
+<p>حالا همه چیز برای حساب کردن بافت‌نگارهای صفحات آماده است. از آنجایی که با صفحات B، G و R کار می‌کنیم، پس می دانیم که برد مقادیر در بازهٔ $[0, 255]$ است.</p>
+
+<p>در خط 27 تعداد سطل‌ها را مشخص می‌کنیم.</p>
+
+<p>در خطوط 30 و 31 برد مقادیر را مشخص می‌کنیم (همانطور که گفتیم در بازهٔ $[0, 255]$ است).</p>
+
+<p>چون می‌خواهیم که سطل‌ها هم اندازه و بافت‌نگارها هم در ابتدا خالی باشند، در خط 33 متغیر uniform را برابر true و متغیر accumulate را برابر false قرار می‌دهیم.</p>
+
+<p>در ادامه برای حساب کردن بافت‌نگارها از تابع calcHist استفاده می‌کنیم:</p>
+
+<p>در خطوط 38 تا 40 برای حساب کردن بافت‌نگار هر صفحه از تابع calcHist استفاده می‌کنیم. این تابع 10 آرگومان دارد:</p>
+
+<ol>
+<li><p><strong><code>&amp;bgr_planes[0]</code>:</strong> صفحهٔ (یا آرایهٔ) ورودی است (که در این مورد صفحهٔ 0 است).</p></li>
+<li><p><strong>1:</strong> تعداد آرایه‌های ورودی است (در اینجا مقدارش 1 است. می‌توان لیستی از آرایه‌ها به ورودی تابع داد و مقدار بیشتری را در اینجا مشخص کرد).</p></li>
+<li><p><strong>0:</strong> کانالی که باید اندازه گیری شود. در این مورد فقط روشنایی است (آرایه‌ها به صورت تک کاناله هستند)، پس باید 0 گذاشت.</p></li>
+<li><p><strong><code>Mat()</code>:</strong> ماتریسی که به عنوان ماسک برای ماتریس ورودی استفاده می‌شود (مقدار صفر در ماسک بدین معنی است که پیکسل متناظر آن در ماتریس ورودی نباید در شمارش شرکت داشته باشد). اگر این ماتریس تعریف نشود، از ماسکی استفاده نخواهد شد.</p></li>
+<li><p><strong>b_hist:</strong> بافت‌نگار خروجی در این ماتریس ذخیره می‌شود.</p></li>
+<li><p><strong>1:</strong> ابعاد بافت‌نگار</p></li>
+<li><p><strong>histSize:</strong> تعداد سطل‌ها در هر کدام از بُعدها</p></li>
+<li><p><strong>histRange:</strong> برد مقادیر مورد اندازه گیری در هر بُعد</p></li>
+<li><p><strong>uniform:</strong> مشخص می‌کند که اندازه سطل‌ها برابر باشند یا نه.</p></li>
+<li><p><strong>accumulate:</strong> مشخص می‌کند که اندازه سطل‌ها در ابتدا خالی باشند یا نه.</p></li>
+</ol>
+
+<p>در خطوط 52 تا 57، قبل از ترسیم بافت‌نگار ها، مقادیر آنها را با استفاده از تابع normalize نرمال می‌کنیم تا بین دو مقدار تعیین شده قرار بگیرند. این تابع 6 آرگومان دارد:</p>
+
+<ol>
+<li><p><strong>b_hist:</strong> آرایه ورودی</p></li>
+<li><p><strong>b_hist:</strong> آرایه خروجی</p></li>
+<li><p><strong>0:</strong> حد پایینی برای نرمال سازی مقادیر آرایه‌های ورودی</p></li>
+<li><p><strong>histImage.rows:</strong> حد بالایی برای نرمال سازی مقادیر آرایه‌های ورودی</p></li>
+<li><p><strong>NORM_MINMAX:</strong> این آرگومان بیان کنندهٔ نوع فرایند نرمال سازی است (در این نوع، مقادیر بین دو مقدار MIN و MAX قرار می‌گیرند).</p></li>
+<li><p><strong>1-:</strong> نوع داده آرایه خروجی را مشخص می‌کند. در اینجا با قرار دادن -1 نوع آرایهٔ خروجی با نوع آرایهٔ ورودی یکی است.</p></li>
+<li><p><strong><code>Mat()</code>:</strong> ماسک آرایه ورودی</p></li>
+</ol>
+
+<h2>خروجی</h2>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image69.png" alt="تصویر ورودی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">تصویر ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image70.png" alt="بافت‌نگار هر کدام از کانال‌های تصویر ورودی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">بافت‌نگار هر کدام از کانال‌های تصویر ورودی</td>
+</tr>
+</tbody>
+</table>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:a"><p>bin<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:b"><p>dims<a href="#fnref:b" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+<li id="fn:c"><p>Domain<a href="#fnref:c" class="reversefootnote">&#160;&#8617;</a></p></li>
+
+</ol>
+</div>
+
+    </div>
+  
+
+
+</div>
+
+<div class="section">
+    <nav class="pagination" role="navigation" aria-label="pagination">
+    <a href="/opencv-book/chapter02/lesson11/threshold/" class="pagination-previous button is-primary is-outlined">
+    →
+    آستانه‌گذاری
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter02/lesson13/equalize-histogram/" class="pagination-next button is-primary is-outlined">
+    برابرسازی بافت‌نگار
+    ←
+  </a>
+    </nav>
+</div>
+    </div>
+
+  </section>
+
+  <footer class="columns hero section is-dark has-text-centered">
+        <div class="container ">
+            <div class="columns">
+
+                <div class="column">
+                    <div class="footer-header">
+                       به این جاها سر بزنید
+                    </div>
+                    <ul class="related-links has-text-centered">
+                        <li>
+                            <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <div class="footer-header">
+                    پردازش تصویر در OpenCV
+                    </div>
+                    <div class="socials">
+                      <a href="/opencv-book">
+                        <img class="cover" src="/opencv-book/media/cover-small.jpg">
+                      </a>
+                    </div>
+                </div>
+
+
+                </div>
+            </div>
+            <div class="has-text-centered credit">
+              <div>
+                ارائه شده بر بستر
+                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                و قالب از
+                <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
+                «لاراول، از صفر تا شصت»
+              </a>                
+              </div>
+            </div>
+        </div>
+    </footer>
+
+
+    
+<script type="text/javascript" src="/opencv-book/static/js/jquery.min.js"></script>
+<script src="/opencv-book/static/js/highlight.pack.js"></script>
+<script src="/opencv-book/static/js/highlightjs-line-numbers.min.js"></script>
+<script src="/opencv-book/static/js/app.js"></script>
+
+<script>
+    renderMathInElement(document.body,{ delimiters:
+      [
+       {left: "$$", right: "$$", display: true},
+       {left: "$", right: "$", display: false}
+      ]
+    });
+</script>
+
+<script>
+    // Trim extra blank line of the codes
+    var y = document.querySelectorAll("pre code");
+    for(var i = 0; i < y.length; i++) {
+      y[i].innerHTML = y[i].innerHTML.trimRight();
+    }
+</script>
+
+</body>
+</html>

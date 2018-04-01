@@ -2,7 +2,7 @@
 <html lang="Farsi">
 <head>
 
-<title>پردازش تصویر در OpenCV</title>
+<title>پردازش تصویر در OpenCV | بَک پروجکشن</title>
 
 <meta charset="utf-8">
 <meta name="description" content="">
@@ -260,27 +260,196 @@
     <div class="container column">
         <div class="section" id="content">
 
-  <h1 class="cover">پردازش تصویر در OpenCV</h1>
-  <h2 class="cover"></h2>
-    
-   <div style="text-align:center">
-     <br>
-     نویسندگان:
-     <br>
-     علیرضا داودی
-     <br>
-     رضا غریبی
-     <br>
-     <br>
-  </div>
-    
-  <img class="cover" src="/opencv-book/media/cover.jpg">
+  
+      
+          <h1 class="list">فصل پنجم - شناسایی الگو</h1>
+      
 
-  <div style="text-align:center">
-    <a href="/opencv-book/chapter01/lesson01/%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D8%A7%D9%8F-%D8%B3%DB%8C-%D9%88%DB%8C/">
-      از اینجا شروع به خواندن کنید
-    </a>
-  </div>
+    <h3 class="list">بَک پروجکشن</h3>
+
+    <div class="content-body content">
+    <a name="more"></a>
+<p>بَک پروجکشن روشی برای ارزیابی میزان تطبیق توزیع بافت‌نگار یک تصویر با توزیع بافت‌نگار مبنا است.</p>
+
+<p>به بیان ساده‌تر، به منظور اجرای بَک پروجکشن، بافت‌نگار ویژگی مورد نظر را حساب می‌کنیم و سپس از آن برای پیدا کردن این ویژگی در تصاویر جدید استفاده می‌کنیم. مثالا اگر اگر بافت‌نگار رنگ پوست را داشته باشیم، آن وقت می‌توانیم از آن برای پیدا کردن نواحی‌ای که احتمال دارد پوست باشد، در تصاویر جدید استفاده کنیم.</p>
+
+<p>فرض کنید از روی تصویر زیر یک بافت‌نگار H-S مربوط به پوست به دست آورده‌ایم. این بافت‌نگار را بافت‌نگار مبنا قرار می‌دهیم. برای اینکه فقط بافت‌نگار قسمت پوست را به دست آوریم، چند ماسک به تصویر اعمال می‌کنیم و سپس بافت‌نگار را حساب می‌کنیم.</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image125.png" alt="سمت چپ تصویر دست و سمت راست تصویر بافت‌نگار آن" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">سمت چپ تصویر دست و سمت راست تصویر بافت‌نگار آن</td>
+</tr>
+</tbody>
+</table>
+
+<p>حالا فرض کنید تصویر زیر را به عنوان تصویر آزمایشی به کار ببریم:</p>
+
+<table>
+<col />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image126.png" alt="سمت چپ تصویر آزمایشی دست و سمت راست تصویر بافت‌نگار آن" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>سمت چپ تصویر آزمایشی دست و سمت راست تصویر بافت‌نگار آن</td>
+</tr>
+</tbody>
+</table>
+
+<p>می‌خواهیم با استفاده از بافت‌نگار مبنا، نواحی پوست در تصویر آزمایشی را پیدا کنیم. برای این کار به صورت زیر عمل می‌کنیم:</p>
+
+<ol>
+<li><p>هر کدام از پیکسل‌های تصویر آزمایشی (یعنی $p(i,j)$) را در سطل متناظر با آن پیکسل ($h_{i,\ j},s_{i,\ j}$) قرار می دهیم.</p></li>
+<li><p>سطل ($h_{i,\ j},s_{i,\ j}$) در بافت‌نگار مبنا را جستجو می‌کنیم و مقدار آن را می‌خوانیم.</p></li>
+<li><p>این مقدار را در مکان $(i,j)$ تصویر جدید ذخیره می‌کنیم (این تصویر همان نتیجه بَک پروجکشن است). همچنین برای اینکه تصویر نهایی قابل دیدن باشد، باید آن را نرمال سازی کنیم.</p></li>
+</ol>
+
+<p>با انجام مراحل بالا روی تصویر آزمایشی نتیجهٔ زیر را به دست می‌آوریم:</p>
+
+<table>
+<col />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image127.png" alt="نتیجه بَک پروجکشن روی تصویر آزمایشی دست" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>نتیجه بَک پروجکشن روی تصویر آزمایشی دست</td>
+</tr>
+</tbody>
+</table>
+
+<p>مقادیری که در تصویر نتیجه ذخیره شده‌اند نشان دهندهٔ احتمال تعلق آن پیکسل به ناحیهٔ مطلوب هستند (طبق بافت‌نگار مبنا). مثلاً در مورد تصویر بالا، هر چه ناحیه‌ای روشن‌تر باشد احتمالش بیشتر است که به یک ناحیهٔ پوست تعلق داشته باشد، در حالی که ناحیه‌های تیره احتمال کمتری دارند.</p>
+
+<h2>کد</h2>
+
+<pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
+
+#include &lt;iostream&gt;
+
+using namespace cv;
+using namespace std;
+
+/// Global Variables
+Mat src; Mat hsv; Mat hue;
+int bins = 25;
+
+/// Function Headers
+void Hist_and_Backproj(int, void* );
+
+/** @function main */
+int main( int argc, char** argv )
+{
+    /// Read the image
+    src = imread( argv[1], 1 );
+    /// Transform it to HSV
+    cvtColor( src, hsv, CV_BGR2HSV );
+
+    /// Use only the Hue value
+    hue.create( hsv.size(), hsv.depth() );
+    int ch[] = { 0, 0 };
+    mixChannels( &amp;hsv, 1, &amp;hue, 1, ch, 1 );
+
+    /// Create Trackbar to enter the number of bins
+    char* window_image = "Source image";
+    namedWindow( window_image, CV_WINDOW_AUTOSIZE );
+    createTrackbar("* Hue  bins: ", window_image, &amp;bins, 180, Hist_and_Backproj );
+    Hist_and_Backproj(0, 0);
+
+    /// Show the image
+    imshow( window_image, src );
+
+    /// Wait until user exits the program
+    waitKey(0);
+    return 0;
+}
+
+
+/**
+ * @function Hist_and_Backproj
+ * @brief Callback to Trackbar
+ */
+void Hist_and_Backproj(int, void* )
+{
+    MatND hist;
+    int histSize = MAX( bins, 2 );
+    float hue_range[] = { 0, 180 };
+    const float* ranges = { hue_range };
+
+    /// Get the Histogram and normalize it
+    calcHist( &amp;hue, 1, 0, Mat(), hist, 1, &amp;histSize, &amp;ranges, true, false );
+    normalize( hist, hist, 0, 255, NORM_MINMAX, -1, Mat() );
+
+    /// Get Backprojection
+    MatND backproj;
+    calcBackProject( &amp;hue, 1, 0, hist, backproj, &amp;ranges, 1, true );
+
+    /// Draw the backproj
+    imshow( "BackProj", backproj );
+
+    /// Draw the histogram
+    int w = 400; int h = 400;
+    int bin_w = cvRound( (double) w / histSize );
+    Mat histImg = Mat::zeros( w, h, CV_8UC3 );
+
+    for( int i = 0; i &lt; bins; i ++ )
+    { rectangle( histImg, Point( i*bin_w, h ), Point( (i+1)*bin_w, h - cvRound( hist.at&lt;float&gt;(i)*h/255.0 ) ), Scalar( 0, 0, 255 ), -1 ); }
+
+    imshow( "Histogram", histImg );
+}
+</code></pre>
+
+<h2>توضیح</h2>
+
+<p>در خط 22 تصویر ورودی را به HSV تبدیل می‌کنیم.</p>
+
+<p>در اینجا فقط از مقدار Hue برای محاسبه بافت‌نگار استفاده می‌کنیم (خطوط 25 تا 27). همانطور که می‌بینید، از تابع mixChannels برای گرفتن کانال صفر (یعنی کانال Hue) استفاده کرده‌ایم. پارامترهای این تابع به شرح زیر هستند:</p>
+
+<ol>
+<li><strong><code>&amp;hsv</code>:</strong> آرایه مبدأ که کانال‌ها از آن کپی می‌شوند.</li>
+<li><strong>1:</strong> تعداد کانال‌های آرایه مبدأ.</li>
+<li><strong><code>&amp;hue</code>:</strong> آرایهٔ مقصد که کانال‌ها در آن کپی می‌شوند.</li>
+<li><strong>1:</strong> تعداد کانال‌های آرایه مقصد.</li>
+<li><strong><code>ch[]={0,0}</code>:</strong> آرایه از جفت اندیس‌ها که نشان دهندهٔ طریقه کپی کانال‌ها از آرایه مبدأ به آرایه مقصد است. در اینجا کانال صفر <code>&amp;hsv</code> در کانال صفر <code>&amp;hue</code> کپی می‌شود.</li>
+<li><strong>1:</strong> تعداد جفت اندیس‌ها است.</li>
+</ol>
+
+<p>در سطر 48، تابع Hist_and_Backproj قرار دارد. این تابع آرگومان‌های مورد نیاز تابع calcHist را مقدار دهی می‌کند. تعداد سطل‌ها هم از طریق ترک بار ارسال می‌شوند.</p>
+
+<p>در خطوط 56 و 57، ابتدا با استفاده از تابع calcHist بافت‌نگار را حساب و سپس آن را با استفاده از تابع normalize در بازهٔ 0 تا 255 نرمال می‌کنیم.</p>
+
+<p>در خط 61 بَک پروجکشن تصویر hue را با استفاده از تابع calcBackProject به دست می‌آوریم. این تابع 8 آرگومان دارد که شما با همه آنها آشنا هستید (مشابه همان‌هایی هستند که برای محاسبهٔ بافت‌نگار به کار می‌بردیم)، فقط ماتریس backproj اضافه شده است که نتیجهٔ بَک پروجکشن تصویر ورودی (یعنی <code>&amp;hue</code>) در آن ذخیره می‌شود.</p>
+
+<h2>خروجی</h2>
+
+<p>به عنوان ورودی از تصویر یک دست استفاده می‌کنیم. خروجی به صورت زیر خواهد بود. می‌توانید مقدار سطل را تغییر دهید و تأثیر آن را روی خروجی ببینید.</p>
+
+<table>
+<col align="center" />
+<thead>
+<tr>
+	<th><img src="/opencv-book/media/image128.png" alt="سمت چپ: تصویر ورودی- وسط: بافت‌نگار ناحیه دست- سمت راست: بَک پروجکشن تصویر ورودی" id="" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td align="center">سمت چپ: تصویر ورودی - وسط: بافت‌نگار ناحیه دست- سمت راست: بَک پروجکشن تصویر ورودی</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
   
 
 
@@ -288,7 +457,18 @@
 
 <div class="section">
     <nav class="pagination" role="navigation" aria-label="pagination">
-    
+    <a href="/opencv-book/chapter05/lesson01/compare-histograms/" class="pagination-previous button is-primary is-outlined">
+    →
+    مقایسه بافت‌نگارها
+  </a>
+
+
+
+
+  <a href="/opencv-book/chapter05/lesson03/pattern-matching/" class="pagination-next button is-primary is-outlined">
+    تطبیق الگو
+    ←
+  </a>
     </nav>
 </div>
     </div>
