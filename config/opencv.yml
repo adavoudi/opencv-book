@@ -1,0 +1,26 @@
+title: پردازش تصویر در OpenCV
+description:
+
+author: Alireza Davoudi, Reza Gharibi
+email: davoudialireza@gmail.com
+
+url: https://h4iku.github.io/opencv-book
+root: /opencv-book
+
+language: Farsi
+icon: /static/img/mira.png
+
+permalink: chapter:chapter/lesson:part/
+
+default_markup: mmd
+
+post_num: all
+
+archive_post_num: all
+
+template: zero60
+
+lists:
+  - chapter
+
+namespace:

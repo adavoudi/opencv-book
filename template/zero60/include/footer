@@ -1,0 +1,70 @@
+<footer class="columns hero section is-dark has-text-centered">
+        <div class="container ">
+            <div class="columns">
+
+                <div class="column">
+                    <div class="footer-header">
+                       به این جاها سر بزنید
+                    </div>
+                    <ul class="related-links has-text-centered">
+                        <li>
+                            <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <div class="footer-header">
+                    پردازش تصویر در OpenCV
+                    </div>
+                    <div class="socials">
+                      <a href="/opencv-book">
+                        <img class="cover" src="/opencv-book/media/cover-small.jpg">
+                      </a>
+                    </div>
+                </div>
+
+
+                </div>
+            </div>
+            <div class="has-text-centered credit">
+              <div>
+                ارائه شده بر بستر
+                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                و قالب از
+                <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
+                «لاراول، از صفر تا شصت»
+              </a>                
+              </div>
+            </div>
+        </div>
+    </footer>
+
+
+    
+<script type="text/javascript" src="{{ MainSTATIC }}/js/jquery.min.js"></script>
+<script src="{{ MainSTATIC }}/js/highlight.pack.js"></script>
+<script src="{{ MainSTATIC }}/js/highlightjs-line-numbers.min.js"></script>
+<script src="{{ MainSTATIC }}/js/app.js"></script>
+
+<script>
+    renderMathInElement(document.body,{ delimiters:
+      [
+       {left: "\$\$", right: "\$\$", display: true},
+       {left: "\$", right: "\$", display: false}
+      ]
+    });
+</script>
+
+<script>
+    // Trim extra blank line of the codes
+    var y = document.querySelectorAll("pre code");
+    for(var i = 0; i < y.length; i++) {
+      y[i].innerHTML = y[i].innerHTML.trimRight();
+    }
+</script>
+
+</body>
+</html>

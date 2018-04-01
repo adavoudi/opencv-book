@@ -1,0 +1,45 @@
+<div class="section" id="content">
+{{ IF IS_POST }}
+  {{ FOREACH post IN POSTS }}
+      {{ IF loop.prev.chaptername != post.chaptername }}
+          <h1 class="list">{{ post.chaptername }}</h1>
+      {{ END }}
+
+    <h3 class="list">{{ post.title }}</h3>
+
+    <div class="content-body content">
+    {{ post.body.more }}
+    </div>
+  {{ END }}
+{{ ELSE }}
+  <h1 class="cover">{{ SITE.title }}</h1>
+  <h2 class="cover">{{ SITE.description }}</h2>
+    
+   <div style="text-align:center">
+     <br>
+     نویسندگان:
+     <br>
+     علیرضا داودی
+     <br>
+     رضا غریبی
+     <br>
+     <br>
+  </div>
+    
+  <img class="cover" src="/opencv-book/media/cover.jpg">
+
+  <div style="text-align:center">
+    <a href="/opencv-book/chapter01/lesson01/%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D8%A7%D9%8F-%D8%B3%DB%8C-%D9%88%DB%8C/">
+      از اینجا شروع به خواندن کنید
+    </a>
+  </div>
+  
+{{ END }}
+
+</div>
+
+<div class="section">
+    <nav class="pagination" role="navigation" aria-label="pagination">
+    {{ INCLUDE navigator }}
+    </nav>
+</div>

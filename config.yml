@@ -1,0 +1,26 @@
+title: Image Processing in OpenCV
+description:
+
+author: Alireza Davoudi, Reza Gharibi
+email: davoudialireza@gmail.com
+
+timezone: +03:30
+
+url: https://h4iku.github.io/opencv-book
+root: /opencv-book
+static: /opencv-book/static
+imageurl: /opencv-book/static/img
+permalink: :year/:month/:day/:title/
+
+
+default_markup: mmd
+
+post_num: all
+
+archive_post_num: all
+
+default_floor: opencv
+
+template: zero60
+
+lists:
