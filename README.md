@@ -4,7 +4,7 @@
 
 #### How to build the book:
 
-1. Install Perl and use cpanm to install (https://miraxy.github.io/)[Mira].
+1. Install Perl and use cpanm to install [Mira](https://miraxy.github.io/).
 ```
 cpanm Mira
 ```
