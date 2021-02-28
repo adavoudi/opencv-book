@@ -59,7 +59,8 @@ void thresh_callback(int, void* )
     /// Detect edges using Threshold
     threshold( src_gray, threshold_output, thresh, 255, THRESH_BINARY );
     /// Find contours
-    findContours( threshold_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+    findContours( threshold_output, contours, hierarchy,
+        CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
 
     /// Find the rotated rectangles and ellipses for each contour
     vector<RotatedRect> minRect( contours.size() );
@@ -102,14 +103,14 @@ void thresh_callback(int, void* )
 
 در خط 50 با فراخوانی تابع findContours، کانتورهای تصویر خروجی تابع threshold (یعنی threshold_output) را پیدا می‌کنیم.
 
-در خطوط 53 و 54 دو بردار از نوع RotatedRect برای نگه داری مستطیل‌ها و بیضی‌های کشف شده درست می‌کنیم.
+در خطوط 54 و 55 دو بردار از نوع RotatedRect برای نگه داری مستطیل‌ها و بیضی‌های کشف شده درست می‌کنیم.
 
 در حلقه موجود در خط 56، روی هر کدام از کانتورها عملیات زیر را انجام می‌دهیم:
 
-1.  ابتدا در خط 57 با استفاده از تابع minAreaRect کوچک‌ترین مستطیل در بر گیرندهٔ همهٔ نقاط کانتور `contours[i]` را پیدا می‌کنیم و آن را در `minRect[i]` قرار می‌دهیم.
-2.  سپس در خط 59 با استفاده از تابع fitEllipse و به شرطی که تعداد نقاط موجود در `contours[i]` بیشتر از 5 عدد باشد، کوچترین بیضی که در برگیرندهٔ همهٔ نقاط `contours[i]` است را پیدا می‌کنیم و آن را در `minEllipse[i]` قرار می‌دهیم.
+1.  ابتدا در خط 58 با استفاده از تابع minAreaRect کوچک‌ترین مستطیل در بر گیرندهٔ همهٔ نقاط کانتور `contours[i]` را پیدا می‌کنیم و آن را در `minRect[i]` قرار می‌دهیم.
+2.  سپس در خط 60 با استفاده از تابع fitEllipse و به شرطی که تعداد نقاط موجود در `contours[i]` بیشتر از 5 عدد باشد، کوچترین بیضی که در برگیرندهٔ همهٔ نقاط `contours[i]` است را پیدا می‌کنیم و آن را در `minEllipse[i]` قرار می‌دهیم.
 
-سپس در خطوط 64 تا 75 در یک حلقه حرکت می‌کنیم و کانتورها و قاب‌های مستطیلی و بیضوی آنها را روی تصویر drawing می‌کشیم. برای کشیدن قاب‌های مستطیلی چرخیده، چون تابعی برای این کار نداریم، ابتدا نقاط مربوط به چهار گوشهٔ مستطیل را به دست می‌آوریم و سپس مستطیل را به صورت چهار خط می‌کشیم.
+سپس در خطوط 65 تا 76 در یک حلقه حرکت می‌کنیم و کانتورها و قاب‌های مستطیلی و بیضوی آنها را روی تصویر drawing می‌کشیم. برای کشیدن قاب‌های مستطیلی چرخیده، چون تابعی برای این کار نداریم، ابتدا نقاط مربوط به چهار گوشهٔ مستطیل را به دست می‌آوریم و سپس مستطیل را به صورت چهار خط می‌کشیم.
 
 
 

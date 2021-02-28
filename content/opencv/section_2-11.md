@@ -21,12 +21,14 @@ _index: threshold
 
 در این نوع به صورت زیر عمل می‌شود:
 
+<span>
 $$
 dst \\left( x,y \\right) = \\left\\{ \\begin{matrix}
 maxVal \\hspace{3em}  if \thickspace src\\left( x,y \\right) > thresh \\\\
 0 \\hspace{10em} otherwise
 \\end{matrix} \\right.
 $$
+</span>
 
 یعنی اگر روشنایی پیکسل `src(x,y)` بیشتر از مقدار thresh بود، آنگاه مقدار آن پیکسل برابر با MaxVal قرار داده می‌شود. در غیر این صورت مقدار آن برابر صفر قرار داده می‌شود.
 
@@ -38,12 +40,14 @@ $$
 
 در این نوع به صورت زیر عمل می‌شود:
 
+<span>
 $$
 dst \\left( x,y \\right) = \\left\\{ \\begin{matrix}
 0 \\hspace{3em} if \\thickspace src \\left( x,y \\right) > thresh \\\\
 maxVal \\hspace{5em} otherwise
 \\end{matrix} \\right.
 $$
+</span>
 
 یعنی اگر روشنایی پیکسل `src(x,y)` بیشتر از thresh بود، آنگاه مقدار آن پیکسل برابر با صفر قرار داده می‌شود. در غیر این صورت مقدار آن برابر MaxVal خواهد بود.
 
@@ -55,12 +59,14 @@ $$
 
 در این نوع به صورت زیر عمل می‌شود:
 
+<span>
 $$
 dst \\left( x,y \\right) = \\left\\{ \\begin{matrix}
 threshold  \\hspace{3em}  if \\thickspace src \\left( x,y \\right) > thresh \\\\
 src\\left( x,y \\right) \\hspace{8em} otherwise
 \\end{matrix} \\right.
 $$
+</span>
 
 بیشترین مقدار مجاز برای پیکسل‌ها، مقدار thresh است. اگر مقدار پیکسلی بیشتر از thresh بود، مقداری از آن بریده می‌شود.
 
@@ -72,12 +78,14 @@ $$
 
 در این نوع به صورت زیر عمل می‌شود:
 
+<span>
 $$
 dst \\left( x,y \\right) = \\left\\{ \begin{matrix}
 src(x,y) \\hspace{3em} if \\thickspace src \\left( x,y \\right) > thresh \\\\
 0\hspace{10em} otherwise
 \\end{matrix} \\right.
 $$
+</span>
 
 اگر `src(x,y)` کوچک‌تر از thresh بود، مقدار آن صفر قرار داده خواهد شد.
 
@@ -89,12 +97,14 @@ $$
 
 در این نوع به صورت زیر عمل می‌شود:
 
+<span>
 $$
 dst \\left( x,y \\right) = \\left\\{ \\begin{matrix}
 0 \\hspace{3em} if \\thickspace src\\left( x,y \\right) > thresh \\\\
 src(x,y) \\hspace{5em} otherwise
 \\end{matrix} \\right.
 $$
+</span>
 
 اگر `src(x,y)` بزرگ‌تر از thresh بود، مقدار آن را صفر می‌گذاریم.
 
@@ -137,7 +147,12 @@ int const max_BINARY_value = 255;
 Mat src, src_gray, dst;
 char* window_name = "Threshold Demo";
 
-char* trackbar_type = "Type: \n 0: Binary \n 1: Binary Inverted \n 2: Truncate \n 3: To Zero \n 4: To Zero Inverted";
+char* trackbar_type = "Type: \n"
+    " 0: Binary \n"
+    " 1: Binary Inverted \n"
+    " 2: Truncate \n"
+    " 3: To Zero \n"
+    " 4: To Zero Inverted";
 char* trackbar_value = "Value";
 
 /// Function headers
@@ -203,17 +218,17 @@ void Threshold_Demo( int, void* )
 
 ## توضیح
 
-در خط 34 تصویر ورودی را با استفاده از تابع cvtColor به فضای رنگی سیاه و سفید می‌بریم.
+در خط 39 تصویر ورودی را با استفاده از تابع cvtColor به فضای رنگی سیاه و سفید می‌بریم.
 
-در خطوط 40 و 44 دو تِرَک‌بار برای دریافت نوع آستانه‌گذاری و مقدار آستانه از کاربر درست می‌کنیم. هر وقت کاربر مقدار یکی از ترک‌بارها را تغییر دهد، تابع Threshold_Demo صدا زده می‌شود.
+در خطوط 45 و 49 دو تِرَک‌بار برای دریافت نوع آستانه‌گذاری و مقدار آستانه از کاربر درست می‌کنیم. هر وقت کاربر مقدار یکی از ترک‌بارها را تغییر دهد، تابع Threshold_Demo صدا زده می‌شود.
 
-در خط 75 از تابع threshold استفاده شده است. این تابع دارای 5 آرگومان است:
+در خط 80 از تابع threshold استفاده شده است. این تابع دارای 5 آرگومان است:
 
 -   src\_gray: تصویر ورودی
 -   dst: تصویر خروجی
 -   threshold\_value: مقدار آستانه است.
 -   max\_BINARY\_value: مقداری که در آستانه‌گذاری باینری استفاده می‌شود.
--   threshold\_type: نوع عمل آستانه‌گذاری است. در خطوط 68 تا 72 این نوع‌ها آورده شده‌اند.
+-   threshold\_type: نوع عمل آستانه‌گذاری است. در خطوط 73 تا 77 این نوع‌ها آورده شده‌اند.
 
 
 ## خروجی

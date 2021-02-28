@@ -89,7 +89,8 @@ void MyEllipse( Mat img, double angle )
     int thickness = 2;
     int lineType = 8;
 
-    ellipse( img, Point( w/2, w/2 ), Size( w/4, w/16 ), angle, 0, 360, Scalar( 255, 0, 0 ), thickness, lineType );
+    ellipse( img, Point( w/2, w/2 ), Size( w/4, w/16 ),
+        angle, 0, 360, Scalar( 255, 0, 0 ), thickness, lineType );
 }
 
 /**
@@ -165,7 +166,7 @@ void MyLine( Mat img, Point start, Point end )
 
 بهتر است ببینیم درون این توابع چه می‌گذرد:
 
-- تابع MyLine (خطوط 132 تا 137)
+- تابع MyLine (خطوط 133 تا 138)
 
   همان طور که می‌بینید این تابع فقط به روش زیر چندین بار از تابع line (که در ماژول Core موجود است) استفاده می‌کند:
 
@@ -175,7 +176,7 @@ void MyLine( Mat img, Point start, Point end )
   -   میزان نازکی خط با متغیر thickness مشخص شده است.
   -   این خط از نوع متصل است و این مورد با متغیر lineType که مقدار 2 دارد مشخص شده است.
 
-- تابع MyEllipse (خطوط 71 تا 77)
+- تابع MyEllipse (خطوط 71 تا 78)
 
   این تابع به شکل زیر یک بیضی می‌کشد:
 
@@ -186,7 +187,7 @@ void MyLine( Mat img, Point start, Point end )
   -   رنگ بیضی با `Scalar(255,0,0)` که در RGB یعنی آبی، مشخص شده است.
   -   نازکی و نوع خط بیضی با متغیرهای thickness و lineType مشخص شده‌اند.
 
-- تابع MyFilledCircle (خطوط 83 تا 89)
+- تابع MyFilledCircle (خطوط 84 تا 90)
 
   آرگومان‌های تابع circle به شرح زیر است:
 
@@ -196,7 +197,7 @@ void MyLine( Mat img, Point start, Point end )
   -   رنگ دایره با `Scalar(0,0,255)` که در RGB به معنی قرمز است، مشخص شده است.
   -   به خاطر اینکه مقدار thickness عدد 1- قرار داده شده، دایره توپُر کشیده می‌شود.
 
-- تابع MyPolygon (خطوط 95 تا 126)
+- تابع MyPolygon (خطوط 96 تا 127)
 
   برای کشیدن یک چند ضلعی توپر، از تابع fillPoly که در ماژول Core موجود است استفاده می‌کنیم. قابل ذکر است که:
 

@@ -71,7 +71,8 @@ void thresh_callback(int, void* )
     threshold( src_gray, threshold_output, thresh, 255, THRESH_BINARY );
 
     /// Find contours
-    findContours( threshold_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+    findContours( threshold_output, contours, hierarchy,
+        CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
 
     /// Find the convex hull object for each contour
     vector<vector<Point> >hull( contours.size() );
@@ -105,7 +106,7 @@ void thresh_callback(int, void* )
 
 با فراخوانی تابع findContours در خط 52، کانتورهای تصویر خروجی تابع threshold (یعنی threshold_output) را پیدا می‌کنیم.
 
-در خط 55 یک بردار دو بعدی به نام hull از نوع Point برای نگه داری پوش محدب هر کدام از کانتورها درست می‌کنیم. سپس در یک حلقه، تابع convexHull را روی هر کدام از کانتورها صدا می‌زنیم و خروجی‌ها را در بردار hull ذخیره می‌کنیم. تابع convexHull دارای 3 آرگومان به شرح زیر است:
+در خط 56 یک بردار دو بعدی به نام hull از نوع Point برای نگه داری پوش محدب هر کدام از کانتورها درست می‌کنیم. سپس در یک حلقه، تابع convexHull را روی هر کدام از کانتورها صدا می‌زنیم و خروجی‌ها را در بردار hull ذخیره می‌کنیم. تابع convexHull دارای 3 آرگومان به شرح زیر است:
 
 1.  **`Mat(contours[i])`:** آرایهٔ ورودی از نقاط است. می‌توانیم آنها را در یک بردار یا یک ماتریس قرار دهیم.
 2.  **`hull[i]`:** پوش محدب مربوط به نقاط ورودی در این بردار قرار می‌گیرند.

@@ -115,7 +115,11 @@ void Hist_and_Backproj(int, void* )
     Mat histImg = Mat::zeros( w, h, CV_8UC3 );
 
     for( int i = 0; i < bins; i ++ )
-    { rectangle( histImg, Point( i*bin_w, h ), Point( (i+1)*bin_w, h - cvRound( hist.at<float>(i)*h/255.0 ) ), Scalar( 0, 0, 255 ), -1 ); }
+    { 
+    rectangle( histImg, Point( i*bin_w, h ),
+        Point( (i+1)*bin_w, h - cvRound( hist.at<float>(i)*h/255.0 ) ), 
+        Scalar( 0, 0, 255 ), -1 );
+    }
 
     imshow( "Histogram", histImg );
 }

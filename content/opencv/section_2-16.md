@@ -7,7 +7,7 @@ title: عملگر کَنی
 _index: canny-operator
 ---
 
-لبه‌یاب کَنی در سال 1986 توسط جان اِف. کَنی[^a] توسعه یافت. همچنین خیلی‌ها آن را با نام **یابندهٔ بهینه**[^b] می‌شناسند. الگوریتم کَنی سه هدف اساسی زیر را دنبال می‌کند:
+لبه‌یاب کَنی در سال 1986 توسط جان اِف. کَنی[^ a] توسعه یافت. همچنین خیلی‌ها آن را با نام **یابندهٔ بهینه**[^ b] می‌شناسند. الگوریتم کَنی سه هدف اساسی زیر را دنبال می‌کند:
 
 1.  **نرخ خطای پایین:** یعنی اینکه فقط لبه‌های واقعی را کشف کند (نه نقاطی که لبه نیستند).
 
@@ -25,6 +25,7 @@ _index: canny-operator
 
     i. دو کرنل زیر را در تصویر کانوال می‌کند (یکی برای جهت x و یکی برای جهت y):
    
+    <span>
     $$
     G_{x} = \begin{bmatrix}
         - 1 & 0 & + 1 \\\\
@@ -32,7 +33,9 @@ _index: canny-operator
         - 1 & 0 & + 1
     \end{bmatrix}
     $$
+    </span>
     
+    <span>
     $$
     G_{y} = \begin{bmatrix}
         - 1 & - 2 & - 1 \\\\
@@ -40,10 +43,13 @@ _index: canny-operator
         + 1 & + 2 & + 1
     \end{bmatrix}
     $$
+    </span>
 
     ii. از روش زیر، دامنه و جهت آن را پیدا می‌کند:
 
+    <div>
     $$G = \sqrt{G_{x}^{2} + G_{y}^{2}}$$
+    </div>
 
     $$\theta = \arctan\left( \frac{G_{y}}{G_{x}} \right)$$
 
@@ -128,7 +134,8 @@ int main( int argc, char** argv )
     namedWindow( window_name, CV_WINDOW_AUTOSIZE );
 
     /// Create a Trackbar for user to enter threshold
-    createTrackbar( "Min Threshold:", window_name, &lowThreshold, max_lowThreshold, CannyThreshold );
+    createTrackbar( "Min Threshold:", window_name, &lowThreshold,
+        max_lowThreshold, CannyThreshold );
 
     /// Show the image
     CannyThreshold(0, 0);

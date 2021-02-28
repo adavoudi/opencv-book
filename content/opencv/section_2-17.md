@@ -59,7 +59,8 @@ void thresh_callback(int, void* )
     /// Detect edges using canny
     Canny( src_gray, canny_output, thresh, thresh*2, 3 );
     /// Find contours
-    findContours( canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+    findContours( canny_output, contours, hierarchy, CV_RETR_TREE,
+        CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
 
     /// Draw contours
     Mat drawing = Mat::zeros( canny_output.size(), CV_8UC3 );
@@ -110,7 +111,7 @@ void thresh_callback(int, void* )
     3.  CV\_CHAIN\_APPROX\_TC89\_L1 و CV\_CHAIN\_APPROX\_TC89\_KCOS
 6.  **`Point(0,0)`:** یک آفست اختیاری که هر کدام از کانتورها با آن جمع می‌شوند. در اینجا نقطهٔ (0,0) را به عنوان آفست در نظر گرفته‌ایم. آفست زمانی مفید است که کانتورها از روی یک ROI به دست آمده باشند و قرار باشد بعداً کانتورها را روی عکس اصلی نشان دهیم.
 
-بعد از پیدا کردن کانتورها، هم می‌توانیم آنها را به صورت یکجا (و با یک رنگ) بکشیم و هم اینکه هر کدام از کانتورها را با یک رنگ خاص نمایش دهیم. به هر حال در هر دو حالت از تابع drawContours استفاده می‌کنیم. در حالت اول با یک بار فراخوانی تابع drawContours و در حالت دوم، تابع drawContours را در یک حلقه می‌گذاریم و به تعداد کانتورهای کشف شده حلقه را تکرار می‌کنیم و هر دفعه یکی از کانتورها را می‌کشیم. در اینجا به روش دوم عمل می‌کنیم. تابع drawContours در خط 57 دارای 9 آرگومان به شرح زیر است:
+بعد از پیدا کردن کانتورها، هم می‌توانیم آنها را به صورت یکجا (و با یک رنگ) بکشیم و هم اینکه هر کدام از کانتورها را با یک رنگ خاص نمایش دهیم. به هر حال در هر دو حالت از تابع drawContours استفاده می‌کنیم. در حالت اول با یک بار فراخوانی تابع drawContours و در حالت دوم، تابع drawContours را در یک حلقه می‌گذاریم و به تعداد کانتورهای کشف شده حلقه را تکرار می‌کنیم و هر دفعه یکی از کانتورها را می‌کشیم. در اینجا به روش دوم عمل می‌کنیم. تابع drawContours در خط 58 دارای 9 آرگومان به شرح زیر است:
 
 1.  **drawing:** تصویر ورودی است.
 2.  **contours:** بردار کانتورها است. هر کانتور به صورت برداری از نقاط در contours قرار می‌گیرند.

@@ -15,6 +15,7 @@ _index: affine-transformation
 
 یک تبدیل اَفاین نشان دهندهٔ یک رابطه بین دو عکس است و معمول‌ترین راه برای نشان دادن یک تبدیل اَفاین، استفاده از یک ماتریس 2 در 3 است:
 
+<div>
 $$
 A=\begin{pmatrix}
 a_{00} & a_{01}\\\\
@@ -26,35 +27,42 @@ b_{00}\\\\
 b_{10}
 \end{bmatrix}
 $$
+</div>
 
+<div>
 $$
 M = \begin{bmatrix}
-A & B \\\\
+A & B
 \end{bmatrix} = \begin{bmatrix}
 \begin{matrix}
-a_{00} & a_{01} & b_{00} \\\\
+a_{00} & a_{01} & b_{00}
 \end{matrix} \\\\
 \begin{matrix}
-a_{10} & a_{11} & b_{10} \\\\
-\end{matrix} \\\\
+a_{10} & a_{11} & b_{10}
+\end{matrix}
 \end{bmatrix}_{2 \times 3}
 $$
+</div>
 
 با توجه به اینکه می‌خواهیم یک بردار دو بعدی به صورت  $X = \begin{bmatrix} x \\\\ y \end{bmatrix}$ را با استفاده از A و B تبدیل کنیم، می‌توانیم این کار را به صورت معادل زیر هم انجام دهیم:
 
+<div>
 $$
 T = A\ .\ \begin{bmatrix}
 x \\\\
 y
 \end{bmatrix} + B\ or\ T = M\ .\ {\lbrack x,\ y,\ 1\rbrack}^{t}
 $$
+</div>
 
+<div>
 $$
 T = \begin{bmatrix}
 a_{00}x + a_{01}y + b_{00} \\\\
 a_{10}x + a_{11}y + b_{10}
 \end{bmatrix}
 $$
+</div>
 
 گفتیم که هر تبدیل اَفاین یک رابطه بین دو عکس است. اطلاعات مربوط به این رابطه می‌تواند به دو طریق وجود داشته باشد:
 

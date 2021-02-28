@@ -11,18 +11,24 @@ _index: compare-histograms
 
 1. **همبستگی**[^a] **(CV\_COMP\_CORREL):**
 
+   <div>
    $$d\left( H_{1},H_{2} \right) = \frac{\sum_{I}^{}{\left( H_{1}\left( I \right) - H_{1}^{'} \right)\left( H_{2}\left( I \right) - H_{2}^{'} \right)}}{\sqrt{\sum_{I}^{}{\left( H_{1}\left( I \right) - H_{1}^{'} \right)^{2}\ \sum_{I}^{}\left( H_{2}\left( I \right) - H_{2}^{'} \right)^{2}}}}$$
+   </div>
 
    که
 
+   <div>
    $$H_{k}^{'} = \frac{1}{N}\sum_{J}^{}{H_{k}(J)}$$
+   </div>
 
    و N هم تعداد سطل‌های بافت‌نگار است.
 
 
 2. **کای-اسکوئر**[^b] **(CV\_COMP\_CHISQR):**
 
+   <div>
    $$d\left( H_{1},H_{2} \right) = \sum_{I}^{}\frac{\left( H_{1}\left( I \right) - H_{2}\left( I \right) \right)^{2}}{H_{1}\left( I \right)}$$
+   </div>
 
 
 3. **اشتراک**[^c] **(CV\_COMP\_INTERSECT):**
@@ -32,7 +38,9 @@ _index: compare-histograms
 
 4. **فاصلهٔ باتاچاریا**[^d] **(CV\_COMP\_BHATTACHARYYA):**
 
+   <div>
    $$d\left( H_{1},H_{2} \right) = \sqrt{1 - \frac{1}{\sqrt{H_{1}^{'}\ H_{2}^{'}\ N^{2}}}\ \sum_{I}^{}\sqrt{H_{1}\left( I \right)\text{.\ }H_{2}\left( I \right)}}$$
+   </div>
 
 [^a]: Correlation
 
@@ -68,8 +76,8 @@ int main( int argc, char** argv )
     /// Load three images with different environment settings
     if( argc < 4 )
     {
-        printf("** Error. Usage: ./compareHist_Demo <image_settings0> <image_setting1> <image_settings2>\n");
-        return -1;
+    printf("*Error. Usage: ./compareHist_Demo <image_settings0> <image_setting1> <image_settings2>\n");
+    return -1;
     }
 
     src_base = imread( argv[1], 1 );

@@ -43,39 +43,49 @@ _index: pattern-matching
 
 1. **CV\_TM\_SQDIFF**
 
+   <div>
    $$R\left( x,\ y \right) = \sum_{x^{'},y^{'}}^{}\left( T\left( x^{'},\ y^{'} \right) - I\left( x + x^{'},\ y + y^{'} \right) \right)^{2}$$
-
+   </div>
 
 2. **CV\_TM\_SQDIFF\_NORMED**
 
+   <div>
    $$R\left( x,\ y \right) = \frac{\sum_{x^{'},\ y^{'}}^{}\left( T\left( x^{'},\ y^{'} \right) - I\left( x + x^{'},\ y + y^{'} \right) \right)^{2}}{\sqrt{\sum_{x^{'},\ y^{'}}^{}{{T\left( x^{'},\ y^{'} \right)}^{2}\ }.\sum_{x^{'},\ y^{'}}^{}{I\left( x + x^{'},\ y + y^{'} \right)}^{2}}}$$
-
+   </div>
 
 3. **CV\_TM\_CCORR**
 
+   <div>
    $$R\left( x,\ y \right) = \sum_{x^{'},y^{'}}^{}\left( T\left( x^{'},\ y^{'} \right).I\left( x + x^{'},\ y + y^{'} \right) \right)$$
-
+   </div>
 
 4. **CV\_TM\_CCORR\_NORMED**
 
+   <div>
    $$R\left( x,\ y \right) = \frac{\sum_{x^{'},\ y^{'}}^{}{T\left( x^{'},\ y^{'} \right).I^{'}\left( x + x^{'},\ y + y^{'} \right)}}{\sqrt{\sum_{x^{'},\ y^{'}}^{}{{T\left( x^{'},\ y^{'} \right)}^{2}\ }.\sum_{x^{'},\ y^{'}}^{}{I\left( x + x^{'},\ y + y^{'} \right)}^{2}}}$$
-
+   </div>
 
 5. **CV\_TM\_CCOEFF**
 
+   <div>
    $$R\left( x,\ y \right) = \sum_{x^{'},y^{'}}^{}\left( T^{'}\left( x^{'},\ y^{'} \right)\text{\ .\ \ I}\left( x + x^{'},\ y + y^{'} \right) \right)$$
-
+   </div>
+   
    که
 
+   <div>
    $$T^{'}\left( x^{'},\ y^{'} \right) = T\left( x^{'},\ y^{'} \right) - \frac{1}{w. h}.\sum_{x^{''},y^{''}}^{}{T\left( x^{''},\ y^{''} \right)}$$
+   </div>
 
+   <div>
    $$I^{'}\left( x + x^{'},\ y + y^{'} \right) = I\left( x + x^{'},\ y + y^{'} \right) - \frac{1}{w.h}.\sum_{x^{''},y^{''}}^{}{I\left( x + x^{''},\ y + y^{''} \right)}$$
-
+   </div>
 
 6. **CV\_TM\_CCOEFF\_NORMED**
 
+   <div>
    $$R\left( x,\ y \right) = \frac{\sum_{x^{'},\ y^{'}}^{}\left( T^{'}\left( x^{'},\ y^{'} \right).I^{'}\left( x + x^{'},\ y + y^{'} \right) \right)}{\sqrt{\sum_{x^{'},\ y^{'}}^{}{{T^{'}\left( x^{'},\ y^{'} \right)}^{2}\ }.\sum_{x^{'},\ y^{'}}^{}{I^{'}\left( x + x^{'},\ y + y^{'} \right)}^{2}}}$$
-
+   </div>
 
 
 ## کد

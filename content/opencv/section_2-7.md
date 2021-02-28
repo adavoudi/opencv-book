@@ -23,7 +23,8 @@ $$g\left( i,j \right) = \ \sum_{k,l}^{}{f\left( i + k,j + l \right)h(k,l)}$$
   است.
 
 - کرنل این فیلتر به صورت زیر است:
-
+    
+  <div>
   $$
   K = \frac{1}{K_{width}.K_{height}}\begin{bmatrix}
   1 & \cdots & 1 \\\\
@@ -31,6 +32,7 @@ $$g\left( i,j \right) = \ \sum_{k,l}^{}{f\left( i + k,j + l \right)h(k,l)}$$
   1 & \cdots & 1
   \end{bmatrix}
   $$
+  </div>
 
 
 
@@ -48,7 +50,9 @@ $$g\left( i,j \right) = \ \sum_{k,l}^{}{f\left( i + k,j + l \right)h(k,l)}$$
 
 **نکته:** به یاد داشته باشید که گوسی دو بعدی به شکل زیر است:
 
+<div>
 $$G_{0}\left( x,y \right) = Ae^{\frac{- {(x - \mu_{x})}^{2}}{2\sigma_{x}^{2}}+\frac{- {(y - \mu_{y})}^{2}}{2\sigma_{y}^{2}}}$$
+</div>
 
 که $\mu$ نشان دهندهٔ میانگین و $\sigma$ نشان دهندهٔ انحراف معیار (به ازای متغییر های $x$ و $y$) است.
 

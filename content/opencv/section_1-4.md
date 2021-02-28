@@ -23,14 +23,15 @@ using namespace std;
 
 static void help(char** av)
 {
-    cout << endl
-        << av[0] << " shows the usage of the OpenCV serialization functionality." << endl << "usage: " << endl
-        <<  av[0] << " outputfile.yml.gz" << endl
-        << "The output file may be either XML (xml) or YAML (yml/yaml). You can even compress it by "
-        << "specifying this in its extension like xml.gz yaml.gz etc... " << endl
-        << "With FileStorage you can serialize objects in OpenCV by using the << and >> operators" << endl
-        << "For example: - create a class and have it serialized"                         << endl
-        << "             - use it to read and write matrices."                            << endl;
+cout << endl
+<< av[0] << " shows the usage of the OpenCV serialization functionality." << endl
+<< "usage: " << endl
+<< av[0] << " outputfile.yml.gz" << endl
+<< "The output file may be either XML (xml) or YAML (yml/yaml). You can even compress it by "
+<< "specifying this in its extension like xml.gz yaml.gz etc... " << endl
+<< "With FileStorage you can serialize objects in OpenCV by using the << and >> operators" << endl
+<< "For example: - create a class and have it serialized"                         << endl
+<< "             - use it to read and write matrices."                            << endl;
 }
 
 class MyData
@@ -38,13 +39,16 @@ class MyData
 public:
     MyData() : A(0), X(0), id()
     {}
-    explicit MyData(int) : A(97), X(CV_PI), id("mydata1234") // explicit to avoid implicit conversion
+    // explicit to avoid implicit conversion
+    explicit MyData(int) : A(97), X(CV_PI), id("mydata1234") 
     {}
-    void write(FileStorage& fs) const                        //Write serialization for this class
+    //Write serialization for this class
+    void write(FileStorage& fs) const
     {
         fs << "{" << "A" << A << "X" << X << "id" << id << "}";
     }
-    void read(const FileNode& node)                          //Read serialization for this class
+    //Read serialization for this class
+    void read(const FileNode& node)
     {
         A = (int)node["A"];
         X = (double)node["X"];
@@ -157,13 +161,14 @@ int main(int ac, char** av)
         cout << "MyData = " << endl << m << endl << endl;
 
         //Show default behavior for non existing nodes
-        cout << "Attempt to read NonExisting (should initialize the data structure with its default).";
+        cout << "Attempt to read NonExisting"
+        " (should initialize the data structure with its default).";
         fs["NonExisting"] >> m;
         cout << endl << "NonExisting = " << endl << m << endl;
     }
 
     cout << endl
-        << "Tip: Open up " << filename << " with a text editor to see the serialized data." << endl;
+    << "Tip: Open up " << filename << " with a text editor to see the serialized data." << endl;
 
     return 0;
 }
@@ -235,7 +240,7 @@ int main(int ac, char** av)
     برای دنباله‌ها، قبل از آیتم اول کاراکتر [ و بعد از آیتم آخر نیز کاراکتر ] را قرار می‌دهیم:
 
     ```c++
-    fs << "strings" << "[";                // text - string sequence
+    fs << "strings" << "["; // text - string sequence
     fs << "image1.jpg" << "Awesomeness" << "baboon.jpg";
     fs << "]"; // close sequence
     ```

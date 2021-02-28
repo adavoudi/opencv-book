@@ -23,18 +23,16 @@
 <meta name="twitter:title" content="{{ TitleContent }}">
 <meta name="twitter:description" content="{{ HeadDesc | html | truncate(50) }}">
 
-  <link rel="short icon" href="{{ SITE.icon }}">
-  <link href="{{ MainSTATIC }}/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="{{ MainSTATIC }}/zero60/style.css" rel="stylesheet">
-  <link href="{{ MainSTATIC }}/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="{{ SITE.icon }}">
+<link href="{{ MainSTATIC }}/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="{{ MainSTATIC }}/zero60/style.css" rel="stylesheet">
+<link href="{{ MainSTATIC }}/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
