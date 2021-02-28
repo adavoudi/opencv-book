@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -271,7 +269,7 @@
     <a name="more"></a>
 <p>اُ سی وی<a href="#fn:1" id="fnref:1" class="footnote">1</a> یک کتابخانه از توابع برنامه‌نویسی است و هدف اصلی آن بینایی کامپیوتر بی‌درنگ است. این کتابخانه توسط شرکت اینتل (مرکز تحقیقات روسیه) توسعه داده شد و در حال حاضر توسط شرکت‌های Willow Garage و Itseez پشتیبانی می‌شود. استفاده از این کتابخانه تحت مجوز متن باز بی اس دی، آزاد (و مجانی) است. بیشتر تمرکز این کتابخانه روی پردازش تصاویر به صورت بی‌درنگ است. اگر روی سیستمتان برنامه Integrated Performance Primitives ‫<a href="#fn:2" id="fnref:2" class="footnote">2</a> را نصب داشته باشید، اُ سی وی می‌تواند از آن جهت بهبود عملکرد خودش استفاده کند و سرعت و کار کردش را بهبود بخشد.</p>
 
-<h2>تاریخچه</h2>
+<h2 id="تاریخچه">تاریخچه</h2>
 
 <p>پروژه اُ سی وی به صورت رسمی در سال 1999 به منظور حل مشکل کاربردهای شدیداً پردازنده‌ای<a href="#fn:3" id="fnref:3" class="footnote">3</a> به عنوان قسمتی از سری پروژه‌هایی شامل ردیابی اشعه بی‌درنگ و دیواره‌های نمایشگر سه بعدی، شروع شد. مهم‌ترین شرکت کنندگان در این پروژه شامل تعدادی متخصصان بهینه سازی در اینتل روسیه و همچنین تیم کتابخانهٔ کارایی<a href="#fn:4" id="fnref:4" class="footnote">4</a> اینتل بودند. در روزهای ابتدایی، هدف پروژه به صورت زیر تشریح شده بود:</p>
 
@@ -285,11 +283,11 @@
 
 <p>اولین نسخه آلفای اُ سی وی در کنفرانس بینایی کامپیوتر و کشف الگوی IEEE در سال 2000 به عموم معرفی شد و 5 نسخه بتا بین سال‌های 2001 و 2005 منتشر شد. نسخه 1.0 در 2006 انتشار یافت. در اواسط 2008، Willow Garage از اُ سی وی حمایت کرد و هم اکنون در حال توسعه فعال است. یک نسخه 1.1 به عنوان "پیش انتشار" در اکتبر 2008 منتشر شد.</p>
 
-<p>نسخه دوم اُ سی وی در اکتبر 2009 منتشر شد. اُ سی وی 2 تغییرهای چشم گیری در رابط C++ داشت که عموماً به هدف ارائه الگوهای آسانتر و نوع امنتر<a href="#fn:5" id="fnref:5" class="footnote">5</a> و توابع جدید و پیاده سازی بهتر توابع قبلی برای کارایی بهتر (مخصوصاً روی پردازنده‌های چند هسته‌ای) بود. در حال حاضر نسخه‌های رسمی هر شش ماه یک بار منتشر می‌شود و توسعهٔ این کتابخانه توسط یک تیم مستقل روسی که از سوی شرکت‌های تجاری حمایت می‌شود، انجام می‌گیرد.</p>
+<p>نسخه دوم اُ سی وی در اکتبر 2009 منتشر شد. اُ سی وی 2 تغییرهای چشم گیری در رابط ++C داشت که عموماً به هدف ارائه الگوهای آسانتر و نوع امنتر<a href="#fn:5" id="fnref:5" class="footnote">5</a> و توابع جدید و پیاده سازی بهتر توابع قبلی برای کارایی بهتر (مخصوصاً روی پردازنده‌های چند هسته‌ای) بود. در حال حاضر نسخه‌های رسمی هر شش ماه یک بار منتشر می‌شود و توسعهٔ این کتابخانه توسط یک تیم مستقل روسی که از سوی شرکت‌های تجاری حمایت می‌شود، انجام می‌گیرد.</p>
 
 <p>در آگوست 2012 حمایت از اُ سی وی از طریق یک سازمان غیر انتفاعی به نام OpenCV.org شکل گرفت. این سازمان شامل یک سایت برای کاربران و یک سایت برای توسعه دهندگان است.</p>
 
-<h2>کاربردها</h2>
+<h2 id="کاربردها">کاربردها</h2>
 
 <p>زمینه‌های کاربرد اُ سی وی شامل موارد زیر است:</p>
 
@@ -322,18 +320,18 @@
 <li>ماشین برداری پشتیبان (SVM)‫<a href="#fn:26" id="fnref:26" class="footnote">26</a></li>
 </ul>
 
-<h2>زبان برنامه‌نویسی</h2>
+<h2 id="زبان_برنامه‌نویسی">زبان برنامه‌نویسی</h2>
 
 <p>اُ سی وی 2 با ++C نوشته شده است و رابط اصلی آن همین ++C است ولی همچنان می‌توانید از رابط C باقی مانده (از نسخه اول) در آن استفاده کنید. در حال حاظر رابط‌های کاملی برای زبان‌های Python، Java و MATLAB/OCTAVE (از نسخه 2.5 به بعد) وجود دارد. APIهای این رابط‌ها را می‌توانید در مستندات آنلاین پیدا کنید. به منظور تشویق توسعه دهندگان زبان‌های دیگر از جمله C#، Ch و Ruby به استفاده از این کتابخانه، رابط‌هایی برای آنها نیز توسعه داده شده است.</p>
 
 <p>در حال حاضر تمامی توسعه‌ها و الگوریتم‌های جدید در ++C توسعه می‌یابند.</p>
 
-<h2>سیستم‌عامل‌ها</h2>
+<h2 id="سیستم‌عامل‌ها">سیستم‌عامل‌ها</h2>
 
 <p>تا این لحظه اُ سی وی روی سیستم‌عامل‌های Windows، Android، Maemo، FreeBSD، OpenBSD، IOS، BlackBerry، Linux و OS X قابل اجرا است. کاربر می‌تواند برای استفاده در هر کدام از این سیستم‌عامل‌ها، نسخه‌های رسمی را از SourceForge دریافت کند.</p>
 
 <div class="footnotes">
-<hr />
+<hr>
 <ol>
 
 <li id="fn:1"><p>OpenCV<a href="#fnref:1" class="reversefootnote">&#160;&#8617;</a></p></li>
@@ -389,8 +387,7 @@
 <li id="fn:26"><p>Support Vector Machine<a href="#fnref:26" class="reversefootnote">&#160;&#8617;</a></p></li>
 
 </ol>
-</div>
-
+</div>
     </div>
   
 
@@ -422,7 +419,7 @@
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -443,7 +440,7 @@
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

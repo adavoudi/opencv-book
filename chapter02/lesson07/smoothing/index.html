@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -284,16 +282,18 @@
 <ul>
 <li><p>ساده‌ترین فیلتر موجود است که هر پیکسل خروجی، میانگین همسایه‌های آن
 است.</p></li>
-<li><p>کرنل این فیلتر به صورت زیر است:</p>
-
-<p>$$
-K = \frac{1}{K_{width}.K_{height}}\begin{bmatrix}
-1 &amp; \cdots &amp; 1 \\
-\vdots &amp; \ddots &amp; \vdots \\
-1 &amp; \cdots &amp; 1
-\end{bmatrix}
-$$</p></li>
+<li><p>کرنل این فیلتر به صورت زیر است:</p></li>
 </ul>
+
+<div>
+  $$
+  K = \frac{1}{K_{width}.K_{height}}\begin{bmatrix}
+  1 & \cdots & 1 \\\\
+   \vdots & \ddots & \vdots \\\\
+  1 & \cdots & 1
+  \end{bmatrix}
+  $$
+  </div>
 
 <p><strong>فیلتر گوسی</strong><a href="#fn:b" id="fnref:b" class="footnote">2</a><strong>:</strong></p>
 
@@ -301,11 +301,11 @@ $$</p></li>
 <li><p>احتمالاً کاربردی‌ترین فیلتر (اما نه سریع‌ترین) است. فیلتر کردن به روش گوسی از کانوال هر نقطهٔ موجود در آرایه ورودی با یک کرنل گوسی و سپس جمع همهٔ آنها برای به دست آوردن خروجی، انجام می‌شود.</p></li>
 <li><p>نمودار کرنل گوسی یک بعدی به صورت زیر است:</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image36.png" alt="تابع توزیع گوسی" id="" /></th>
+	<th><img src="/opencv-book/media/image36.png" alt="تابع توزیع گوسی" id="تابع_توزیع_گوسی"></th>
 </tr>
 </thead>
 <tbody>
@@ -320,7 +320,9 @@ $$</p></li>
 
 <p><strong>نکته:</strong> به یاد داشته باشید که گوسی دو بعدی به شکل زیر است:</p>
 
-<p>$$G_{0}\left( x,y \right) = Ae^{\frac{- {(x - \mu_{x})}^{2}}{2\sigma_{x}^{2}}+\frac{- {(y - \mu_{y})}^{2}}{2\sigma_{y}^{2}}}$$</p>
+<div>
+$$G_{0}\left( x,y \right) = Ae^{\frac{- {(x - \mu_{x})}^{2}}{2\sigma_{x}^{2}}+\frac{- {(y - \mu_{y})}^{2}}{2\sigma_{y}^{2}}}$$
+</div>
 
 <p>که $\mu$ نشان دهندهٔ میانگین و $\sigma$ نشان دهندهٔ انحراف معیار (به ازای متغییر های $x$ و $y$) است.</p>
 
@@ -334,7 +336,7 @@ $$</p></li>
 
 <p>فیلتر دوگانه به روشی مشابه با فیلتر گوسی به هر کدام از پیکسل‌های همسایه، وزنی اختصاص می‌دهد. هر وزن از دو قسمت تشکیل شده است؛ قسمت اول همان وزنی است که در فیلتر گوسی وجود دارد. قسمت دوم هم اختلاف بین روشنایی پیکسل فعلی با همسایه‌هایش است. چون هدف این کتاب آموزش اُ سی وی است از ذکر جزئیات این فیلتر خودداری می‌کنیم.</p>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include &lt;iostream&gt;
 #include &lt;vector&gt;
@@ -442,7 +444,7 @@ int display_dst( int delay )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>در فصل قبل با خیلی از دستورهایی که در کد بالا استفاده شده‌اند، آشنا شدید؛ به همین دلیل فقط به توابع هموار سازی می‌پردازیم.</p>
 
@@ -491,15 +493,15 @@ int display_dst( int delay )
 <li>$\sigma_{\text{space}}$: انحراف معیار در فضای مختصات (در مقیاس پیکسل).</li>
 </ul>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
 <p>برنامه پس از اجرا تصویری را باز می‌کند و چهار فیلتر توضیح داده شده را به ترتیب روی آن اعمال می‌کند.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image37.jpg" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image37.jpg" alt="تصویر ورودی" id="تصویر_ورودی"></th>
 </tr>
 </thead>
 <tbody>
@@ -509,11 +511,11 @@ int display_dst( int delay )
 </tbody>
 </table>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image38.jpg" alt="فیلتر جعبه‌ای نرمال شده با اندازه کرنل 25" id="" /></th>
+	<th><img src="/opencv-book/media/image38.jpg" alt="فیلتر جعبه‌ای نرمال شده با اندازه کرنل 25" id="فیلتر_جعبه‌ای_نرمال_شده_با_اندازه_کرنل_25"></th>
 </tr>
 </thead>
 <tbody>
@@ -523,11 +525,11 @@ int display_dst( int delay )
 </tbody>
 </table>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image39.jpg" alt="فیلتر گوسی با اندازه کرنل 25" id="" /></th>
+	<th><img src="/opencv-book/media/image39.jpg" alt="فیلتر گوسی با اندازه کرنل 25" id="فیلتر_گوسی_با_اندازه_کرنل_25"></th>
 </tr>
 </thead>
 <tbody>
@@ -537,11 +539,11 @@ int display_dst( int delay )
 </tbody>
 </table>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image40.jpg" alt="فیلتر میانه با اندازه کرنل 25" id="" /></th>
+	<th><img src="/opencv-book/media/image40.jpg" alt="فیلتر میانه با اندازه کرنل 25" id="فیلتر_میانه_با_اندازه_کرنل_25"></th>
 </tr>
 </thead>
 <tbody>
@@ -551,11 +553,11 @@ int display_dst( int delay )
 </tbody>
 </table>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image41.jpg" alt="فیلتر دوگانه با اندازه کرنل 25" id="" /></th>
+	<th><img src="/opencv-book/media/image41.jpg" alt="فیلتر دوگانه با اندازه کرنل 25" id="فیلتر_دوگانه_با_اندازه_کرنل_25"></th>
 </tr>
 </thead>
 <tbody>
@@ -568,7 +570,7 @@ int display_dst( int delay )
 <p>به راحتی می‌توان دید که کیفیت تصویر ایجاد شده با فیلتر دوگانه از سایر تصاویر بیشتر است.</p>
 
 <div class="footnotes">
-<hr />
+<hr>
 <ol>
 
 <li id="fn:a"><p>Normalized Box Filter<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
@@ -584,8 +586,7 @@ int display_dst( int delay )
 <li id="fn:f"><p>Standard derivation<a href="#fnref:f" class="reversefootnote">&#160;&#8617;</a></p></li>
 
 </ol>
-</div>
-
+</div>
     </div>
   
 
@@ -625,7 +626,7 @@ int display_dst( int delay )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -646,7 +647,7 @@ int display_dst( int delay )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

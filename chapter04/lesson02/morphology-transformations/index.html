@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -279,11 +277,11 @@
 
 <p>این عمل برای از بین بردن اشیای کوچک مناسب است (بافرض اینکه اشیا به رنگ روشن و روی زمینهٔ تیره قرار داشته باشند). به شکل زیر نگاه کنید. تصویر سمت چپ تصویر ورودی و تصویر سمت راست نتیجهٔ عملیات باز کردن است. همانطور که می‌بینید ناحیه‌های کوچک بین حرف ناپدید شده‌اند.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image117.png" alt="نتیجه اعمال باز کردن روی تصویر سمت چپ" id="" /></th>
+	<th><img src="/opencv-book/media/image117.png" alt="نتیجه اعمال باز کردن روی تصویر سمت چپ" id="نتیجه_اعمال_باز_کردن_روی_تصویر_سمت_چپ"></th>
 </tr>
 </thead>
 <tbody>
@@ -301,11 +299,11 @@
 
 <p>این عمل برای از بین بردن حفره‌های کوچک مناسب است (نواحی تیره).</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image118.png" alt="نتیجه اعمال بستن روی تصویر سمت چپ" id="" /></th>
+	<th><img src="/opencv-book/media/image118.png" alt="نتیجه اعمال بستن روی تصویر سمت چپ" id="نتیجه_اعمال_بستن_روی_تصویر_سمت_چپ"></th>
 </tr>
 </thead>
 <tbody>
@@ -323,11 +321,11 @@
 
 <p>این عمل برای پیدا کردن محیط یک شیء مناسب است.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image119.png" alt="نتیجه اعمال گرادیان به روش مورفولوژی روی تصویر سمت چپ" id="" /></th>
+	<th><img src="/opencv-book/media/image119.png" alt="نتیجه اعمال گرادیان به روش مورفولوژی روی تصویر سمت چپ" id="نتیجه_اعمال_گرادیان_به_روش_مورفولوژی_روی_تصویر_سمت_چپ"></th>
 </tr>
 </thead>
 <tbody>
@@ -343,11 +341,11 @@
 
 <p>$$dst = tophat\left( src,\ element \right) = src - open(src,\ element)$$</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image120.png" alt="نتیجه اعمال تاپ هَت روی تصویر سمت چپ" id="" /></th>
+	<th><img src="/opencv-book/media/image120.png" alt="نتیجه اعمال تاپ هَت روی تصویر سمت چپ" id="نتیجه_اعمال_تاپ_هَت_روی_تصویر_سمت_چپ"></th>
 </tr>
 </thead>
 <tbody>
@@ -363,11 +361,11 @@
 
 <p>$$dst = blackhat\left( src,\ element \right) = close\left( src,\ element \right) - src$$</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image121.png" alt="نتیجه اعمال بلک هَت روی تصویر سمت چپ" id="" /></th>
+	<th><img src="/opencv-book/media/image121.png" alt="نتیجه اعمال بلک هَت روی تصویر سمت چپ" id="نتیجه_اعمال_بلک_هَت_روی_تصویر_سمت_چپ"></th>
 </tr>
 </thead>
 <tbody>
@@ -377,7 +375,7 @@
 </tbody>
 </table>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -451,7 +449,7 @@ void Morphology_Operations( int, void* )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>در خط 68 از تابع MorphologyEx برای انجام عملیات مورفولوژی روی تصویر ورودی استفاده می‌شود. این تابع چهار آرگومان دارد:</p>
 
@@ -472,13 +470,13 @@ void Morphology_Operations( int, void* )
 <li><p>element: کرنل مورد استفاده است. از تابع getStructuringElement برای ساخت آن استفاده شده است.</p></li>
 </ul>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image122.png" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image122.png" alt="تصویر ورودی" id="تصویر_ورودی"></th>
 </tr>
 </thead>
 <tbody>
@@ -488,11 +486,11 @@ void Morphology_Operations( int, void* )
 </tbody>
 </table>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image123.png" alt="نمایی از برنامه – سمت راست عمل بلک هَت و سمت چپ عمل باز کردن" id="" /></th>
+	<th><img src="/opencv-book/media/image123.png" alt="نمایی از برنامه – سمت راست عمل بلک هَت و سمت چپ عمل باز کردن" id="نمایی_از_برنامه___سمت_راست_عمل_بلک_هَت_و_سمت_چپ_عمل_باز_کردن"></th>
 </tr>
 </thead>
 <tbody>
@@ -503,7 +501,7 @@ void Morphology_Operations( int, void* )
 </table>
 
 <div class="footnotes">
-<hr />
+<hr>
 <ol>
 
 <li id="fn:a"><p>Opening<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
@@ -515,8 +513,7 @@ void Morphology_Operations( int, void* )
 <li id="fn:d"><p>Black Hat<a href="#fnref:d" class="reversefootnote">&#160;&#8617;</a></p></li>
 
 </ol>
-</div>
-
+</div>
     </div>
   
 
@@ -556,7 +553,7 @@ void Morphology_Operations( int, void* )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -577,7 +574,7 @@ void Morphology_Operations( int, void* )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

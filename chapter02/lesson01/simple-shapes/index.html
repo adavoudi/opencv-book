@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -271,7 +269,7 @@
     <a name="more"></a>
 <p>در این بخش می‌خواهیم طریقه ترسیم شکل‌های هندسی ساده را آموزش دهیم. این شکل‌ها عبارتند از خط، دایره، بیضی، مستطیل، چند ضلعی.</p>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include &lt;opencv2/core/core.hpp&gt;
 #include &lt;opencv2/highgui/highgui.hpp&gt;
@@ -348,7 +346,8 @@ void MyEllipse( Mat img, double angle )
     int thickness = 2;
     int lineType = 8;
 
-    ellipse( img, Point( w/2, w/2 ), Size( w/4, w/16 ), angle, 0, 360, Scalar( 255, 0, 0 ), thickness, lineType );
+    ellipse( img, Point( w/2, w/2 ), Size( w/4, w/16 ),
+        angle, 0, 360, Scalar( 255, 0, 0 ), thickness, lineType );
 }
 
 /**
@@ -412,7 +411,7 @@ void MyLine( Mat img, Point start, Point end )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>از آنجایی که می‌خواهیم دو شکل رسم کنیم (یک اتم و یک قلعه)، باید دو ماتریس به عنوان صفحهٔ ترسیم و دو پنجره برای نمایش آنها درست کنیم (خطوط 25 و 26).</p>
 
@@ -423,7 +422,7 @@ void MyLine( Mat img, Point start, Point end )
 <p>بهتر است ببینیم درون این توابع چه می‌گذرد:</p>
 
 <ul>
-<li><p>تابع MyLine (خطوط 132 تا 137)</p>
+<li><p>تابع MyLine (خطوط 133 تا 138)</p>
 
 <p>همان طور که می‌بینید این تابع فقط به روش زیر چندین بار از تابع line (که در ماژول Core موجود است) استفاده می‌کند:</p>
 
@@ -434,7 +433,7 @@ void MyLine( Mat img, Point start, Point end )
 <li>میزان نازکی خط با متغیر thickness مشخص شده است.</li>
 <li>این خط از نوع متصل است و این مورد با متغیر lineType که مقدار 2 دارد مشخص شده است.</li>
 </ul></li>
-<li><p>تابع MyEllipse (خطوط 71 تا 77)</p>
+<li><p>تابع MyEllipse (خطوط 71 تا 78)</p>
 
 <p>این تابع به شکل زیر یک بیضی می‌کشد:</p>
 
@@ -446,7 +445,7 @@ void MyLine( Mat img, Point start, Point end )
 <li>رنگ بیضی با <code>Scalar(255,0,0)</code> که در RGB یعنی آبی، مشخص شده است.</li>
 <li>نازکی و نوع خط بیضی با متغیرهای thickness و lineType مشخص شده‌اند.</li>
 </ul></li>
-<li><p>تابع MyFilledCircle (خطوط 83 تا 89)</p>
+<li><p>تابع MyFilledCircle (خطوط 84 تا 90)</p>
 
 <p>آرگومان‌های تابع circle به شرح زیر است:</p>
 
@@ -457,7 +456,7 @@ void MyLine( Mat img, Point start, Point end )
 <li>رنگ دایره با <code>Scalar(0,0,255)</code> که در RGB به معنی قرمز است، مشخص شده است.</li>
 <li>به خاطر اینکه مقدار thickness عدد 1- قرار داده شده، دایره توپُر کشیده می‌شود.</li>
 </ul></li>
-<li><p>تابع MyPolygon (خطوط 95 تا 126)</p>
+<li><p>تابع MyPolygon (خطوط 96 تا 127)</p>
 
 <p>برای کشیدن یک چند ضلعی توپر، از تابع fillPoly که در ماژول Core موجود است استفاده می‌کنیم. قابل ذکر است که:</p>
 
@@ -480,17 +479,17 @@ void MyLine( Mat img, Point start, Point end )
 </ul></li>
 </ul>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
 <p>خروجی برنامه به شکل زیر است:</p>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image11.jpg" alt="mage1" id="mage1" /></th>
-	<th><img src="/opencv-book/media/image12.jpg" alt="mage1" id="mage1" /></th>
+	<th><img src="/opencv-book/media/image11.jpg" alt="mage1" id="mage1"></th>
+	<th><img src="/opencv-book/media/image12.jpg" alt="mage1" id="mage1"></th>
 </tr>
 </thead>
 <tbody>
@@ -499,8 +498,7 @@ void MyLine( Mat img, Point start, Point end )
 	<td align="center"> </td>
 </tr>
 </tbody>
-</table>
-
+</table>
     </div>
   
 
@@ -540,7 +538,7 @@ void MyLine( Mat img, Point start, Point end )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -561,7 +559,7 @@ void MyLine( Mat img, Point start, Point end )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -275,11 +273,11 @@
 
 <p>فرض کنید از روی تصویر زیر یک بافت‌نگار H-S مربوط به پوست به دست آورده‌ایم. این بافت‌نگار را بافت‌نگار مبنا قرار می‌دهیم. برای اینکه فقط بافت‌نگار قسمت پوست را به دست آوریم، چند ماسک به تصویر اعمال می‌کنیم و سپس بافت‌نگار را حساب می‌کنیم.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image125.png" alt="سمت چپ تصویر دست و سمت راست تصویر بافت‌نگار آن" id="" /></th>
+	<th><img src="/opencv-book/media/image125.png" alt="سمت چپ تصویر دست و سمت راست تصویر بافت‌نگار آن" id="سمت_چپ_تصویر_دست_و_سمت_راست_تصویر_بافت‌نگار_آن"></th>
 </tr>
 </thead>
 <tbody>
@@ -291,11 +289,11 @@
 
 <p>حالا فرض کنید تصویر زیر را به عنوان تصویر آزمایشی به کار ببریم:</p>
 
-<table>
-<col />
+<table class="markmod_table">
+<col>
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image126.png" alt="سمت چپ تصویر آزمایشی دست و سمت راست تصویر بافت‌نگار آن" id="" /></th>
+	<th><img src="/opencv-book/media/image126.png" alt="سمت چپ تصویر آزمایشی دست و سمت راست تصویر بافت‌نگار آن" id="سمت_چپ_تصویر_آزمایشی_دست_و_سمت_راست_تصویر_بافت‌نگار_آن"></th>
 </tr>
 </thead>
 <tbody>
@@ -315,11 +313,11 @@
 
 <p>با انجام مراحل بالا روی تصویر آزمایشی نتیجهٔ زیر را به دست می‌آوریم:</p>
 
-<table>
-<col />
+<table class="markmod_table">
+<col>
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image127.png" alt="نتیجه بَک پروجکشن روی تصویر آزمایشی دست" id="" /></th>
+	<th><img src="/opencv-book/media/image127.png" alt="نتیجه بَک پروجکشن روی تصویر آزمایشی دست" id="نتیجه_بَک_پروجکشن_روی_تصویر_آزمایشی_دست"></th>
 </tr>
 </thead>
 <tbody>
@@ -331,7 +329,7 @@
 
 <p>مقادیری که در تصویر نتیجه ذخیره شده‌اند نشان دهندهٔ احتمال تعلق آن پیکسل به ناحیهٔ مطلوب هستند (طبق بافت‌نگار مبنا). مثلاً در مورد تصویر بالا، هر چه ناحیه‌ای روشن‌تر باشد احتمالش بیشتر است که به یک ناحیهٔ پوست تعلق داشته باشد، در حالی که ناحیه‌های تیره احتمال کمتری دارند.</p>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -404,13 +402,17 @@ void Hist_and_Backproj(int, void* )
     Mat histImg = Mat::zeros( w, h, CV_8UC3 );
 
     for( int i = 0; i &lt; bins; i ++ )
-    { rectangle( histImg, Point( i*bin_w, h ), Point( (i+1)*bin_w, h - cvRound( hist.at&lt;float&gt;(i)*h/255.0 ) ), Scalar( 0, 0, 255 ), -1 ); }
+    { 
+    rectangle( histImg, Point( i*bin_w, h ),
+        Point( (i+1)*bin_w, h - cvRound( hist.at&lt;float&gt;(i)*h/255.0 ) ), 
+        Scalar( 0, 0, 255 ), -1 );
+    }
 
     imshow( "Histogram", histImg );
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>در خط 22 تصویر ورودی را به HSV تبدیل می‌کنیم.</p>
 
@@ -431,15 +433,15 @@ void Hist_and_Backproj(int, void* )
 
 <p>در خط 61 بَک پروجکشن تصویر hue را با استفاده از تابع calcBackProject به دست می‌آوریم. این تابع 8 آرگومان دارد که شما با همه آنها آشنا هستید (مشابه همان‌هایی هستند که برای محاسبهٔ بافت‌نگار به کار می‌بردیم)، فقط ماتریس backproj اضافه شده است که نتیجهٔ بَک پروجکشن تصویر ورودی (یعنی <code>&amp;hue</code>) در آن ذخیره می‌شود.</p>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
 <p>به عنوان ورودی از تصویر یک دست استفاده می‌کنیم. خروجی به صورت زیر خواهد بود. می‌توانید مقدار سطل را تغییر دهید و تأثیر آن را روی خروجی ببینید.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image128.png" alt="سمت چپ: تصویر ورودی- وسط: بافت‌نگار ناحیه دست- سمت راست: بَک پروجکشن تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image128.png" alt="سمت چپ: تصویر ورودی- وسط: بافت‌نگار ناحیه دست- سمت راست: بَک پروجکشن تصویر ورودی" id="سمت_چپ:<em>تصویر</em>ورودی-<em>وسط:</em>بافت‌نگار_ناحیه_دست-<em>سمت</em>راست:<em>بَک</em>پروجکشن_تصویر_ورودی"></th>
 </tr>
 </thead>
 <tbody>
@@ -447,8 +449,7 @@ void Hist_and_Backproj(int, void* )
 	<td align="center">سمت چپ: تصویر ورودی - وسط: بافت‌نگار ناحیه دست- سمت راست: بَک پروجکشن تصویر ورودی</td>
 </tr>
 </tbody>
-</table>
-
+</table>
     </div>
   
 
@@ -488,7 +489,7 @@ void Hist_and_Backproj(int, void* )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -509,7 +510,7 @@ void Hist_and_Backproj(int, void* )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

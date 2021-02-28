@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -281,11 +279,11 @@
 
 <p>در ادامه با در نظر گرفتن تصویر زیر، عملیات فرسایش و گشایش را بررسی می‌کنیم.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image112.png" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image112.png" alt="تصویر ورودی" id="تصویر_ورودی"></th>
 </tr>
 </thead>
 <tbody>
@@ -301,11 +299,11 @@
 
 <p>همین‌طور که کرنل B روی تصویر حرکت می‌کند، پیکسل بیشینه‌ای که در پنجرهٔ B است را پیدا کرده و مقدار آن را به جای مقدار پیکسلی که لنگر روی آن قرار دارد می‌گذارد. پس این عمل باعث رشد نواحی روشن در تصویر می‌شود (نام گشایش از اینجا می‌آید). به عنوان مثال اگر عملگر گشایش را به تصویر ورودی بالا اعمال کنیم، نتیجه به صورت زیر خواهد بود:</p>
 
-<p><img src="/opencv-book/media/image113.png" alt="نتیجه اعمال گشایش روی تصویر ورودی" id="" /></p>
+<p><img src="/opencv-book/media/image113.png" alt="نتیجه اعمال گشایش روی تصویر ورودی" id="نتیجه_اعمال_گشایش_روی_تصویر_ورودی"></p>
 
 <p>نتیجه اعمال گشایش روی تصویر ورودی</p>
 
-<hr />
+<hr>
 
 <p>پس زمینهٔ تصویر (قسمت روشن) نسبت به ناحیهٔ تیره مربوط به حرف j، گشایش می‌یابد.</p>
 
@@ -315,11 +313,11 @@
 
 <p>عملگر فرسایش را روی تصویر ورودی اعمال می‌کنیم. شکل زیر نتیجهٔ این کار را نشان می‌دهد. در این تصویر می‌بینید که ناحیه‌های روشن تصویر (یعنی پس زمینه) نازک‌تر شده‌اند (یعنی فرسایش یافته‌اند)، در حالی که ناحیه‌های تیره بزرگتر شده‌اند.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image114.png" alt="نتیجه اعمال فرسایش روی تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image114.png" alt="نتیجه اعمال فرسایش روی تصویر ورودی" id="نتیجه_اعمال_فرسایش_روی_تصویر_ورودی"></th>
 </tr>
 </thead>
 <tbody>
@@ -329,7 +327,7 @@
 </tbody>
 </table>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -426,7 +424,7 @@ void Dilation( int, void* )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p><strong>تابع Erosion (خط 63):</strong></p>
 
@@ -447,13 +445,13 @@ void Dilation( int, void* )
 
 <p>کد این تابع بسیار مشابه با کد تابع Erosion است. اینجا هم باید نوع کرنل، مختصات لنگر و اندازهٔ کرنل را مشخص کرد.</p>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image115.png" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image115.png" alt="تصویر ورودی" id="تصویر_ورودی"></th>
 </tr>
 </thead>
 <tbody>
@@ -463,11 +461,11 @@ void Dilation( int, void* )
 </tbody>
 </table>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image116.png" alt="نمایی از برنامه – سمت راست عمل گشایش و سمت چپ عمل فرسایش" id="" /></th>
+	<th><img src="/opencv-book/media/image116.png" alt="نمایی از برنامه – سمت راست عمل گشایش و سمت چپ عمل فرسایش" id="نمایی_از_برنامه___سمت_راست_عمل_گشایش_و_سمت_چپ_عمل_فرسایش"></th>
 </tr>
 </thead>
 <tbody>
@@ -478,7 +476,7 @@ void Dilation( int, void* )
 </table>
 
 <div class="footnotes">
-<hr />
+<hr>
 <ol>
 
 <li id="fn:a"><p>Structuring element<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
@@ -490,8 +488,7 @@ void Dilation( int, void* )
 <li id="fn:d"><p>holes<a href="#fnref:d" class="reversefootnote">&#160;&#8617;</a></p></li>
 
 </ol>
-</div>
-
+</div>
     </div>
   
 
@@ -531,7 +528,7 @@ void Dilation( int, void* )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -552,7 +549,7 @@ void Dilation( int, void* )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -275,11 +273,11 @@
 
 <p>برای ادامه این بخش فرض کنید یک تصویر مرجع با مقادیر روشنایی <code>src(x,y)</code> برای پیکسل‌های آن داریم. خط افقی آبی رنگ مقدار آستانه را نمایش می‌دهد.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image55.png" alt="تصویر مرجع و خط آستانه" id="" /></th>
+	<th><img src="/opencv-book/media/image55.png" alt="تصویر مرجع و خط آستانه" id="تصویر_مرجع_و_خط_آستانه"></th>
 </tr>
 </thead>
 <tbody>
@@ -293,20 +291,22 @@
 
 <p>در این نوع به صورت زیر عمل می‌شود:</p>
 
-<p>$$
+<p><span>
+$$
 dst \left( x,y \right) = \left\{ \begin{matrix}
 maxVal \hspace{3em}  if \thickspace src\left( x,y \right) > thresh \\
 0 \hspace{10em} otherwise
 \end{matrix} \right.
-$$</p>
+$$
+</span></p>
 
 <p>یعنی اگر روشنایی پیکسل <code>src(x,y)</code> بیشتر از مقدار thresh بود، آنگاه مقدار آن پیکسل برابر با MaxVal قرار داده می‌شود. در غیر این صورت مقدار آن برابر صفر قرار داده می‌شود.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image56.png" alt="نتیجه آستانه‌گذاری باینری" id="" /></th>
+	<th><img src="/opencv-book/media/image56.png" alt="نتیجه آستانه‌گذاری باینری" id="نتیجه_آستانه‌گذاری_باینری"></th>
 </tr>
 </thead>
 <tbody>
@@ -320,20 +320,22 @@ $$</p>
 
 <p>در این نوع به صورت زیر عمل می‌شود:</p>
 
-<p>$$
+<p><span>
+$$
 dst \left( x,y \right) = \left\{ \begin{matrix}
 0 \hspace{3em} if \thickspace src \left( x,y \right) > thresh \\
 maxVal \hspace{5em} otherwise
 \end{matrix} \right.
-$$</p>
+$$
+</span></p>
 
 <p>یعنی اگر روشنایی پیکسل <code>src(x,y)</code> بیشتر از thresh بود، آنگاه مقدار آن پیکسل برابر با صفر قرار داده می‌شود. در غیر این صورت مقدار آن برابر MaxVal خواهد بود.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image57.png" alt="نتیجه آستانه‌گذاری باینری معکوس" id="" /></th>
+	<th><img src="/opencv-book/media/image57.png" alt="نتیجه آستانه‌گذاری باینری معکوس" id="نتیجه_آستانه‌گذاری_باینری_معکوس"></th>
 </tr>
 </thead>
 <tbody>
@@ -347,20 +349,22 @@ $$</p>
 
 <p>در این نوع به صورت زیر عمل می‌شود:</p>
 
-<p>$$
+<p><span>
+$$
 dst \left( x,y \right) = \left\{ \begin{matrix}
 threshold  \hspace{3em}  if \thickspace src \left( x,y \right) > thresh \\
 src\left( x,y \right) \hspace{8em} otherwise
 \end{matrix} \right.
-$$</p>
+$$
+</span></p>
 
 <p>بیشترین مقدار مجاز برای پیکسل‌ها، مقدار thresh است. اگر مقدار پیکسلی بیشتر از thresh بود، مقداری از آن بریده می‌شود.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image58.png" alt="نتیجه بریدن" id="" /></th>
+	<th><img src="/opencv-book/media/image58.png" alt="نتیجه بریدن" id="نتیجه_بریدن"></th>
 </tr>
 </thead>
 <tbody>
@@ -374,20 +378,22 @@ $$</p>
 
 <p>در این نوع به صورت زیر عمل می‌شود:</p>
 
-<p>$$
+<p><span>
+$$
 dst \left( x,y \right) = \left\{ \begin{matrix}
 src(x,y) \hspace{3em} if \thickspace src \left( x,y \right) > thresh \\
 0\hspace{10em} otherwise
 \end{matrix} \right.
-$$</p>
+$$
+</span></p>
 
 <p>اگر <code>src(x,y)</code> کوچک‌تر از thresh بود، مقدار آن صفر قرار داده خواهد شد.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image59.png" alt="نتیجه آستانه‌گذاری به صفر" id="" /></th>
+	<th><img src="/opencv-book/media/image59.png" alt="نتیجه آستانه‌گذاری به صفر" id="نتیجه_آستانه‌گذاری_به_صفر"></th>
 </tr>
 </thead>
 <tbody>
@@ -401,20 +407,22 @@ $$</p>
 
 <p>در این نوع به صورت زیر عمل می‌شود:</p>
 
-<p>$$
+<p><span>
+$$
 dst \left( x,y \right) = \left\{ \begin{matrix}
 0 \hspace{3em} if \thickspace src\left( x,y \right) > thresh \\
 src(x,y) \hspace{5em} otherwise
 \end{matrix} \right.
-$$</p>
+$$
+</span></p>
 
 <p>اگر <code>src(x,y)</code> بزرگ‌تر از thresh بود، مقدار آن را صفر می‌گذاریم.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image60.png" alt="نتیجه آستانه‌گذاری به صفر معکوس" id="" /></th>
+	<th><img src="/opencv-book/media/image60.png" alt="نتیجه آستانه‌گذاری به صفر معکوس" id="نتیجه_آستانه‌گذاری_به_صفر_معکوس"></th>
 </tr>
 </thead>
 <tbody>
@@ -424,7 +432,7 @@ $$</p>
 </tbody>
 </table>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -444,7 +452,12 @@ int const max_BINARY_value = 255;
 Mat src, src_gray, dst;
 char* window_name = "Threshold Demo";
 
-char* trackbar_type = "Type: \n 0: Binary \n 1: Binary Inverted \n 2: Truncate \n 3: To Zero \n 4: To Zero Inverted";
+char* trackbar_type = "Type: \n"
+    " 0: Binary \n"
+    " 1: Binary Inverted \n"
+    " 2: Truncate \n"
+    " 3: To Zero \n"
+    " 4: To Zero Inverted";
 char* trackbar_value = "Value";
 
 /// Function headers
@@ -506,31 +519,31 @@ void Threshold_Demo( int, void* )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
-<p>در خط 34 تصویر ورودی را با استفاده از تابع cvtColor به فضای رنگی سیاه و سفید می‌بریم.</p>
+<p>در خط 39 تصویر ورودی را با استفاده از تابع cvtColor به فضای رنگی سیاه و سفید می‌بریم.</p>
 
-<p>در خطوط 40 و 44 دو تِرَک‌بار برای دریافت نوع آستانه‌گذاری و مقدار آستانه از کاربر درست می‌کنیم. هر وقت کاربر مقدار یکی از ترک‌بارها را تغییر دهد، تابع Threshold_Demo صدا زده می‌شود.</p>
+<p>در خطوط 45 و 49 دو تِرَک‌بار برای دریافت نوع آستانه‌گذاری و مقدار آستانه از کاربر درست می‌کنیم. هر وقت کاربر مقدار یکی از ترک‌بارها را تغییر دهد، تابع Threshold_Demo صدا زده می‌شود.</p>
 
-<p>در خط 75 از تابع threshold استفاده شده است. این تابع دارای 5 آرگومان است:</p>
+<p>در خط 80 از تابع threshold استفاده شده است. این تابع دارای 5 آرگومان است:</p>
 
 <ul>
 <li>src_gray: تصویر ورودی</li>
 <li>dst: تصویر خروجی</li>
 <li>threshold_value: مقدار آستانه است.</li>
 <li>max_BINARY_value: مقداری که در آستانه‌گذاری باینری استفاده می‌شود.</li>
-<li>threshold_type: نوع عمل آستانه‌گذاری است. در خطوط 68 تا 72 این نوع‌ها آورده شده‌اند.</li>
+<li>threshold_type: نوع عمل آستانه‌گذاری است. در خطوط 73 تا 77 این نوع‌ها آورده شده‌اند.</li>
 </ul>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image61.jpeg" alt="تصویر ورودی" id="" /></th>
-	<th><img src="/opencv-book/media/image62.jpeg" alt="نتیجه آستانه‌گذاری صفر با آستانه 100" id="" /></th>
+	<th><img src="/opencv-book/media/image61.jpeg" alt="تصویر ورودی" id="تصویر_ورودی"></th>
+	<th><img src="/opencv-book/media/image62.jpeg" alt="نتیجه آستانه‌گذاری صفر با آستانه 100" id="نتیجه_آستانه‌گذاری_صفر_با_آستانه_100"></th>
 </tr>
 </thead>
 <tbody>
@@ -541,13 +554,13 @@ void Threshold_Demo( int, void* )
 </tbody>
 </table>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image63.jpeg" alt="نتیجه آستانه‌گذاری صفر معکوس با آستانه 100" id="" /></th>
-	<th><img src="/opencv-book/media/image64.jpeg" alt="نتیجه آستانه‌گذاری باینری با آستانه 100" id="" /></th>
+	<th><img src="/opencv-book/media/image63.jpeg" alt="نتیجه آستانه‌گذاری صفر معکوس با آستانه 100" id="نتیجه_آستانه‌گذاری_صفر_معکوس_با_آستانه_100"></th>
+	<th><img src="/opencv-book/media/image64.jpeg" alt="نتیجه آستانه‌گذاری باینری با آستانه 100" id="نتیجه_آستانه‌گذاری_باینری_با_آستانه_100"></th>
 </tr>
 </thead>
 <tbody>
@@ -558,13 +571,13 @@ void Threshold_Demo( int, void* )
 </tbody>
 </table>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image65.jpeg" alt="نتیجه آستانه‌گذاری باینری معکوس با آستانه 100" id="" /></th>
-	<th><img src="/opencv-book/media/image66.jpeg" alt="نتیجه آستانه‌گذاری بریدن با آستانه 100" id="" /></th>
+	<th><img src="/opencv-book/media/image65.jpeg" alt="نتیجه آستانه‌گذاری باینری معکوس با آستانه 100" id="نتیجه_آستانه‌گذاری_باینری_معکوس_با_آستانه_100"></th>
+	<th><img src="/opencv-book/media/image66.jpeg" alt="نتیجه آستانه‌گذاری بریدن با آستانه 100" id="نتیجه_آستانه‌گذاری_بریدن_با_آستانه_100"></th>
 </tr>
 </thead>
 <tbody>
@@ -576,7 +589,7 @@ void Threshold_Demo( int, void* )
 </table>
 
 <div class="footnotes">
-<hr />
+<hr>
 <ol>
 
 <li id="fn:a"><p>Threshold binary<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
@@ -590,8 +603,7 @@ void Threshold_Demo( int, void* )
 <li id="fn:e"><p>Threshold to zero, inverted<a href="#fnref:e" class="reversefootnote">&#160;&#8617;</a></p></li>
 
 </ol>
-</div>
-
+</div>
     </div>
   
 
@@ -631,7 +643,7 @@ void Threshold_Demo( int, void* )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -652,7 +664,7 @@ void Threshold_Demo( int, void* )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

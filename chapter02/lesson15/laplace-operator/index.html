@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -271,11 +269,11 @@
     <a name="more"></a>
 <p>در بخش قبل با نحوهٔ استفاده از عملگر سابل آشنا شدید. این عملگر بر مبنای تغییرات روشنایی پیکسل‌های عکس بود. با گرفتن مشتق اول از تابع روشنایی دیدیم که می‌توان لبه را به عنوان یک بیشینه در نظر گرفت. مثلاً مشتق اول یک تابع می‌تواند به شکل زیر باشد:</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image83.png" alt="یک تابع و مشتق آن" id="" /></th>
+	<th><img src="/opencv-book/media/image83.png" alt="یک تابع و مشتق آن" id="یک_تابع_و_مشتق_آن"></th>
 </tr>
 </thead>
 <tbody>
@@ -287,11 +285,11 @@
 
 <p>و وقتی مشتق دوم گرفته شود به شکل زیر خواهد بود:</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image84.png" alt="مشتق دوم تابع بالا" id="" /></th>
+	<th><img src="/opencv-book/media/image84.png" alt="مشتق دوم تابع بالا" id="مشتق_دوم_تابع_بالا"></th>
 </tr>
 </thead>
 <tbody>
@@ -311,7 +309,7 @@
 
 <p>در اُ سی وی تابعی به نام Laplacian وجود دارد که معادلهٔ بالا را پیاده سازی کرده است. در واقع از آنجایی که لاپلاس از گرادیان‌های تصویر استفاده می‌کند، این تابع به صورت داخلی از عملگر سابل برای محاسباتش استفاده می‌کند.</p>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -362,7 +360,7 @@ int main( int argc, char** argv )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>در خط 27 به منظور کاهش نویز از فیلتر هموار ساز گوسی استفاده می‌کنیم.</p>
 
@@ -378,15 +376,15 @@ int main( int argc, char** argv )
 
 <p>در خط 39 خروجی تابع Laplacian را به نوع CV_8U تبدیل می‌کنیم.</p>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image85.png" alt="تصویر ورودی" id="" /></th>
-	<th><img src="/opencv-book/media/image86.png" alt="تصویر خروجی" id="" /></th>
+	<th><img src="/opencv-book/media/image85.png" alt="تصویر ورودی" id="تصویر_ورودی"></th>
+	<th><img src="/opencv-book/media/image86.png" alt="تصویر خروجی" id="تصویر_خروجی"></th>
 </tr>
 </thead>
 <tbody>
@@ -397,8 +395,7 @@ int main( int argc, char** argv )
 </tbody>
 </table>
 
-<p>درخت‌ها و نیمرخ گاو خوب در آمده‌اند؛ البته ناحیه‌هایی که دارای روشنایی یکسان هستند، مثل اطراف سر گاو، خیلی خوب نشده‌اند. همانطور که می‌بینید به دلیل کنتراست زیاد ناحیه سقف خانه پشت گاو، لبه‌ها خیلی واضح مشخص شده‌اند.</p>
-
+<p>درخت‌ها و نیمرخ گاو خوب در آمده‌اند؛ البته ناحیه‌هایی که دارای روشنایی یکسان هستند، مثل اطراف سر گاو، خیلی خوب نشده‌اند. همانطور که می‌بینید به دلیل کنتراست زیاد ناحیه سقف خانه پشت گاو، لبه‌ها خیلی واضح مشخص شده‌اند.</p>
     </div>
   
 
@@ -438,7 +435,7 @@ int main( int argc, char** argv )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -459,7 +456,7 @@ int main( int argc, char** argv )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

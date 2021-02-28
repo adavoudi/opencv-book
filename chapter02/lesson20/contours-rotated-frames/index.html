@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -269,7 +267,7 @@
 
     <div class="content-body content">
     <a name="more"></a>
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -320,7 +318,8 @@ void thresh_callback(int, void* )
     /// Detect edges using Threshold
     threshold( src_gray, threshold_output, thresh, 255, THRESH_BINARY );
     /// Find contours
-    findContours( threshold_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+    findContours( threshold_output, contours, hierarchy,
+        CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
 
     /// Find the rotated rectangles and ellipses for each contour
     vector&lt;RotatedRect&gt; minRect( contours.size() );
@@ -353,7 +352,7 @@ void thresh_callback(int, void* )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>در خط 41 تابع thresh_callback تعریف شده است. در این تابع ابتدا یک ماتریس برای نگه داری خروجی تابع threshold درست می‌کنیم. همچنین یک بردار دو بعدی از نوع Point برای نگه داری کانتورهای به دست آمده و یک بردار تک بعدی از نوع Vec4i برای نگه داری خروجی اختیاری تابع findContours، یعنی hierarchy، تعریف می‌کنیم.</p>
 
@@ -361,26 +360,26 @@ void thresh_callback(int, void* )
 
 <p>در خط 50 با فراخوانی تابع findContours، کانتورهای تصویر خروجی تابع threshold (یعنی threshold_output) را پیدا می‌کنیم.</p>
 
-<p>در خطوط 53 و 54 دو بردار از نوع RotatedRect برای نگه داری مستطیل‌ها و بیضی‌های کشف شده درست می‌کنیم.</p>
+<p>در خطوط 54 و 55 دو بردار از نوع RotatedRect برای نگه داری مستطیل‌ها و بیضی‌های کشف شده درست می‌کنیم.</p>
 
 <p>در حلقه موجود در خط 56، روی هر کدام از کانتورها عملیات زیر را انجام می‌دهیم:</p>
 
 <ol>
-<li>ابتدا در خط 57 با استفاده از تابع minAreaRect کوچک‌ترین مستطیل در بر گیرندهٔ همهٔ نقاط کانتور <code>contours[i]</code> را پیدا می‌کنیم و آن را در <code>minRect[i]</code> قرار می‌دهیم.</li>
-<li>سپس در خط 59 با استفاده از تابع fitEllipse و به شرطی که تعداد نقاط موجود در <code>contours[i]</code> بیشتر از 5 عدد باشد، کوچترین بیضی که در برگیرندهٔ همهٔ نقاط <code>contours[i]</code> است را پیدا می‌کنیم و آن را در <code>minEllipse[i]</code> قرار می‌دهیم.</li>
+<li>ابتدا در خط 58 با استفاده از تابع minAreaRect کوچک‌ترین مستطیل در بر گیرندهٔ همهٔ نقاط کانتور <code>contours[i]</code> را پیدا می‌کنیم و آن را در <code>minRect[i]</code> قرار می‌دهیم.</li>
+<li>سپس در خط 60 با استفاده از تابع fitEllipse و به شرطی که تعداد نقاط موجود در <code>contours[i]</code> بیشتر از 5 عدد باشد، کوچترین بیضی که در برگیرندهٔ همهٔ نقاط <code>contours[i]</code> است را پیدا می‌کنیم و آن را در <code>minEllipse[i]</code> قرار می‌دهیم.</li>
 </ol>
 
-<p>سپس در خطوط 64 تا 75 در یک حلقه حرکت می‌کنیم و کانتورها و قاب‌های مستطیلی و بیضوی آنها را روی تصویر drawing می‌کشیم. برای کشیدن قاب‌های مستطیلی چرخیده، چون تابعی برای این کار نداریم، ابتدا نقاط مربوط به چهار گوشهٔ مستطیل را به دست می‌آوریم و سپس مستطیل را به صورت چهار خط می‌کشیم.</p>
+<p>سپس در خطوط 65 تا 76 در یک حلقه حرکت می‌کنیم و کانتورها و قاب‌های مستطیلی و بیضوی آنها را روی تصویر drawing می‌کشیم. برای کشیدن قاب‌های مستطیلی چرخیده، چون تابعی برای این کار نداریم، ابتدا نقاط مربوط به چهار گوشهٔ مستطیل را به دست می‌آوریم و سپس مستطیل را به صورت چهار خط می‌کشیم.</p>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image97.png" alt="تصویر ورودی" id="" /></th>
-	<th><img src="/opencv-book/media/image98.png" alt="تصویر خروجی" id="" /></th>
+	<th><img src="/opencv-book/media/image97.png" alt="تصویر ورودی" id="تصویر_ورودی"></th>
+	<th><img src="/opencv-book/media/image98.png" alt="تصویر خروجی" id="تصویر_خروجی"></th>
 </tr>
 </thead>
 <tbody>
@@ -389,8 +388,7 @@ void thresh_callback(int, void* )
 	<td align="center">تصویر خروجی</td>
 </tr>
 </tbody>
-</table>
-
+</table>
     </div>
   
 
@@ -430,7 +428,7 @@ void thresh_callback(int, void* )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -451,7 +449,7 @@ void thresh_callback(int, void* )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

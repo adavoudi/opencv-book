@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -286,11 +284,11 @@
 
 <p>هرم را به صورت یک مجموعه از لایه‌ها در نظر بگیرید که هر چه لایه در سطح بالاتری قرار گرفته باشد، کوچک‌تر خواهد بود.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image50.png" alt="هرم تصویر (سطح زیرین تصویر اصلی است)" id="" /></th>
+	<th><img src="/opencv-book/media/image50.png" alt="هرم تصویر (سطح زیرین تصویر اصلی است)" id="هرم_تصویر__سطح_زیرین_تصویر_اصلی_است_"></th>
 </tr>
 </thead>
 <tbody>
@@ -307,7 +305,7 @@
 <ul>
 <li><p>$G_{i}$ را با یک کرنل گوسی زیر کانوالو می‌کنیم:</p>
 
-<p><img src="/opencv-book/media/image51.png" alt="mage5" id="mage5" /></p></li>
+<p><img src="/opencv-book/media/image51.png" alt="mage5" id="mage5"></p></li>
 <li><p>همهٔ سطرها و ستون‌های زوج را پاک می‌کنیم.</p></li>
 </ul>
 
@@ -322,7 +320,7 @@
 
 <p>دو رویهٔ بالا (یعنی کوچک نمایی و بزرگ‌نمایی)، در توابع pyrDown و pyrUp پیاده سازی شده‌اند.</p>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -385,7 +383,7 @@ int main( int argc, char** argv )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>در خط 44 مشخص شده که اگر کاربر کلید ESC را فشار دهد از برنامه خارج شود.</p>
 
@@ -407,18 +405,18 @@ int main( int argc, char** argv )
 
 <p>توجه داشته باشید که ابعاد تصویر ورودی به توابع pyrDown و pyrUp باید حتماً ضریبی از دو باشد، در غیر این صورت خطایی مبتنی بر رعایت نکردن این محدودیت دریافت خواهید کرد.</p>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
 <p>برنامه را به صورت زیر اجرا می‌کنیم:</p>
 
 <pre><code class="language-powershell">PyrUpDown.exe "PICTURES /1.jpg"
 </code></pre>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image52.jpg" alt="تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image52.jpg" alt="تصویر ورودی" id="تصویر_ورودی"></th>
 </tr>
 </thead>
 <tbody>
@@ -428,11 +426,11 @@ int main( int argc, char** argv )
 </tbody>
 </table>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image53.jpg" alt="نتیجه دو بار کوچک‌نمایی تصویر اصلی" id="" /></th>
+	<th><img src="/opencv-book/media/image53.jpg" alt="نتیجه دو بار کوچک‌نمایی تصویر اصلی" id="نتیجه_دو_بار_کوچک‌نمایی_تصویر_اصلی"></th>
 </tr>
 </thead>
 <tbody>
@@ -442,11 +440,11 @@ int main( int argc, char** argv )
 </tbody>
 </table>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image54.jpg" alt="نتیجه دو بار بزرگ‌نمایی تصویر کوچک شده" id="" /></th>
+	<th><img src="/opencv-book/media/image54.jpg" alt="نتیجه دو بار بزرگ‌نمایی تصویر کوچک شده" id="نتیجه_دو_بار_بزرگ‌نمایی_تصویر_کوچک_شده"></th>
 </tr>
 </thead>
 <tbody>
@@ -459,7 +457,7 @@ int main( int argc, char** argv )
 <p>همانطور که می‌بینید تصویر آخر دارای وضوح کمتری نسبت به تصویر ورودی است.</p>
 
 <div class="footnotes">
-<hr />
+<hr>
 <ol>
 
 <li id="fn:a"><p>Gaussian pyramid<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
@@ -467,8 +465,7 @@ int main( int argc, char** argv )
 <li id="fn:b"><p>Laplacian pyramid<a href="#fnref:b" class="reversefootnote">&#160;&#8617;</a></p></li>
 
 </ol>
-</div>
-
+</div>
     </div>
   
 
@@ -508,7 +505,7 @@ int main( int argc, char** argv )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -529,7 +526,7 @@ int main( int argc, char** argv )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

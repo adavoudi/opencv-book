@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -271,7 +269,7 @@
     <a name="more"></a>
 <p>در این بخش می‌خواهیم شما را با شیوه استاندارد ذخیره سازی و بازیابی داده ساختارهای موجود در اُ سی وی آشنا کنیم. البته با این روش می‌توان داده ساختارهایی که به نوعی از داده ساختارهای اُ سی وی درست شده‌اند را نیز ذخیره/بازیابی کرد.</p>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include &lt;opencv2/core/core.hpp&gt;
 #include &lt;iostream&gt;
@@ -282,14 +280,15 @@ using namespace std;
 
 static void help(char** av)
 {
-    cout &lt;&lt; endl
-        &lt;&lt; av[0] &lt;&lt; " shows the usage of the OpenCV serialization functionality." &lt;&lt; endl &lt;&lt; "usage: " &lt;&lt; endl
-        &lt;&lt;  av[0] &lt;&lt; " outputfile.yml.gz" &lt;&lt; endl
-        &lt;&lt; "The output file may be either XML (xml) or YAML (yml/yaml). You can even compress it by "
-        &lt;&lt; "specifying this in its extension like xml.gz yaml.gz etc... " &lt;&lt; endl
-        &lt;&lt; "With FileStorage you can serialize objects in OpenCV by using the &lt;&lt; and &gt;&gt; operators" &lt;&lt; endl
-        &lt;&lt; "For example: - create a class and have it serialized"                         &lt;&lt; endl
-        &lt;&lt; "             - use it to read and write matrices."                            &lt;&lt; endl;
+cout &lt;&lt; endl
+&lt;&lt; av[0] &lt;&lt; " shows the usage of the OpenCV serialization functionality." &lt;&lt; endl
+&lt;&lt; "usage: " &lt;&lt; endl
+&lt;&lt; av[0] &lt;&lt; " outputfile.yml.gz" &lt;&lt; endl
+&lt;&lt; "The output file may be either XML (xml) or YAML (yml/yaml). You can even compress it by "
+&lt;&lt; "specifying this in its extension like xml.gz yaml.gz etc... " &lt;&lt; endl
+&lt;&lt; "With FileStorage you can serialize objects in OpenCV by using the &lt;&lt; and &gt;&gt; operators" &lt;&lt; endl
+&lt;&lt; "For example: - create a class and have it serialized"                         &lt;&lt; endl
+&lt;&lt; "             - use it to read and write matrices."                            &lt;&lt; endl;
 }
 
 class MyData
@@ -297,13 +296,16 @@ class MyData
 public:
     MyData() : A(0), X(0), id()
     {}
-    explicit MyData(int) : A(97), X(CV_PI), id("mydata1234") // explicit to avoid implicit conversion
+    // explicit to avoid implicit conversion
+    explicit MyData(int) : A(97), X(CV_PI), id("mydata1234") 
     {}
-    void write(FileStorage&amp; fs) const                        //Write serialization for this class
+    //Write serialization for this class
+    void write(FileStorage&amp; fs) const
     {
         fs &lt;&lt; "{" &lt;&lt; "A" &lt;&lt; A &lt;&lt; "X" &lt;&lt; X &lt;&lt; "id" &lt;&lt; id &lt;&lt; "}";
     }
-    void read(const FileNode&amp; node)                          //Read serialization for this class
+    //Read serialization for this class
+    void read(const FileNode&amp; node)
     {
         A = (int)node["A"];
         X = (double)node["X"];
@@ -416,19 +418,20 @@ int main(int ac, char** av)
         cout &lt;&lt; "MyData = " &lt;&lt; endl &lt;&lt; m &lt;&lt; endl &lt;&lt; endl;
 
         //Show default behavior for non existing nodes
-        cout &lt;&lt; "Attempt to read NonExisting (should initialize the data structure with its default).";
+        cout &lt;&lt; "Attempt to read NonExisting"
+        " (should initialize the data structure with its default).";
         fs["NonExisting"] &gt;&gt; m;
         cout &lt;&lt; endl &lt;&lt; "NonExisting = " &lt;&lt; endl &lt;&lt; m &lt;&lt; endl;
     }
 
     cout &lt;&lt; endl
-        &lt;&lt; "Tip: Open up " &lt;&lt; filename &lt;&lt; " with a text editor to see the serialized data." &lt;&lt; endl;
+    &lt;&lt; "Tip: Open up " &lt;&lt; filename &lt;&lt; " with a text editor to see the serialized data." &lt;&lt; endl;
 
     return 0;
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>در این بخش فقط در مورد فایل‌های XML و YAML صحبت می‌کنیم. فایل ورودی/خروجی شما ممکن است فقط یکی از این دو فرمت را داشته باشد.</p>
 
@@ -488,7 +491,7 @@ fs["T"] &gt;&gt; T;
 
 <p>برای دنباله‌ها، قبل از آیتم اول کاراکتر [ و بعد از آیتم آخر نیز کاراکتر ] را قرار می‌دهیم:</p>
 
-<pre><code class="language-c++">fs &lt;&lt; "strings" &lt;&lt; "[";                // text - string sequence
+<pre><code class="language-c++">fs &lt;&lt; "strings" &lt;&lt; "["; // text - string sequence
 fs &lt;&lt; "image1.jpg" &lt;&lt; "Awesomeness" &lt;&lt; "baboon.jpg";
 fs &lt;&lt; "]"; // close sequence
 </code></pre>
@@ -577,7 +580,7 @@ fs["MyData"] &gt;&gt; m; // Read your own structure_
 </code></pre></li>
 </ol>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
 <p>برنامه را به صورت زیر اجرا می‌کنیم:</p>
 
@@ -648,7 +651,7 @@ MyData:
 <p>.</p>
 
 <div class="footnotes">
-<hr />
+<hr>
 <ol>
 
 <li id="fn:32"><p>Serializing<a href="#fnref:32" class="reversefootnote">&#160;&#8617;</a></p></li>
@@ -658,8 +661,7 @@ MyData:
 <li id="fn:34"><p>Element sequence<a href="#fnref:34" class="reversefootnote">&#160;&#8617;</a></p></li>
 
 </ol>
-</div>
-
+</div>
     </div>
   
 
@@ -699,7 +701,7 @@ MyData:
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -720,7 +722,7 @@ MyData:
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

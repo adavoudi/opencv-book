@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -272,27 +270,41 @@
 <p>برای مقایسهٔ دو بافت‌نگار H1 و H2 باید ابتدا معیاری برای بیان میزان شباهت دو بافت‌نگار انتخاب کرد. در اُ سی وی برای مقایسهٔ بافت‌نگارها از تابع comapreHist استفاده می‌شود. این تابع سه معیار شباهت در اختیار ما قرار می‌دهد:</p>
 
 <ol>
-<li><p><strong>همبستگی</strong><a href="#fn:a" id="fnref:a" class="footnote">1</a> <strong>(CV_COMP_CORREL):</strong></p>
+<li><strong>همبستگی</strong><a href="#fn:a" id="fnref:a" class="footnote">1</a> <strong>(CV_COMP_CORREL):</strong></li>
+</ol>
 
-<p>$$d\left( H_{1},H_{2} \right) = \frac{\sum_{I}^{}{\left( H_{1}\left( I \right) - H_{1}^{'} \right)\left( H_{2}\left( I \right) - H_{2}^{'} \right)}}{\sqrt{\sum_{I}^{}{\left( H_{1}\left( I \right) - H_{1}^{'} \right)^{2}\ \sum_{I}^{}\left( H_{2}\left( I \right) - H_{2}^{'} \right)^{2}}}}$$</p>
+<div>
+   $$d\left( H_{1},H_{2} \right) = \frac{\sum_{I}^{}{\left( H_{1}\left( I \right) - H_{1}^{'} \right)\left( H_{2}\left( I \right) - H_{2}^{'} \right)}}{\sqrt{\sum_{I}^{}{\left( H_{1}\left( I \right) - H_{1}^{'} \right)^{2}\ \sum_{I}^{}\left( H_{2}\left( I \right) - H_{2}^{'} \right)^{2}}}}$$
+   </div>
 
 <p>که</p>
 
-<p>$$H_{k}^{'} = \frac{1}{N}\sum_{J}^{}{H_{k}(J)}$$</p>
+<div>
+   $$H_{k}^{'} = \frac{1}{N}\sum_{J}^{}{H_{k}(J)}$$
+   </div>
 
-<p>و N هم تعداد سطل‌های بافت‌نگار است.</p></li>
-<li><p><strong>کای-اسکوئر</strong><a href="#fn:b" id="fnref:b" class="footnote">2</a> <strong>(CV_COMP_CHISQR):</strong></p>
+<p>و N هم تعداد سطل‌های بافت‌نگار است.</p>
 
-<p>$$d\left( H_{1},H_{2} \right) = \sum_{I}^{}\frac{\left( H_{1}\left( I \right) - H_{2}\left( I \right) \right)^{2}}{H_{1}\left( I \right)}$$</p></li>
+<ol>
+<li><strong>کای-اسکوئر</strong><a href="#fn:b" id="fnref:b" class="footnote">2</a> <strong>(CV_COMP_CHISQR):</strong></li>
+</ol>
+
+<div>
+   $$d\left( H_{1},H_{2} \right) = \sum_{I}^{}\frac{\left( H_{1}\left( I \right) - H_{2}\left( I \right) \right)^{2}}{H_{1}\left( I \right)}$$
+   </div>
+
+<ol>
 <li><p><strong>اشتراک</strong><a href="#fn:c" id="fnref:c" class="footnote">3</a> <strong>(CV_COMP_INTERSECT):</strong></p>
 
 <p>$$d\left( H_{1},H_{2} \right) = \sum_{I}^{}{\min\left( H_{1}\left( I \right),\ H_{2}\left( I \right) \right)}$$</p></li>
-<li><p><strong>فاصلهٔ باتاچاریا</strong><a href="#fn:d" id="fnref:d" class="footnote">4</a> <strong>(CV_COMP_BHATTACHARYYA):</strong></p>
-
-<p>$$d\left( H_{1},H_{2} \right) = \sqrt{1 - \frac{1}{\sqrt{H_{1}^{'}\ H_{2}^{'}\ N^{2}}}\ \sum_{I}^{}\sqrt{H_{1}\left( I \right)\text{.\ }H_{2}\left( I \right)}}$$</p></li>
+<li><p><strong>فاصلهٔ باتاچاریا</strong><a href="#fn:d" id="fnref:d" class="footnote">4</a> <strong>(CV_COMP_BHATTACHARYYA):</strong></p></li>
 </ol>
 
-<h2>کد</h2>
+<div>
+   $$d\left( H_{1},H_{2} \right) = \sqrt{1 - \frac{1}{\sqrt{H_{1}^{'}\ H_{2}^{'}\ N^{2}}}\ \sum_{I}^{}\sqrt{H_{1}\left( I \right)\text{.\ }H_{2}\left( I \right)}}$$
+   </div>
+
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -315,8 +327,8 @@ int main( int argc, char** argv )
     /// Load three images with different environment settings
     if( argc &lt; 4 )
     {
-        printf("** Error. Usage: ./compareHist_Demo &lt;image_settings0&gt; &lt;image_setting1&gt; &lt;image_settings2&gt;\n");
-        return -1;
+    printf("*Error. Usage: ./compareHist_Demo &lt;image_settings0&gt; &lt;image_setting1&gt; &lt;image_settings2&gt;\n");
+    return -1;
     }
 
     src_base = imread( argv[1], 1 );
@@ -382,7 +394,7 @@ int main( int argc, char** argv )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>در خطوط 31 تا 33، تصاویر پایه را به فرمت HSV تبدیل می‌کنیم.</p>
 
@@ -394,15 +406,15 @@ int main( int argc, char** argv )
 
 <p>در خطوط 71 تا 81، به ترتیب چهار بار تابع مقایسه را بین بافت‌نگار تصویر پایه و بافت‌نگار تصاویر دیگر اعمال می‌کنیم.</p>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
 <p>سه تصویر زیر را به عنوان ورودی به کار می‌بریم:</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image124.png" alt="تصاویر ورودی به برنامه-تصویر سمت چپ، تصویر پایه است" id="" /></th>
+	<th><img src="/opencv-book/media/image124.png" alt="تصاویر ورودی به برنامه-تصویر سمت چپ، تصویر پایه است" id="تصاویر_ورودی_به_برنامه-تصویر_سمت_چپ__تصویر_پایه_است"></th>
 </tr>
 </thead>
 <tbody>
@@ -418,12 +430,12 @@ int main( int argc, char** argv )
 
 <p>خروجی برنامه به صورت زیر است:</p>
 
-<table>
-<col align="center" />
-<col align="center" />
-<col align="center" />
-<col align="center" />
-<col />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
+<col align="center">
+<col align="center">
+<col>
 <thead>
 <tr>
 	<th>BASE-TEST2</th>
@@ -468,7 +480,7 @@ int main( int argc, char** argv )
 <p>در روش‌های همبستگی و اشتراکی هر چه نتیجه بزرگتر باشد، شباهت بیشتر است. همانطور که انتظار داشتیم نتیجهٔ مقایسهٔ پایه با خودش، بزرگ‌ترین مقدار را دارد. همچنین نتیجهٔ مقایسه بافت‌نگار پایه با بافت‌نگار تصویر نصفه، دومین بزرگترین مقدار است. در دو روش دیگر، هر چه نتیجه کوچکتر باشد شباهت بیشتر است.</p>
 
 <div class="footnotes">
-<hr />
+<hr>
 <ol>
 
 <li id="fn:a"><p>Correlation<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
@@ -480,8 +492,7 @@ int main( int argc, char** argv )
 <li id="fn:d"><p>Bhattacharyya<a href="#fnref:d" class="reversefootnote">&#160;&#8617;</a></p></li>
 
 </ol>
-</div>
-
+</div>
     </div>
   
 
@@ -521,7 +532,7 @@ int main( int argc, char** argv )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -542,7 +553,7 @@ int main( int argc, char** argv )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -271,7 +269,9 @@
     <a name="more"></a>
 <p>تبدیل فوریه تصویر را به مؤلفه‌های سینوسی و کسینوسی آن تبدیل می‌کند. به عبارت دیگر، تصویر را از دامنهٔ مکانی<a href="#fn:a" id="fnref:a" class="footnote">1</a> به دامنهٔ زمانی یا فرکانسی<a href="#fn:b" id="fnref:b" class="footnote">2</a> می‌برد. اصل قضیه این است که هر تابع را می‌توان به صورت جمع تعداد بینهایت سینوس و کسینوس درآورد و تبدیل فوریه راهی برای انجام این کار است. به صورت ریاضی وار، تبدیل فوریهٔ دو بعدی برای یک تصویر به صورت زیر است:</p>
 
-<p>$$F\left( k,l \right) = \ \sum_{i = 0}^{N - 1}{\sum_{j = 0}^{N - 1}{f\left( i,j \right)\ e^{- i2\pi\left( \frac{\text{ki}}{N} + \frac{\text{lj}}{N} \right)}}}$$</p>
+<div>
+$$F\left( k,l \right) = \ \sum_{i = 0}^{N - 1}{\sum_{j = 0}^{N - 1}{f\left( i,j \right)\ e^{- i2\pi\left( \frac{\text{ki}}{N} + \frac{\text{lj}}{N} \right)}}}$$
+</div>
 
 <p>$$e^{\text{ix}} = cosx + isinx$$</p>
 
@@ -279,15 +279,15 @@
 
 <p>در زیر دامنه و فاز تصویر سمت چپ نشان داده شده است:</p>
 
-<table>
-<col align="center" />
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image99.gif" alt="تصویر فاز" id="" /></th>
-	<th><img src="/opencv-book/media/image100.gif" alt="تصویر دامنه لگاریتمی" id="" /></th>
-	<th><img src="/opencv-book/media/image101.gif" alt="تصویر اصلی" id="" /></th>
+	<th><img src="/opencv-book/media/image99.gif" alt="تصویر فاز" id="تصویر_فاز"></th>
+	<th><img src="/opencv-book/media/image100.gif" alt="تصویر دامنه لگاریتمی" id="تصویر_دامنه_لگاریتمی"></th>
+	<th><img src="/opencv-book/media/image101.gif" alt="تصویر اصلی" id="تصویر_اصلی"></th>
 </tr>
 </thead>
 <tbody>
@@ -301,13 +301,13 @@
 
 <p>برای بازسازی کامل یک تصویر از تبدیل فوریهٔ آن، هم به فاز و هم به دامنه آن تصویر نیاز است. در زیر می بینیدکه نتیجه بازسازی تصویر بالا فقط با استفاده از دامنه یا فاز آن به چه صورتی در می‌آید:</p>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image102.gif" alt="فقط فاز" id="" /></th>
-	<th><img src="/opencv-book/media/image103.gif" alt="فقط دامنه" id="" /></th>
+	<th><img src="/opencv-book/media/image102.gif" alt="فقط فاز" id="فقط_فاز"></th>
+	<th><img src="/opencv-book/media/image103.gif" alt="فقط دامنه" id="فقط_دامنه"></th>
 </tr>
 </thead>
 <tbody>
@@ -320,7 +320,7 @@
 
 <p>برای بازسازی یک تصویر فقط با استفاده از فاز آن باید مقدار دامنه را یک قرار دهیم و سپس عمل بازسازی را انجام دهیم. همچنین برای بازسازی یک تصویر فقط با استفاده از دامنه آن باید مقدار فاز را صفر قرار دهیم و سپس عمل بازسازی را انجام دهیم.</p>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/core/core.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -440,7 +440,7 @@ int main()
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>ابتدا در خطوط 42 و 43 دو تصویر را از روی دیسک به صورت سیاه و سفید می‌خوانیم. بهتر است که ابعاد هر دو تصویر یکسان باشد؛ البته اگر هم اندازه نباشند هم در ادامه اندازه تصویر دوم هم اندازه تصویر اول می‌کنیم. می‌خواهیم در ادامه فاز و دامنه این دو تصویر را حساب کنیم و نمایش دهیم.</p>
 
@@ -480,15 +480,15 @@ int main()
 
 <p>در خطوط 109 و 110 ماتریس‌هایی که از تبدیل فوریه معکوس به دست آمده بوداند را به نوعِ 8 بیتی تبدیل می‌کنیم و سرانجام در خطوط 112 و 113 خروجی نهایی را نشان می‌دهیم.</p>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image104.jpeg" alt="تصویر ورودی اول" id="" /></th>
-	<th><img src="/opencv-book/media/image105.jpeg" alt="تصویر ورودی دوم" id="" /></th>
+	<th><img src="/opencv-book/media/image104.jpeg" alt="تصویر ورودی اول" id="تصویر_ورودی_اول"></th>
+	<th><img src="/opencv-book/media/image105.jpeg" alt="تصویر ورودی دوم" id="تصویر_ورودی_دوم"></th>
 </tr>
 </thead>
 <tbody>
@@ -499,13 +499,13 @@ int main()
 </tbody>
 </table>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image106.jpeg" alt="بازسازی تصویر اول فقط با استفاده از فاز آن" id="" /></th>
-	<th><img src="/opencv-book/media/image107.jpeg" alt="بازسازی تصویر دوم فقط با استفاده از فاز آن" id="" /></th>
+	<th><img src="/opencv-book/media/image106.jpeg" alt="بازسازی تصویر اول فقط با استفاده از فاز آن" id="بازسازی_تصویر_اول_فقط_با_استفاده_از_فاز_آن"></th>
+	<th><img src="/opencv-book/media/image107.jpeg" alt="بازسازی تصویر دوم فقط با استفاده از فاز آن" id="بازسازی_تصویر_دوم_فقط_با_استفاده_از_فاز_آن"></th>
 </tr>
 </thead>
 <tbody>
@@ -516,13 +516,13 @@ int main()
 </tbody>
 </table>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image108.jpeg" alt="بازسازی تصویر اول فقط با استفاده از دامنه آن" id="" /></th>
-	<th><img src="/opencv-book/media/image109.jpeg" alt="بازسازی تصویر دوم فقط با استفاده از دامنه آن" id="" /></th>
+	<th><img src="/opencv-book/media/image108.jpeg" alt="بازسازی تصویر اول فقط با استفاده از دامنه آن" id="بازسازی_تصویر_اول_فقط_با_استفاده_از_دامنه_آن"></th>
+	<th><img src="/opencv-book/media/image109.jpeg" alt="بازسازی تصویر دوم فقط با استفاده از دامنه آن" id="بازسازی_تصویر_دوم_فقط_با_استفاده_از_دامنه_آن"></th>
 </tr>
 </thead>
 <tbody>
@@ -533,13 +533,13 @@ int main()
 </tbody>
 </table>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image110.jpeg" alt="بازسازی تصویر اول با استفاده از فاز خودش و دامنه تصویر دوم" id="" /></th>
-	<th><img src="/opencv-book/media/image111.jpeg" alt="بازسازی تصویر دوم با استفاده از فاز خودش و دامنه تصویر اول" id="" /></th>
+	<th><img src="/opencv-book/media/image110.jpeg" alt="بازسازی تصویر اول با استفاده از فاز خودش و دامنه تصویر دوم" id="بازسازی_تصویر_اول_با_استفاده_از_فاز_خودش_و_دامنه_تصویر_دوم"></th>
+	<th><img src="/opencv-book/media/image111.jpeg" alt="بازسازی تصویر دوم با استفاده از فاز خودش و دامنه تصویر اول" id="بازسازی_تصویر_دوم_با_استفاده_از_فاز_خودش_و_دامنه_تصویر_اول"></th>
 </tr>
 </thead>
 <tbody>
@@ -551,7 +551,7 @@ int main()
 </table>
 
 <div class="footnotes">
-<hr />
+<hr>
 <ol>
 
 <li id="fn:a"><p>Domain Spatial<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
@@ -567,8 +567,7 @@ int main()
 <li id="fn:f"><p>Phase<a href="#fnref:f" class="reversefootnote">&#160;&#8617;</a></p></li>
 
 </ol>
-</div>
-
+</div>
     </div>
   
 
@@ -608,7 +607,7 @@ int main()
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -629,7 +628,7 @@ int main()
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

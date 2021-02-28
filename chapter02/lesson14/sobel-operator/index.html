@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -271,11 +269,11 @@
     <a name="more"></a>
 <p>پیدا کردن مشتق‌های یک تصویر در کاربردهایی مثل یافتن لبه‌های موجود در تصویر مفید است.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image78.png" alt="قسمت مشخص شده با دایره قرمز یک لبه است" id="" /></th>
+	<th><img src="/opencv-book/media/image78.png" alt="قسمت مشخص شده با دایره قرمز یک لبه است" id="قسمت_مشخص_شده_با_دایره_قرمز_یک_لبه_است"></th>
 </tr>
 </thead>
 <tbody>
@@ -289,11 +287,11 @@
 
 <p>برای اینکه قضیه واضح‌تر شود، فرض کنید یک تصویر تک بعدی به صورت زیر داریم. محلی که با دایره قرمز مشخص شده است یک لبه است. این نقطه جایی است که تغییر قابل توجهی در شدت روشنایی دارد.</p>
 
-<table>
-<col />
+<table class="markmod_table">
+<col>
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image79.png" alt="یک تصویر یک بعدی- ناحیه مشخص شده با دایره قرمز یک لبه است" id="" /></th>
+	<th><img src="/opencv-book/media/image79.png" alt="یک تصویر یک بعدی- ناحیه مشخص شده با دایره قرمز یک لبه است" id="یک_تصویر_یک_بعدی-<em>ناحیه</em>مشخص_شده_با_دایره_قرمز_یک_لبه_است"></th>
 </tr>
 </thead>
 <tbody>
@@ -305,11 +303,11 @@
 
 <p>می‌توان محل لبه‌ها را به راحتی با گرفتن مشتق اول پیدا کرد (در اینجا به شکل یک نقطهٔ بیشینه در آمده است).</p>
 
-<table>
-<col />
+<table class="markmod_table">
+<col>
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image80.png" alt="مشتق تصویر تک بعدی قبل" id="" /></th>
+	<th><img src="/opencv-book/media/image80.png" alt="مشتق تصویر تک بعدی قبل" id="مشتق_تصویر_تک_بعدی_قبل"></th>
 </tr>
 </thead>
 <tbody>
@@ -334,26 +332,32 @@
 
 <p>i. <strong>مشتق افقی:</strong> از طریق کانوالو I با کرنلی با اندازهٔ فرد به دست می‌آید. مثلاً برای کرنلی با اندازهٔ 3، $G_{x}$ (مشتق در راستای افقی) به شکل زیر به دست می‌آید:</p>
 
-<p>$$
+<p><span>
+$$
 G_{x} = \begin{bmatrix}
     - 1 &amp; 0 &amp; + 1 \\
     - 2 &amp; 0 &amp; + 2 \\
     - 1 &amp; 0 &amp; + 1
 \end{bmatrix}*I
-$$</p>
+$$
+</span></p>
 
 <p>ii. <strong>مشتق عمودی:</strong> از طریق کانوالو I با کرنلی با اندازهٔ فرد به دست می‌آید. مثلاً برای کرنلی با اندازهٔ 3، $G_{y}$ (مشتق در راستای عمودی) به شکل زیر به دست می‌آید:</p>
 
-<p>$$
+<p><span>
+$$
 G_{y} = \begin{bmatrix}
     - 1 &amp; - 2 &amp; - 1 \\
     0 &amp; 0 &amp; 0 \\
     + 1 &amp; + 2 &amp; + 1
 \end{bmatrix}*I
-$$</p></li>
+$$
+</span></p></li>
 <li><p>برای به دست آوردن گرادیان پیکسل‌های تصویر باید $G_{x}$ و $G_{y}$ را به شکل زیر با هم ترکیب کرد:</p>
 
-<p>$$G = \sqrt{G_{x}^{2} + G_{y}^{2}}$$</p>
+<div>
+$$G = \sqrt{G_{x}^{2} + G_{y}^{2}}$$
+</div>
 
 <p>البته بعضی اوقات از معادله ساده‌تر زیر هم استفاده می‌شود:</p>
 
@@ -362,23 +366,27 @@ $$</p></li>
 
 <p><strong>نکته: وقتی اندازهٔ کرنل 3 است، کرنل سابلی که در قسمت قبل نشان داده شد می‌تواند به صورت قابل توجه ای نتایج نادرست تولید کند (به هر حال سابل فقط یک تقریب برای مشتقات است). در اُ سی وی برای حل این مشکل تابع Scharr ارائه شده که به اندازهٔ سابل سریع است و البته در عین حال دقتی بسیار بیشتر از آن دارد. تابع Scharr از کرنل‌های زیر استفاده می‌کند:</strong></p>
 
-<p>$$
+<p><span>
+$$
 \mathbf{G}_{\mathbf{x}}\mathbf{=}\begin{bmatrix}
 \mathbf{- 3} &amp; \mathbf{0} &amp; \mathbf{+ 3} \\
 \mathbf{- 10} &amp; \mathbf{0} &amp; \mathbf{+ 10} \\
 \mathbf{- 3} &amp; \mathbf{0} &amp; \mathbf{+ 3}
 \end{bmatrix}
-$$</p>
+$$
+</span></p>
 
-<p>$$
+<p><span>
+$$
 \mathbf{G}_{\mathbf{y}}\mathbf{=}\begin{bmatrix}
 \mathbf{- 3} &amp; \mathbf{- 10} &amp; \mathbf{- 3} \\
 \mathbf{0} &amp; \mathbf{0} &amp; \mathbf{0} \\
 \mathbf{+ 3} &amp; \mathbf{+ 10} &amp; \mathbf{+ 3}
 \end{bmatrix}
-$$</p>
+$$
+</span></p>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -439,7 +447,7 @@ int main( int argc, char** argv )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>در خط 27 برای کاهش نویز یک هموار سازی گوسی به تصویر ورودی اعمال می‌کنیم (با اندازه کرنل 3).</p>
 
@@ -460,15 +468,15 @@ int main( int argc, char** argv )
 
 <p>سرانجام در خط 50 برای تخمین گرادیان کلی، گردایان در جهت‌های x و y را با هم جمع می‌کنیم (توجه کنید که این کار اصلاً یک محاسبه دقیق نیست!! ولی کار ما را راه می‌اندازد).</p>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image81.png" alt="تصویر ورودی" id="" /></th>
-	<th><img src="/opencv-book/media/image82.png" alt="تصویر خروجی" id="" /></th>
+	<th><img src="/opencv-book/media/image81.png" alt="تصویر ورودی" id="تصویر_ورودی"></th>
+	<th><img src="/opencv-book/media/image82.png" alt="تصویر خروجی" id="تصویر_خروجی"></th>
 </tr>
 </thead>
 <tbody>
@@ -480,14 +488,13 @@ int main( int argc, char** argv )
 </table>
 
 <div class="footnotes">
-<hr />
+<hr>
 <ol>
 
 <li id="fn:a"><p>Sobel<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
 
 </ol>
-</div>
-
+</div>
     </div>
   
 
@@ -527,7 +534,7 @@ int main( int argc, char** argv )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -548,7 +555,7 @@ int main( int argc, char** argv )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

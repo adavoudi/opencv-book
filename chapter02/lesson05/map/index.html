@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -283,13 +281,13 @@
 
 <p>به راحتی می‌توان دید که نتیجهٔ این نگاشت چرخیدن عکس در جهت x است. مثلاً عکس زیر را در نظر بگیرید:</p>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image28.png" alt="تصویر نگاشت شده" id="" /></th>
-	<th><img src="/opencv-book/media/image29.png" alt="تصویر اصلی" id="" /></th>
+	<th><img src="/opencv-book/media/image28.png" alt="تصویر نگاشت شده" id="تصویر_نگاشت_شده"></th>
+	<th><img src="/opencv-book/media/image29.png" alt="تصویر اصلی" id="تصویر_اصلی"></th>
 </tr>
 </thead>
 <tbody>
@@ -302,7 +300,7 @@
 
 <p>به تغییر موقعیت دایره قرمز نسبت به X توجه کنید (با توجه به اینکه x جهت افقی است).</p>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -369,7 +367,8 @@ void update_map( void )
             switch( ind )
             {
             case 0:
-                if( i &gt; src.cols*0.25 &amp;&amp; i &lt; src.cols*0.75 &amp;&amp; j &gt; src.rows*0.25 &amp;&amp; j &lt; src.rows*0.75 )
+                if( i &gt; src.cols*0.25 &amp;&amp; i &lt; src.cols*0.75 &amp;&amp;
+                    j &gt; src.rows*0.25 &amp;&amp; j &lt; src.rows*0.75 )
                 {
                     map_x.at&lt;float&gt;(j,i) = 2*( i - src.cols*0.25 ) + 0.5 ;
                     map_y.at&lt;float&gt;(j,i) = 2*( j - src.rows*0.25 ) + 0.5 ;
@@ -398,7 +397,7 @@ void update_map( void )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>در خط 44 برای انجام نگاشت، تابع remap را صدا می‌زنیم. این تابع پنج آرگومان به شرح زیر دارد:</p>
 
@@ -429,15 +428,15 @@ void update_map( void )
 
 <p>تمام موارد بالا در خطوط 65 تا 88 پیاده سازی شده‌اند. در اینجا map_x نشان دهندهٔ مختص اول $h\left( i,\ j \right)$ و map_y مختص دوم آن است.</p>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image30.jpg" alt="تصویر ورودی" id="" /></th>
-	<th><img src="/opencv-book/media/image31.jpeg" alt="بالا به پایین کردن تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image30.jpg" alt="تصویر ورودی" id="تصویر_ورودی"></th>
+	<th><img src="/opencv-book/media/image31.jpeg" alt="بالا به پایین کردن تصویر ورودی" id="بالا_به_پایین_کردن_تصویر_ورودی"></th>
 </tr>
 </thead>
 <tbody>
@@ -448,13 +447,13 @@ void update_map( void )
 </tbody>
 </table>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image32.jpeg" alt="چپ به راست کردن تصویر ورودی" id="" /></th>
-	<th><img src="/opencv-book/media/image33.jpg" alt="بالا به پایین و چپ به راست کردن تصویر ورودی" id="" /></th>
+	<th><img src="/opencv-book/media/image32.jpeg" alt="چپ به راست کردن تصویر ورودی" id="چپ_به_راست_کردن_تصویر_ورودی"></th>
+	<th><img src="/opencv-book/media/image33.jpg" alt="بالا به پایین و چپ به راست کردن تصویر ورودی" id="بالا_به_پایین_و_چپ_به_راست_کردن_تصویر_ورودی"></th>
 </tr>
 </thead>
 <tbody>
@@ -465,11 +464,11 @@ void update_map( void )
 </tbody>
 </table>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image34.jpg" alt="کاهش اندازهٔ تصویر به نصف و نشان دادن آن در مرکز" id="" /></th>
+	<th><img src="/opencv-book/media/image34.jpg" alt="کاهش اندازهٔ تصویر به نصف و نشان دادن آن در مرکز" id="کاهش_اندازهٔ_تصویر_به_نصف_و_نشان_دادن_آن_در_مرکز"></th>
 </tr>
 </thead>
 <tbody>
@@ -477,8 +476,7 @@ void update_map( void )
 	<td align="center">کاهش اندازهٔ تصویر به نصف و نشان دادن آن در مرکز</td>
 </tr>
 </tbody>
-</table>
-
+</table>
     </div>
   
 
@@ -518,7 +516,7 @@ void update_map( void )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -539,7 +537,7 @@ void update_map( void )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

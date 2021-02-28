@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -273,7 +271,7 @@
 
 <p>برای تولید اعداد تصادفی از کلاس RNG استفاده خواهیم کرد.</p>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include &lt;opencv2/core/core.hpp&gt;
 #include &lt;opencv2/highgui/highgui.hpp&gt;
@@ -597,7 +595,7 @@ int Displaying_Big_End( Mat image, char* window_name, RNG )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>از تابع main شروع می‌کنیم. اولین کاری که در این تابع انجام داده‌ایم، ساخت یک شیء RNG است (خط 42). کلاس RNG یک سازندهٔ عدد تصادفی است. در این مثال rng یک شیء از نوع RNG است که با 0xFFFFFFFF مقداردهی اولیه شده است.</p>
 
@@ -617,7 +615,7 @@ int Displaying_Big_End( Mat image, char* window_name, RNG )
 <pre><code class="language-c++">pt1.x = rng.uniform( x_1, x_2 );
 pt1.y = rng.uniform( y_1, y_2 );
 </code></pre></li>
-<li>می دانیم که rng یک شیء RNG است. در کد بالا تابع <code>rng.uniform(a,b)</code> را صدا می‌زنیم. این تابع یک عدد تصادفی با توزیع یکنواخت بین مقادیر a و b تولید می‌کند (شامل a و فاقد b).</li>
+<li><p>می دانیم که rng یک شیء RNG است. در کد بالا تابع <code>rng.uniform(a,b)</code> را صدا می‌زنیم. این تابع یک عدد تصادفی با توزیع یکنواخت بین مقادیر a و b تولید می‌کند (شامل a و فاقد b).</p></li>
 <li><p>از توضیحات بالا متوجه می‌شویم که رأس‌های pt1 و pt2 کاملاً تصادفی خواهند بود؛ پس موقعیت خط‌ها غیر قابل پیش بینی می‌شود و این یک جلوهٔ بصری زیبا تولید می‌کند.</p></li>
 <li><p>توجه کنیدکه در تابع line به جای رنگ، تابع <code>randomColor(rng)</code> را قرار داده‌ایم. این تابع به شکل زیر پیاده سازی شده است:</p>
 
@@ -665,33 +663,32 @@ return Scalar( icolor&amp;255, (icolor&gt;&gt;8)&amp;255, (icolor&gt;&gt;16)&amp
 <p>همچنین به یاد داشته باشید که عمل تفریق خودش به صورت خودکار عمل saturate_cast را انجام می‌دهد تا همیشه مقادیر معتبر (که در این مثال بین 0 تا 255 است) را تولید کند.</p></li>
 </ul>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
 <p>روند اجرای برنامه به صورت زیر است:</p>
 
 <ol>
 <li><p>ابتدا به تعداد NUMBER خط تصادفی روی صفحه نشان داده می‌شود:</p>
 
-<p><img src="/opencv-book/media/image45.png" alt="mage4" id="mage4" /></p></li>
+<p><img src="/opencv-book/media/image45.png" alt="mage4" id="mage4"></p></li>
 <li><p>سپس تعدادی مستطیل تصادفی نشان داده می‌شود.</p></li>
 <li><p>حالا تعدادی بیضی با مختصات، اندازه، نازکی و اندازهٔ قوس تصادفی کشیده می‌شود.</p>
 
-<p><img src="/opencv-book/media/image46.png" alt="mage4" id="mage4" /></p></li>
+<p><img src="/opencv-book/media/image46.png" alt="mage4" id="mage4"></p></li>
 <li><p>بعد تعدادی چند ضلعی تو خالی کشیده می‌شود:</p>
 
-<p><img src="/opencv-book/media/image47.png" alt="mage4" id="mage4" /></p></li>
+<p><img src="/opencv-book/media/image47.png" alt="mage4" id="mage4"></p></li>
 <li><p>سپس چند ضلعی‌های توپُر.</p></li>
 <li><p>و آخرین شکل هندسی، دایره:</p>
 
-<p><img src="/opencv-book/media/image48.png" alt="mage4" id="mage4" /></p></li>
+<p><img src="/opencv-book/media/image48.png" alt="mage4" id="mage4"></p></li>
 <li><p>بعد از آن، متن "Testing text rendering" چندین بار با فونت، اندازه، رنگ و مختصات متفاوت نشان داده می‌شود.</p></li>
 <li><p>در نهایت عبارت OpenCV For Ever روی تصویر به تنهایی نمایش داده می‌شود.</p>
 
-<p><img src="/opencv-book/media/image49.png" alt="mage4" id="mage4" /></p>
+<p><img src="/opencv-book/media/image49.png" alt="mage4" id="mage4"></p>
 
 <p>​</p></li>
-</ol>
-
+</ol>
     </div>
   
 
@@ -731,7 +728,7 @@ return Scalar( icolor&amp;255, (icolor&gt;&gt;8)&amp;255, (icolor&gt;&gt;16)&amp
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -752,7 +749,7 @@ return Scalar( icolor&amp;255, (icolor&gt;&gt;8)&amp;255, (icolor&gt;&gt;16)&amp
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

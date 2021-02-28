@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -280,11 +278,11 @@
 
 <p>هدف پیدا کردن بزرگترین ناحیهٔ تطبیق است.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image129.png" alt="دو عنصر مورد نیاز برای انجام یک تطبیق الگو" id="" /></th>
+	<th><img src="/opencv-book/media/image129.png" alt="دو عنصر مورد نیاز برای انجام یک تطبیق الگو" id="دو_عنصر_مورد_نیاز_برای_انجام_یک_تطبیق_الگو"></th>
 </tr>
 </thead>
 <tbody>
@@ -296,11 +294,11 @@
 
 <p>برای پیدا کردن ناحیهٔ تطبیق باید تصویر الگو را روی تصویر منبع حرکت دهیم و هر قسمت از تصویر منبع را با تصویر الگو مقایسه کنیم.</p>
 
-<table>
-<col />
+<table class="markmod_table">
+<col>
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image130.png" alt="روند پیدا کردن یک تطبیق در تصویر منبع" id="" /></th>
+	<th><img src="/opencv-book/media/image130.png" alt="روند پیدا کردن یک تطبیق در تصویر منبع" id="روند_پیدا_کردن_یک_تطبیق_در_تصویر_منبع"></th>
 </tr>
 </thead>
 <tbody>
@@ -314,11 +312,11 @@
 
 <p>به ازای هر محل T روی I، مقدار حساب شده را در ماتریس R (ماتریس نتیجه) ذخیره می‌کنیم. هر محل (x,y) در R حاوی مقدار حساب شده برای آن محل است.</p>
 
-<table>
-<col />
+<table class="markmod_table">
+<col>
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image131.png" alt="مثالی از ماتریس R" id="r" /></th>
+	<th><img src="/opencv-book/media/image131.png" alt="مثالی از ماتریس R" id="مثالی_از_ماتریس_r"></th>
 </tr>
 </thead>
 <tbody>
@@ -335,33 +333,64 @@
 <p>اُ سی وی عملیات تطبیق الگو را در تابع matchTemplate پیاده سازی کرده است. روش‌های موجود به صورت زیر هستند:</p>
 
 <ol>
-<li><p><strong>CV_TM_SQDIFF</strong></p>
+<li><strong>CV_TM_SQDIFF</strong></li>
+</ol>
 
-<p>$$R\left( x,\ y \right) = \sum_{x^{'},y^{'}}^{}\left( T\left( x^{'},\ y^{'} \right) - I\left( x + x^{'},\ y + y^{'} \right) \right)^{2}$$</p></li>
-<li><p><strong>CV_TM_SQDIFF_NORMED</strong></p>
+<div>
+   $$R\left( x,\ y \right) = \sum_{x^{'},y^{'}}^{}\left( T\left( x^{'},\ y^{'} \right) - I\left( x + x^{'},\ y + y^{'} \right) \right)^{2}$$
+   </div>
 
-<p>$$R\left( x,\ y \right) = \frac{\sum_{x^{'},\ y^{'}}^{}\left( T\left( x^{'},\ y^{'} \right) - I\left( x + x^{'},\ y + y^{'} \right) \right)^{2}}{\sqrt{\sum_{x^{'},\ y^{'}}^{}{{T\left( x^{'},\ y^{'} \right)}^{2}\ }.\sum_{x^{'},\ y^{'}}^{}{I\left( x + x^{'},\ y + y^{'} \right)}^{2}}}$$</p></li>
-<li><p><strong>CV_TM_CCORR</strong></p>
+<ol>
+<li><strong>CV_TM_SQDIFF_NORMED</strong></li>
+</ol>
 
-<p>$$R\left( x,\ y \right) = \sum_{x^{'},y^{'}}^{}\left( T\left( x^{'},\ y^{'} \right).I\left( x + x^{'},\ y + y^{'} \right) \right)$$</p></li>
-<li><p><strong>CV_TM_CCORR_NORMED</strong></p>
+<div>
+   $$R\left( x,\ y \right) = \frac{\sum_{x^{'},\ y^{'}}^{}\left( T\left( x^{'},\ y^{'} \right) - I\left( x + x^{'},\ y + y^{'} \right) \right)^{2}}{\sqrt{\sum_{x^{'},\ y^{'}}^{}{{T\left( x^{'},\ y^{'} \right)}^{2}\ }.\sum_{x^{'},\ y^{'}}^{}{I\left( x + x^{'},\ y + y^{'} \right)}^{2}}}$$
+   </div>
 
-<p>$$R\left( x,\ y \right) = \frac{\sum_{x^{'},\ y^{'}}^{}{T\left( x^{'},\ y^{'} \right).I^{'}\left( x + x^{'},\ y + y^{'} \right)}}{\sqrt{\sum_{x^{'},\ y^{'}}^{}{{T\left( x^{'},\ y^{'} \right)}^{2}\ }.\sum_{x^{'},\ y^{'}}^{}{I\left( x + x^{'},\ y + y^{'} \right)}^{2}}}$$</p></li>
-<li><p><strong>CV_TM_CCOEFF</strong></p>
+<ol>
+<li><strong>CV_TM_CCORR</strong></li>
+</ol>
 
-<p>$$R\left( x,\ y \right) = \sum_{x^{'},y^{'}}^{}\left( T^{'}\left( x^{'},\ y^{'} \right)\text{\ .\ \ I}\left( x + x^{'},\ y + y^{'} \right) \right)$$</p>
+<div>
+   $$R\left( x,\ y \right) = \sum_{x^{'},y^{'}}^{}\left( T\left( x^{'},\ y^{'} \right).I\left( x + x^{'},\ y + y^{'} \right) \right)$$
+   </div>
+
+<ol>
+<li><strong>CV_TM_CCORR_NORMED</strong></li>
+</ol>
+
+<div>
+   $$R\left( x,\ y \right) = \frac{\sum_{x^{'},\ y^{'}}^{}{T\left( x^{'},\ y^{'} \right).I^{'}\left( x + x^{'},\ y + y^{'} \right)}}{\sqrt{\sum_{x^{'},\ y^{'}}^{}{{T\left( x^{'},\ y^{'} \right)}^{2}\ }.\sum_{x^{'},\ y^{'}}^{}{I\left( x + x^{'},\ y + y^{'} \right)}^{2}}}$$
+   </div>
+
+<ol>
+<li><strong>CV_TM_CCOEFF</strong></li>
+</ol>
+
+<div>
+   $$R\left( x,\ y \right) = \sum_{x^{'},y^{'}}^{}\left( T^{'}\left( x^{'},\ y^{'} \right)\text{\ .\ \ I}\left( x + x^{'},\ y + y^{'} \right) \right)$$
+   </div>
 
 <p>که</p>
 
-<p>$$T^{'}\left( x^{'},\ y^{'} \right) = T\left( x^{'},\ y^{'} \right) - \frac{1}{w. h}.\sum_{x^{''},y^{''}}^{}{T\left( x^{''},\ y^{''} \right)}$$</p>
+<div>
+   $$T^{'}\left( x^{'},\ y^{'} \right) = T\left( x^{'},\ y^{'} \right) - \frac{1}{w. h}.\sum_{x^{''},y^{''}}^{}{T\left( x^{''},\ y^{''} \right)}$$
+   </div>
 
-<p>$$I^{'}\left( x + x^{'},\ y + y^{'} \right) = I\left( x + x^{'},\ y + y^{'} \right) - \frac{1}{w.h}.\sum_{x^{''},y^{''}}^{}{I\left( x + x^{''},\ y + y^{''} \right)}$$</p></li>
-<li><p><strong>CV_TM_CCOEFF_NORMED</strong></p>
+<div>
+   $$I^{'}\left( x + x^{'},\ y + y^{'} \right) = I\left( x + x^{'},\ y + y^{'} \right) - \frac{1}{w.h}.\sum_{x^{''},y^{''}}^{}{I\left( x + x^{''},\ y + y^{''} \right)}$$
+   </div>
 
-<p>$$R\left( x,\ y \right) = \frac{\sum_{x^{'},\ y^{'}}^{}\left( T^{'}\left( x^{'},\ y^{'} \right).I^{'}\left( x + x^{'},\ y + y^{'} \right) \right)}{\sqrt{\sum_{x^{'},\ y^{'}}^{}{{T^{'}\left( x^{'},\ y^{'} \right)}^{2}\ }.\sum_{x^{'},\ y^{'}}^{}{I^{'}\left( x + x^{'},\ y + y^{'} \right)}^{2}}}$$</p></li>
+<ol>
+<li><strong>CV_TM_CCOEFF_NORMED</strong></li>
 </ol>
 
-<h2>کد</h2>
+<div>
+   $$R\left( x,\ y \right) = \frac{\sum_{x^{'},\ y^{'}}^{}\left( T^{'}\left( x^{'},\ y^{'} \right).I^{'}\left( x + x^{'},\ y + y^{'} \right) \right)}{\sqrt{\sum_{x^{'},\ y^{'}}^{}{{T^{'}\left( x^{'},\ y^{'} \right)}^{2}\ }.\sum_{x^{'},\ y^{'}}^{}{I^{'}\left( x + x^{'},\ y + y^{'} \right)}^{2}}}$$
+   </div>
+
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -450,7 +479,7 @@ void MatchingMethod( int, void* )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>در خط 59 با استفاده از تابع matchTemplate عملیات تطبیق الگو را اجرا می‌کنیم. آرگومان‌های این تابع تصویر ورودی (I)، الگو (T)، ماتریس نتیجه (R) و نوع تطبیق (که از ترک‌بار به دست می‌آید) هستند.</p>
 
@@ -467,15 +496,15 @@ void MatchingMethod( int, void* )
 
 <p>در دو روش تطبیق CV_SQDIFF و CV_SQDIFF_NORMED، بهترین تطبیق‌ها دارای کمترین مقادیر هستند در حالی که در دیگر روش‌ها بهترین تطبیق‌ها دارای بیشترین مقادیر هستند. پس برای سادگی، در خطوط 70 تا 73 بسته به روش مورد استفاده، متغیر matchLoc را مقدار دهی می‌کنیم.</p>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
-<table>
-<col />
-<col />
+<table class="markmod_table">
+<col>
+<col>
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image132.png" alt="تصویر ورودی" id="" /></th>
-	<th><img src="/opencv-book/media/image133.png" alt="تصویر الگو" id="" /></th>
+	<th><img src="/opencv-book/media/image132.png" alt="تصویر ورودی" id="تصویر_ورودی"></th>
+	<th><img src="/opencv-book/media/image133.png" alt="تصویر الگو" id="تصویر_الگو"></th>
 </tr>
 </thead>
 <tbody>
@@ -488,11 +517,11 @@ void MatchingMethod( int, void* )
 
 <p>ماتریس‌های نتیجه زیر تولید می‌شوند (ردیف اول روش‌های SQDIFF، CCORR و CCOEFF و ردیف دوم هم همین روش‌ها، ولی نسخهٔ نرمال شدهٔ آنها هستند). در ستون اول، تاریک‌ترین محل، بهترین تطبیق است و در دو ستون دیگر روشن‌ترین محل، بهترین تطبیق است.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image134.png" alt="ماتریس‌های نتیجه تولید شده توسط فرایند تطبیق الگو" id="" /></th>
+	<th><img src="/opencv-book/media/image134.png" alt="ماتریس‌های نتیجه تولید شده توسط فرایند تطبیق الگو" id="ماتریس‌های_نتیجه_تولید_شده_توسط_فرایند_تطبیق_الگو"></th>
 </tr>
 </thead>
 <tbody>
@@ -504,11 +533,11 @@ void MatchingMethod( int, void* )
 
 <p>نتیجه نهایی در شکل زیر نشان داده شده است. دقت کنید که CCORR و CCDEFF جواب نادرستی را به عنوان پاسخ داده‌اند؛ البته نسخه نرمال شده آنها درست عمل کرده است. این ممکن است به خاطر این واقعیت باشد که ما فقط اولین بزرگترین تطبیق را در نظر می‌گیریم و به تطبیق‌های بزرگ دیگر کاری نداریم.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image135.png" alt="نتیجه نهایی" id="" /></th>
+	<th><img src="/opencv-book/media/image135.png" alt="نتیجه نهایی" id="نتیجه_نهایی"></th>
 </tr>
 </thead>
 <tbody>
@@ -516,8 +545,7 @@ void MatchingMethod( int, void* )
 	<td align="center">نتیجه نهایی</td>
 </tr>
 </tbody>
-</table>
-
+</table>
     </div>
   
 
@@ -557,7 +585,7 @@ void MatchingMethod( int, void* )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -578,7 +606,7 @@ void MatchingMethod( int, void* )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

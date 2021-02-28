@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -280,7 +278,7 @@
 <li><strong>BORDER_REPLICATE:</strong> سطرها و ستون‌های آخر تصویر اصلی را در قسمت قاب کپی می‌کند.</li>
 </ol>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -349,7 +347,7 @@ int main( int argc, char** argv )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>در خطوط 41 و 42 متغیرهایی که اندازهٔ قاب را مشخص می‌کنند (بالا، پایین، چپ و راست) تعریف شده است. در اینجا مقدارشان پنج درصدِ اندازهٔ تصویر src قرار داده شده‌اند.</p>
 
@@ -367,20 +365,20 @@ int main( int argc, char** argv )
 <li>value: اگر مقدار borderType، BORDER_CONSTANT باشد، value همان مقدار ثابتی است که در قاب قرار می‌گیرد.</li>
 </ul>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
 <p>برنامه را به صورت زیر اجرا می‌کنیم:</p>
 
 <pre><code class="language-powershell">CopyMakeBorder.exe "PICTURES /2.jpg"
 </code></pre>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image42.jpeg" alt="تصویر ورودی" id="" /></th>
-	<th><img src="/opencv-book/media/image43.jpeg" alt="قاب ثابت (بعد از فشردن کلید c)" id="c" /></th>
+	<th><img src="/opencv-book/media/image42.jpeg" alt="تصویر ورودی" id="تصویر_ورودی"></th>
+	<th><img src="/opencv-book/media/image43.jpeg" alt="قاب ثابت (بعد از فشردن کلید c)" id="قاب_ثابت__بعد_از_فشردن_کلید_c_"></th>
 </tr>
 </thead>
 <tbody>
@@ -391,11 +389,11 @@ int main( int argc, char** argv )
 </tbody>
 </table>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image44.jpeg" alt="قاب تکرار شونده (بعد از فشردن کلید r)" id="r" /></th>
+	<th><img src="/opencv-book/media/image44.jpeg" alt="قاب تکرار شونده (بعد از فشردن کلید r)" id="قاب_تکرار_شونده__بعد_از_فشردن_کلید_r_"></th>
 </tr>
 </thead>
 <tbody>
@@ -403,8 +401,7 @@ int main( int argc, char** argv )
 	<td align="center">قاب تکرار شونده (بعد از فشردن کلید r)</td>
 </tr>
 </tbody>
-</table>
-
+</table>
     </div>
   
 
@@ -444,7 +441,7 @@ int main( int argc, char** argv )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -465,7 +462,7 @@ int main( int argc, char** argv )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

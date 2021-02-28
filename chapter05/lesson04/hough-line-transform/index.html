@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -277,11 +275,11 @@
 
 <p>b.  در مختصات قطبی پارامترها به صورت (r,ɵ) هستند.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image136.png" alt="یک خط و نحوه نمایش آن در مختصات کارتزین و قطبی" id="" /></th>
+	<th><img src="/opencv-book/media/image136.png" alt="یک خط و نحوه نمایش آن در مختصات کارتزین و قطبی" id="یک_خط_و_نحوه_نمایش_آن_در_مختصات_کارتزین_و_قطبی"></th>
 </tr>
 </thead>
 <tbody>
@@ -306,11 +304,11 @@
 
 <p>اگر خانوادهٔ تمام خطوطی که از نقطهٔ $\left( x_{0},y_{0} \right)$ می‌گذرند را در صحفهٔ $\theta - r$ رسم کنیم، یک شکل سینوسی به وجود می‌آید. مثلاً به ازای $x_{0} = 8$ و $y_{0} = 6$ شکل زیر به وجود می‌آید:</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image137.png" alt="mage13" id="mage13" /></th>
+	<th><img src="/opencv-book/media/image137.png" alt="mage13" id="mage13"></th>
 </tr>
 </thead>
 <tbody>
@@ -322,11 +320,11 @@
 
 <p>می‌توان مشابه کار بالا را برای تمام نقاط موجود در یک تصویر انجام داد. اگر منحنی دو نقطهٔ مختلف در صفحهٔ $\theta - r$ هم دیگر را قطع کنند، به این معنی است که آن دو نقطه روی یک خط قرار دارند. مثلاً اگر به دنبال نقطهٔ مثال قبل، منحنی‌های نقاط $\left( 4,\ 9 \right)$ و $\left( 12,\ 3 \right)$ را بکشیم، نمودار حاصل به شکل زیر در می‌آید:</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image138.png" alt="mage13" id="mage13" /></th>
+	<th><img src="/opencv-book/media/image138.png" alt="mage13" id="mage13"></th>
 </tr>
 </thead>
 <tbody>
@@ -350,7 +348,7 @@
 
 <p>این تبدیل بسیار بهینه‌تر از تبدیل خط استاندارد پیاده سازی شده است. به عنوان خروجی، نقاط انتهایی خطوط کشف شده را بر می‌گرداند $(x_{0},y_{0},x_{1},y_{1})$. این تبدیل در تابع HoughLinesP پیاده سازی شده است.</p>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -416,7 +414,7 @@ int main(int argc, char** argv)
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>در خط 28 با استفاده از لبه‌یاب کَنی، لبه‌های عکس را پیدا می‌کنیم.</p>
 
@@ -453,15 +451,15 @@ int main(int argc, char** argv)
 
 <p>سپس در خطوط 50 تا 54 نتیجه را با کشیدن تمام خط‌های کشف شده، نشان می‌دهیم.</p>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image139.png" alt="تصویر ورودی" id="" /></th>
-	<th><img src="/opencv-book/media/image140.png" alt="نتیجه اعمال تبدیل خط احتمالی هاف با آستانه 20" id="" /></th>
+	<th><img src="/opencv-book/media/image139.png" alt="تصویر ورودی" id="تصویر_ورودی"></th>
+	<th><img src="/opencv-book/media/image140.png" alt="نتیجه اعمال تبدیل خط احتمالی هاف با آستانه 20" id="نتیجه_اعمال_تبدیل_خط_احتمالی_هاف_با_آستانه_20"></th>
 </tr>
 </thead>
 <tbody>
@@ -473,14 +471,13 @@ int main(int argc, char** argv)
 </table>
 
 <div class="footnotes">
-<hr />
+<hr>
 <ol>
 
 <li id="fn:a"><p>Hough<a href="#fnref:a" class="reversefootnote">&#160;&#8617;</a></p></li>
 
 </ol>
-</div>
-
+</div>
     </div>
   
 
@@ -520,7 +517,7 @@ int main(int argc, char** argv)
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -541,7 +538,7 @@ int main(int argc, char** argv)
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»

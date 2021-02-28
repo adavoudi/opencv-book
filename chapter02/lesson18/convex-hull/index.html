@@ -9,25 +9,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="">
-<meta property="og:url" content="https://h4iku.github.io/opencv-book">
+<meta property="og:url" content="https://adavoudi.github.io/opencv-book">
 <meta property="og:site_name" content="پردازش تصویر در OpenCV">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="">
 
-  <link rel="short icon" href="/static/img/mira.png">
-  <link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
-  <link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/rastikerdar/sahel-font/v1.0.0-alpha13/dist/font-face.css" rel="stylesheet" type="text/css" />
+<link rel="short icon" href="/static/img/mira.png">
+<link href="/opencv-book/static/node_modules/bulma-rtl/css/bulma-rtl.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/style.css" rel="stylesheet">
+<link href="/opencv-book/static/zero60/agate.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/sahel-font@v2.0.2/dist/font-face.css" rel="stylesheet" type="text/css" />
  
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/contrib/auto-render.min.js"></script>
-
-<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-MML-AM_CHTML' async></script> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.9.0/dist/contrib/auto-render.min.js"></script>
 
 </head>
 <body>
@@ -273,11 +271,11 @@
 
 <p>برای این که تصور بهتری از پوش محدب به دست آورید، نقاط صفحه را مانند میخ‌هایی در نظر بگیرید که به دیوار کوبیده شده‌اند. حال کش تنگی را درنظر بگیرید که همه میخ‌ها را احاطه کرده است. در این صورت پوش محدب نقاط شکلی خواهد بود که کش به خود می‌گیرد.</p>
 
-<table>
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image92.png" alt="نحوه پیدا کردن پوش مخدب مجموعه‌ای از نقاط" id="" /></th>
+	<th><img src="/opencv-book/media/image92.png" alt="نحوه پیدا کردن پوش مخدب مجموعه‌ای از نقاط" id="نحوه_پیدا_کردن_پوش_مخدب_مجموعه‌ای_از_نقاط"></th>
 </tr>
 </thead>
 <tbody>
@@ -287,7 +285,7 @@
 </tbody>
 </table>
 
-<h2>کد</h2>
+<h2 id="کد">کد</h2>
 
 <pre><code class="language-c++">#include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -340,7 +338,8 @@ void thresh_callback(int, void* )
     threshold( src_gray, threshold_output, thresh, 255, THRESH_BINARY );
 
     /// Find contours
-    findContours( threshold_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+    findContours( threshold_output, contours, hierarchy,
+        CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
 
     /// Find the convex hull object for each contour
     vector&lt;vector&lt;Point&gt; &gt;hull( contours.size() );
@@ -362,7 +361,7 @@ void thresh_callback(int, void* )
 }
 </code></pre>
 
-<h2>توضیح</h2>
+<h2 id="توضیح">توضیح</h2>
 
 <p>در خط 41 تابع thresh_callback تعریف شده است. در این تابع ابتدا یک کپی از ماتریس src به نام src_copy درست می‌کنیم. سپس یک ماتریس برای نگه داری خروجی تابع threshold درست می‌کنیم. همچنین یک بردار دو بعدی از نوع Point برای نگه داری کانتورهای به دست آمده و یک بردار تک بعدی از نوع Vec4i برای نگه داری خروجی اختیاری تابع findContours، یعنی hierarchy، تعریف می‌کنیم.</p>
 
@@ -372,7 +371,7 @@ void thresh_callback(int, void* )
 
 <p>با فراخوانی تابع findContours در خط 52، کانتورهای تصویر خروجی تابع threshold (یعنی threshold_output) را پیدا می‌کنیم.</p>
 
-<p>در خط 55 یک بردار دو بعدی به نام hull از نوع Point برای نگه داری پوش محدب هر کدام از کانتورها درست می‌کنیم. سپس در یک حلقه، تابع convexHull را روی هر کدام از کانتورها صدا می‌زنیم و خروجی‌ها را در بردار hull ذخیره می‌کنیم. تابع convexHull دارای 3 آرگومان به شرح زیر است:</p>
+<p>در خط 56 یک بردار دو بعدی به نام hull از نوع Point برای نگه داری پوش محدب هر کدام از کانتورها درست می‌کنیم. سپس در یک حلقه، تابع convexHull را روی هر کدام از کانتورها صدا می‌زنیم و خروجی‌ها را در بردار hull ذخیره می‌کنیم. تابع convexHull دارای 3 آرگومان به شرح زیر است:</p>
 
 <ol>
 <li><strong><code>Mat(contours[i])</code>:</strong> آرایهٔ ورودی از نقاط است. می‌توانیم آنها را در یک بردار یا یک ماتریس قرار دهیم.</li>
@@ -380,15 +379,15 @@ void thresh_callback(int, void* )
 <li><strong>false:</strong> جهت پوش محدب را مشخص می‌کند. اگر true باشد به معنی این است که جهت به صورت موافق با عقربه‌های ساعت است و اگر false باشد به معنی خلاف عقربه‌های ساعت است. در هر حالت، نقطهٔ (0,0) در گوشهٔ سمت چپ و بالا قرار دارد.</li>
 </ol>
 
-<h2>خروجی</h2>
+<h2 id="خروجی">خروجی</h2>
 
-<table>
-<col align="center" />
-<col align="center" />
+<table class="markmod_table">
+<col align="center">
+<col align="center">
 <thead>
 <tr>
-	<th><img src="/opencv-book/media/image93.png" alt="ورودی" id="" /></th>
-	<th><img src="/opencv-book/media/image94.png" alt="خروجی" id="" /></th>
+	<th><img src="/opencv-book/media/image93.png" alt="ورودی" id="ورودی"></th>
+	<th><img src="/opencv-book/media/image94.png" alt="خروجی" id="خروجی"></th>
 </tr>
 </thead>
 <tbody>
@@ -399,8 +398,7 @@ void thresh_callback(int, void* )
 </tbody>
 </table>
 
-<p>چند ضلعی بنفش رنگ که همهٔ تصویر را در برگرفته، همان پوش محدب تصویر دست است.</p>
-
+<p>چند ضلعی بنفش رنگ که همهٔ تصویر را در برگرفته، همان پوش محدب تصویر دست است.</p>
     </div>
   
 
@@ -440,7 +438,7 @@ void thresh_callback(int, void* )
                             <a href="/opencv-book/pdf/opencv-book-v1.pdf" target="_blank">دریافت کتاب با فرمت پی‌دی‌اف</a>
                         </li>
                         <li>
-                            <a href="https://github.com/h4iku/opencv-book/issues" target="_blank">گزارش مشکلات</a>
+                            <a href="https://github.com/adavoudi/opencv-book/issues" target="_blank">گزارش مشکلات</a>
                         </li>
                     </ul>
                 </div>
@@ -461,7 +459,7 @@ void thresh_callback(int, void* )
             <div class="has-text-centered credit">
               <div>
                 ارائه شده بر بستر
-                <a href="https://miraxy.github.io/doc-fa/" target="_blank">«میرا»</a>
+                <a href="https://miraxy.github.io/" target="_blank">«میرا»</a>
                 و قالب از
                 <a href="https://dutymess.github.io/laravel-0-to-60/" target="_blank">
                 «لاراول، از صفر تا شصت»
